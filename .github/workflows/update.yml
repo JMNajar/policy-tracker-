@@ -1,0 +1,39 @@
+name: Update PolicyTracker
+
+on:
+  schedule:
+    # Daily at 6am ET (10am UTC) — refreshes news feed and executive actions
+    - cron: '0 10 * * *'
+    # Weekly Monday 5am ET (9am UTC) — full rebuild including bills/PAC data
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual trigger from GitHub Actions UI
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests feedparser
+
+      - name: Run site builder
+        env:
+          CONGRESS_API_KEY: ${{ secrets.CONGRESS_API_KEY }}
+          OPENSECRETS_API_KEY: ${{ secrets.OPENSECRETS_API_KEY }}
+        run: python build_policytracker.py
+
+      - name: Commit and push updated pages
+        run: |
+          git config --global user.name "PolicyTracker Bot"
+          git config --global user.email "actions@github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "Auto-update: $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push

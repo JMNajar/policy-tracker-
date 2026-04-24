@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cannabis Lawmakers & Campaign Finance | PolicyTracker</title>
+  <meta name="description" content="Cannabis and executive policy intelligence for business leaders. Built by Horsepower AI, sponsored by GF Tech One.">
+  <style>
+  :root {
+    --navy:   #1B2D4F;
+    --red:    #C8311A;
+    --cream:  #F5EDE0;
+    --green:  #2D6B2D;
+    --lgreen: #E8F5E9;
+    --lred:   #FFF0EE;
+    --lblue:  #EEF2FA;
+    --white:  #FFFFFF;
+    --light:  #FAFAF8;
+    --border: #DDE3ED;
+    --text:   #1a2535;
+    --muted:  #5a6a80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--light); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy); padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    min-height: 64px;
+  }
+  .nav-brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+  .nav-brand img { height: 38px; }
+  .nav-brand-text { color: #fff; font-size: 1.15rem; font-weight: 800; letter-spacing: .06em; }
+  .nav-brand-text span { color: #C8311A; }
+  .nav-links { display: flex; gap: .15rem; flex-wrap: wrap; }
+  .nav-links a {
+    color: #90caf9; text-decoration: none; font-size: .78rem; font-weight: 600;
+    padding: .45rem .7rem; border-radius: 4px; letter-spacing: .03em;
+    transition: background .2s, color .2s; white-space: nowrap;
+  }
+  .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,.12); color: #fff; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1B2D4F 0%, #243d6b 100%);
+    color: #fff; padding: 3rem 2rem 2.5rem; text-align: center;
+  }
+  .hero-tag {
+    display: inline-block; background: rgba(200,49,26,.2);
+    color: #ff9980; font-size: .72rem; font-weight: 700;
+    letter-spacing: .1em; padding: .3rem .9rem; border-radius: 20px;
+    border: 1px solid rgba(200,49,26,.4); margin-bottom: 1rem;
+  }
+  .hero h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; margin-bottom: .6rem; }
+  .hero h1 span { color: #C8311A; }
+  .hero p { color: #90caf9; font-size: 1rem; max-width: 620px; margin: 0 auto 2rem; }
+  .stat-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .stat-card {
+    background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.15);
+    border-radius: 10px; padding: 1.1rem 1.5rem; min-width: 140px; text-align: center;
+  }
+  .stat-card .num { font-size: 1.75rem; font-weight: 800; color: #fff; }
+  .stat-card .lbl { font-size: .68rem; color: #90caf9; font-weight: 600; letter-spacing: .06em; margin-top: .2rem; }
+
+  /* SECTIONS */
+  .container { max-width: 1000px; margin: 0 auto; padding: 3rem 2rem; }
+  .section-tag {
+    display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+    padding: .28rem .75rem; border-radius: 20px; margin-bottom: .65rem;
+  }
+  .tag-navy  { background: #EEF2FA; color: #1B2D4F; }
+  .tag-green { background: #E8F5E9; color: #2D6B2D; }
+  .tag-red   { background: #FFF0EE; color: #C8311A; }
+  .tag-cream { background: #F5EDE0; color: #1B2D4F; }
+  h2 { font-size: 1.65rem; font-weight: 800; margin-bottom: .4rem; color: var(--navy); }
+  .section-intro { color: var(--muted); font-size: .95rem; margin-bottom: 1.75rem; max-width: 700px; }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+  .card {
+    background: #FFFFFF; border: 1px solid #DDE3ED; border-radius: 10px;
+    padding: 1.25rem 1.4rem; transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(27,45,79,.1); }
+  .card-source { font-size: .7rem; font-weight: 700; color: #C8311A; letter-spacing: .06em; text-transform: uppercase; margin-bottom: .4rem; }
+  .card-title { font-size: .95rem; font-weight: 700; color: #1B2D4F; margin-bottom: .5rem; line-height: 1.35; }
+  .card-title a { color: #1B2D4F; text-decoration: none; }
+  .card-title a:hover { color: #C8311A; }
+  .card-meta { font-size: .75rem; color: #5a6a80; }
+  .card-impact {
+    margin-top: .65rem; padding: .5rem .75rem;
+    background: #E8F5E9; border-left: 3px solid #2D6B2D;
+    border-radius: 0 6px 6px 0; font-size: .8rem; color: #2D6B2D; font-weight: 600;
+  }
+
+  /* TABLES */
+  .data-table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 1.5rem; }
+  .data-table th {
+    background: #1B2D4F; color: #FFFFFF; padding: .6rem .9rem;
+    text-align: left; font-size: .75rem; letter-spacing: .05em; font-weight: 700;
+  }
+  .data-table td { padding: .55rem .9rem; border-bottom: 1px solid #DDE3ED; vertical-align: top; }
+  .data-table tr:nth-child(even) { background: #FAFAF8; }
+  .data-table tr:hover { background: #EEF2FA; }
+  .data-table a { color: #1B2D4F; text-decoration: none; font-weight: 600; }
+  .data-table a:hover { color: #C8311A; }
+
+  /* BADGES */
+  .badge {
+    display: inline-block; padding: .2rem .55rem; border-radius: 20px;
+    font-size: .68rem; font-weight: 700; letter-spacing: .04em;
+  }
+  .badge-green { background: #E8F5E9; color: #2D6B2D; }
+  .badge-red   { background: #FFF0EE; color: #C8311A; }
+  .badge-navy  { background: #EEF2FA; color: #1B2D4F; }
+  .badge-gray  { background: #f0f0f0; color: #666; }
+
+  /* ALERT / PLACEHOLDER */
+  .api-pending {
+    background: #F5EDE0; border: 1px solid #d4c4a0; border-radius: 8px;
+    padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+  }
+  .api-pending h3 { color: #1B2D4F; font-size: 1rem; margin-bottom: .4rem; }
+  .api-pending p { color: #5a6a80; font-size: .88rem; }
+  .api-pending code {
+    background: rgba(27,45,79,.08); padding: .1rem .4rem;
+    border-radius: 3px; font-family: monospace; font-size: .82rem;
+  }
+
+  /* EMAIL SIGNUP */
+  .signup-band {
+    background: linear-gradient(135deg, #2D6B2D 0%, #1a4a1a 100%);
+    padding: 2.5rem 2rem; text-align: center; color: #fff;
+  }
+  .signup-band h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: .4rem; }
+  .signup-band p { color: rgba(255,255,255,.8); margin-bottom: 1.25rem; font-size: .95rem; }
+  .signup-form { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+  .signup-form input {
+    padding: .65rem 1rem; border-radius: 6px; border: none;
+    font-size: .95rem; min-width: 240px; outline: none;
+  }
+  .signup-form button {
+    padding: .65rem 1.5rem; background: #C8311A; color: #fff;
+    border: none; border-radius: 6px; font-size: .95rem; font-weight: 700;
+    cursor: pointer; transition: background .2s;
+  }
+  .signup-form button:hover { background: #a82815; }
+  .signup-note { font-size: .75rem; color: rgba(255,255,255,.6); margin-top: .75rem; }
+
+  /* DIVIDER */
+  .section-divider { border: none; border-top: 1px solid #DDE3ED; margin: 0; }
+
+  /* FOOTER */
+  footer {
+    background: #1B2D4F; color: rgba(255,255,255,.7);
+    padding: 2.5rem 2rem; text-align: center;
+  }
+  .footer-logos { display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .footer-logo-block { display: flex; align-items: center; gap: .6rem; }
+  .footer-logo-block img { height: 32px; filter: brightness(0) invert(1); opacity: .85; }
+  .footer-logo-text { color: rgba(255,255,255,.85); font-size: .85rem; font-weight: 600; }
+  .footer-divider { width: 1px; height: 32px; background: rgba(255,255,255,.2); }
+  .footer-tagline { font-size: .82rem; margin-bottom: .5rem; }
+  .footer-tagline a { color: #C8311A; text-decoration: none; font-weight: 600; }
+  .footer-tagline a:hover { color: #ff7055; }
+  .footer-legal { font-size: .72rem; color: rgba(255,255,255,.4); }
+  .sponsor-label { font-size: .65rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .08em; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7rem; }
+    .nav-links { display: none; }
+    .stat-row { gap: .6rem; }
+    .stat-card { min-width: 120px; padding: .9rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <img src="assets/horsepowerai-logo.png" alt="Horsepower AI" onerror="this.style.display='none'">
+    <span class="nav-brand-text">Policy<span>Tracker</span></span>
+  </a>
+  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html" class="active">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="about.html">About</a></div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">LEGISLATORS + CAMPAIGN FINANCE</div>
+  <h1>Who's <span>Sponsoring What</span></h1>
+  <p>The legislators behind cannabis bills — and who funds their campaigns.</p>
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">FEC</div><div class="lbl">FINANCE DATA</div></div>
+    <div class="stat-card"><div class="num">OpenSecrets</div><div class="lbl">INDUSTRY OVERLAY</div></div>
+    <div class="stat-card"><div class="num">Monthly</div><div class="lbl">FINANCE REFRESH</div></div>
+  </div>
+</div>
+
+<div class="container">
+  <span class="section-tag tag-green">LEGISLATORS</span>
+  <h2>Key Lawmakers on Cannabis</h2>
+  <p class="section-intro">Legislators actively sponsoring or opposing cannabis legislation —
+     with campaign finance context showing which industries fund their campaigns.
+     Full live data activates when Congress.gov and OpenSecrets API keys are provided.</p>
+
+  <div class="api-pending">
+    <h3>🔑 Congress.gov + OpenSecrets API Keys Required</h3>
+    <p>Full legislator profiles with bill sponsorship history and campaign finance overlay
+       activate when both keys are added. FEC base data (committee funding) is live below.</p>
+  </div>
+
+  <span class="section-tag tag-red">FOLLOW THE MONEY</span>
+  <h2>Understanding Who Funds Cannabis Legislation</h2>
+  <p class="section-intro">The industries funding legislators tell you everything about how they'll vote.
+     Here's the influence map — who supports cannabis and who opposes it.</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Industry</th>
+        <th>Position on Cannabis</th>
+        <th>Why</th>
+        <th>Signal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Cannabis Industry PACs</strong></td>
+        <td><span class="badge badge-green">Pro-Legalization</span></td>
+        <td>Direct business interest. NCIA and state cannabis associations fund pro-cannabis legislators.</td>
+        <td>Legislator funded by cannabis PACs = genuine ally</td>
+      </tr>
+      <tr>
+        <td><strong>Real Estate / Banking</strong></td>
+        <td><span class="badge badge-green">Pro-SAFER Banking</span></td>
+        <td>SAFER Banking creates massive new commercial lending market for cannabis businesses.</td>
+        <td>Banking-funded legislators often support banking reform bills</td>
+      </tr>
+      <tr>
+        <td><strong>Big Pharma</strong></td>
+        <td><span class="badge badge-red">Often Anti-Legalization</span></td>
+        <td>Cannabis competes directly with opioid painkillers and sleep medications.</td>
+        <td>Heavy pharma funding = watch for anti-cannabis votes</td>
+      </tr>
+      <tr>
+        <td><strong>Alcohol Industry</strong></td>
+        <td><span class="badge badge-red">Often Anti-Legalization</span></td>
+        <td>Cannabis competes with beer and spirits. Beer Institute lobbies against legalization.</td>
+        <td>Alcohol PAC funding is a red flag for cannabis bills</td>
+      </tr>
+      <tr>
+        <td><strong>Tobacco Companies</strong></td>
+        <td><span class="badge badge-navy">Mixed</span></td>
+        <td>Altria and Philip Morris are buying cannabis stakes — they want to own it, not kill it.</td>
+        <td>Complex — watch which specific company funds the legislator</td>
+      </tr>
+      <tr>
+        <td><strong>Private Prison Industry</strong></td>
+        <td><span class="badge badge-red">Anti-Legalization</span></td>
+        <td>Cannabis convictions fill prison beds. GEO Group and CoreCivic fund anti-cannabis legislators.</td>
+        <td>Private prison funding = strong anti-cannabis vote likelihood</td>
+      </tr>
+      <tr>
+        <td><strong>Technology / VC</strong></td>
+        <td><span class="badge badge-green">Generally Pro</span></td>
+        <td>Tech industry has significant cannabis investment. Legalization protects portfolio companies.</td>
+        <td>Tech-funded legislators tend toward legalization and SAFE Banking</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="signup-band">
+  <h3>Weekly Cannabis Law Roundup</h3>
+  <p>The legislation that matters to your business — plain English, every Monday morning.</p>
+  <div class="signup-form">
+    <input type="text" placeholder="First name">
+    <input type="email" placeholder="Your email address">
+    <button>Subscribe Free</button>
+  </div>
+  <p class="signup-note">No spam. Unsubscribe anytime. Produced by Horsepower AI.</p>
+</div>
+
+<footer>
+  <div class="footer-logos">
+    <div class="footer-logo-block">
+      <img src="assets/horsepowerai-logo.png" alt="Horsepower AI">
+      <div>
+        <div class="footer-logo-text">Horsepower AI</div>
+        <div class="sponsor-label">Built by</div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-logo-block">
+      <img src="assets/gft1-logo.png" alt="GF Tech One">
+      <div>
+        <div class="footer-logo-text">GF Tech One</div>
+        <div class="sponsor-label">Presenting Sponsor</div>
+      </div>
+    </div>
+  </div>
+  <p class="footer-tagline">
+    PolicyTracker is produced by <a href="#">Horsepower AI</a> — done-for-you AI marketing services
+    for cannabis and emerging industry businesses.
+    <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
+  </p>
+  <p class="footer-legal">
+    Updated April 24, 2026 &nbsp;·&nbsp; Data: Congress.gov, Federal Register, FEC.gov, OpenSecrets, Google News
+    &nbsp;·&nbsp; For informational purposes only. Not legal advice.
+  </p>
+</footer>
+</body>
+</html>

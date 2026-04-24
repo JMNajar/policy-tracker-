@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Today's Cannabis Policy News | PolicyTracker</title>
+  <meta name="description" content="Cannabis and executive policy intelligence for business leaders. Built by Horsepower AI, sponsored by GF Tech One.">
+  <style>
+  :root {
+    --navy:   #1B2D4F;
+    --red:    #C8311A;
+    --cream:  #F5EDE0;
+    --green:  #2D6B2D;
+    --lgreen: #E8F5E9;
+    --lred:   #FFF0EE;
+    --lblue:  #EEF2FA;
+    --white:  #FFFFFF;
+    --light:  #FAFAF8;
+    --border: #DDE3ED;
+    --text:   #1a2535;
+    --muted:  #5a6a80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--light); }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy); padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    min-height: 64px;
+  }
+  .nav-brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+  .nav-brand img { height: 38px; }
+  .nav-brand-text { color: #fff; font-size: 1.15rem; font-weight: 800; letter-spacing: .06em; }
+  .nav-brand-text span { color: #C8311A; }
+  .nav-links { display: flex; gap: .15rem; flex-wrap: wrap; }
+  .nav-links a {
+    color: #90caf9; text-decoration: none; font-size: .78rem; font-weight: 600;
+    padding: .45rem .7rem; border-radius: 4px; letter-spacing: .03em;
+    transition: background .2s, color .2s; white-space: nowrap;
+  }
+  .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,.12); color: #fff; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1B2D4F 0%, #243d6b 100%);
+    color: #fff; padding: 3rem 2rem 2.5rem; text-align: center;
+  }
+  .hero-tag {
+    display: inline-block; background: rgba(200,49,26,.2);
+    color: #ff9980; font-size: .72rem; font-weight: 700;
+    letter-spacing: .1em; padding: .3rem .9rem; border-radius: 20px;
+    border: 1px solid rgba(200,49,26,.4); margin-bottom: 1rem;
+  }
+  .hero h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; margin-bottom: .6rem; }
+  .hero h1 span { color: #C8311A; }
+  .hero p { color: #90caf9; font-size: 1rem; max-width: 620px; margin: 0 auto 2rem; }
+  .stat-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .stat-card {
+    background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.15);
+    border-radius: 10px; padding: 1.1rem 1.5rem; min-width: 140px; text-align: center;
+  }
+  .stat-card .num { font-size: 1.75rem; font-weight: 800; color: #fff; }
+  .stat-card .lbl { font-size: .68rem; color: #90caf9; font-weight: 600; letter-spacing: .06em; margin-top: .2rem; }
+
+  /* SECTIONS */
+  .container { max-width: 1000px; margin: 0 auto; padding: 3rem 2rem; }
+  .section-tag {
+    display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+    padding: .28rem .75rem; border-radius: 20px; margin-bottom: .65rem;
+  }
+  .tag-navy  { background: #EEF2FA; color: #1B2D4F; }
+  .tag-green { background: #E8F5E9; color: #2D6B2D; }
+  .tag-red   { background: #FFF0EE; color: #C8311A; }
+  .tag-cream { background: #F5EDE0; color: #1B2D4F; }
+  h2 { font-size: 1.65rem; font-weight: 800; margin-bottom: .4rem; color: var(--navy); }
+  .section-intro { color: var(--muted); font-size: .95rem; margin-bottom: 1.75rem; max-width: 700px; }
+
+  /* CARDS */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+  .card {
+    background: #FFFFFF; border: 1px solid #DDE3ED; border-radius: 10px;
+    padding: 1.25rem 1.4rem; transition: box-shadow .2s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(27,45,79,.1); }
+  .card-source { font-size: .7rem; font-weight: 700; color: #C8311A; letter-spacing: .06em; text-transform: uppercase; margin-bottom: .4rem; }
+  .card-title { font-size: .95rem; font-weight: 700; color: #1B2D4F; margin-bottom: .5rem; line-height: 1.35; }
+  .card-title a { color: #1B2D4F; text-decoration: none; }
+  .card-title a:hover { color: #C8311A; }
+  .card-meta { font-size: .75rem; color: #5a6a80; }
+  .card-impact {
+    margin-top: .65rem; padding: .5rem .75rem;
+    background: #E8F5E9; border-left: 3px solid #2D6B2D;
+    border-radius: 0 6px 6px 0; font-size: .8rem; color: #2D6B2D; font-weight: 600;
+  }
+
+  /* TABLES */
+  .data-table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 1.5rem; }
+  .data-table th {
+    background: #1B2D4F; color: #FFFFFF; padding: .6rem .9rem;
+    text-align: left; font-size: .75rem; letter-spacing: .05em; font-weight: 700;
+  }
+  .data-table td { padding: .55rem .9rem; border-bottom: 1px solid #DDE3ED; vertical-align: top; }
+  .data-table tr:nth-child(even) { background: #FAFAF8; }
+  .data-table tr:hover { background: #EEF2FA; }
+  .data-table a { color: #1B2D4F; text-decoration: none; font-weight: 600; }
+  .data-table a:hover { color: #C8311A; }
+
+  /* BADGES */
+  .badge {
+    display: inline-block; padding: .2rem .55rem; border-radius: 20px;
+    font-size: .68rem; font-weight: 700; letter-spacing: .04em;
+  }
+  .badge-green { background: #E8F5E9; color: #2D6B2D; }
+  .badge-red   { background: #FFF0EE; color: #C8311A; }
+  .badge-navy  { background: #EEF2FA; color: #1B2D4F; }
+  .badge-gray  { background: #f0f0f0; color: #666; }
+
+  /* ALERT / PLACEHOLDER */
+  .api-pending {
+    background: #F5EDE0; border: 1px solid #d4c4a0; border-radius: 8px;
+    padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+  }
+  .api-pending h3 { color: #1B2D4F; font-size: 1rem; margin-bottom: .4rem; }
+  .api-pending p { color: #5a6a80; font-size: .88rem; }
+  .api-pending code {
+    background: rgba(27,45,79,.08); padding: .1rem .4rem;
+    border-radius: 3px; font-family: monospace; font-size: .82rem;
+  }
+
+  /* EMAIL SIGNUP */
+  .signup-band {
+    background: linear-gradient(135deg, #2D6B2D 0%, #1a4a1a 100%);
+    padding: 2.5rem 2rem; text-align: center; color: #fff;
+  }
+  .signup-band h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: .4rem; }
+  .signup-band p { color: rgba(255,255,255,.8); margin-bottom: 1.25rem; font-size: .95rem; }
+  .signup-form { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
+  .signup-form input {
+    padding: .65rem 1rem; border-radius: 6px; border: none;
+    font-size: .95rem; min-width: 240px; outline: none;
+  }
+  .signup-form button {
+    padding: .65rem 1.5rem; background: #C8311A; color: #fff;
+    border: none; border-radius: 6px; font-size: .95rem; font-weight: 700;
+    cursor: pointer; transition: background .2s;
+  }
+  .signup-form button:hover { background: #a82815; }
+  .signup-note { font-size: .75rem; color: rgba(255,255,255,.6); margin-top: .75rem; }
+
+  /* DIVIDER */
+  .section-divider { border: none; border-top: 1px solid #DDE3ED; margin: 0; }
+
+  /* FOOTER */
+  footer {
+    background: #1B2D4F; color: rgba(255,255,255,.7);
+    padding: 2.5rem 2rem; text-align: center;
+  }
+  .footer-logos { display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .footer-logo-block { display: flex; align-items: center; gap: .6rem; }
+  .footer-logo-block img { height: 32px; filter: brightness(0) invert(1); opacity: .85; }
+  .footer-logo-text { color: rgba(255,255,255,.85); font-size: .85rem; font-weight: 600; }
+  .footer-divider { width: 1px; height: 32px; background: rgba(255,255,255,.2); }
+  .footer-tagline { font-size: .82rem; margin-bottom: .5rem; }
+  .footer-tagline a { color: #C8311A; text-decoration: none; font-weight: 600; }
+  .footer-tagline a:hover { color: #ff7055; }
+  .footer-legal { font-size: .72rem; color: rgba(255,255,255,.4); }
+  .sponsor-label { font-size: .65rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .08em; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7rem; }
+    .nav-links { display: none; }
+    .stat-row { gap: .6rem; }
+    .stat-card { min-width: 120px; padding: .9rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <img src="assets/horsepowerai-logo.png" alt="Horsepower AI" onerror="this.style.display='none'">
+    <span class="nav-brand-text">Policy<span>Tracker</span></span>
+  </a>
+  <div class="nav-links"><a href="index.html" class="active">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="about.html">About</a></div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">UPDATED APRIL 24, 2026</div>
+  <h1>Cannabis & Executive Policy<br><span>Intelligence Dashboard</span></h1>
+  <p>The legislation, executive actions, and money behind the vote — built for cannabis business leaders.</p>
+  <div class="stat-row">
+    <div class="stat-card"><div class="num">10</div><div class="lbl">NEWS ITEMS TODAY</div></div>
+    <div class="stat-card"><div class="num">Federal</div><div class="lbl">COVERAGE SCOPE</div></div>
+    <div class="stat-card"><div class="num">Daily</div><div class="lbl">UPDATE FREQUENCY</div></div>
+    <div class="stat-card"><div class="num">Free</div><div class="lbl">ALWAYS</div></div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<div class="container">
+  <span class="section-tag tag-red">TODAY'S TOP 10</span>
+  <h2>Cannabis Policy News</h2>
+  <p class="section-intro">The most important cannabis legislation and regulatory stories updated every morning.
+     Click any headline for the full story.</p>
+  <div class="card-grid">
+    
+    <div class="card">
+      <div class="card-source">Ogletree</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxQTWh5OFhUcUNLZkQwUEhOb1BuNVdRZ09YU3ZDTlZXelRLdU16UzJzay1UTkFHcVN5eHM1VWthSEt0RTR0QWctTDBoNHZVOU9fdzI0cllLeGlCLVBIU2hyN2RMb2g2dEJCSV9famZmVDlaT2JDRUlRbmZZQWNRZFl0NmtFdGZuSFkyMTFHSXRfaXJYS1Z0RHotc0dQYVg5c19iaTh2SHJWemdFTDBiRVZQMlJ3WVFVNnM3ekdB?oc=5" target="_blank" rel="noopener">DOJ Orders Immediate Reclassification of Medical Marijuana Products - Ogletree</a></div>
+      <div class="card-meta">Apr 24, 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-source">Missouri Independent</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPR3RRaXh5NEpRLVJxbC03b0gtaXFBOXlfU1M4N3B6Sk9HUHJvYU9uV1cyUjUwdEw0N2ZoN2locjZxQVd1bUh2eGhIdnIwcWlKOGM0ZGxKay1WV1BFaU1BVWZXS20zTllZb2l0YlZ1d18yb3NrZTlpWTd3WEJuYjdlcjNzVDJZeXBOZTZsTGtMWWNsTjhVNmhDUXdqYm51cGVRSkFsYURSSkF5Wmg2YVRhWkNWZTQwYXppcXc?oc=5" target="_blank" rel="noopener">Missouri governor signs bill to ban intoxicating hemp products in November - Missouri Independent</a></div>
+      <div class="card-meta">Apr 23, 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-source">CNBC</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxOVnA0QWtEMUNPaXpCM1pid0N3dmpCT0xmYncxdE13WkdaMElFeHFQZHFJdnNWWkFWejRzbUlkMlpUUDNPYUxRWVV1VGNQUnA1OHU4NDQwQjYwQXJQNlQwaE92bEJRSVZ0UXhEOTUwTTF3d0lPTlV5Q0dHSkZ1WnB3dGMteHExX0dyNGNUQVZFd2HSAZYBQVVfeXFMTU55RC1LZUhPeHpiM2VZbDI3VkZUNFZ0SDB2cnctbE15djdIVkdYZC1UcmVxYzBJTGUtR1RoLXNBWE0zZzZJUHFPdFRySC1reUQyeEZHWThrN1NaM0U2NHd3TDlaQUxPY1VrcXplbFpYWGY1MS1LOXMzUjJlbVNhbkgzZzNDcXdNNUNtQU9MeE9QWGRQMjR3?oc=5" target="_blank" rel="noopener">What the Trump administration's move to reclassify marijuana means for investors - CNBC</a></div>
+      <div class="card-meta">Apr 23, 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-source">MJBizDaily</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxNaHB5MXREcmF2RGR3SkNaOGRnaGtzeEVvWmpvT3BjYThCNTNiZGpGeU9GOThTTnY3VkZNeUhwYV93Ui1FeHprVWlCelR1WFdweWFldEdJb3RpV1l5LS1HemRJZDdpbjJMdERma1EtbW4xdGpDUUdfQVBvTXQ0MXJ4ZXNMTDZSLWUzUmo0S0pHVWpkb29JWVRCdFl1UkNpTnEtbHUxa2w3Vm1SNFVsdUN1aHhObmhCd0ZWSFBLRg?oc=5" target="_blank" rel="noopener">Marijuana is medicine again in the US as Trump administration reschedules cannabis - MJBizDaily</a></div>
+      <div class="card-meta">Apr 23, 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-source">NPR</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOVVY2R054b2lUcWJrMmdoei1BM1NrVHg3SnNhVGw3S0lyamtBTXp5WGIyaHp5V1pVZFRRZlRBN2wxXzRYVlp2dlJ5dmFzOUhoZ19OaVlLa2pTODZXWVl2RU5ZUDJNeVA1RzhWLThoekE5LW9JcmJUSFp1aXlrQjhWbG44QXcxMW5Sd2VmNjRkeFNvaVU0SG04?oc=5" target="_blank" rel="noopener">Trump administration eases rules on some marijuana categories. Here's what to know - NPR</a></div>
+      <div class="card-meta">Apr 23, 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-source">PBS</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxQbFN5QlBMN2luU1lZWXItNGFVS0Z5WWY5bVU3T25zY2ZCWXpRaFMzcjlWeXRuSHlHWGt4QzYzY1l3a3U1YV9ZWkY4OHdtMjR2MEhMSU9BazVtUktXdlUzaU1kYmg0REFuckRUcTRNZS1YWkpDLU9zTi1FT0RrMmxQT0xYSnM3V3lTQjNmTWxVRkczenAxMnlKWF9zN2tURUVIVUM3N1o3VWJXR0FULVN0UEZR?oc=5" target="_blank" rel="noopener">Trump reclassifies state-licensed medical marijuana as less-dangerous drug - PBS</a></div>
+      <div class="card-meta">Apr 23, 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-source">The Guardian</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxOX1pzTGlveWlaSDNnQTQ2dzBKZ0JWcVJLSGl1Znl4VEtYWDk5NkEtdlktakdTWEpERVRKbnRadXRYX3d6MGo0LUZxR0xoUGtKYVVqRTBGUGVIYUN3VEE0V0RxY3ZIX1QxcjE3X2EwV1kwRnlPMkZQZ3ducEF1Y0JVbEY0SXQycm5xRTNKTGkwVE5nanlRNGVMSjZEMmE1UV9aY090Uw?oc=5" target="_blank" rel="noopener">Trump administration moves to ease federal restrictions on marijuana - The Guardian</a></div>
+      <div class="card-meta">Apr 23, 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-source">CNBC</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxNM2tRX3kzWnNGdzdTTHBhUEp5WERBV3U0T1pZdUNkWmdsQUhnT1J2LTBvU1h1STVmYkg4YnZTYmJydDBVaGNpSHFYMWNqdUZnSHJlUkU4OFlRNWJIUlBONXFGUFR2UWZOQlFWVFlKazRkRGlZMjV6UmlDLXBXVENqT1VNZjIwZ9IBiwFBVV95cUxOajYyR1E5bm5TWk5PdEk0ZmlBa0tBRXZsbWlQLWxJcWRCeEpRUWVxS3VSYWF3TEhVRnlaUTE0VzY3MlU0Uk8yRmNBZDBUQnVaV1JfNmxQY0xuSVBRclBtNUFfbWhPZDhhS0YzYUhBSmx1WDRRcE4ydFExN3JQLUhsZUhCX00yTmRZSnNr?oc=5" target="_blank" rel="noopener">Trump administration moves to reclassify cannabis in major shift that could expand research - CNBC</a></div>
+      <div class="card-meta">Apr 23, 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-source">VPM</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxQaVYxSGtGX0I4RExWeUh4d0szSkd1RzJWZGxJekNPQ2ZoWFVvaUZ1YWtOQzJudXYwMDhjVjJLUFNmZHM4SFd0S0diaVV3RVdrcG1DZExVWW95cEtYTllPT1ItX19UVEVBQXJkWDlGY0NBOUhTT1J2ZXdEc09MRDVJSnBFYlM2TGpZNnlUSjdXWXpTZWZGUHd4djhJd0FfSWVkN3BtdlZVQ3M3dmM?oc=5" target="_blank" rel="noopener">General Assembly declines Spanberger amendments to major legislation - VPM</a></div>
+      <div class="card-meta">Apr 23, 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-source">Arkansas Advocate</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOUUZhWVQ4WkZZTXdwZ0hidmhPZzBvVk1ONk5FMnlPNHVBbmd5N0hWeE45RXhqVWtkU21JU0lXUGxhRV9GVnhKeHJmcHlIOGszMHFrSnk4WmgwTlAyOVYwRmhiUmYyMUtnSXVrc1lJVjhlTjFpOHl3RlQwZ2RJamIxTXI2ZVFOWHoyY0tHOGJhZmYwNEp3SjV3?oc=5" target="_blank" rel="noopener">Arkansas attorney general certifies hemp regulating law - Arkansas Advocate</a></div>
+      <div class="card-meta">Apr 22, 2026</div>
+    </div>
+  </div>
+
+  <hr class="section-divider" style="margin: 2rem 0;">
+
+  <span class="section-tag tag-navy">NAVIGATE THE TRACKER</span>
+  <h2>What's Inside PolicyTracker</h2>
+  <p class="section-intro">Four intelligence layers — legislation, lawmakers, executive actions, and the money behind the vote.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-source" style="color:#1B2D4F">BILLS</div>
+      <div class="card-title"><a href="bills.html">Cannabis Bills in Congress</a></div>
+      <div class="card-meta">Active bills, committee status, floor votes — updated weekly</div>
+      <div class="card-impact" style="background:#EEF2FA;border-color:#1B2D4F;color:#1B2D4F;">Federal legislation tracked in plain English</div>
+    </div>
+    <div class="card">
+      <div class="card-source" style="color:#2D6B2D">LAWMAKERS</div>
+      <div class="card-title"><a href="lawmakers.html">Who's Sponsoring What</a></div>
+      <div class="card-meta">Legislators behind cannabis bills with campaign finance context</div>
+      <div class="card-impact">Who funds the people writing the laws</div>
+    </div>
+    <div class="card">
+      <div class="card-source" style="color:#C8311A">EXECUTIVE</div>
+      <div class="card-title"><a href="executive.html">Presidential & Agency Actions</a></div>
+      <div class="card-meta">Executive orders, DEA/FDA/DOJ rulings — updated weekly</div>
+      <div class="card-impact" style="background:#FFF0EE;border-color:#C8311A;color:#C8311A;">Moves faster than Congress — watch this page</div>
+    </div>
+    <div class="card">
+      <div class="card-source" style="color:#8B6914">MONEY</div>
+      <div class="card-title"><a href="money.html">The Money Behind the Vote</a></div>
+      <div class="card-meta">Cannabis PACs, opposition industry funding, campaign finance map</div>
+      <div class="card-impact" style="background:#FFF8E1;border-color:#F9A825;color:#7a5800;">Big Pharma, alcohol, tobacco — follow the money</div>
+    </div>
+  </div>
+</div>
+
+<div class="signup-band">
+  <h3>Weekly Cannabis Law Roundup</h3>
+  <p>The legislation that matters to your business — plain English, every Monday morning.</p>
+  <div class="signup-form">
+    <input type="text" placeholder="First name">
+    <input type="email" placeholder="Your email address">
+    <button>Subscribe Free</button>
+  </div>
+  <p class="signup-note">No spam. Unsubscribe anytime. Produced by Horsepower AI.</p>
+</div>
+
+<footer>
+  <div class="footer-logos">
+    <div class="footer-logo-block">
+      <img src="assets/horsepowerai-logo.png" alt="Horsepower AI">
+      <div>
+        <div class="footer-logo-text">Horsepower AI</div>
+        <div class="sponsor-label">Built by</div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-logo-block">
+      <img src="assets/gft1-logo.png" alt="GF Tech One">
+      <div>
+        <div class="footer-logo-text">GF Tech One</div>
+        <div class="sponsor-label">Presenting Sponsor</div>
+      </div>
+    </div>
+  </div>
+  <p class="footer-tagline">
+    PolicyTracker is produced by <a href="#">Horsepower AI</a> — done-for-you AI marketing services
+    for cannabis and emerging industry businesses.
+    <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
+  </p>
+  <p class="footer-legal">
+    Updated April 24, 2026 &nbsp;·&nbsp; Data: Congress.gov, Federal Register, FEC.gov, OpenSecrets, Google News
+    &nbsp;·&nbsp; For informational purposes only. Not legal advice.
+  </p>
+</footer>
+</body>
+</html>
