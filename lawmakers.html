@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cannabis Lawmakers & Campaign Finance | PolicyTracker</title>
+  <title>Cannabis Lawmakers & Money (19) | PolicyTracker</title>
   <meta name="description" content="Cannabis and executive policy intelligence for business leaders. Built by Horsepower AI, sponsored by GF Tech One.">
   <style>
   :root {
@@ -191,87 +191,496 @@
 <div class="hero">
   <div class="hero-tag">LEGISLATORS + CAMPAIGN FINANCE</div>
   <h1>Who's <span>Sponsoring What</span></h1>
-  <p>The legislators behind cannabis bills — and who funds their campaigns.</p>
+  <p>Every legislator sponsoring cannabis bills this Congress — with party, chamber, bill count, and FEC fundraising.</p>
   <div class="stat-row">
-    <div class="stat-card"><div class="num">FEC</div><div class="lbl">FINANCE DATA</div></div>
-    <div class="stat-card"><div class="num">OpenSecrets</div><div class="lbl">INDUSTRY OVERLAY</div></div>
-    <div class="stat-card"><div class="num">Monthly</div><div class="lbl">FINANCE REFRESH</div></div>
+    <div class="stat-card"><div class="num">19</div><div class="lbl">LAWMAKERS TRACKED</div></div>
+    <div class="stat-card"><div class="num">FEC</div><div class="lbl">FINANCE SOURCE</div></div>
+    <div class="stat-card"><div class="num">Live</div><div class="lbl">DATA</div></div>
   </div>
 </div>
 
 <div class="container">
-  <span class="section-tag tag-green">LEGISLATORS</span>
-  <h2>Key Lawmakers on Cannabis</h2>
-  <p class="section-intro">Legislators actively sponsoring or opposing cannabis legislation —
-     with campaign finance context showing which industries fund their campaigns.
-     Full live data activates when Congress.gov and OpenSecrets API keys are provided.</p>
+  <span class="section-tag tag-green">FILTER</span>
+  <h2>Cannabis Bill Sponsors — 119th Congress</h2>
+  <p class="section-intro">Legislators ranked by number of cannabis bills sponsored. Filter by party or chamber.</p>
 
-  <div class="api-pending">
-    <h3>🔑 Congress.gov + OpenSecrets API Keys Required</h3>
-    <p>Full legislator profiles with bill sponsorship history and campaign finance overlay
-       activate when both keys are added. FEC base data (committee funding) is live below.</p>
+  <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem">
+    <button class="filter-btn active" onclick="filterLawmakers('party','ALL')" data-group="party">All Parties</button>
+    <button class="filter-btn" onclick="filterLawmakers('party','D')" data-group="party">Democrat</button>
+    <button class="filter-btn" onclick="filterLawmakers('party','R')" data-group="party">Republican</button>
+    <button class="filter-btn" onclick="filterLawmakers('party','I')" data-group="party">Independent</button>
+    &nbsp;
+    <button class="filter-btn active" onclick="filterLawmakers('chamber','ALL')" data-group="chamber">All Chambers</button>
+    <button class="filter-btn" onclick="filterLawmakers('chamber','Senate')" data-group="chamber">Senate</button>
+    <button class="filter-btn" onclick="filterLawmakers('chamber','House')" data-group="chamber">House</button>
   </div>
 
-  <span class="section-tag tag-red">FOLLOW THE MONEY</span>
-  <h2>Understanding Who Funds Cannabis Legislation</h2>
-  <p class="section-intro">The industries funding legislators tell you everything about how they'll vote.
-     Here's the influence map — who supports cannabis and who opposes it.</p>
+  <div id="lm-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-bottom:2rem">
+    
+    <div class="lm-card" data-party="D" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/J000298.jpg" alt="Pramila Jayapal" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; WA</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Pramila Jayapal</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#E3F2FD;color:#1565C0;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #1565C033">D</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HCONRES 89, HRES 1212</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">2</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="R" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/R000614.jpg" alt="Chip Roy" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; TX</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Chip Roy</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HRES 1189</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="R" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/F000485.jpg" alt="Clay Fuller" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; GA</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Clay Fuller</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HRES 1182</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="D" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/B000490.jpg" alt="Sanford Bishop" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; GA</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Sanford Bishop</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#E3F2FD;color:#1565C0;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #1565C033">D</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HRES 1206</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="R" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/E000300.jpg" alt="Gabe Evans" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; CO</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Gabe Evans</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HR 6387</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="R" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/L000600.jpg" alt="Nicholas Langworthy" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; NY</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Nicholas Langworthy</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HR 4690</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="R" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/C001051.jpg" alt="John Carter" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; TX</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">John Carter</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HR 8469</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="R" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/W000814.jpg" alt="Randy Weber" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; TX</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Randy Weber</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HR 8462</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="R" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/L000595.jpg" alt="Julia Letlow" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; LA</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Julia Letlow</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HR 8485</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="R" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/M001184.jpg" alt="Thomas Massie" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; KY</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Thomas Massie</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HR 8470</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="D" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/D000623.jpg" alt="Mark DeSaulnier" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; CA</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Mark DeSaulnier</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#E3F2FD;color:#1565C0;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #1565C033">D</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HR 8465</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="D" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/B001313.jpg" alt="Shontel Brown" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; OH</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Shontel Brown</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#E3F2FD;color:#1565C0;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #1565C033">D</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HR 8474</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="R" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/P000609.jpg" alt="Gary Palmer" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; AL</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Gary Palmer</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HR 8467</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="R" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/B001323.jpg" alt="Nicholas Begich" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; AK</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Nicholas Begich</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HR 8473</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="D" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/F000454.jpg" alt="Bill Foster" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; IL</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Bill Foster</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#E3F2FD;color:#1565C0;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #1565C033">D</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HRES 1210</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="D" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/C001069.jpg" alt="Joe Courtney" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; CT</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Joe Courtney</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#E3F2FD;color:#1565C0;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #1565C033">D</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HRES 1209</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="D" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/S001221.jpg" alt="Hillary Scholten" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; MI</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Hillary Scholten</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#E3F2FD;color:#1565C0;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #1565C033">D</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HRES 1214</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="D" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/T000468.jpg" alt="Dina Titus" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; NV</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Dina Titus</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#E3F2FD;color:#1565C0;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #1565C033">D</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HRES 1215</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+    <div class="lm-card" data-party="D" data-chamber="House">
+      <div style="display:flex;gap:1rem;align-items:flex-start">
+        <img src="https://theunitedstates.io/images/congress/225x275/O000176.jpg" alt="Johnny Olszewski" style="width:72px;height:88px;object-fit:cover;border-radius:8px;border:2px solid #DDE3ED" onerror="this.style.display='none'">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; MD</div>
+          <div style="font-size:1rem;font-weight:800;color:#1B2D4F;line-height:1.2;margin-bottom:.4rem">Johnny Olszewski</div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#E3F2FD;color:#1565C0;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #1565C033">D</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
+          <div style="font-size:.78rem;color:#5a6a80">HRES 1213</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
+        <div style="text-align:center">
+          <div style="font-size:1.3rem;font-weight:800;color:#1B2D4F">1</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CANNABIS BILLS</div>
+        </div>
+        <div style="text-align:center">
+          <div style="font-size:1rem;font-weight:700;color:#2D6B2D">—</div>
+          <div style="font-size:.65rem;color:#5a6a80;font-weight:600;letter-spacing:.05em">CYCLE RAISED</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p id="lm-empty" style="display:none;color:#5a6a80;text-align:center;padding:2rem">No lawmakers match that filter.</p>
 
+  <hr class="section-divider" style="margin:2rem 0">
+
+  <span class="section-tag tag-red">FOLLOW THE MONEY</span>
+  <h2>Industry Influence Map</h2>
+  <p class="section-intro">The industries funding legislators tell you everything about how they'll vote.
+     A legislator's donor list is their real policy agenda.</p>
   <table class="data-table">
-    <thead>
-      <tr>
-        <th>Industry</th>
-        <th>Position on Cannabis</th>
-        <th>Why</th>
-        <th>Signal</th>
-      </tr>
-    </thead>
+    <thead><tr><th>Industry</th><th>Cannabis Position</th><th>Why They Care</th><th>Signal for Operators</th></tr></thead>
     <tbody>
-      <tr>
-        <td><strong>Cannabis Industry PACs</strong></td>
-        <td><span class="badge badge-green">Pro-Legalization</span></td>
-        <td>Direct business interest. NCIA and state cannabis associations fund pro-cannabis legislators.</td>
-        <td>Legislator funded by cannabis PACs = genuine ally</td>
-      </tr>
-      <tr>
-        <td><strong>Real Estate / Banking</strong></td>
-        <td><span class="badge badge-green">Pro-SAFER Banking</span></td>
-        <td>SAFER Banking creates massive new commercial lending market for cannabis businesses.</td>
-        <td>Banking-funded legislators often support banking reform bills</td>
-      </tr>
-      <tr>
-        <td><strong>Big Pharma</strong></td>
-        <td><span class="badge badge-red">Often Anti-Legalization</span></td>
-        <td>Cannabis competes directly with opioid painkillers and sleep medications.</td>
-        <td>Heavy pharma funding = watch for anti-cannabis votes</td>
-      </tr>
-      <tr>
-        <td><strong>Alcohol Industry</strong></td>
-        <td><span class="badge badge-red">Often Anti-Legalization</span></td>
-        <td>Cannabis competes with beer and spirits. Beer Institute lobbies against legalization.</td>
-        <td>Alcohol PAC funding is a red flag for cannabis bills</td>
-      </tr>
-      <tr>
-        <td><strong>Tobacco Companies</strong></td>
-        <td><span class="badge badge-navy">Mixed</span></td>
-        <td>Altria and Philip Morris are buying cannabis stakes — they want to own it, not kill it.</td>
-        <td>Complex — watch which specific company funds the legislator</td>
-      </tr>
-      <tr>
-        <td><strong>Private Prison Industry</strong></td>
-        <td><span class="badge badge-red">Anti-Legalization</span></td>
-        <td>Cannabis convictions fill prison beds. GEO Group and CoreCivic fund anti-cannabis legislators.</td>
-        <td>Private prison funding = strong anti-cannabis vote likelihood</td>
-      </tr>
-      <tr>
-        <td><strong>Technology / VC</strong></td>
-        <td><span class="badge badge-green">Generally Pro</span></td>
-        <td>Tech industry has significant cannabis investment. Legalization protects portfolio companies.</td>
-        <td>Tech-funded legislators tend toward legalization and SAFE Banking</td>
-      </tr>
+      <tr><td><strong>Cannabis PACs</strong></td><td><span class="badge badge-green">Pro-Legalization</span></td><td>Direct business interest. NCIA and state associations fund allies.</td><td>Cannabis PAC funding = genuine legislative ally</td></tr>
+      <tr><td><strong>Banking / Real Estate</strong></td><td><span class="badge badge-green">Pro-SAFER Banking</span></td><td>SAFER Banking opens a massive new lending market.</td><td>Banking-funded legislators support financial access reform</td></tr>
+      <tr><td><strong>Big Pharma</strong></td><td><span class="badge badge-red">Anti-Legalization</span></td><td>Cannabis competes with opioids and sleep drugs.</td><td>Heavy pharma funding = likely anti-cannabis votes</td></tr>
+      <tr><td><strong>Alcohol Industry</strong></td><td><span class="badge badge-red">Anti-Legalization</span></td><td>Direct market competition with beer and spirits.</td><td>Alcohol PAC money = red flag on cannabis bills</td></tr>
+      <tr><td><strong>Tobacco / Altria</strong></td><td><span class="badge badge-navy">Mixed</span></td><td>Buying cannabis stakes — they want to own it, not kill it.</td><td>Complex — depends on which company is the donor</td></tr>
+      <tr><td><strong>Private Prison</strong></td><td><span class="badge badge-red">Anti-Legalization</span></td><td>Cannabis convictions fill beds. GEO Group, CoreCivic.</td><td>Prison funding = strong anti-cannabis likelihood</td></tr>
+      <tr><td><strong>Technology / VC</strong></td><td><span class="badge badge-green">Generally Pro</span></td><td>Significant cannabis portfolio exposure across the sector.</td><td>Tech-funded legislators tend pro-legalization</td></tr>
     </tbody>
   </table>
 </div>
+
+<style>
+  .lm-card {
+    background:#FFFFFF;border:1px solid #DDE3ED;border-radius:10px;
+    padding:1.25rem 1.3rem;transition:box-shadow .2s;
+  }
+  .lm-card:hover { box-shadow:0 4px 16px rgba(27,45,79,.1); }
+  .lm-card.hidden { display:none; }
+  .filter-btn {
+    background:#FFFFFF;border:1px solid #DDE3ED;color:#1B2D4F;
+    padding:.4rem .9rem;border-radius:20px;font-size:.78rem;font-weight:600;
+    cursor:pointer;transition:all .15s;
+  }
+  .filter-btn.active {
+    background:#1B2D4F;color:#fff;border-color:#1B2D4F;
+  }
+</style>
+
+<script>
+  var partyFilter = 'ALL';
+  var chamberFilter = 'ALL';
+
+  function filterLawmakers(group, val) {
+    if (group === 'party') partyFilter = val;
+    if (group === 'chamber') chamberFilter = val;
+
+    // Update button states
+    document.querySelectorAll('.filter-btn[data-group="' + group + '"]').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    event.target.classList.add('active');
+
+    var cards = document.querySelectorAll('.lm-card');
+    var visible = 0;
+    cards.forEach(function(c) {
+      var pMatch = partyFilter === 'ALL' || c.dataset.party === partyFilter;
+      var cMatch = chamberFilter === 'ALL' || c.dataset.chamber === chamberFilter;
+      if (pMatch && cMatch) { c.classList.remove('hidden'); visible++; }
+      else { c.classList.add('hidden'); }
+    });
+    document.getElementById('lm-empty').style.display = visible === 0 ? 'block' : 'none';
+  }
+</script>
 
 <div class="signup-band">
   <h3>Weekly Cannabis Law Roundup</h3>
