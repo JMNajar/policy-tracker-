@@ -189,7 +189,23 @@
   .footer-tagline a { color: #FFD54F; text-decoration: none; font-weight: 600; }
   .footer-tagline a:hover { color: #F9A825; }
   .footer-legal { font-size: .72rem; color: rgba(255,255,255,.4); }
+  .footer-legal a { color: rgba(255,255,255,.65); text-decoration: none; }
+  .footer-legal a:hover { color: #FFD54F; }
   .sponsor-label { font-size: .65rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .08em; }
+
+  /* CREDIBILITY BAR */
+  .cred-bar {
+    background: #FEFCE8; border-bottom: 1px solid #DDE3ED;
+    padding: .5rem 2rem; display: flex; align-items: center;
+    gap: 1.1rem; flex-wrap: wrap; font-size: .75rem;
+  }
+  .cred-bar .cred-label { font-size: .65rem; font-weight: 800; color: #1B4332; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+  .cred-bar a { color: #2D6B2D; text-decoration: none; font-weight: 600; }
+  .cred-bar a:hover { color: #D4A017; }
+  .cred-bar .cred-pipe { color: #DDE3ED; font-weight: 400; }
+  .cred-bar .cred-media { color: #1B4332; font-weight: 700; font-size: .72rem; }
+  .cred-bar .cred-verified { color: #5a6a80; font-size: .72rem; margin-left: auto; white-space: nowrap; }
+  @media (max-width: 640px) { .cred-bar { padding: .4rem 1rem; gap: .5rem; } .cred-bar .cred-verified { margin-left: 0; } }
 
   /* HAMBURGER */
   .nav-hamburger {
@@ -228,6 +244,17 @@
   <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open navigation"><span></span><span></span><span></span></button>
   <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="about.html" class="active">About</a></div>
 </nav>
+
+<div class="cred-bar">
+  <span class="cred-label">Verified Sources</span>
+  <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>
+  <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>
+  <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>
+  <a href="https://www.opensecrets.org" target="_blank" rel="noopener">OpenSecrets</a>
+  <span class="cred-pipe">·</span>
+  <span class="cred-media">Official cannabis news supplier to <strong>Easyriders Magazine</strong></span>
+  <span class="cred-verified">Last verified April 25, 2026</span>
+</div>
 
 <div class="hero">
   <div class="hero-tag">ABOUT GF TECH ONE</div>
@@ -295,6 +322,55 @@
     </div>
   </div>
 
+  <div class="about-section">
+    <span class="section-tag tag-navy">DATA INTEGRITY</span>
+    <h2>Verified Data Sources</h2>
+    <p>Every data point on GFTO PolicyTracker is sourced directly from official government agencies and verified public records. No third-party data resellers. No unverified aggregators.</p>
+    <table class="data-table">
+      <thead><tr><th>Source</th><th>What We Pull</th><th>Update Frequency</th><th>Last Verified</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.congress.gov" target="_blank" rel="noopener"><strong>Congress.gov</strong></a></td>
+          <td>Active cannabis bills, sponsors, committee status, vote records</td>
+          <td>Weekly — Mondays</td>
+          <td>April 25, 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.federalregister.gov" target="_blank" rel="noopener"><strong>Federal Register</strong></a></td>
+          <td>DEA, FDA, and DOJ executive orders, proposed rules, final rules</td>
+          <td>Daily — 6am ET</td>
+          <td>April 25, 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.fec.gov" target="_blank" rel="noopener"><strong>FEC.gov</strong></a></td>
+          <td>Campaign finance filings, PAC contributions, candidate fundraising</td>
+          <td>Monthly</td>
+          <td>April 25, 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.opensecrets.org" target="_blank" rel="noopener"><strong>OpenSecrets</strong></a></td>
+          <td>Lawmaker donor profiles, industry money flows, lobbying spend</td>
+          <td>Monthly</td>
+          <td>April 25, 2026</td>
+        </tr>
+        <tr>
+          <td><strong>Google News RSS</strong></td>
+          <td>Cannabis and vapor/nicotine policy headlines from major outlets</td>
+          <td>Daily — 6am ET</td>
+          <td>April 25, 2026</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>All government data is public domain. GFTO PolicyTracker does not editorialize or alter source data — we organize, summarize, and present it for business intelligence use.</p>
+  </div>
+
+  <div class="about-section">
+    <span class="section-tag tag-cream">MEDIA PARTNERSHIP</span>
+    <h2>Easyriders Magazine</h2>
+    <p>GFTO PolicyTracker serves as an official cannabis news supplier to <strong>Easyriders Magazine</strong> — one of America's most iconic motorcycle and lifestyle publications. Through this partnership, GFTO delivers curated cannabis policy intelligence to Easyriders' audience of hundreds of thousands of readers who represent a core and growing cannabis consumer demographic.</p>
+    <p>This partnership validates GFTO PolicyTracker as a trusted, publication-grade intelligence source — not just a data aggregator.</p>
+  </div>
+
   <p style="font-size:.82rem;color:#5a6a80;margin-top:2rem;">
     GFTO PolicyTracker is for informational purposes only. This is not legal or investment advice.
     Data sourced from Congress.gov, Federal Register, FEC.gov, OpenSecrets, and Google News.
@@ -337,7 +413,11 @@
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
-    Updated April 25, 2026 &nbsp;·&nbsp; Data: Congress.gov, Federal Register, FEC.gov, OpenSecrets, Google News
+    Updated April 25, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
+    &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
+    <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
+    <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,
+    <a href="https://www.opensecrets.org" target="_blank" rel="noopener">OpenSecrets</a>, Google News
     &nbsp;·&nbsp; For informational purposes only. Not legal advice.
   </p>
 </footer>
