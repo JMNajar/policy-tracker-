@@ -26,26 +26,25 @@
   /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: #7A5835; padding: 0 2rem;
+    background: #C4B5A0; padding: 0 2rem;
     display: flex; align-items: center; justify-content: space-between;
-    box-shadow: 0 2px 10px rgba(0,0,0,.35);
+    box-shadow: 0 2px 10px rgba(0,0,0,.18);
     min-height: 64px;
   }
   .nav-brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
   .nav-brand img {
-    height: 40px; border-radius: 6px;
-    padding: 3px 5px; background: #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.15);
+    height: 40px; mix-blend-mode: multiply;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,.25));
   }
-  .nav-brand-text { color: #fff; font-size: 1.15rem; font-weight: 800; letter-spacing: .06em; }
+  .nav-brand-text { color: #1B2D4F; font-size: 1.15rem; font-weight: 800; letter-spacing: .06em; }
   .nav-brand-text span { color: #C8311A; }
   .nav-links { display: flex; gap: .15rem; flex-wrap: wrap; }
   .nav-links a {
-    color: #ffe8c8; text-decoration: none; font-size: .78rem; font-weight: 600;
+    color: #1B2D4F; text-decoration: none; font-size: .78rem; font-weight: 600;
     padding: .45rem .7rem; border-radius: 4px; letter-spacing: .03em;
     transition: background .2s, color .2s; white-space: nowrap;
   }
-  .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,.15); color: #fff; }
+  .nav-links a:hover, .nav-links a.active { background: rgba(27,45,79,.12); color: #1B2D4F; }
 
   /* HERO */
   .hero {
@@ -190,7 +189,7 @@
     nav { position: relative; }
     .nav-links {
       display: none; position: absolute; top: 64px; left: 0; right: 0;
-      background: #7A5835; flex-direction: column;
+      background: #C4B5A0; flex-direction: column;
       padding: .5rem 0 1rem; box-shadow: 0 4px 12px rgba(0,0,0,.3); z-index: 99;
     }
     .nav-links.open { display: flex; }
@@ -258,6 +257,11 @@
       <div class="card-meta">Apr 23, 2026</div>
     </div>
     <div class="card">
+      <div class="card-source">Foley Hoag</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMijwJBVV95cUxNaWkxTUFBbzFCa294TlRydUh1QnBZMHdpU1MyeUhGVWh1cGdtRW9lQWlfaU1yclplU3VpaW9DYTBwb1lzbDBNLWY0TDFteXg4cDlVRWVEVkMyTDBjb1duSjY4TWRCdTg0UWsxY0wxa19HMEFib0VuVEl1VnlBTVZlYVp5enVvaWVzcUZocVd3NnRZcW9CaUNoc04yanU2WVBISTlUR216eXM0dzFPd2s0NlRQZ2JUM3ZpaXNINEhZSW5EVG9OUTlLT2RZUTV0c1VkZ19Bd19veTExMzFkOFRHNHZYTGNSLVJzWk5CYVRaQXNkVjQ5VGF4UUdFXzJlSFVfeUhlUFFkM0dVYlBjUVJz?oc=5" target="_blank" rel="noopener">DOJ Immediately Reschedules State-Licensed Medical Cannabis to Schedule III — and Restarts the Clock on Broader Reschedu</a></div>
+      <div class="card-meta">Apr 23, 2026</div>
+    </div>
+    <div class="card">
       <div class="card-source">Congressman Steve Cohen (.gov)</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxQR0NrenFjUjYxRjFqaGZoUlFOUHpuaUU5X0FuYjdlYWh3a0ZvRTRDcUlrQ3VpSFllMGlGYUVEd0swYlFVdld1bmxWbnczbTJVRVA2NG41WWFnZk53WVFyWE9BTzlndFh3T3hvVnJlWXhvcVVFTE9lZ1Vfek1zSjJ1dXdYNjd5MDBoVlNZbTlwSm9na0FWNlF2Mkt4WXlGbVFkVW43ZG4tWTFVUjBfS2tEa2E2SnF2bk1wU2o3RDBjNA?oc=5" target="_blank" rel="noopener">April 23, 2026 Congressman Cohen Welcomes Rescheduling of Medical Marijuana - Congressman Steve Cohen (.gov)</a></div>
       <div class="card-meta">Apr 23, 2026</div>
@@ -275,11 +279,6 @@
     <div class="card">
       <div class="card-source">CNBC</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxNM2tRX3kzWnNGdzdTTHBhUEp5WERBV3U0T1pZdUNkWmdsQUhnT1J2LTBvU1h1STVmYkg4YnZTYmJydDBVaGNpSHFYMWNqdUZnSHJlUkU4OFlRNWJIUlBONXFGUFR2UWZOQlFWVFlKazRkRGlZMjV6UmlDLXBXVENqT1VNZjIwZ9IBiwFBVV95cUxOajYyR1E5bm5TWk5PdEk0ZmlBa0tBRXZsbWlQLWxJcWRCeEpRUWVxS3VSYWF3TEhVRnlaUTE0VzY3MlU0Uk8yRmNBZDBUQnVaV1JfNmxQY0xuSVBRclBtNUFfbWhPZDhhS0YzYUhBSmx1WDRRcE4ydFExN3JQLUhsZUhCX00yTmRZSnNr?oc=5" target="_blank" rel="noopener">Trump administration moves to reclassify cannabis in major shift that could expand research - CNBC</a></div>
-      <div class="card-meta">Apr 23, 2026</div>
-    </div>
-    <div class="card">
-      <div class="card-source">VPM</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxQaVYxSGtGX0I4RExWeUh4d0szSkd1RzJWZGxJekNPQ2ZoWFVvaUZ1YWtOQzJudXYwMDhjVjJLUFNmZHM4SFd0S0diaVV3RVdrcG1DZExVWW95cEtYTllPT1ItX19UVEVBQXJkWDlGY0NBOUhTT1J2ZXdEc09MRDVJSnBFYlM2TGpZNnlUSjdXWXpTZWZGUHd4djhJd0FfSWVkN3BtdlZVQ3M3dmM?oc=5" target="_blank" rel="noopener">General Assembly declines Spanberger amendments to major legislation - VPM</a></div>
       <div class="card-meta">Apr 23, 2026</div>
     </div>
   </div>
