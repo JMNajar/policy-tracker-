@@ -26,22 +26,26 @@
   /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: var(--navy); padding: 0 2rem;
+    background: #7A5835; padding: 0 2rem;
     display: flex; align-items: center; justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    box-shadow: 0 2px 10px rgba(0,0,0,.35);
     min-height: 64px;
   }
   .nav-brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
-  .nav-brand img { height: 38px; }
+  .nav-brand img {
+    height: 40px; border-radius: 6px;
+    padding: 3px 5px; background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.15);
+  }
   .nav-brand-text { color: #fff; font-size: 1.15rem; font-weight: 800; letter-spacing: .06em; }
   .nav-brand-text span { color: #C8311A; }
   .nav-links { display: flex; gap: .15rem; flex-wrap: wrap; }
   .nav-links a {
-    color: #90caf9; text-decoration: none; font-size: .78rem; font-weight: 600;
+    color: #ffe8c8; text-decoration: none; font-size: .78rem; font-weight: 600;
     padding: .45rem .7rem; border-radius: 4px; letter-spacing: .03em;
     transition: background .2s, color .2s; white-space: nowrap;
   }
-  .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,.12); color: #fff; }
+  .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,.15); color: #fff; }
 
   /* HERO */
   .hero {
@@ -186,7 +190,7 @@
     nav { position: relative; }
     .nav-links {
       display: none; position: absolute; top: 64px; left: 0; right: 0;
-      background: var(--navy); flex-direction: column;
+      background: #7A5835; flex-direction: column;
       padding: .5rem 0 1rem; box-shadow: 0 4px 12px rgba(0,0,0,.3); z-index: 99;
     }
     .nav-links.open { display: flex; }
@@ -213,7 +217,7 @@
   <p>Who funds the legislators writing cannabis law — and what that tells you about how they'll vote.</p>
   <div class="stat-row">
     <div class="stat-card"><div class="num">FEC</div><div class="lbl">DATA SOURCE</div></div>
-    <div class="stat-card"><div class="num">15</div><div class="lbl">CANNABIS PACs FOUND</div></div>
+    <div class="stat-card"><div class="num">0</div><div class="lbl">CANNABIS PACs FOUND</div></div>
     <div class="stat-card"><div class="num">Monthly</div><div class="lbl">REFRESH</div></div>
   </div>
 </div>
@@ -229,97 +233,7 @@
     <thead>
       <tr><th>Committee Name</th><th>Type</th><th>State</th><th>Total Receipts</th></tr>
     </thead>
-    <tbody>
-      <tr>
-        <td><strong>NATIONAL CANNABIS INDUSTRY ASSOCIATION PAC</strong></td>
-        <td>PAC - Qualified</td>
-        <td>CO</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>THE CANNABIS FUND</strong></td>
-        <td>PAC - Nonqualified</td>
-        <td>OR</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>MEDICINAL CANNABIS SUPERPAC</strong></td>
-        <td>Super PAC (Independent Expenditure-Only)</td>
-        <td>CA</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>CANNABIS TRADE FEDERATION ACTION FUND</strong></td>
-        <td>PAC - Nonqualified</td>
-        <td>CO</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>CANNABIS FREEDOM PAC</strong></td>
-        <td>Hybrid PAC (with Non-Contribution Account) - Nonqualified</td>
-        <td>TX</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>CANNABIS VICTORY FUND</strong></td>
-        <td>Super PAC (Independent Expenditure-Only)</td>
-        <td>CA</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>AMERICAN TRADE ASSOCIATION FOR CANNABIS AND HEMP POLITICAL ACTION COMMITTEE (ATACH PAC)</strong></td>
-        <td>PAC - Nonqualified</td>
-        <td>DC</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>AMEICANS FOR CANNABIS LEGALIZATION</strong></td>
-        <td>Super PAC (Independent Expenditure-Only)</td>
-        <td>VT</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>CITIZENS FOR THE LEGALIZATION OF CANNABIS POLITICAL ACTION COMMITTEE</strong></td>
-        <td>Hybrid PAC (with Non-Contribution Account) - Nonqualified</td>
-        <td>DC</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>CANNABIS ACTION FUND</strong></td>
-        <td>Super PAC (Independent Expenditure-Only)</td>
-        <td>PA</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>CANNABIS CATALYST POLITICAL ACTION COMMITTEE</strong></td>
-        <td>Hybrid PAC (with Non-Contribution Account) - Nonqualified</td>
-        <td>VA</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>MEDICAL CANNABIS RESEARCH PAC</strong></td>
-        <td>PAC - Nonqualified</td>
-        <td>PA</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>CANNABIS PATIENTS FOR THE RIGHT TO BEAR ARMS</strong></td>
-        <td>PAC - Nonqualified</td>
-        <td>DC</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>AMERICAN CANNABIS POLITICAL ACTION COMMITTEE</strong></td>
-        <td>PAC - Nonqualified</td>
-        <td>CA</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>THE ACCC CANNABIS POLITICAL ACTION COMMITTEE</strong></td>
-        <td>PAC - Nonqualified</td>
-        <td>CA</td>
-        <td>$0</td>
-      </tr></tbody>
+    <tbody><tr><td colspan='4' style='color:#999;padding:1rem;'>FEC data loading — check connection.</td></tr></tbody>
   </table>
 
 
