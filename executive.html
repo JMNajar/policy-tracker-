@@ -169,10 +169,28 @@
   .footer-legal { font-size: .72rem; color: rgba(255,255,255,.4); }
   .sponsor-label { font-size: .65rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .08em; }
 
+  /* HAMBURGER */
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: .5rem;
+  }
+  .nav-hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: #fff; border-radius: 2px; transition: transform .2s, opacity .2s;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 640px) {
     .hero h1 { font-size: 1.7rem; }
-    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    nav { position: relative; }
+    .nav-links {
+      display: none; position: absolute; top: 64px; left: 0; right: 0;
+      background: var(--navy); flex-direction: column;
+      padding: .5rem 0 1rem; box-shadow: 0 4px 12px rgba(0,0,0,.3); z-index: 99;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: .75rem 1.5rem; font-size: .9rem; }
     .stat-row { gap: .6rem; }
     .stat-card { min-width: 120px; padding: .9rem 1rem; }
   }
@@ -185,6 +203,7 @@
     <img src="assets/Bold_logo_ HorsepowerAI.png" alt="Horsepower AI" onerror="this.style.display='none'">
     <span class="nav-brand-text">Policy<span>Tracker</span></span>
   </a>
+  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open navigation"><span></span><span></span><span></span></button>
   <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html" class="active">Executive</a><a href="money.html">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="about.html">About</a></div>
 </nav>
 
@@ -367,5 +386,9 @@
     &nbsp;·&nbsp; For informational purposes only. Not legal advice.
   </p>
 </footer>
+<script>
+function toggleNav(){document.querySelector('.nav-links').classList.toggle('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('nav'))document.querySelector('.nav-links').classList.remove('open');});
+</script>
 </body>
 </html>

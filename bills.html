@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cannabis Bills in Congress (21) | PolicyTracker</title>
+  <title>Cannabis Bills in Congress (20) | PolicyTracker</title>
   <meta name="description" content="Cannabis and executive policy intelligence for business leaders. Built by Horsepower AI, sponsored by GF Tech One.">
   <style>
   :root {
@@ -169,10 +169,28 @@
   .footer-legal { font-size: .72rem; color: rgba(255,255,255,.4); }
   .sponsor-label { font-size: .65rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .08em; }
 
+  /* HAMBURGER */
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: .5rem;
+  }
+  .nav-hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: #fff; border-radius: 2px; transition: transform .2s, opacity .2s;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 640px) {
     .hero h1 { font-size: 1.7rem; }
-    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    nav { position: relative; }
+    .nav-links {
+      display: none; position: absolute; top: 64px; left: 0; right: 0;
+      background: var(--navy); flex-direction: column;
+      padding: .5rem 0 1rem; box-shadow: 0 4px 12px rgba(0,0,0,.3); z-index: 99;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: .75rem 1.5rem; font-size: .9rem; }
     .stat-row { gap: .6rem; }
     .stat-card { min-width: 120px; padding: .9rem 1rem; }
   }
@@ -185,6 +203,7 @@
     <img src="assets/Bold_logo_ HorsepowerAI.png" alt="Horsepower AI" onerror="this.style.display='none'">
     <span class="nav-brand-text">Policy<span>Tracker</span></span>
   </a>
+  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open navigation"><span></span><span></span><span></span></button>
   <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html" class="active">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="about.html">About</a></div>
 </nav>
 
@@ -193,7 +212,7 @@
   <h1>Cannabis <span>Bills in Congress</span></h1>
   <p>Active bills, committee status, and floor votes — updated every Monday morning.</p>
   <div class="stat-row">
-    <div class="stat-card"><div class="num">21</div><div class="lbl">BILLS TRACKED</div></div>
+    <div class="stat-card"><div class="num">20</div><div class="lbl">BILLS TRACKED</div></div>
     <div class="stat-card"><div class="num">Federal</div><div class="lbl">SCOPE</div></div>
     <div class="stat-card"><div class="num">Weekly</div><div class="lbl">UPDATES</div></div>
   </div>
@@ -202,13 +221,76 @@
 <div class="container">
   
   <span class="section-tag tag-navy">LIVE FROM CONGRESS.GOV</span>
-  <h2>Cannabis Legislation — 21 Bills Found</h2>
+  <h2>Cannabis Legislation — 20 Bills Found</h2>
   <p class="section-intro">All cannabis, marijuana, and hemp-related bills in the 119th Congress sorted by most recent activity.</p>
   <table class="data-table">
     <thead>
       <tr><th>Bill</th><th>Title</th><th>Sponsor</th><th>Latest Action</th><th>Updated</th></tr>
     </thead>
     <tbody>
+      <tr>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/7567" target="_blank" rel="noopener">HR 7567</a></strong></td>
+        <td>Farm, Food, and National Security Act of 2026</td>
+        <td>Glenn Thompson</td>
+        <td>Placed on the Union Calendar, Calendar No. 537.</td>
+        <td style="white-space:nowrap">2026-04-24</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/1" target="_blank" rel="noopener">HR 1</a></strong></td>
+        <td>An act to provide for reconciliation pursuant to title II of H. Con. Res. 14.</td>
+        <td>Jodey Arrington</td>
+        <td>Became Public Law No: 119-21.</td>
+        <td style="white-space:nowrap">2026-04-24</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/3946" target="_blank" rel="noopener">HR 3946</a></strong></td>
+        <td>FIGHT Act of 2025</td>
+        <td>Don Bacon</td>
+        <td>Referred to the House Committee on Agriculture.</td>
+        <td style="white-space:nowrap">2026-04-24</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8476" target="_blank" rel="noopener">HR 8476</a></strong></td>
+        <td>To require each local educational agency and institution of higher education that receives Federal financial assistance to treat discriminat</td>
+        <td>Randy Fine</td>
+        <td>Referred to the Committee on Education and Workforce, and in addition to the Committee on the Judiciary, for a period to</td>
+        <td style="white-space:nowrap">2026-04-24</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hconres-bill/14" target="_blank" rel="noopener">HCONRES 14</a></strong></td>
+        <td>Establishing the congressional budget for the United States Government for fiscal year 2025 and setting forth the appropriate budgetary leve</td>
+        <td>Jodey Arrington</td>
+        <td>Star Print ordered on the reported concurrent resolution.</td>
+        <td style="white-space:nowrap">2026-04-24</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1184" target="_blank" rel="noopener">HRES 1184</a></strong></td>
+        <td>Recognizing and honoring National Mushroom Day and the contributions of Chester and Berks Counties to the national mushroom industry and to </td>
+        <td>Chrissy Houlahan</td>
+        <td>Referred to the House Committee on Agriculture.</td>
+        <td style="white-space:nowrap">2026-04-24</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1194" target="_blank" rel="noopener">HRES 1194</a></strong></td>
+        <td>Recognizing April 2026 as "Distracted Driving Awareness Month" and promoting efforts to help prevent tragic and preventable crashes, deaths,</td>
+        <td>Tracey Mann</td>
+        <td>Referred to the House Committee on Transportation and Infrastructure.</td>
+        <td style="white-space:nowrap">2026-04-24</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/s-bill/4368" target="_blank" rel="noopener">S 4368</a></strong></td>
+        <td>A bill to approve the settlement of the water rights claims of the Agua Caliente Band of Cahuilla Indians, and for other purposes.</td>
+        <td>Alex Padilla</td>
+        <td>Read twice and referred to the Committee on Indian Affairs. (Sponsor introductory remarks on measure: CR S1937)</td>
+        <td style="white-space:nowrap">2026-04-24</td>
+      </tr>
+      <tr>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/s-bill/2677" target="_blank" rel="noopener">S 2677</a></strong></td>
+        <td>A bill to expand the sharing of information with respect to suspected violations of intellectual property rights in trade.</td>
+        <td>Chuck Grassley</td>
+        <td>Read twice and referred to the Committee on Finance.</td>
+        <td style="white-space:nowrap">2026-04-24</td>
+      </tr>
       <tr>
         <td><strong><a href="https://www.congress.gov/bill/119th-congress/sconres-bill/33" target="_blank" rel="noopener">SCONRES 33</a></strong></td>
         <td>A concurrent resolution setting forth the congressional budget for the United States Government for fiscal year 2026 and setting forth the a</td>
@@ -217,143 +299,73 @@
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
       <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1206" target="_blank" rel="noopener">HRES 1206</a></strong></td>
-        <td>Expressing the profound sorrow of the House of Representatives on the death of the Honorable David Scott.</td>
-        <td>Sanford Bishop</td>
-        <td>Motion to reconsider laid on the table Agreed to without objection.</td>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/3196" target="_blank" rel="noopener">HR 3196</a></strong></td>
+        <td>Improving Helicopter Safety Act of 2025</td>
+        <td>Jerrold Nadler</td>
+        <td>Referred to the Subcommittee on Aviation.</td>
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
       <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1189" target="_blank" rel="noopener">HRES 1189</a></strong></td>
-        <td>Providing for consideration of the bill (H.R. 4690) to amend the Energy Conservation and Production Act to repeal certain Federal building e</td>
-        <td>Chip Roy</td>
-        <td>Motion to reconsider laid on the table Agreed to without objection.</td>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/sjres-bill/161" target="_blank" rel="noopener">SJRES 161</a></strong></td>
+        <td>A joint resolution to direct the removal of United States Armed Forces from hostilities within or against the Islamic Republic of Iran that </td>
+        <td>Mark Kelly</td>
+        <td>Read twice and referred to the Committee on Foreign Relations.</td>
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
       <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1182" target="_blank" rel="noopener">HRES 1182</a></strong></td>
-        <td>Expressing support for rural communities across the United States as stewards of the environment, major suppliers of United States energy re</td>
-        <td>Clay Fuller</td>
-        <td>Motion to reconsider laid on the table Agreed to without objection.</td>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/sjres-bill/104" target="_blank" rel="noopener">SJRES 104</a></strong></td>
+        <td>A joint resolution to direct the removal of United States Armed Forces from hostilities within or against the Islamic Republic of Iran that </td>
+        <td>Timothy Kaine</td>
+        <td>Motion to discharge Senate Committee on Foreign Relations rejected by Yea-Nay Vote. 47 - 53. Record Vote Number: 46. (co</td>
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
       <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/6387" target="_blank" rel="noopener">HR 6387</a></strong></td>
-        <td>FIRE Act</td>
-        <td>Gabe Evans</td>
-        <td>Motion to reconsider laid on the table Agreed to without objection.</td>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/s-bill/2132" target="_blank" rel="noopener">S 2132</a></strong></td>
+        <td>CLEAR Path Act</td>
+        <td>John Cornyn</td>
+        <td>Held at the desk.</td>
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
       <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/4690" target="_blank" rel="noopener">HR 4690</a></strong></td>
-        <td>Reliable Federal Infrastructure Act</td>
-        <td>Nicholas Langworthy</td>
-        <td>Motion to reconsider laid on the table Agreed to without objection.</td>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/6106" target="_blank" rel="noopener">HR 6106</a></strong></td>
+        <td>CLEAR Path Act</td>
+        <td>August Pfluger</td>
+        <td>Referred to the Committee on Foreign Affairs, and in addition to the Committees on the Judiciary, and Rules, for a perio</td>
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
       <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8469" target="_blank" rel="noopener">HR 8469</a></strong></td>
-        <td>Making appropriations for military construction, the Department of Veterans Affairs, and related agencies for the fiscal year ending Septemb</td>
-        <td>John Carter</td>
-        <td>Placed on the Union Calendar, Calendar No. 539.</td>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/6955" target="_blank" rel="noopener">HR 6955</a></strong></td>
+        <td>Main Street Act</td>
+        <td>J. Hill</td>
+        <td>Placed on the Union Calendar, Calendar No. 535.</td>
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
       <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8462" target="_blank" rel="noopener">HR 8462</a></strong></td>
-        <td>National Quantum Initiative Reauthorization Act</td>
-        <td>Randy Weber</td>
-        <td>Referred to the House Committee on Science, Space, and Technology.</td>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/sres-bill/678" target="_blank" rel="noopener">SRES 678</a></strong></td>
+        <td>A resolution prohibiting the use of funds for travel by Senators to or from their residence during Government shutdowns.</td>
+        <td>Ashley Moody</td>
+        <td>Referred to the Committee on Rules and Administration. (text: CR S1826)</td>
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
       <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8485" target="_blank" rel="noopener">HR 8485</a></strong></td>
-        <td>No Rogue Jurors Act</td>
-        <td>Julia Letlow</td>
-        <td>Referred to the House Committee on Oversight and Government Reform.</td>
-        <td style="white-space:nowrap">2026-04-24</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8470" target="_blank" rel="noopener">HR 8470</a></strong></td>
-        <td>Surveillance Accountability Act</td>
-        <td>Thomas Massie</td>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8323" target="_blank" rel="noopener">HR 8323</a></strong></td>
+        <td>SOUL Act of 2026</td>
+        <td>Andy Biggs</td>
         <td>Referred to the House Committee on the Judiciary.</td>
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
       <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8465" target="_blank" rel="noopener">HR 8465</a></strong></td>
-        <td>Funding Early Childhood is the Right IDEA Act</td>
-        <td>Mark DeSaulnier</td>
-        <td>Referred to the House Committee on Education and Workforce.</td>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/s-bill/3404" target="_blank" rel="noopener">S 3404</a></strong></td>
+        <td>Satellite Cybersecurity Act of 2025</td>
+        <td>Gary Peters</td>
+        <td>Committee on Commerce, Science, and Transportation. Ordered to be reported with an amendment in the nature of a substitu</td>
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
       <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8467" target="_blank" rel="noopener">HR 8467</a></strong></td>
-        <td>ZOMBIE Act</td>
-        <td>Gary Palmer</td>
-        <td>Referred to the House Committee on Oversight and Government Reform.</td>
-        <td style="white-space:nowrap">2026-04-24</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8474" target="_blank" rel="noopener">HR 8474</a></strong></td>
-        <td>Neighborhood Tree Act of 2026</td>
-        <td>Shontel Brown</td>
-        <td>Referred to the House Committee on Agriculture.</td>
-        <td style="white-space:nowrap">2026-04-24</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8473" target="_blank" rel="noopener">HR 8473</a></strong></td>
-        <td>Veterinary Services to Improve Public Health in Rural Communities Act</td>
-        <td>Nicholas Begich</td>
-        <td>Referred to the Committee on Natural Resources, and in addition to the Committees on Energy and Commerce, and Agricultur</td>
-        <td style="white-space:nowrap">2026-04-24</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hconres-bill/89" target="_blank" rel="noopener">HCONRES 89</a></strong></td>
-        <td>Directing the President, pursuant to section 5(c) of the War Powers Resolution, to remove United States Armed Forces from hostilities with I</td>
-        <td>Pramila Jayapal</td>
-        <td>Referred to the House Committee on Foreign Affairs.</td>
-        <td style="white-space:nowrap">2026-04-24</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1210" target="_blank" rel="noopener">HRES 1210</a></strong></td>
-        <td>Expressing the sense of the House of Representatives in support of the International Atomic Energy Agency's (IAEA) nuclear security role.</td>
-        <td>Bill Foster</td>
-        <td>Referred to the House Committee on Foreign Affairs.</td>
-        <td style="white-space:nowrap">2026-04-24</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1212" target="_blank" rel="noopener">HRES 1212</a></strong></td>
-        <td>Expressing support for the staff of public, school, academic, and special libraries in the United States and the essential services those li</td>
-        <td>Pramila Jayapal</td>
-        <td>Referred to the House Committee on Education and Workforce.</td>
-        <td style="white-space:nowrap">2026-04-24</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1209" target="_blank" rel="noopener">HRES 1209</a></strong></td>
-        <td>Recognizing the significance of "Community College Month" in April as a celebration of more than 1,000 institutions throughout the United St</td>
-        <td>Joe Courtney</td>
-        <td>Referred to the House Committee on Oversight and Government Reform.</td>
-        <td style="white-space:nowrap">2026-04-24</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1214" target="_blank" rel="noopener">HRES 1214</a></strong></td>
-        <td>Celebrating the 75th anniversary of the International Hearing Society.</td>
-        <td>Hillary Scholten</td>
-        <td>Referred to the House Committee on Energy and Commerce.</td>
-        <td style="white-space:nowrap">2026-04-24</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1215" target="_blank" rel="noopener">HRES 1215</a></strong></td>
-        <td>Commending the Holy See for its enduring diplomatic relationship with Taiwan and affirming the support of Congress for the continued preserv</td>
-        <td>Dina Titus</td>
-        <td>Referred to the House Committee on Foreign Affairs.</td>
-        <td style="white-space:nowrap">2026-04-24</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hres-bill/1213" target="_blank" rel="noopener">HRES 1213</a></strong></td>
-        <td>Supporting the recognition of April 2026 as "National County Government Month" to honor the county government workforce, educate residents a</td>
-        <td>Johnny Olszewski</td>
-        <td>Referred to the House Committee on Oversight and Government Reform.</td>
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/sres-bill/684" target="_blank" rel="noopener">SRES 684</a></strong></td>
+        <td>A resolution recognizing the 56th anniversary of Earth Day and the leadership of its founder, Senator Gaylord Nelson.</td>
+        <td>Tammy Baldwin</td>
+        <td>Referred to the Committee on Environment and Public Works. (text: CR S1938)</td>
         <td style="white-space:nowrap">2026-04-24</td>
       </tr>
     </tbody>
@@ -458,5 +470,9 @@
     &nbsp;·&nbsp; For informational purposes only. Not legal advice.
   </p>
 </footer>
+<script>
+function toggleNav(){document.querySelector('.nav-links').classList.toggle('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('nav'))document.querySelector('.nav-links').classList.remove('open');});
+</script>
 </body>
 </html>
