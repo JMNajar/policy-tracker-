@@ -653,6 +653,26 @@ def fetch_opposition_news():
 def fetch_bills():
     api_key = os.environ.get("CONGRESS_API_KEY", "x6DiIlrW2gyfGrXC9I1ySo9qVFjuwpEyNDFuCM6c")
     search_terms = ["cannabis", "marijuana", "hemp"]
+    # Bills whose titles contain these keywords are general legislation, not cannabis-specific
+    BILL_EXCLUSIONS = [
+        'appropriations', 'appropriation', 'consolidated appropriations',
+        'omnibus', 'continuing resolution', 'national defense authorization',
+        'supplemental appropriations', 'emergency supplemental',
+        'general government', 'military construction',
+    ]
+
+    # Congress.gov URL type mapping
+    BILL_TYPE_URL = {
+        'hr':       'house-bill',
+        's':        'senate-bill',
+        'hres':     'house-resolution',
+        'sres':     'senate-resolution',
+        'hjres':    'house-joint-resolution',
+        'sjres':    'senate-joint-resolution',
+        'hconres':  'house-concurrent-resolution',
+        'sconres':  'senate-concurrent-resolution',
+    }
+
     bill_stubs = []
     seen = set()
     for term in search_terms:
@@ -667,6 +687,9 @@ def fetch_bills():
             for b in data.get("bills", []):
                 bill_id = f"{b.get('congress','')}-{b.get('type','')}-{b.get('number','')}"
                 if bill_id in seen:
+                    continue
+                title_lower = b.get("title", "").lower()
+                if any(excl in title_lower for excl in BILL_EXCLUSIONS):
                     continue
                 seen.add(bill_id)
                 bill_stubs.append(b)
@@ -706,7 +729,7 @@ def fetch_bills():
             "chamber":         "Senate" if b.get("originChamberCode","") == "S" else "House",
             "congress":        congress,
             "updated":         b.get("updateDate","")[:10],
-            "url":             f"https://www.congress.gov/bill/{congress}th-congress/{btype}-bill/{bnum}",
+            "url":             f"https://www.congress.gov/bill/{congress}th-congress/{BILL_TYPE_URL.get(btype, btype + '-bill')}/{bnum}",
             "latest_action":   b.get("latestAction",{}).get("text","")[:120],
         })
 
