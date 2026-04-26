@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cannabis Campaign Finance & Money | GFTO AI Compliance Engine</title>
-  <meta name="description" content="Cannabis and executive policy intelligence for business leaders. Built by Horsepower AI, sponsored by GF Tech One.">
+  <meta name="description" content="AI-powered compliance intelligence for cannabis and nicotine operators. Track legislation, regulations, and campaign finance in real time. Built by Horsepower AI, sponsored by GF Tech One.">
   <style>
   :root {
     --navy:   #1B4332;
@@ -121,6 +121,20 @@
   .badge-navy  { background: #E8F5E9; color: #1B4332; }
   .badge-gray  { background: #f0f0f0; color: #666; }
 
+  /* RISK SCORE BADGES */
+  .risk-badge { display: inline-block; padding: .18rem .55rem; border-radius: 12px; font-size: .65rem; font-weight: 800; letter-spacing: .05em; white-space: nowrap; }
+  .risk-critical { background: #FFEBEE; color: #B71C1C; border: 1px solid #EF9A9A; }
+  .risk-high     { background: #FFF3E0; color: #E65100; border: 1px solid #FFCC80; }
+  .risk-medium   { background: #FFFDE7; color: #F57F17; border: 1px solid #FFE082; }
+  .risk-low      { background: #F5F5F5; color: #757575; border: 1px solid #E0E0E0; }
+
+  /* FILTER BAR */
+  .filter-bar { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem; padding: 1rem 1.25rem; background: #FFFFFF; border: 1px solid #DDE3ED; border-radius: 8px; }
+  .filter-bar label { font-size: .72rem; font-weight: 700; color: #1B4332; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+  .filter-bar select { font-size: .82rem; color: #1B4332; border: 1px solid #DDE3ED; border-radius: 6px; padding: .35rem .7rem; background: #FFFFFF; cursor: pointer; font-weight: 600; }
+  .filter-bar select:focus { outline: none; border-color: #1B4332; }
+  .filter-count { font-size: .78rem; color: #5a6a80; margin-left: auto; white-space: nowrap; }
+
   /* ALERT / PLACEHOLDER */
   .api-pending {
     background: #F5EDE0; border: 1px solid #d4c4a0; border-radius: 8px;
@@ -185,8 +199,17 @@
   .cred-bar a:hover { color: #D4A017; }
   .cred-bar .cred-pipe { color: #DDE3ED; font-weight: 400; }
   .cred-bar .cred-media { color: #1B4332; font-weight: 700; font-size: .72rem; }
+  .cred-bar .cred-freshness { color: #D4A017; font-weight: 700; font-size: .72rem; }
   .cred-bar .cred-verified { color: #5a6a80; font-size: .72rem; margin-left: auto; white-space: nowrap; }
-  @media (max-width: 640px) { .cred-bar { padding: .4rem 1rem; gap: .5rem; } .cred-bar .cred-verified { margin-left: 0; } }
+
+  /* ABOUT PAGE */
+  .about-section { margin-bottom: 2.5rem; }
+  .about-section p { color: #3a4a3a; font-size: .96rem; line-height: 1.7; margin-bottom: 1rem; }
+  .kent-card { background: #fff; border: 1px solid #DDE3ED; border-radius: 10px; padding: 1.75rem 2rem; margin-bottom: 2rem; border-left: 4px solid #1B4332; }
+  .kent-card h3 { font-size: 1.2rem; font-weight: 800; color: #1B4332; margin-bottom: .25rem; }
+  .kent-card .kent-title { font-size: .82rem; color: #D4A017; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1rem; }
+  .capability-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0 2rem; }
+  .capability-item { background: #E8F5E9; border-radius: 8px; padding: .85rem 1.1rem; border-left: 3px solid #2D6B2D; font-size: .88rem; font-weight: 600; color: #1B4332; }
 
   /* HAMBURGER */
   .nav-hamburger {
@@ -214,6 +237,8 @@
     .nav-links a { padding: .85rem 1.5rem; font-size: .95rem; border-bottom: 1px solid rgba(27,67,50,.08); }
     .stat-row { gap: .6rem; }
     .stat-card { min-width: 120px; padding: .9rem 1rem; }
+    .cred-bar { padding: .4rem 1rem; gap: .5rem; }
+    .cred-bar .cred-verified { margin-left: 0; }
   }
 </style>
 </head>
@@ -225,7 +250,7 @@
     <span class="nav-brand-text">GF TECH ONE <span>AI Compliance Engine</span></span>
   </a>
   <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open navigation"><span></span><span></span><span></span></button>
-  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html" class="active">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="about.html">About</a></div>
+  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html" class="active">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="methodology.html">Methodology</a><a href="about.html">About</a></div>
 </nav>
 
 <div class="cred-bar">
@@ -236,7 +261,9 @@
   <a href="https://www.opensecrets.org" target="_blank" rel="noopener">OpenSecrets</a>
   <span class="cred-pipe">·</span>
   <span class="cred-media">Official cannabis news supplier to <strong>Easyriders Magazine</strong></span>
-  <span class="cred-verified">Last verified April 25, 2026</span>
+  <span class="cred-pipe">·</span>
+  <span class="cred-freshness">Final Rule — 2 days ago</span>
+  <span class="cred-verified">Last verified April 26, 2026</span>
 </div>
 
 <div class="hero">
@@ -245,12 +272,21 @@
   <p>Who funds the legislators writing cannabis law — and what that tells you about how they'll vote.</p>
   <div class="stat-row">
     <div class="stat-card"><div class="num">FEC</div><div class="lbl">DATA SOURCE</div></div>
-    <div class="stat-card"><div class="num">0</div><div class="lbl">CANNABIS PACs FOUND</div></div>
+    <div class="stat-card"><div class="num">15</div><div class="lbl">CANNABIS PACs FOUND</div></div>
     <div class="stat-card"><div class="num">Monthly</div><div class="lbl">REFRESH</div></div>
   </div>
 </div>
 
 <div class="container">
+
+  <span class="section-tag tag-navy">INDUSTRY SPENDING COMPARISON</span>
+  <h2>Cannabis vs. Opposition — PAC Money Tracked</h2>
+  <p class="section-intro">Total political spending detected via FEC records this cycle. Opposition figure represents disbursements to federal legislators from documented anti-cannabis PACs only — full industry political spend is far larger.</p>
+  <div style="background:#FFFFFF;border:1px solid #DDE3ED;border-radius:10px;padding:1.5rem 1.75rem;margin-bottom:2rem;max-width:600px">
+    <div style="margin-bottom:.85rem"><div style="display:flex;justify-content:space-between;font-size:.82rem;font-weight:700;margin-bottom:.3rem"><span>Cannabis Industry PACs (Pro-Cannabis)</span><span style="color:#2D6B2D">$0</span></div><div style="background:#f0f0f0;border-radius:4px;height:18px"><div style="background:#2D6B2D;width:2%;height:18px;border-radius:4px;transition:width .5s"></div></div></div><div style="margin-bottom:.85rem"><div style="display:flex;justify-content:space-between;font-size:.82rem;font-weight:700;margin-bottom:.3rem"><span>Opposition Industry PACs (Anti-Cannabis)</span><span style="color:#B71C1C">$0</span></div><div style="background:#f0f0f0;border-radius:4px;height:18px"><div style="background:#B71C1C;width:2%;height:18px;border-radius:4px;transition:width .5s"></div></div></div>
+    <p style="font-size:.72rem;color:#5a6a80;margin-top:.5rem">Source: FEC.gov · 2023–2024 cycle · Cannabis PAC total receipts vs. documented opposition disbursements to legislators</p>
+  </div>
+
   <span class="section-tag tag-green">LIVE FEC DATA</span>
   <h2>Cannabis-Related Political Committees</h2>
   <p class="section-intro">Political action committees and organizations with cannabis in their name or mission
@@ -261,7 +297,97 @@
     <thead>
       <tr><th>Committee Name</th><th>Type</th><th>State</th><th>Total Receipts</th></tr>
     </thead>
-    <tbody><tr><td colspan='4' style='color:#999;padding:1rem;'>FEC data loading — check connection.</td></tr></tbody>
+    <tbody>
+      <tr>
+        <td><strong>NATIONAL CANNABIS INDUSTRY ASSOCIATION PAC</strong></td>
+        <td>PAC - Qualified</td>
+        <td>CO</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>THE CANNABIS FUND</strong></td>
+        <td>PAC - Nonqualified</td>
+        <td>OR</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>MEDICINAL CANNABIS SUPERPAC</strong></td>
+        <td>Super PAC (Independent Expenditure-Only)</td>
+        <td>CA</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>CANNABIS TRADE FEDERATION ACTION FUND</strong></td>
+        <td>PAC - Nonqualified</td>
+        <td>CO</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>CANNABIS FREEDOM PAC</strong></td>
+        <td>Hybrid PAC (with Non-Contribution Account) - Nonqualified</td>
+        <td>TX</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>CANNABIS VICTORY FUND</strong></td>
+        <td>Super PAC (Independent Expenditure-Only)</td>
+        <td>CA</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>AMERICAN TRADE ASSOCIATION FOR CANNABIS AND HEMP POLITICAL ACTION COMMITTEE (ATACH PAC)</strong></td>
+        <td>PAC - Nonqualified</td>
+        <td>DC</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>AMEICANS FOR CANNABIS LEGALIZATION</strong></td>
+        <td>Super PAC (Independent Expenditure-Only)</td>
+        <td>VT</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>CITIZENS FOR THE LEGALIZATION OF CANNABIS POLITICAL ACTION COMMITTEE</strong></td>
+        <td>Hybrid PAC (with Non-Contribution Account) - Nonqualified</td>
+        <td>DC</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>CANNABIS ACTION FUND</strong></td>
+        <td>Super PAC (Independent Expenditure-Only)</td>
+        <td>PA</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>CANNABIS CATALYST POLITICAL ACTION COMMITTEE</strong></td>
+        <td>Hybrid PAC (with Non-Contribution Account) - Nonqualified</td>
+        <td>VA</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>MEDICAL CANNABIS RESEARCH PAC</strong></td>
+        <td>PAC - Nonqualified</td>
+        <td>PA</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>CANNABIS PATIENTS FOR THE RIGHT TO BEAR ARMS</strong></td>
+        <td>PAC - Nonqualified</td>
+        <td>DC</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>AMERICAN CANNABIS POLITICAL ACTION COMMITTEE</strong></td>
+        <td>PAC - Nonqualified</td>
+        <td>CA</td>
+        <td>$0</td>
+      </tr>
+      <tr>
+        <td><strong>THE ACCC CANNABIS POLITICAL ACTION COMMITTEE</strong></td>
+        <td>PAC - Nonqualified</td>
+        <td>CA</td>
+        <td>$0</td>
+      </tr></tbody>
   </table>
 
 
@@ -325,59 +451,59 @@
   
   <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
-      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">AL.com</span>
-      <span style="font-size:.68rem;color:#5a6a80">Apr 15, 2026</span>
+      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Britannica</span>
+      <span style="font-size:.68rem;color:#5a6a80">Apr 23, 2026</span>
     </div>
-    <a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxQWDBRX3VSUXRpa2Z0Vk9DaVlPQlZZR093cVJGMTJFNlRZckdoV0FhaElWUVdPbU1UT2FCMUdxWXNlMGEwZmlOa1FLQ25GUUZzNVFwY3pVMkdqNGoyUEVNQ0xtaklIXzB0b19HQ1FCRGYyNV84NzhQUUVxT3dKRzNEdzdldU1MYnkwNVlRcFc2Nlo5TnVIbHZjRmxXUFh2T3F2WFVJWVhpeUl5bWVFZFgtUFdXc1dUelZOanloTGw5MFRCcjZsSUtJTQ?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B2D4F;text-decoration:none;line-height:1.35">Political group tied to Birmingham mayor funds attack radio ads against state rep - AL.com</a>
+    <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5JSnpFb2E3bkZ6QXpndDhVZ0JDaDRuVEJid3lzMG90N21jS1pLMi1wU2lScmdoWjh6Q0lMMFR4cFBmUXlVZnozOWltRHg3aEsyTHZESFpIbWZXbDZQNXBPN1lRb3RwZE5tYUE?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Medical Marijuana | Pros, Cons, Debate, Arguments, Health Care, Cannabis, CBD, & THC - Britannica</a>
   </div>
   <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
       <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Cannabis Business Times</span>
       <span style="font-size:.68rem;color:#5a6a80">Apr 07, 2026</span>
     </div>
-    <a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxORlhrZWF3WXdKNmVDS2Z5ZXp6MFd5U0dKUEZ2WUJGVEVhRm13TkJ6QWY4TWxvTElLYWVTcGpSOU1UVUtySnV5VEkyRjhnT1p1Zkk5VExzVkVReE1yTjAyWU1jaVVLYzdkUnNKSUx1SEVIcVZOOXl2T0ZrRkJvWVVwaFZIYW1sRkdPa1lxQ1FEQU80VHdTRVctZExNYmJtMmtMaWdnNUcxNFByMmxuU01ZU01UX0UxUWRsV3NiSFZSc3BmTURFb0g1dEZHRzNWaDVoSGlPV2p3Y2prcnZ0bTVJ?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B2D4F;text-decoration:none;line-height:1.35">California Cannabis Operators Confront Proposed 10mg THC Cap on Beverages - Cannabis Business Times</a>
+    <a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxORlhrZWF3WXdKNmVDS2Z5ZXp6MFd5U0dKUEZ2WUJGVEVhRm13TkJ6QWY4TWxvTElLYWVTcGpSOU1UVUtySnV5VEkyRjhnT1p1Zkk5VExzVkVReE1yTjAyWU1jaVVLYzdkUnNKSUx1SEVIcVZOOXl2T0ZrRkJvWVVwaFZIYW1sRkdPa1lxQ1FEQU80VHdTRVctZExNYmJtMmtMaWdnNUcxNFByMmxuU01ZU01UX0UxUWRsV3NiSFZSc3BmTURFb0g1dEZHRzNWaDVoSGlPV2p3Y2prcnZ0bTVJ?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">California Cannabis Operators Confront Proposed 10mg THC Cap on Beverages - Cannabis Business Times</a>
   </div>
   <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
       <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Idaho Capital Sun</span>
       <span style="font-size:.68rem;color:#5a6a80">Mar 25, 2026</span>
     </div>
-    <a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxOMUJUTTRvc3VGcmtfb1ZNMmVYd2JGSnFDT0c1SUJvYjV5Tm9DeVZnTXJwRThRU1ZxWDIyN2h4NVA0MHdXWElMQk40cVRNa1k4emtNTHU2UDB3NF93V0p1WHlBMldLdkl0MFNzbVBiWGdEYzRNdkVfbnZzR1hscDFsUzZKMVMwOEpkMkwySU0yQjZTd1VCNTVNUHhXYmJ1TWdoaDI0eWJqLXg3SUE?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B2D4F;text-decoration:none;line-height:1.35">Idaho budget committee co-chair’s PAC accepts $200,000 contribution – tied for largest this year - Idaho Capital Sun</a>
+    <a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxOMUJUTTRvc3VGcmtfb1ZNMmVYd2JGSnFDT0c1SUJvYjV5Tm9DeVZnTXJwRThRU1ZxWDIyN2h4NVA0MHdXWElMQk40cVRNa1k4emtNTHU2UDB3NF93V0p1WHlBMldLdkl0MFNzbVBiWGdEYzRNdkVfbnZzR1hscDFsUzZKMVMwOEpkMkwySU0yQjZTd1VCNTVNUHhXYmJ1TWdoaDI0eWJqLXg3SUE?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Idaho budget committee co-chair’s PAC accepts $200,000 contribution – tied for largest this year - Idaho Capital Sun</a>
+  </div>
+  <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
+      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Idaho Capital Sun</span>
+      <span style="font-size:.68rem;color:#5a6a80">Mar 23, 2026</span>
+    </div>
+    <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxOalNLRWlSMjF1Z29lNFRHSm1jQzlpbm15N0lxSkF0a2IwTno1MGlpeEh2SzBfN2Y0TUp1UHc2QWI3TDhubWJlNGR6R1MxbjlQVjRqbDBwWVRWUk1mc2wtS0c4bkZtWnNDcndPRV95bHUyaC1JQ0lldkwyVGdtUTRTYzgtLTlFMEJKVG5FbDBVUzNIX0tiRVF2OEh6c19oR2M3UzNQb1h2M04wczNWN0JQUkhaWGdjY3dKVW5JOUNrVHdhTWxnUnhTWjhvQk52dw?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Idaho Legislative District 30: Rematch pits culture warrior against special education advocate - Idaho Capital Sun</a>
   </div>
   <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
       <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Marijuana Moment</span>
       <span style="font-size:.68rem;color:#5a6a80">Mar 17, 2026</span>
     </div>
-    <a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxNMFNORWJyVjFHWGJoZjBOeGI4SDBDejdfME9scFRpMEhJbWQtRHI3OU92TUxvUWIwQVI5MzBROXgzcmMwRThPX1dsZ3ptQ2d5cnhNLS11QlZxUUxqWlRPWVNwOE9jTlNzTEJ1bU1SMlN0M1dqVWd4UkdtT3RoNjRwa3FRcXB1U1p0Yi1Td0VZUGloM2d5N2RXYXpGR2JvemlGdEV3dlZhQzBXWTk3SGFVYzJ3OTZ5Q09sNXF5eWZtVW01aWstR0xNMzBDOTRDNXNKbGNUUTRSR3Z0QQ?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B2D4F;text-decoration:none;line-height:1.35">Colorado Legislative Committee Votes To Reject Bill To Put Marijuana And Alcohol Tax Hikes On November Ballot - Marijuana Moment</a>
+    <a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxNMFNORWJyVjFHWGJoZjBOeGI4SDBDejdfME9scFRpMEhJbWQtRHI3OU92TUxvUWIwQVI5MzBROXgzcmMwRThPX1dsZ3ptQ2d5cnhNLS11QlZxUUxqWlRPWVNwOE9jTlNzTEJ1bU1SMlN0M1dqVWd4UkdtT3RoNjRwa3FRcXB1U1p0Yi1Td0VZUGloM2d5N2RXYXpGR2JvemlGdEV3dlZhQzBXWTk3SGFVYzJ3OTZ5Q09sNXF5eWZtVW01aWstR0xNMzBDOTRDNXNKbGNUUTRSR3Z0QQ?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Colorado Legislative Committee Votes To Reject Bill To Put Marijuana And Alcohol Tax Hikes On November Ballot - Marijuana Moment</a>
   </div>
   <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
       <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Politico</span>
       <span style="font-size:.68rem;color:#5a6a80">Feb 10, 2026</span>
     </div>
-    <a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQdUdwU2pyX1NweVBOMmN0bUpJOFJTMmVSSmM5LXowTzBaTHU3cFFvU3c4VmNLb3pNd3MwZjBIMm02bkR5WnFfZlRFZ3B3ZzJzVU11X3NqWWM1T0RNTksxd3FQSVhJN0g3UXlxSmJGNVV5dTRiRThNUWNWd1B4aFdDUENTV0lNOVBBRkwzRUtnbF9XdHpCZnFDZXJrSnVETXJ3amdXT2hJYUdoTWdWaE5hSg?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B2D4F;text-decoration:none;line-height:1.35">The Alex Bores campaign’s PAC overlap - Politico</a>
+    <a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQdUdwU2pyX1NweVBOMmN0bUpJOFJTMmVSSmM5LXowTzBaTHU3cFFvU3c4VmNLb3pNd3MwZjBIMm02bkR5WnFfZlRFZ3B3ZzJzVU11X3NqWWM1T0RNTksxd3FQSVhJN0g3UXlxSmJGNVV5dTRiRThNUWNWd1B4aFdDUENTV0lNOVBBRkwzRUtnbF9XdHpCZnFDZXJrSnVETXJ3amdXT2hJYUdoTWdWaE5hSg?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">The Alex Bores campaign’s PAC overlap - Politico</a>
   </div>
   <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
       <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Ohio Capital Journal</span>
       <span style="font-size:.68rem;color:#5a6a80">Feb 06, 2026</span>
     </div>
-    <a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxQX3lMd2oyM0w3dkpwWnhaYTdwaTFUNVJLYTlQY1phVjI2cHdyWHBvYTQyNGFXUGlnX1FOWmdvaHhwS0dHQzVXOEJxckdvMy1WQ1J3TGx6QWdPdzJRUGhnYTNIcWRaWWU2U29ad1l0all5UW5Ld01zeENsczZ2RFV6Q05OenFmdExVcF9GLThzUFFpRmZoRWUtOUNiXzhBWFNVU195Y1Z3NlFRNHBZWXN2MkFOSVNjNHNHenowZU9aNUluRHhYdVVscER3bEZocTE3eGVmZA?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B2D4F;text-decoration:none;line-height:1.35">Some in Ohio's marijuana industry oppose new attempt to overturn hemp ban, marijuana restrictions - Ohio Capital Journal</a>
+    <a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxQX3lMd2oyM0w3dkpwWnhaYTdwaTFUNVJLYTlQY1phVjI2cHdyWHBvYTQyNGFXUGlnX1FOWmdvaHhwS0dHQzVXOEJxckdvMy1WQ1J3TGx6QWdPdzJRUGhnYTNIcWRaWWU2U29ad1l0all5UW5Ld01zeENsczZ2RFV6Q05OenFmdExVcF9GLThzUFFpRmZoRWUtOUNiXzhBWFNVU195Y1Z3NlFRNHBZWXN2MkFOSVNjNHNHenowZU9aNUluRHhYdVVscER3bEZocTE3eGVmZA?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Some in Ohio's marijuana industry oppose new attempt to overturn hemp ban, marijuana restrictions - Ohio Capital Journal</a>
   </div>
   <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
       <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">The Atlantic</span>
       <span style="font-size:.68rem;color:#5a6a80">Dec 18, 2025</span>
     </div>
-    <a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxNREV4T2E2d2h0TXk5Q1gzMHhXRU9mVERTYXdxWGdtOVFzS0VnbGNhZXdWZ1ZDZnRxOWVXS1BFcFVvU2lsN1dpQkpISkYxYS1mdmhQdEJEdm1mMzFOYnluSGY2TkRuMEp5YUFGZHZfZVB4MzVBNTR6c3g3ck01eWhocUM3QklWN1FTekE?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B2D4F;text-decoration:none;line-height:1.35">Rescheduling Marijuana Is an Enormous Mistake - The Atlantic</a>
-  </div>
-  <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
-      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">The Washington Post</span>
-      <span style="font-size:.68rem;color:#5a6a80">Dec 12, 2025</span>
-    </div>
-    <a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxOQjBIbjQ4LS1rcnBQZkdIellGMEh5WC1UMVhZWHFjRWQ0blAyRDROSVF0bS05VFYtX3dLMmNoc3lRcGFYN0Q4QzFIeF9wbnR0OW00MjJ3YmhlWmVSaW15MjI5c2V1aUxFM2R4aEhsTkFXd1F1bmY3SWtwOVNjQ2h5dWlrdHZFT0NKT0RaRHlxZUdwdGIzbmhmYjNNaXBlWTNWNVp3aw?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B2D4F;text-decoration:none;line-height:1.35">What the reclassification of marijuana would mean for Americans - The Washington Post</a>
+    <a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxNREV4T2E2d2h0TXk5Q1gzMHhXRU9mVERTYXdxWGdtOVFzS0VnbGNhZXdWZ1ZDZnRxOWVXS1BFcFVvU2lsN1dpQkpISkYxYS1mdmhQdEJEdm1mMzFOYnluSGY2TkRuMEp5YUFGZHZfZVB4MzVBNTR6c3g3ck01eWhocUM3QklWN1FTekE?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Rescheduling Marijuana Is an Enormous Mistake - The Atlantic</a>
   </div>
 </div>
 
@@ -415,7 +541,7 @@
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
-    Updated April 25, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
+    Updated April 26, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
     &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
     <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
     <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,

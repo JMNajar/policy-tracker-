@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vapor & Nicotine Compliance | GFTO AI Compliance Engine</title>
-  <meta name="description" content="Cannabis and executive policy intelligence for business leaders. Built by Horsepower AI, sponsored by GF Tech One.">
+  <meta name="description" content="AI-powered compliance intelligence for cannabis and nicotine operators. Track legislation, regulations, and campaign finance in real time. Built by Horsepower AI, sponsored by GF Tech One.">
   <style>
   :root {
     --navy:   #1B4332;
@@ -121,6 +121,20 @@
   .badge-navy  { background: #E8F5E9; color: #1B4332; }
   .badge-gray  { background: #f0f0f0; color: #666; }
 
+  /* RISK SCORE BADGES */
+  .risk-badge { display: inline-block; padding: .18rem .55rem; border-radius: 12px; font-size: .65rem; font-weight: 800; letter-spacing: .05em; white-space: nowrap; }
+  .risk-critical { background: #FFEBEE; color: #B71C1C; border: 1px solid #EF9A9A; }
+  .risk-high     { background: #FFF3E0; color: #E65100; border: 1px solid #FFCC80; }
+  .risk-medium   { background: #FFFDE7; color: #F57F17; border: 1px solid #FFE082; }
+  .risk-low      { background: #F5F5F5; color: #757575; border: 1px solid #E0E0E0; }
+
+  /* FILTER BAR */
+  .filter-bar { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem; padding: 1rem 1.25rem; background: #FFFFFF; border: 1px solid #DDE3ED; border-radius: 8px; }
+  .filter-bar label { font-size: .72rem; font-weight: 700; color: #1B4332; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+  .filter-bar select { font-size: .82rem; color: #1B4332; border: 1px solid #DDE3ED; border-radius: 6px; padding: .35rem .7rem; background: #FFFFFF; cursor: pointer; font-weight: 600; }
+  .filter-bar select:focus { outline: none; border-color: #1B4332; }
+  .filter-count { font-size: .78rem; color: #5a6a80; margin-left: auto; white-space: nowrap; }
+
   /* ALERT / PLACEHOLDER */
   .api-pending {
     background: #F5EDE0; border: 1px solid #d4c4a0; border-radius: 8px;
@@ -185,8 +199,17 @@
   .cred-bar a:hover { color: #D4A017; }
   .cred-bar .cred-pipe { color: #DDE3ED; font-weight: 400; }
   .cred-bar .cred-media { color: #1B4332; font-weight: 700; font-size: .72rem; }
+  .cred-bar .cred-freshness { color: #D4A017; font-weight: 700; font-size: .72rem; }
   .cred-bar .cred-verified { color: #5a6a80; font-size: .72rem; margin-left: auto; white-space: nowrap; }
-  @media (max-width: 640px) { .cred-bar { padding: .4rem 1rem; gap: .5rem; } .cred-bar .cred-verified { margin-left: 0; } }
+
+  /* ABOUT PAGE */
+  .about-section { margin-bottom: 2.5rem; }
+  .about-section p { color: #3a4a3a; font-size: .96rem; line-height: 1.7; margin-bottom: 1rem; }
+  .kent-card { background: #fff; border: 1px solid #DDE3ED; border-radius: 10px; padding: 1.75rem 2rem; margin-bottom: 2rem; border-left: 4px solid #1B4332; }
+  .kent-card h3 { font-size: 1.2rem; font-weight: 800; color: #1B4332; margin-bottom: .25rem; }
+  .kent-card .kent-title { font-size: .82rem; color: #D4A017; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1rem; }
+  .capability-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0 2rem; }
+  .capability-item { background: #E8F5E9; border-radius: 8px; padding: .85rem 1.1rem; border-left: 3px solid #2D6B2D; font-size: .88rem; font-weight: 600; color: #1B4332; }
 
   /* HAMBURGER */
   .nav-hamburger {
@@ -214,6 +237,8 @@
     .nav-links a { padding: .85rem 1.5rem; font-size: .95rem; border-bottom: 1px solid rgba(27,67,50,.08); }
     .stat-row { gap: .6rem; }
     .stat-card { min-width: 120px; padding: .9rem 1rem; }
+    .cred-bar { padding: .4rem 1rem; gap: .5rem; }
+    .cred-bar .cred-verified { margin-left: 0; }
   }
 </style>
 </head>
@@ -225,7 +250,7 @@
     <span class="nav-brand-text">GF TECH ONE <span>AI Compliance Engine</span></span>
   </a>
   <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open navigation"><span></span><span></span><span></span></button>
-  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="vapor.html" class="active">Vapor/Nicotine</a><a href="about.html">About</a></div>
+  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="vapor.html" class="active">Vapor/Nicotine</a><a href="methodology.html">Methodology</a><a href="about.html">About</a></div>
 </nav>
 
 <div class="cred-bar">
@@ -236,7 +261,9 @@
   <a href="https://www.opensecrets.org" target="_blank" rel="noopener">OpenSecrets</a>
   <span class="cred-pipe">·</span>
   <span class="cred-media">Official cannabis news supplier to <strong>Easyriders Magazine</strong></span>
-  <span class="cred-verified">Last verified April 25, 2026</span>
+  <span class="cred-pipe">·</span>
+  <span class="cred-freshness">Final Rule — 2 days ago</span>
+  <span class="cred-verified">Last verified April 26, 2026</span>
 </div>
 
 <div class="hero">
@@ -258,54 +285,54 @@
      for nicotine device manufacturers updated every morning.</p>
   <div class="card-grid">
     <div class="card">
-      <div class="card-source" style="color:#1B2D4F">Vaping360</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE9aR0h3MjBsM2s0Wkk1SG8wR0RVSmpEZ0lMQ0hrRmhCSTBsZFpMN1J0WktUR1ExNDNWZ2ZaRl9Ybm5kV25ITEx0aWthMGE5WV82bEpiYVNKclo5RU1BZm1VVTJ2RWRVblZPeVY3RHBaTHA1ZlB6WnZELQ?oc=5" target="_blank" rel="noopener">Vape Bans: E-Cigarette Restrictions in the U.S. and Worldwide - Vaping360</a></div>
-      <div class="card-meta">Mar 31, 2026</div>
-    </div>
-    <div class="card">
-      <div class="card-source" style="color:#1B2D4F">The Washington Post</div>
+      <div class="card-source" style="color:#1B4332">The Washington Post</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxOYVpfc1AxOGNtZFcwaElLbkR2cEVxcmlFd21nWHZFRUpWZy0yTDhDcmZtNDBEcXByNmxRYXdkSXgySmlNUG90SGxibjVkeHJBOEpudEFlcnlqLS11UmtmRDk1R1g0cHVxTTQtRGVNMHhsbUJ4N0c3aFp1aFJUQmZiMUk0aDZEcXBQdmk3SUxqOEk4WjFlQU02UkhrdlZ5S1RKWVpHdg?oc=5" target="_blank" rel="noopener">Opinion | The reality of regulating electronic cigarettes - The Washington Post</a></div>
       <div class="card-meta">Mar 25, 2026</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B2D4F">Buchanan Ingersoll & Rooney PC</div>
+      <div class="card-source" style="color:#1B4332">Buchanan Ingersoll & Rooney PC</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE81anNpUzU1OVlrUG5LUVV1aktTMENUSmRPUkRQZ1puRjB0VFZWaDgyRjVwbVB3VUlHOUhuMWFBbUJEUXhEUS1ERzFYc0lhUXc3VXRxcC1WRUZFSzBIdG0zRWd3eDM2RjJzY2FMN1BkZ0h2eTcxcG5lX0F2TFRxd0k?oc=5" target="_blank" rel="noopener">New Draft Guidance from FDA on Flavored Vape Products - Buchanan Ingersoll & Rooney PC</a></div>
       <div class="card-meta">Mar 17, 2026</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B2D4F">The National Law Review</div>
+      <div class="card-source" style="color:#1B4332">The National Law Review</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNWGJpdDg4NFRGQVpzSXNHZFZFVmtZR2RGenc5bVkwaFlTSXgteUR0VWNLcEdTNVhPc1dUUFJPWXlSMVVxekdON2Rnb0tsZjlXR1JnRlkyWWIyMkYzUXpnbzhzWEhtZGdaWlFFVVJCWDJxQTNYMHhIRVVzcWMtT29xZXE1QnowZnVFSC04V3JsQUFXcTlxdEQtbWpCZUdYSHZTZzlUYzZKZWpBRnloWHfSAbMBQVVfeXFMTmJ0aGp0ZjZJSXgyODlkVXd1SC1tMk4tTE9JNm1yeEc0dE5TUXV3SFZtakpKbk5ZUUx6WEJGOXF3cGE4LU92X0VKSTM0ZXFzTThZbWVLdnlIRVZQRi1TZm9QY0pReHJWeHcxNjY2THVtTFNBNWtVT0pSbEFZLUNfNEF4MFUtM3dEUXpFcC1TTk91T3QxQzZPZmx5OXRtOGNmcFJsaDBhcW5UZ2VRdVRtcy1rcm8?oc=5" target="_blank" rel="noopener">FDA Formalizes a Flavor-Specific PMTA Framework as Youth Vaping Continues to Decline - The National Law Review</a></div>
       <div class="card-meta">Mar 10, 2026</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B2D4F">The New York Times</div>
+      <div class="card-source" style="color:#1B4332">The New York Times</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE1yWlF6WWp1SjRKMW5jZ2V3MmpoVk5rUVN6eDFTaXNfdWl5czJhUHJBS3NGdmJOWHJqc0psUkQtMnlFVVk4ZmllUmVUVzNrUTlzQ0RGZjJNVWNOcFVNYnZyZTgzM0JHdHNZU1doX2Utem04X1plWjdteW5QSQ?oc=5" target="_blank" rel="noopener">F.D.A. Opens Door to More Flavored E-Cigarettes - The New York Times</a></div>
       <div class="card-meta">Mar 09, 2026</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B2D4F">2Firsts</div>
+      <div class="card-source" style="color:#1B4332">halfwheel</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxNMW54clgzRjNMTTVHM3hqV01VbExITXc5LThyMmx4U3BLVjRmTUZ4TEE5b29UWE4tQTQ1SVRfaXRWeWlWS2pVNWNWVkdaR29xMjRNSXEzXzFzcWw5ZU1jSHA5SnpuNldONUppR25TRmMzSzZ5Z05Mbkx5M2ltYm1CZ0NCdzFTZG5XXzVNUHY0dktheUxxcUlv?oc=5" target="_blank" rel="noopener">FDA Says It Will Consider Approving Flavored Vapes - halfwheel</a></div>
+      <div class="card-meta">Mar 09, 2026</div>
+    </div>
+    <div class="card">
+      <div class="card-source" style="color:#1B4332">2Firsts</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxNTGkxSUZlT2RhZ2NheVQ0clB0cmoweEJ0UG9vM245eEcyVVhCVGlkdGJqMzVUN21XNm1VZ3p3SFBGUmRJSnZqYmhhQWZYODRMOFZmS3FxVmNzNHRQcG1wdzV3NkdTbUdqbEk5c1VxaUIxZE5XNWdmNi1ZRzJpV0FTQ3o4TS1fOVI2N29weUNHeU5maTJ4NHVqWGI0Z0lzT3pMMkRNZlZTZUY5NDY3TzlBdTA4YnVBSFAwY0R6b3BKemh6Mk1OcW5LX20xMA?oc=5" target="_blank" rel="noopener">Fifth Circuit Upholds FDA’s 2021 PMTA Rule, Citing Statutory Health-Study Requirements - 2Firsts</a></div>
       <div class="card-meta">Feb 26, 2026</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B2D4F">CSP Daily News</div>
+      <div class="card-source" style="color:#1B4332">CSP Daily News</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxNU0xQMjZwVEhFNDduSExrYU84c3l5c0JicXhBQkFVRm9TZFhEODZkX3gwNEtxM2ZFX0lFbENjWW1oT0FtVVYtRkNLZ2dCanBnLUw5WFdiUVhfcWxiaktBZFRNdjRjdmVTT3JCckVwZzNQeW41M1hCRE01N0RkMHoyMXN6SlZZWUdENDlOczFyS1BBU2dKR2c?oc=5" target="_blank" rel="noopener">2026 tobacco regulations: What convenience stores need to know - CSP Daily News</a></div>
       <div class="card-meta">Jan 09, 2026</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B2D4F">2Firsts</div>
+      <div class="card-source" style="color:#1B4332">2Firsts</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxQdVluWmNhN05mVm5Ed2xhNjZLaDh2UEVhVmNJbVE1U2U3OG1ZN29LMnlJZlZiclpqbUN5OW9JaU9CT2ZDMnNwSThDUGNIYVhWbUVHbF9ySEJiNThMd1BPSE9tS1VJWVJZT09zQ2swbWs3dGFZVG9GWThfNGxMUDNHQlpJTkQ3bmQ5aklyUVdTd1ZiakJH?oc=5" target="_blank" rel="noopener">Mexican Congress Postpones Debate on Vape and E-Cigarette Ban - 2Firsts</a></div>
       <div class="card-meta">Dec 05, 2025</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B2D4F">Vaping360</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE5LeVV2c1NiekZZRzBod0RJN3JmM3pFRlpqazhUSG1QdDQ1VmpiRDhFSVBnUmlaLUFtUC02eTFKQzdzcjJmWW5IWEJud3dyaVVfUnJwcEV0YnczZmIxdi1zMHRoS0hCaFZUeGdKRThhU3JJXzNpVmc?oc=5" target="_blank" rel="noopener">FDA Tobacco Director Says Agency Could Authorize Flavored Vapes - Vaping360</a></div>
-      <div class="card-meta">Oct 28, 2025</div>
-    </div>
-    <div class="card">
-      <div class="card-source" style="color:#1B2D4F">Vaping360</div>
+      <div class="card-source" style="color:#1B4332">Vaping360</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTFA4REpwRmxydTZYT0JXc1k4a2RFa0UwVFJ0dmhnVUhzM2N6QUJyZmFjTVR1c3NoWDJCdU9OVXhNeEFTcllLaUVhdC1vQjdDdEIxNFRkbkFTTFR5N2l3N3AtcHY5VnF3cnRiWjBWMmdHenVtdms3TFE?oc=5" target="_blank" rel="noopener">Fed Up with the FDA, Big Tobacco Goes Nuclear - Vaping360</a></div>
       <div class="card-meta">Aug 26, 2025</div>
+    </div>
+    <div class="card">
+      <div class="card-source" style="color:#1B4332">Food and Drug Law Institute (F</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxOUXRvVlQ2OERLWXJ1R3pmZ3ZydGphNk5IZ0Fjd05ZZjN2SG85ZDlwZ0pqQ01aLUhuZE1VT2VpZUZuTDhiRVBOTDh2a184NjFrVEotWVo2QjNKQzhmT2o5dzRvSEZSUEVpM3ZCVUY3WG5uNzI3bHMwT0VOQTYxNjRhbXkxd0JmT2RxYVZ0M0Fub2pBNW9COWJDWXBaOE1rQ05uWWVBNA?oc=5" target="_blank" rel="noopener">Is the FDA Nicotine-Reduction Rule for Cigarettes Dead? Can it be Revived? - Food and Drug Law Institute (FDLI)</a></div>
+      <div class="card-meta">Aug 20, 2025</div>
     </div></div>
 
   <hr class="section-divider" style="margin:2rem 0">
@@ -511,7 +538,7 @@
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
-    Updated April 25, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
+    Updated April 26, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
     &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
     <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
     <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,

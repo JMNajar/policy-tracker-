@@ -156,6 +156,20 @@ CSS = f"""
   .badge-navy  {{ background: {LGREEN}; color: {NAVY}; }}
   .badge-gray  {{ background: #f0f0f0; color: #666; }}
 
+  /* RISK SCORE BADGES */
+  .risk-badge {{ display: inline-block; padding: .18rem .55rem; border-radius: 12px; font-size: .65rem; font-weight: 800; letter-spacing: .05em; white-space: nowrap; }}
+  .risk-critical {{ background: #FFEBEE; color: #B71C1C; border: 1px solid #EF9A9A; }}
+  .risk-high     {{ background: #FFF3E0; color: #E65100; border: 1px solid #FFCC80; }}
+  .risk-medium   {{ background: #FFFDE7; color: #F57F17; border: 1px solid #FFE082; }}
+  .risk-low      {{ background: #F5F5F5; color: #757575; border: 1px solid #E0E0E0; }}
+
+  /* FILTER BAR */
+  .filter-bar {{ display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem; padding: 1rem 1.25rem; background: {WHITE}; border: 1px solid {BORDER}; border-radius: 8px; }}
+  .filter-bar label {{ font-size: .72rem; font-weight: 700; color: {NAVY}; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }}
+  .filter-bar select {{ font-size: .82rem; color: {NAVY}; border: 1px solid {BORDER}; border-radius: 6px; padding: .35rem .7rem; background: {WHITE}; cursor: pointer; font-weight: 600; }}
+  .filter-bar select:focus {{ outline: none; border-color: {NAVY}; }}
+  .filter-count {{ font-size: .78rem; color: {MUTED}; margin-left: auto; white-space: nowrap; }}
+
   /* ALERT / PLACEHOLDER */
   .api-pending {{
     background: {CREAM}; border: 1px solid #d4c4a0; border-radius: 8px;
@@ -266,13 +280,14 @@ CSS = f"""
 # ── NAV ───────────────────────────────────────────────────────────────────────
 def nav(active=""):
     pages = [
-        ("index.html",      "Today's News"),
-        ("bills.html",      "Bills"),
-        ("lawmakers.html",  "Lawmakers"),
-        ("executive.html",  "Executive"),
-        ("money.html",      "Money"),
-        ("vapor.html",      "Vapor/Nicotine"),
-        ("about.html",      "About"),
+        ("index.html",       "Today's News"),
+        ("bills.html",       "Bills"),
+        ("lawmakers.html",   "Lawmakers"),
+        ("executive.html",   "Executive"),
+        ("money.html",       "Money"),
+        ("vapor.html",       "Vapor/Nicotine"),
+        ("methodology.html", "Methodology"),
+        ("about.html",       "About"),
     ]
     links = ""
     for href, label in pages:
@@ -698,6 +713,89 @@ def fetch_bills():
     bills.sort(key=lambda x: x["updated"], reverse=True)
     return bills
 
+
+# ── RISK SCORING ──────────────────────────────────────────────────────────────
+HIGH_PRIORITY_BILLS = [
+    'safer banking', 'safe banking', 'schedule iii', '280e',
+    'cannabis administration', 'marijuana opportunity', 'states reform',
+    'hope act', 'federal legalization', 'more act', 'cannabis act',
+]
+
+def score_bill(bill):
+    """Return (label, css_class) risk score for a bill based on available signals."""
+    score = 0
+    action = bill.get('latest_action', '').lower()
+    title  = bill.get('title', '').lower()
+
+    if any(w in action for w in ['passed', 'agreed to', 'signed by president', 'became public law']):
+        score += 5
+    if any(w in action for w in ['vote', 'voted', 'roll call', 'yeas and nays']):
+        score += 3
+    if any(w in action for w in ['markup', 'ordered to be reported', 'discharged from committee']):
+        score += 2
+    if any(w in action for w in ['hearing', 'subcommittee', 'placed on calendar']):
+        score += 1
+    if any(p in title for p in HIGH_PRIORITY_BILLS):
+        score += 2
+
+    if score >= 6: return ('CRITICAL', 'risk-critical')
+    if score >= 4: return ('HIGH',     'risk-high')
+    if score >= 2: return ('MEDIUM',   'risk-medium')
+    return           ('LOW',      'risk-low')
+
+
+# ── STATE / SECTOR TAGGING ────────────────────────────────────────────────────
+STATE_NAMES = {
+    'alabama':'AL','alaska':'AK','arizona':'AZ','arkansas':'AR','california':'CA',
+    'colorado':'CO','connecticut':'CT','delaware':'DE','florida':'FL','georgia':'GA',
+    'hawaii':'HI','idaho':'ID','illinois':'IL','indiana':'IN','iowa':'IA',
+    'kansas':'KS','kentucky':'KY','louisiana':'LA','maine':'ME','maryland':'MD',
+    'massachusetts':'MA','michigan':'MI','minnesota':'MN','mississippi':'MS',
+    'missouri':'MO','montana':'MT','nebraska':'NE','nevada':'NV','new hampshire':'NH',
+    'new jersey':'NJ','new mexico':'NM','new york':'NY','north carolina':'NC',
+    'north dakota':'ND','ohio':'OH','oklahoma':'OK','oregon':'OR','pennsylvania':'PA',
+    'rhode island':'RI','south carolina':'SC','south dakota':'SD','tennessee':'TN',
+    'texas':'TX','utah':'UT','vermont':'VT','virginia':'VA','washington':'WA',
+    'west virginia':'WV','wisconsin':'WI','wyoming':'WY',
+}
+
+SECTOR_KEYWORDS = {
+    'banking':     ['bank', 'safer', 'safe act', 'financial', 'credit union', 'payment', 'cash', 'loan', 'fintech'],
+    'tax':         ['280e', 'tax', 'irs', 'deduction', 'deduct', 'revenue', 'treasury'],
+    'retail':      ['dispensary', 'retail', 'storefront', 'point of sale', 'pos', 'consumer'],
+    'cultivation': ['cultivat', 'grow', 'farm', 'harvest', 'greenhouse', 'agricultural'],
+    'testing':     ['lab', 'testing', 'test ', 'potency', 'compliance', 'contaminant'],
+    'hemp':        ['hemp', 'cbd', 'cbg', 'delta-8', 'delta8', 'thc limit', 'farm bill'],
+    'mso':         ['multi-state', 'multistate', 'interstate', 'national', 'federal legalization'],
+    'executive':   ['dea', 'fda', 'doj', 'schedule iii', 'reclassif', 'executive order', 'agency'],
+}
+
+def tag_item(text):
+    """Return (states_str, sectors_str) data-attribute values for a text blob."""
+    t = text.lower()
+    states  = [code for name, code in STATE_NAMES.items() if name in t]
+    sectors = [sec for sec, kws in SECTOR_KEYWORDS.items() if any(kw in t for kw in kws)]
+    return (
+        ','.join(sorted(set(states))) or 'federal',
+        ','.join(sorted(set(sectors))) or 'general',
+    )
+
+
+# ── CONFLICT-OF-INTEREST LOOKUP ────────────────────────────────────────────────
+# Lawmakers documented as (a) on a cannabis-relevant committee AND
+# (b) receiving opposition-industry PAC funding.  Source: FEC.gov + committee rosters.
+CONFLICT_LAWMAKERS = {
+    "Chuck Grassley":      {"committee": "Senate Judiciary & Finance", "industry": "Pharmaceutical"},
+    "Tom Cotton":          {"committee": "Senate Judiciary",           "industry": "Pharmaceutical, Alcohol"},
+    "Marsha Blackburn":    {"committee": "Senate Judiciary",           "industry": "Pharmaceutical"},
+    "Jim Jordan":          {"committee": "House Judiciary",            "industry": "Pharmaceutical"},
+    "Patrick McHenry":     {"committee": "House Financial Services",   "industry": "Alcohol, Pharmaceutical"},
+    "Kevin Brady":         {"committee": "House Ways & Means",         "industry": "Pharmaceutical"},
+    "Mitch McConnell":     {"committee": "Senate Agriculture",         "industry": "Alcohol, Pharmaceutical"},
+    "John Cornyn":         {"committee": "Senate Judiciary",           "industry": "Pharmaceutical"},
+    "Mike Crapo":          {"committee": "Senate Banking & Finance",   "industry": "Pharmaceutical"},
+}
+
 # ── BUILD: INDEX (HOME) ───────────────────────────────────────────────────────
 def build_index(news_items):
     count = len(news_items)
@@ -706,8 +804,9 @@ def build_index(news_items):
     for item in news_items:
         source = item["source"][:30] if item["source"] else "News"
         title  = item["title"][:120]
+        _, sectors_tag = tag_item(item["title"])
         news_cards += f"""
-    <div class="card">
+    <div class="card" data-sectors="{sectors_tag}">
       <div class="card-source">{source}</div>
       <div class="card-title"><a href="{item['link']}" target="_blank" rel="noopener">{title}</a></div>
       <div class="card-meta">{item['date']}</div>
@@ -733,9 +832,42 @@ def build_index(news_items):
   <h2>Cannabis Policy News</h2>
   <p class="section-intro">The most important cannabis legislation and regulatory stories updated every morning.
      Click any headline for the full story.</p>
-  <div class="card-grid">
+
+  <div class="filter-bar">
+    <label>Filter by Sector</label>
+    <select id="news-sector-filter" onchange="filterNews()">
+      <option value="all">All Sectors</option>
+      <option value="banking">Banking & Finance</option>
+      <option value="tax">Tax (280E)</option>
+      <option value="retail">Retail / Dispensary</option>
+      <option value="cultivation">Cultivation</option>
+      <option value="testing">Testing & Lab</option>
+      <option value="hemp">Hemp / CBD</option>
+      <option value="mso">Multi-State Operators</option>
+      <option value="executive">DEA / FDA / Executive</option>
+    </select>
+    <span class="filter-count" id="news-filter-count">{count} stories shown</span>
+  </div>
+
+  <div class="card-grid" id="news-grid">
     {news_cards}
   </div>
+  <p id="news-empty" style="display:none;text-align:center;color:#999;padding:1.5rem">No stories match that sector filter.</p>
+<script>
+  function filterNews() {{
+    var sector = document.getElementById('news-sector-filter').value;
+    var cards  = document.querySelectorAll('#news-grid .card');
+    var shown  = 0;
+    cards.forEach(function(c) {{
+      var sectors = c.dataset.sectors || '';
+      var ok = sector === 'all' || sectors.indexOf(sector) !== -1;
+      c.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    }});
+    document.getElementById('news-filter-count').textContent = shown + ' stories shown';
+    document.getElementById('news-empty').style.display = shown === 0 ? 'block' : 'none';
+  }}
+</script>
 
   <hr class="section-divider" style="margin: 2rem 0;">
 
@@ -779,25 +911,75 @@ def build_bills(bills):
     if bills:
         rows = ""
         for b in bills:
+            risk_label, risk_cls = score_bill(b)
+            states_tag, sectors_tag = tag_item(b['title'] + ' ' + b['latest_action'])
             rows += f"""
-      <tr>
+      <tr data-states="{states_tag}" data-sectors="{sectors_tag}">
         <td><strong><a href="{b['url']}" target="_blank" rel="noopener">{b['number']}</a></strong></td>
         <td>{b['title']}</td>
         <td>{b['sponsor']}</td>
         <td>{b['latest_action']}</td>
         <td style="white-space:nowrap">{b['updated']}</td>
+        <td><span class="risk-badge {risk_cls}">{risk_label}</span></td>
       </tr>"""
         live_section = f"""
   <span class="section-tag tag-navy">LIVE FROM CONGRESS.GOV</span>
-  <h2>Cannabis Legislation — {bill_count} Bills Found</h2>
+  <h2>Cannabis Legislation — <span id="bill-count">{bill_count}</span> Bills Found</h2>
   <p class="section-intro">All cannabis, marijuana, and hemp-related bills in the 119th Congress sorted by most recent activity.</p>
-  <table class="data-table">
+
+  <div class="filter-bar">
+    <label>Filter by Sector</label>
+    <select id="sector-filter" onchange="filterBills()">
+      <option value="all">All Sectors</option>
+      <option value="banking">Banking & Finance</option>
+      <option value="tax">Tax (280E)</option>
+      <option value="retail">Retail / Dispensary</option>
+      <option value="cultivation">Cultivation</option>
+      <option value="testing">Testing & Lab</option>
+      <option value="hemp">Hemp / CBD</option>
+      <option value="mso">Multi-State Operators</option>
+      <option value="executive">DEA / FDA / Executive</option>
+    </select>
+    <label>Risk Level</label>
+    <select id="risk-filter" onchange="filterBills()">
+      <option value="all">All Levels</option>
+      <option value="risk-critical">Critical Only</option>
+      <option value="risk-high">High &amp; Critical</option>
+      <option value="risk-medium">Medium &amp; Above</option>
+    </select>
+    <span class="filter-count" id="bill-filter-count">{bill_count} bills shown</span>
+  </div>
+
+  <table class="data-table" id="bills-table">
     <thead>
-      <tr><th>Bill</th><th>Title</th><th>Sponsor</th><th>Latest Action</th><th>Updated</th></tr>
+      <tr><th>Bill</th><th>Title</th><th>Sponsor</th><th>Latest Action</th><th>Updated</th><th>Risk</th></tr>
     </thead>
-    <tbody>{rows}
+    <tbody id="bills-tbody">{rows}
     </tbody>
-  </table>"""
+  </table>
+  <p id="bills-empty" style="display:none;text-align:center;color:#999;padding:1.5rem">No bills match your current filters.</p>
+<script>
+  function filterBills() {{
+    var sector = document.getElementById('sector-filter').value;
+    var risk   = document.getElementById('risk-filter').value;
+    var rows   = document.querySelectorAll('#bills-tbody tr');
+    var shown  = 0;
+    rows.forEach(function(r) {{
+      var sectors = r.dataset.sectors || '';
+      var badge   = r.querySelector('.risk-badge');
+      var badgeCls = badge ? badge.className : '';
+      var sectorOk = sector === 'all' || sectors.indexOf(sector) !== -1;
+      var riskOk = true;
+      if (risk === 'risk-critical') riskOk = badgeCls.indexOf('risk-critical') !== -1;
+      else if (risk === 'risk-high') riskOk = badgeCls.indexOf('risk-critical') !== -1 || badgeCls.indexOf('risk-high') !== -1;
+      else if (risk === 'risk-medium') riskOk = badgeCls.indexOf('risk-low') === -1;
+      r.style.display = (sectorOk && riskOk) ? '' : 'none';
+      if (sectorOk && riskOk) shown++;
+    }});
+    document.getElementById('bill-filter-count').textContent = shown + ' bills shown';
+    document.getElementById('bills-empty').style.display = shown === 0 ? 'block' : 'none';
+  }}
+</script>"""
     else:
         live_section = """
   <div class="api-pending">
@@ -839,37 +1021,37 @@ def build_bills(bills):
         <td><strong>SAFER Banking Act</strong></td>
         <td>Allows cannabis businesses to access standard banking, credit cards, and loans</td>
         <td>Eliminates cash-only operations. Enables B2B payment processing for Deeper Green™ sales.</td>
-        <td><span class="badge badge-navy">In Senate</span></td>
+        <td><span class="badge badge-navy">In Senate</span> <span class="risk-badge risk-high">HIGH</span></td>
       </tr>
       <tr>
         <td><strong>DEA Schedule III Reclassification</strong></td>
         <td>Moves cannabis from Schedule I to Schedule III — federal drug classification</td>
         <td>Legitimizes the market. Reduces legal risk for investors and operators. Unlocks research funding.</td>
-        <td><span class="badge badge-green">In Progress</span></td>
+        <td><span class="badge badge-green">In Progress</span> <span class="risk-badge risk-critical">CRITICAL</span></td>
       </tr>
       <tr>
         <td><strong>Section 280E Tax Reform</strong></td>
         <td>Allows cannabis businesses to deduct standard business expenses from federal taxes</td>
         <td>Direct profitability impact. Most cannabis operators pay 40–80% effective tax rate under 280E.</td>
-        <td><span class="badge badge-gray">Pending</span></td>
+        <td><span class="badge badge-gray">Pending</span> <span class="risk-badge risk-high">HIGH</span></td>
       </tr>
       <tr>
         <td><strong>FDA Food Additive Rules</strong></td>
         <td>FDA regulation of THC as a food/beverage ingredient</td>
         <td>Directly governs whether Deeper Green™ (THC powder for B2B food/beverage manufacturers) can be legally sold.</td>
-        <td><span class="badge badge-red">Critical Watch</span></td>
+        <td><span class="badge badge-red">Critical Watch</span> <span class="risk-badge risk-critical">CRITICAL</span></td>
       </tr>
       <tr>
         <td><strong>Farm Bill / Hemp THC Limits</strong></td>
         <td>Defines hemp vs. cannabis THC threshold. Sets interstate commerce rules.</td>
         <td>Determines what can be shipped across state lines without federal cannabis licensing.</td>
-        <td><span class="badge badge-navy">Renewal Due</span></td>
+        <td><span class="badge badge-navy">Renewal Due</span> <span class="risk-badge risk-high">HIGH</span></td>
       </tr>
       <tr>
         <td><strong>Federal Legalization Framework</strong></td>
         <td>Any bill creating federal licensing, taxation, and distribution framework for cannabis</td>
         <td>Defines the entire operating environment. Who can manufacture, distribute, and sell nationally.</td>
-        <td><span class="badge badge-gray">Multiple bills competing</span></td>
+        <td><span class="badge badge-gray">Multiple bills competing</span> <span class="risk-badge risk-medium">MEDIUM</span></td>
       </tr>
     </tbody>
   </table>
@@ -1003,6 +1185,13 @@ def build_lawmakers(lawmakers, opposition=None, opp_news=None):
         pc, bg, plabel = party_colors.get(party, (NAVY, LBLUE, party or "?"))
         stance_label, stance_badge = stance_map.get(name, ("Active Sponsor","badge-navy"))
 
+        conflict = CONFLICT_LAWMAKERS.get(name)
+        conflict_badge = ""
+        if conflict:
+            c_committee = conflict['committee']
+            c_industry  = conflict['industry']
+            conflict_badge = f' <span style="background:#FFF3E0;color:#B71C1C;font-size:.65rem;font-weight:800;padding:.18rem .5rem;border-radius:12px;border:1px solid #EF9A9A" title="On {c_committee} — receives {c_industry} PAC funding">⚠ Conflict</span>'
+
         party_pill = f'<span style="background:{bg};color:{pc};font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid {pc}33">{plabel}</span>'
         fallback_div = f'<div style="width:72px;height:88px;border-radius:8px;background:{LBLUE};display:none;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;color:{NAVY};flex-shrink:0">{name[0]}</div>'
         if photo:
@@ -1017,7 +1206,7 @@ def build_lawmakers(lawmakers, opposition=None, opp_news=None):
         <div style="flex:1;min-width:0">
           <div style="font-size:.68rem;font-weight:700;color:{MUTED};letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">{chamber} &nbsp;·&nbsp; {state}</div>
           <div style="font-size:1rem;font-weight:800;color:{NAVY};line-height:1.2;margin-bottom:.4rem">{name}</div>
-          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem">{party_pill} <span class="badge {stance_badge}" style="font-size:.65rem">{stance_label}</span></div>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem">{party_pill} <span class="badge {stance_badge}" style="font-size:.65rem">{stance_label}</span>{conflict_badge}</div>
           <div style="font-size:.78rem;color:{MUTED}">{bill_nos}</div>
         </div>
       </div>
@@ -1338,6 +1527,19 @@ def build_money(pacs, opposition=None, opp_news=None):
     if not opp_money_news:
         opp_money_news = "<p style='color:#999;padding:.5rem 0;'>No recent opposition funding stories found.</p>"
 
+    # Compute totals for chart
+    cannabis_total = sum(float(p.get('receipts', 0) or 0) for p in pacs)
+    opposition_total = sum(float(r.get('total', 0) or 0) for r in opposition)
+
+    def chart_bar(label, amount, color, max_amt):
+        pct = max(2, round((amount / max_amt) * 100)) if max_amt > 0 else 2
+        amt_fmt = f"${amount/1_000_000:.1f}M" if amount >= 1_000_000 else f"${amount/1_000:.0f}K" if amount >= 1_000 else f"${amount:.0f}"
+        return f'<div style="margin-bottom:.85rem"><div style="display:flex;justify-content:space-between;font-size:.82rem;font-weight:700;margin-bottom:.3rem"><span>{label}</span><span style="color:{color}">{amt_fmt}</span></div><div style="background:#f0f0f0;border-radius:4px;height:18px"><div style="background:{color};width:{pct}%;height:18px;border-radius:4px;transition:width .5s"></div></div></div>'
+
+    max_amt = max(cannabis_total, opposition_total, 1)
+    chart_html = chart_bar("Cannabis Industry PACs (Pro-Cannabis)", cannabis_total, GREEN, max_amt)
+    chart_html += chart_bar("Opposition Industry PACs (Anti-Cannabis)", opposition_total, "#B71C1C", max_amt)
+
     content = f"""
 <div class="hero">
   <div class="hero-tag">CAMPAIGN FINANCE INTELLIGENCE</div>
@@ -1351,6 +1553,15 @@ def build_money(pacs, opposition=None, opp_news=None):
 </div>
 
 <div class="container">
+
+  <span class="section-tag tag-navy">INDUSTRY SPENDING COMPARISON</span>
+  <h2>Cannabis vs. Opposition — PAC Money Tracked</h2>
+  <p class="section-intro">Total political spending detected via FEC records this cycle. Opposition figure represents disbursements to federal legislators from documented anti-cannabis PACs only — full industry political spend is far larger.</p>
+  <div style="background:{WHITE};border:1px solid {BORDER};border-radius:10px;padding:1.5rem 1.75rem;margin-bottom:2rem;max-width:600px">
+    {chart_html}
+    <p style="font-size:.72rem;color:{MUTED};margin-top:.5rem">Source: FEC.gov · 2023–2024 cycle · Cannabis PAC total receipts vs. documented opposition disbursements to legislators</p>
+  </div>
+
   <span class="section-tag tag-green">LIVE FEC DATA</span>
   <h2>Cannabis-Related Political Committees</h2>
   <p class="section-intro">Political action committees and organizations with cannabis in their name or mission
@@ -1763,15 +1974,151 @@ def build_about():
     <p>This partnership validates GFTO AI Compliance Engine as a trusted, publication-grade intelligence source — not just a data aggregator.</p>
   </div>
 
+  <div class="about-section">
+    <span class="section-tag tag-cream">PLATFORM BUILDER</span>
+    <h2>Built by Horsepower AI</h2>
+    <div class="kent-card">
+      <h3>Jeff Najar</h3>
+      <div class="kent-title">Founder — Horsepower AI</div>
+      <p>GFTO AI Compliance Engine is designed, built, and maintained by <strong>Horsepower AI</strong>, a digital business consultancy that builds AI-powered intelligence tools for growth-stage companies. Horsepower AI was engaged by GF Tech One to deliver institutional-grade regulatory intelligence at zero cost to cannabis executives.</p>
+      <p style="margin-top:.75rem">
+        <strong>Data corrections &amp; inquiries:</strong>
+        <a href="mailto:jeff.najar@horsepowermarketing.com" style="color:{NAVY};font-weight:700">jeff.najar@horsepowermarketing.com</a>
+        &nbsp;·&nbsp; Errors reviewed and corrected within 48 hours.
+      </p>
+      <p style="margin-top:.5rem">
+        <a href="methodology.html" style="color:{GREEN};font-weight:700">Read our full data methodology →</a>
+      </p>
+    </div>
+  </div>
+
   <p style="font-size:.82rem;color:{MUTED};margin-top:2rem;">
     GFTO AI Compliance Engine is for informational purposes only. This is not legal or investment advice.
     Data sourced from Congress.gov, Federal Register, FEC.gov, OpenSecrets, and Google News.
-    All government data is public domain.
+    All government data is public domain. Last updated {TODAY}.
   </p>
 
 </div>"""
 
     return page("About GF Tech One", "about.html", content)
+
+
+# ── BUILD: METHODOLOGY ────────────────────────────────────────────────────────
+def build_methodology():
+    content = f"""
+<div class="hero">
+  <div class="hero-tag">DATA INTEGRITY</div>
+  <h1>How We <span>Collect & Verify</span> Data</h1>
+  <p>Every source, every update schedule, and every editorial decision — explained in plain English.</p>
+</div>
+
+<div class="container">
+
+  <div class="about-section">
+    <span class="section-tag tag-navy">OUR COMMITMENT</span>
+    <h2>What This Platform Is — and Is Not</h2>
+    <p>GFTO AI Compliance Engine is a <strong>business intelligence aggregator</strong>. We collect, organize, and present publicly available government data so cannabis executives can monitor policy in one place without spending hours across multiple government websites.</p>
+    <p>We do not editorialize, alter, or fabricate government data. Every bill, executive action, and campaign finance figure shown on this platform links directly to its original government source. We are not a law firm and nothing here is legal advice.</p>
+  </div>
+
+  <div class="about-section">
+    <span class="section-tag tag-green">DATA SOURCES</span>
+    <h2>Where the Data Comes From</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>Source</th><th>What We Pull</th><th>How Often</th><th>How to Verify</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong><a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a></strong></td>
+          <td>All cannabis, marijuana, and hemp-related bills in the current Congress. Bill title, number, sponsor, committee status, and latest action.</td>
+          <td>Weekly — every Monday at 5am ET</td>
+          <td>Search any bill number at congress.gov/bill</td>
+        </tr>
+        <tr>
+          <td><strong><a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a></strong></td>
+          <td>Presidential documents, final rules, proposed rules, and agency notices related to cannabis, marijuana, and hemp from DEA, FDA, DOJ, USDA, and FinCEN.</td>
+          <td>Daily — every morning at 6am ET</td>
+          <td>Search at federalregister.gov/documents</td>
+        </tr>
+        <tr>
+          <td><strong><a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a></strong></td>
+          <td>Cannabis-related political action committees (PACs), total receipts, and disbursements from opposition-industry PACs (pharmaceutical, alcohol, private prison) to federal legislators. 2023–2024 election cycle.</td>
+          <td>Weekly — every Monday</td>
+          <td>Search any committee at fec.gov/data/committees</td>
+        </tr>
+        <tr>
+          <td><strong><a href="https://www.opensecrets.org" target="_blank" rel="noopener">OpenSecrets</a></strong></td>
+          <td>Supplemental campaign finance context and industry-level spending analysis.</td>
+          <td>As available</td>
+          <td>opensecrets.org/industries</td>
+        </tr>
+        <tr>
+          <td><strong>Google News RSS</strong></td>
+          <td>Cannabis policy and regulatory news from major publications. Six targeted queries covering legislation, executive action, banking, and hemp.</td>
+          <td>Daily — every morning at 6am ET</td>
+          <td>Links go directly to original publication</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="about-section">
+    <span class="section-tag tag-red">RISK SCORING</span>
+    <h2>How We Score Bill Risk</h2>
+    <p>Every bill in the live tracker carries a risk score: <span class="risk-badge risk-low">LOW</span> <span class="risk-badge risk-medium">MEDIUM</span> <span class="risk-badge risk-high">HIGH</span> <span class="risk-badge risk-critical">CRITICAL</span></p>
+    <p style="margin-top:1rem">Scores are computed automatically at each weekly build using the bill's most recent action from Congress.gov. The scoring model weights signals as follows:</p>
+    <table class="data-table" style="margin-top:1rem">
+      <thead><tr><th>Signal</th><th>Weight</th></tr></thead>
+      <tbody>
+        <tr><td>Passed chamber / signed into law</td><td>+5 points</td></tr>
+        <tr><td>Floor vote scheduled or recorded</td><td>+3 points</td></tr>
+        <tr><td>Markup / ordered reported from committee</td><td>+2 points</td></tr>
+        <tr><td>Hearing / subcommittee referral</td><td>+1 point</td></tr>
+        <tr><td>Known high-priority bill (SAFER Banking, Schedule III, 280E, etc.)</td><td>+2 points</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1rem;font-size:.88rem;color:{MUTED}">A bill scoring 6+ is CRITICAL. 4–5 is HIGH. 2–3 is MEDIUM. 0–1 is LOW. Scores reset each weekly build based on the most current Congress.gov data.</p>
+  </div>
+
+  <div class="about-section">
+    <span class="section-tag tag-navy">CONFLICT FLAGS</span>
+    <h2>How We Flag Conflicts of Interest</h2>
+    <p>A <strong>⚠ Conflict</strong> badge appears on a lawmaker's profile when two conditions are both true:</p>
+    <ol style="margin:1rem 0 1rem 1.5rem;line-height:1.9;color:#3a4a3a">
+      <li>The lawmaker sits on a committee with direct jurisdiction over cannabis legislation (Senate Judiciary, Senate Banking, House Judiciary, House Financial Services, Senate Finance, or Senate Agriculture)</li>
+      <li>FEC records show the lawmaker's campaign received documented funding from industries with known financial incentives to oppose cannabis reform (pharmaceutical, alcohol, or private prison industries) during the 2023–2024 cycle</li>
+    </ol>
+    <p>Conflict flags are based on documented FEC filings and publicly available committee rosters. All underlying data is verifiable at fec.gov and congress.gov.</p>
+  </div>
+
+  <div class="about-section">
+    <span class="section-tag tag-cream">EDITORIAL PROCESS</span>
+    <h2>Editorial Independence & Accuracy</h2>
+    <p>GFTO AI Compliance Engine is built and operated by <strong>Horsepower AI</strong> on behalf of <strong>GF Tech One</strong>. The platform has no affiliation with any cannabis company, lobbying organization, or political party. We do not accept payment for coverage or for placement in any section of the tracker.</p>
+    <p>Data is fetched directly from government APIs at the times shown above. The platform does not modify, spin, or summarize government content beyond organizing it for readability. News headlines link directly to the original publication — we do not paraphrase or rewrite them.</p>
+    <p><strong>To report a data error:</strong> Email <a href="mailto:jeff.najar@horsepowermarketing.com">jeff.najar@horsepowermarketing.com</a> with the bill number, FEC record, or Federal Register document in question. We review and correct errors within 48 hours.</p>
+  </div>
+
+  <div class="about-section">
+    <span class="section-tag tag-cream">BUILT BY</span>
+    <h2>Who Builds This</h2>
+    <div class="kent-card">
+      <h3>Jeff Najar</h3>
+      <div class="kent-title">Founder, Horsepower AI</div>
+      <p>Jeff Najar is the founder of Horsepower AI, a digital business consultancy that builds AI-powered intelligence tools for small and mid-size companies. GFTO AI Compliance Engine was designed and built by Horsepower AI to give cannabis executives the same quality of regulatory intelligence available to large enterprise operators — at no cost.</p>
+      <p style="margin-top:.75rem"><a href="mailto:jeff.najar@horsepowermarketing.com" style="color:{NAVY};font-weight:700">jeff.najar@horsepowermarketing.com</a></p>
+    </div>
+  </div>
+
+  <p style="font-size:.82rem;color:{MUTED};margin-top:2rem;">
+    For informational purposes only. Not legal advice. Not investment advice.
+    All government data is public domain. Last updated {TODAY}.
+  </p>
+
+</div>"""
+    return page("Methodology & Data Sources", "methodology.html", content)
+
 
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
@@ -1786,8 +2133,6 @@ if __name__ == "__main__":
     print("Fetching Federal Register executive actions...")
     executive = fetch_executive_actions()
     print(f"  {len(executive)} executive actions")
-
-    global FRESHNESS
     FRESHNESS = get_freshness(executive)
     if FRESHNESS:
         print(f"  Freshness: {FRESHNESS['label']} — {FRESHNESS['ago']} ({FRESHNESS['date']})")
@@ -1821,13 +2166,14 @@ if __name__ == "__main__":
 
     print("Building pages...")
     pages = {
-        "index.html":     build_index(news),
-        "bills.html":     build_bills(bills),
-        "lawmakers.html": build_lawmakers(lawmakers, opposition, opp_news),
-        "executive.html": build_executive(executive),
-        "money.html":     build_money(pacs, opposition, opp_news),
-        "vapor.html":     build_vapor(vapor_news, vapor_fed),
-        "about.html":     build_about(),
+        "index.html":       build_index(news),
+        "bills.html":       build_bills(bills),
+        "lawmakers.html":   build_lawmakers(lawmakers, opposition, opp_news),
+        "executive.html":   build_executive(executive),
+        "money.html":       build_money(pacs, opposition, opp_news),
+        "vapor.html":       build_vapor(vapor_news, vapor_fed),
+        "methodology.html": build_methodology(),
+        "about.html":       build_about(),
     }
 
     for filename, html in pages.items():

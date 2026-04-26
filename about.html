@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About GF Tech One | GFTO AI Compliance Engine</title>
-  <meta name="description" content="Cannabis and executive policy intelligence for business leaders. Built by Horsepower AI, sponsored by GF Tech One.">
+  <meta name="description" content="AI-powered compliance intelligence for cannabis and nicotine operators. Track legislation, regulations, and campaign finance in real time. Built by Horsepower AI, sponsored by GF Tech One.">
   <style>
   :root {
     --navy:   #1B4332;
@@ -121,6 +121,20 @@
   .badge-navy  { background: #E8F5E9; color: #1B4332; }
   .badge-gray  { background: #f0f0f0; color: #666; }
 
+  /* RISK SCORE BADGES */
+  .risk-badge { display: inline-block; padding: .18rem .55rem; border-radius: 12px; font-size: .65rem; font-weight: 800; letter-spacing: .05em; white-space: nowrap; }
+  .risk-critical { background: #FFEBEE; color: #B71C1C; border: 1px solid #EF9A9A; }
+  .risk-high     { background: #FFF3E0; color: #E65100; border: 1px solid #FFCC80; }
+  .risk-medium   { background: #FFFDE7; color: #F57F17; border: 1px solid #FFE082; }
+  .risk-low      { background: #F5F5F5; color: #757575; border: 1px solid #E0E0E0; }
+
+  /* FILTER BAR */
+  .filter-bar { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem; padding: 1rem 1.25rem; background: #FFFFFF; border: 1px solid #DDE3ED; border-radius: 8px; }
+  .filter-bar label { font-size: .72rem; font-weight: 700; color: #1B4332; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+  .filter-bar select { font-size: .82rem; color: #1B4332; border: 1px solid #DDE3ED; border-radius: 6px; padding: .35rem .7rem; background: #FFFFFF; cursor: pointer; font-weight: 600; }
+  .filter-bar select:focus { outline: none; border-color: #1B4332; }
+  .filter-count { font-size: .78rem; color: #5a6a80; margin-left: auto; white-space: nowrap; }
+
   /* ALERT / PLACEHOLDER */
   .api-pending {
     background: #F5EDE0; border: 1px solid #d4c4a0; border-radius: 8px;
@@ -152,25 +166,6 @@
   }
   .signup-form button:hover { background: #B8860B; }
   .signup-note { font-size: .75rem; color: rgba(255,255,255,.6); margin-top: .75rem; }
-
-  /* ABOUT PAGE EXTRAS */
-  .about-section { margin-bottom: 2.5rem; }
-  .about-section p { color: #3a4a3a; font-size: .96rem; line-height: 1.7; margin-bottom: 1rem; }
-  .about-section ul { padding-left: 1.5rem; margin-bottom: 1rem; }
-  .about-section ul li { color: #3a4a3a; font-size: .96rem; line-height: 1.7; margin-bottom: .35rem; }
-  .kent-card {
-    background: #fff; border: 1px solid #DDE3ED; border-radius: 10px;
-    padding: 1.75rem 2rem; margin-bottom: 2rem;
-    border-left: 4px solid #1B4332;
-  }
-  .kent-card h3 { font-size: 1.2rem; font-weight: 800; color: #1B4332; margin-bottom: .25rem; }
-  .kent-card .kent-title { font-size: .82rem; color: #D4A017; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1rem; }
-  .kent-card p { color: #3a4a3a; font-size: .92rem; line-height: 1.65; margin-bottom: .75rem; }
-  .capability-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0 2rem; }
-  .capability-item {
-    background: #E8F5E9; border-radius: 8px; padding: .85rem 1.1rem;
-    border-left: 3px solid #2D6B2D; font-size: .88rem; font-weight: 600; color: #1B4332;
-  }
 
   /* DIVIDER */
   .section-divider { border: none; border-top: 1px solid #DDE3ED; margin: 0; }
@@ -204,8 +199,17 @@
   .cred-bar a:hover { color: #D4A017; }
   .cred-bar .cred-pipe { color: #DDE3ED; font-weight: 400; }
   .cred-bar .cred-media { color: #1B4332; font-weight: 700; font-size: .72rem; }
+  .cred-bar .cred-freshness { color: #D4A017; font-weight: 700; font-size: .72rem; }
   .cred-bar .cred-verified { color: #5a6a80; font-size: .72rem; margin-left: auto; white-space: nowrap; }
-  @media (max-width: 640px) { .cred-bar { padding: .4rem 1rem; gap: .5rem; } .cred-bar .cred-verified { margin-left: 0; } }
+
+  /* ABOUT PAGE */
+  .about-section { margin-bottom: 2.5rem; }
+  .about-section p { color: #3a4a3a; font-size: .96rem; line-height: 1.7; margin-bottom: 1rem; }
+  .kent-card { background: #fff; border: 1px solid #DDE3ED; border-radius: 10px; padding: 1.75rem 2rem; margin-bottom: 2rem; border-left: 4px solid #1B4332; }
+  .kent-card h3 { font-size: 1.2rem; font-weight: 800; color: #1B4332; margin-bottom: .25rem; }
+  .kent-card .kent-title { font-size: .82rem; color: #D4A017; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1rem; }
+  .capability-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0 2rem; }
+  .capability-item { background: #E8F5E9; border-radius: 8px; padding: .85rem 1.1rem; border-left: 3px solid #2D6B2D; font-size: .88rem; font-weight: 600; color: #1B4332; }
 
   /* HAMBURGER */
   .nav-hamburger {
@@ -233,6 +237,8 @@
     .nav-links a { padding: .85rem 1.5rem; font-size: .95rem; border-bottom: 1px solid rgba(27,67,50,.08); }
     .stat-row { gap: .6rem; }
     .stat-card { min-width: 120px; padding: .9rem 1rem; }
+    .cred-bar { padding: .4rem 1rem; gap: .5rem; }
+    .cred-bar .cred-verified { margin-left: 0; }
   }
 </style>
 </head>
@@ -244,7 +250,7 @@
     <span class="nav-brand-text">GF TECH ONE <span>AI Compliance Engine</span></span>
   </a>
   <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open navigation"><span></span><span></span><span></span></button>
-  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="about.html" class="active">About</a></div>
+  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="methodology.html">Methodology</a><a href="about.html" class="active">About</a></div>
 </nav>
 
 <div class="cred-bar">
@@ -255,7 +261,9 @@
   <a href="https://www.opensecrets.org" target="_blank" rel="noopener">OpenSecrets</a>
   <span class="cred-pipe">·</span>
   <span class="cred-media">Official cannabis news supplier to <strong>Easyriders Magazine</strong></span>
-  <span class="cred-verified">Last verified April 25, 2026</span>
+  <span class="cred-pipe">·</span>
+  <span class="cred-freshness">Final Rule — 2 days ago</span>
+  <span class="cred-verified">Last verified April 26, 2026</span>
 </div>
 
 <div class="hero">
@@ -335,31 +343,31 @@
           <td><a href="https://www.congress.gov" target="_blank" rel="noopener"><strong>Congress.gov</strong></a></td>
           <td>Active cannabis bills, sponsors, committee status, vote records</td>
           <td>Weekly — Mondays</td>
-          <td>April 25, 2026</td>
+          <td>April 26, 2026</td>
         </tr>
         <tr>
           <td><a href="https://www.federalregister.gov" target="_blank" rel="noopener"><strong>Federal Register</strong></a></td>
           <td>DEA, FDA, and DOJ executive orders, proposed rules, final rules</td>
           <td>Daily — 6am ET</td>
-          <td>April 25, 2026</td>
+          <td>April 26, 2026</td>
         </tr>
         <tr>
           <td><a href="https://www.fec.gov" target="_blank" rel="noopener"><strong>FEC.gov</strong></a></td>
           <td>Campaign finance filings, PAC contributions, candidate fundraising</td>
           <td>Monthly</td>
-          <td>April 25, 2026</td>
+          <td>April 26, 2026</td>
         </tr>
         <tr>
           <td><a href="https://www.opensecrets.org" target="_blank" rel="noopener"><strong>OpenSecrets</strong></a></td>
           <td>Lawmaker donor profiles, industry money flows, lobbying spend</td>
           <td>Monthly</td>
-          <td>April 25, 2026</td>
+          <td>April 26, 2026</td>
         </tr>
         <tr>
           <td><strong>Google News RSS</strong></td>
           <td>Cannabis and vapor/nicotine policy headlines from major outlets</td>
           <td>Daily — 6am ET</td>
-          <td>April 25, 2026</td>
+          <td>April 26, 2026</td>
         </tr>
       </tbody>
     </table>
@@ -373,10 +381,28 @@
     <p>This partnership validates GFTO AI Compliance Engine as a trusted, publication-grade intelligence source — not just a data aggregator.</p>
   </div>
 
+  <div class="about-section">
+    <span class="section-tag tag-cream">PLATFORM BUILDER</span>
+    <h2>Built by Horsepower AI</h2>
+    <div class="kent-card">
+      <h3>Jeff Najar</h3>
+      <div class="kent-title">Founder — Horsepower AI</div>
+      <p>GFTO AI Compliance Engine is designed, built, and maintained by <strong>Horsepower AI</strong>, a digital business consultancy that builds AI-powered intelligence tools for growth-stage companies. Horsepower AI was engaged by GF Tech One to deliver institutional-grade regulatory intelligence at zero cost to cannabis executives.</p>
+      <p style="margin-top:.75rem">
+        <strong>Data corrections &amp; inquiries:</strong>
+        <a href="mailto:jeff.najar@horsepowermarketing.com" style="color:#1B4332;font-weight:700">jeff.najar@horsepowermarketing.com</a>
+        &nbsp;·&nbsp; Errors reviewed and corrected within 48 hours.
+      </p>
+      <p style="margin-top:.5rem">
+        <a href="methodology.html" style="color:#2D6B2D;font-weight:700">Read our full data methodology →</a>
+      </p>
+    </div>
+  </div>
+
   <p style="font-size:.82rem;color:#5a6a80;margin-top:2rem;">
     GFTO AI Compliance Engine is for informational purposes only. This is not legal or investment advice.
     Data sourced from Congress.gov, Federal Register, FEC.gov, OpenSecrets, and Google News.
-    All government data is public domain.
+    All government data is public domain. Last updated April 26, 2026.
   </p>
 
 </div>
@@ -415,7 +441,7 @@
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
-    Updated April 25, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
+    Updated April 26, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
     &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
     <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
     <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,

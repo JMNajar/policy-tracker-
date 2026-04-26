@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cannabis Bills in Congress (25) | GFTO AI Compliance Engine</title>
-  <meta name="description" content="Cannabis and executive policy intelligence for business leaders. Built by Horsepower AI, sponsored by GF Tech One.">
+  <title>Cannabis Bills in Congress (23) | GFTO AI Compliance Engine</title>
+  <meta name="description" content="AI-powered compliance intelligence for cannabis and nicotine operators. Track legislation, regulations, and campaign finance in real time. Built by Horsepower AI, sponsored by GF Tech One.">
   <style>
   :root {
     --navy:   #1B4332;
@@ -121,6 +121,20 @@
   .badge-navy  { background: #E8F5E9; color: #1B4332; }
   .badge-gray  { background: #f0f0f0; color: #666; }
 
+  /* RISK SCORE BADGES */
+  .risk-badge { display: inline-block; padding: .18rem .55rem; border-radius: 12px; font-size: .65rem; font-weight: 800; letter-spacing: .05em; white-space: nowrap; }
+  .risk-critical { background: #FFEBEE; color: #B71C1C; border: 1px solid #EF9A9A; }
+  .risk-high     { background: #FFF3E0; color: #E65100; border: 1px solid #FFCC80; }
+  .risk-medium   { background: #FFFDE7; color: #F57F17; border: 1px solid #FFE082; }
+  .risk-low      { background: #F5F5F5; color: #757575; border: 1px solid #E0E0E0; }
+
+  /* FILTER BAR */
+  .filter-bar { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem; padding: 1rem 1.25rem; background: #FFFFFF; border: 1px solid #DDE3ED; border-radius: 8px; }
+  .filter-bar label { font-size: .72rem; font-weight: 700; color: #1B4332; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+  .filter-bar select { font-size: .82rem; color: #1B4332; border: 1px solid #DDE3ED; border-radius: 6px; padding: .35rem .7rem; background: #FFFFFF; cursor: pointer; font-weight: 600; }
+  .filter-bar select:focus { outline: none; border-color: #1B4332; }
+  .filter-count { font-size: .78rem; color: #5a6a80; margin-left: auto; white-space: nowrap; }
+
   /* ALERT / PLACEHOLDER */
   .api-pending {
     background: #F5EDE0; border: 1px solid #d4c4a0; border-radius: 8px;
@@ -185,8 +199,17 @@
   .cred-bar a:hover { color: #D4A017; }
   .cred-bar .cred-pipe { color: #DDE3ED; font-weight: 400; }
   .cred-bar .cred-media { color: #1B4332; font-weight: 700; font-size: .72rem; }
+  .cred-bar .cred-freshness { color: #D4A017; font-weight: 700; font-size: .72rem; }
   .cred-bar .cred-verified { color: #5a6a80; font-size: .72rem; margin-left: auto; white-space: nowrap; }
-  @media (max-width: 640px) { .cred-bar { padding: .4rem 1rem; gap: .5rem; } .cred-bar .cred-verified { margin-left: 0; } }
+
+  /* ABOUT PAGE */
+  .about-section { margin-bottom: 2.5rem; }
+  .about-section p { color: #3a4a3a; font-size: .96rem; line-height: 1.7; margin-bottom: 1rem; }
+  .kent-card { background: #fff; border: 1px solid #DDE3ED; border-radius: 10px; padding: 1.75rem 2rem; margin-bottom: 2rem; border-left: 4px solid #1B4332; }
+  .kent-card h3 { font-size: 1.2rem; font-weight: 800; color: #1B4332; margin-bottom: .25rem; }
+  .kent-card .kent-title { font-size: .82rem; color: #D4A017; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1rem; }
+  .capability-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0 2rem; }
+  .capability-item { background: #E8F5E9; border-radius: 8px; padding: .85rem 1.1rem; border-left: 3px solid #2D6B2D; font-size: .88rem; font-weight: 600; color: #1B4332; }
 
   /* HAMBURGER */
   .nav-hamburger {
@@ -214,6 +237,8 @@
     .nav-links a { padding: .85rem 1.5rem; font-size: .95rem; border-bottom: 1px solid rgba(27,67,50,.08); }
     .stat-row { gap: .6rem; }
     .stat-card { min-width: 120px; padding: .9rem 1rem; }
+    .cred-bar { padding: .4rem 1rem; gap: .5rem; }
+    .cred-bar .cred-verified { margin-left: 0; }
   }
 </style>
 </head>
@@ -225,7 +250,7 @@
     <span class="nav-brand-text">GF TECH ONE <span>AI Compliance Engine</span></span>
   </a>
   <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open navigation"><span></span><span></span><span></span></button>
-  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html" class="active">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="about.html">About</a></div>
+  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html" class="active">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="methodology.html">Methodology</a><a href="about.html">About</a></div>
 </nav>
 
 <div class="cred-bar">
@@ -236,7 +261,9 @@
   <a href="https://www.opensecrets.org" target="_blank" rel="noopener">OpenSecrets</a>
   <span class="cred-pipe">·</span>
   <span class="cred-media">Official cannabis news supplier to <strong>Easyriders Magazine</strong></span>
-  <span class="cred-verified">Last verified April 25, 2026</span>
+  <span class="cred-pipe">·</span>
+  <span class="cred-freshness">Final Rule — 2 days ago</span>
+  <span class="cred-verified">Last verified April 26, 2026</span>
 </div>
 
 <div class="hero">
@@ -244,7 +271,7 @@
   <h1>Cannabis <span>Bills in Congress</span></h1>
   <p>Active bills, committee status, and floor votes — updated every Monday morning.</p>
   <div class="stat-row">
-    <div class="stat-card"><div class="num">25</div><div class="lbl">BILLS TRACKED</div></div>
+    <div class="stat-card"><div class="num">23</div><div class="lbl">BILLS TRACKED</div></div>
     <div class="stat-card"><div class="num">Federal</div><div class="lbl">SCOPE</div></div>
     <div class="stat-card"><div class="num">Weekly</div><div class="lbl">UPDATES</div></div>
   </div>
@@ -253,190 +280,246 @@
 <div class="container">
   
   <span class="section-tag tag-navy">LIVE FROM CONGRESS.GOV</span>
-  <h2>Cannabis Legislation — 25 Bills Found</h2>
+  <h2>Cannabis Legislation — <span id="bill-count">23</span> Bills Found</h2>
   <p class="section-intro">All cannabis, marijuana, and hemp-related bills in the 119th Congress sorted by most recent activity.</p>
-  <table class="data-table">
+
+  <div class="filter-bar">
+    <label>Filter by Sector</label>
+    <select id="sector-filter" onchange="filterBills()">
+      <option value="all">All Sectors</option>
+      <option value="banking">Banking & Finance</option>
+      <option value="tax">Tax (280E)</option>
+      <option value="retail">Retail / Dispensary</option>
+      <option value="cultivation">Cultivation</option>
+      <option value="testing">Testing & Lab</option>
+      <option value="hemp">Hemp / CBD</option>
+      <option value="mso">Multi-State Operators</option>
+      <option value="executive">DEA / FDA / Executive</option>
+    </select>
+    <label>Risk Level</label>
+    <select id="risk-filter" onchange="filterBills()">
+      <option value="all">All Levels</option>
+      <option value="risk-critical">Critical Only</option>
+      <option value="risk-high">High &amp; Critical</option>
+      <option value="risk-medium">Medium &amp; Above</option>
+    </select>
+    <span class="filter-count" id="bill-filter-count">23 bills shown</span>
+  </div>
+
+  <table class="data-table" id="bills-table">
     <thead>
-      <tr><th>Bill</th><th>Title</th><th>Sponsor</th><th>Latest Action</th><th>Updated</th></tr>
+      <tr><th>Bill</th><th>Title</th><th>Sponsor</th><th>Latest Action</th><th>Updated</th><th>Risk</th></tr>
     </thead>
-    <tbody>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8138" target="_blank" rel="noopener">HR 8138</a></strong></td>
-        <td>DPA Specialized Staffing Act</td>
+    <tbody id="bills-tbody">
+      <tr data-states="federal" data-sectors="banking">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8495" target="_blank" rel="noopener">HR 8495</a></strong></td>
+        <td>Financial Services and General Government Appropriations Act, 2027</td>
+        <td>David Joyce</td>
+        <td>Placed on the Union Calendar, Calendar No. 540.</td>
+        <td style="white-space:nowrap">2026-04-26</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="tax">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hconres-bill/75" target="_blank" rel="noopener">HCONRES 75</a></strong></td>
+        <td>Directing the President, pursuant to section 5(c) of the War Powers Resolution, to remove the United States Armed Forces from hostilities ag</td>
         <td>Josh Gottheimer</td>
-        <td>Referred to the Committee on Financial Services, and in addition to the Committee on Oversight and Government Reform, fo</td>
+        <td>Referred to the House Committee on Foreign Affairs.</td>
         <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
       </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8136" target="_blank" rel="noopener">HR 8136</a></strong></td>
-        <td>DPA Advanced Procurement Act of 2026</td>
-        <td>Cleo Fields</td>
-        <td>Referred to the House Committee on Financial Services.</td>
+      <tr data-states="federal" data-sectors="tax">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hconres-bill/88" target="_blank" rel="noopener">HCONRES 88</a></strong></td>
+        <td>Directing the President, pursuant to section 5(c) of the War Powers Resolution, to remove United States Armed Forces from hostilities with I</td>
+        <td>Jared Huffman</td>
+        <td>Referred to the House Committee on Foreign Affairs.</td>
         <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
       </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/7022" target="_blank" rel="noopener">HR 7022</a></strong></td>
-        <td>Mystic Alerts Act</td>
-        <td>August Pfluger</td>
-        <td>Received in the Senate and Read twice and referred to the Committee on Commerce, Science, and Transportation.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8038" target="_blank" rel="noopener">HR 8038</a></strong></td>
-        <td>DPA Private-Sector Outreach Act of 2026</td>
-        <td>Joyce Beatty</td>
-        <td>Referred to the House Committee on Financial Services.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
+      <tr data-states="federal" data-sectors="tax">
         <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8469" target="_blank" rel="noopener">HR 8469</a></strong></td>
         <td>Making appropriations for military construction, the Department of Veterans Affairs, and related agencies for the fiscal year ending Septemb</td>
         <td>John Carter</td>
         <td>Placed on the Union Calendar, Calendar No. 539.</td>
         <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
       </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8133" target="_blank" rel="noopener">HR 8133</a></strong></td>
-        <td>DPA Workforce and Skilled Labor Needs Act of 2026</td>
-        <td>Sean Casten</td>
-        <td>Referred to the House Committee on Financial Services.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/3542" target="_blank" rel="noopener">HR 3542</a></strong></td>
-        <td>CLEAR (Committee Leadership and Enhanced Accountability for Resilience) Defense Production Act of 2025</td>
-        <td>James Himes</td>
-        <td>Referred to the House Committee on Financial Services.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8053" target="_blank" rel="noopener">HR 8053</a></strong></td>
-        <td>DPA Emerging Technology Act of 2026</td>
-        <td>Stephen Lynch</td>
-        <td>Referred to the House Committee on Financial Services.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/s-bill/3936" target="_blank" rel="noopener">S 3936</a></strong></td>
-        <td>USDA Loan Modernization Act</td>
-        <td>Tommy Tuberville</td>
-        <td>Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8030" target="_blank" rel="noopener">HR 8030</a></strong></td>
-        <td>DPA Transparency Act of 2026</td>
-        <td>Maxine Waters</td>
-        <td>Referred to the House Committee on Financial Services.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8071" target="_blank" rel="noopener">HR 8071</a></strong></td>
-        <td>Strengthening and Improving Mobilization Act of 2026</td>
-        <td>Al Green</td>
-        <td>Referred to the House Committee on Financial Services.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/7688" target="_blank" rel="noopener">HR 7688</a></strong></td>
-        <td>DPA Modernization Act of 2026</td>
-        <td>Warren Davidson</td>
-        <td>Placed on the Union Calendar, Calendar No. 529.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
+      <tr data-states="federal" data-sectors="general">
         <td><strong><a href="https://www.congress.gov/bill/119th-congress/sconres-bill/33" target="_blank" rel="noopener">SCONRES 33</a></strong></td>
         <td>A concurrent resolution setting forth the congressional budget for the United States Government for fiscal year 2026 and setting forth the a</td>
         <td>Lindsey Graham</td>
         <td>Held at the desk.</td>
         <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
       </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8495" target="_blank" rel="noopener">HR 8495</a></strong></td>
-        <td>Financial Services and General Government Appropriations Act, 2027</td>
-        <td>David Joyce</td>
-        <td>Placed on the Union Calendar, Calendar No. 540.</td>
+      <tr data-states="federal" data-sectors="banking">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/3542" target="_blank" rel="noopener">HR 3542</a></strong></td>
+        <td>CLEAR (Committee Leadership and Enhanced Accountability for Resilience) Defense Production Act of 2025</td>
+        <td>James Himes</td>
+        <td>Referred to the House Committee on Financial Services.</td>
         <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
       </tr>
-      <tr>
+      <tr data-states="federal" data-sectors="banking">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8053" target="_blank" rel="noopener">HR 8053</a></strong></td>
+        <td>DPA Emerging Technology Act of 2026</td>
+        <td>Stephen Lynch</td>
+        <td>Referred to the House Committee on Financial Services.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="banking">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/s-bill/3936" target="_blank" rel="noopener">S 3936</a></strong></td>
+        <td>USDA Loan Modernization Act</td>
+        <td>Tommy Tuberville</td>
+        <td>Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="banking,testing">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8133" target="_blank" rel="noopener">HR 8133</a></strong></td>
+        <td>DPA Workforce and Skilled Labor Needs Act of 2026</td>
+        <td>Sean Casten</td>
+        <td>Referred to the House Committee on Financial Services.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="banking">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8030" target="_blank" rel="noopener">HR 8030</a></strong></td>
+        <td>DPA Transparency Act of 2026</td>
+        <td>Maxine Waters</td>
+        <td>Referred to the House Committee on Financial Services.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="banking">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8136" target="_blank" rel="noopener">HR 8136</a></strong></td>
+        <td>DPA Advanced Procurement Act of 2026</td>
+        <td>Cleo Fields</td>
+        <td>Referred to the House Committee on Financial Services.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="banking">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8038" target="_blank" rel="noopener">HR 8038</a></strong></td>
+        <td>DPA Private-Sector Outreach Act of 2026</td>
+        <td>Joyce Beatty</td>
+        <td>Referred to the House Committee on Financial Services.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="general">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/7688" target="_blank" rel="noopener">HR 7688</a></strong></td>
+        <td>DPA Modernization Act of 2026</td>
+        <td>Warren Davidson</td>
+        <td>Placed on the Union Calendar, Calendar No. 529.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="banking">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8138" target="_blank" rel="noopener">HR 8138</a></strong></td>
+        <td>DPA Specialized Staffing Act</td>
+        <td>Josh Gottheimer</td>
+        <td>Referred to the Committee on Financial Services, and in addition to the Committee on Oversight and Government Reform, fo</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="banking">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8071" target="_blank" rel="noopener">HR 8071</a></strong></td>
+        <td>Strengthening and Improving Mobilization Act of 2026</td>
+        <td>Al Green</td>
+        <td>Referred to the House Committee on Financial Services.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="general">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/7022" target="_blank" rel="noopener">HR 7022</a></strong></td>
+        <td>Mystic Alerts Act</td>
+        <td>August Pfluger</td>
+        <td>Received in the Senate and Read twice and referred to the Committee on Commerce, Science, and Transportation.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="general">
         <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/5587" target="_blank" rel="noopener">HR 5587</a></strong></td>
         <td>HEATS Act</td>
         <td>Young Kim</td>
         <td>Motion to reconsider laid on the table Agreed to without objection.</td>
         <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-high">HIGH</span></td>
       </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8393" target="_blank" rel="noopener">HR 8393</a></strong></td>
-        <td>Consumer Protection and Corporate Accountability in Bankruptcy Act of 2026</td>
-        <td>Emilia Sykes</td>
-        <td>Referred to the House Committee on the Judiciary.</td>
+      <tr data-states="federal" data-sectors="general">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8422" target="_blank" rel="noopener">HR 8422</a></strong></td>
+        <td>CLEAN Act</td>
+        <td>Chris Pappas</td>
+        <td>Referred to the Committee on House Administration, and in addition to the Committee on Rules, for a period to be subsequ</td>
         <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
       </tr>
-      <tr>
+      <tr data-states="federal" data-sectors="general">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8411" target="_blank" rel="noopener">HR 8411</a></strong></td>
+        <td>Original Legislation to Give TSA Employees a Raise</td>
+        <td>Al Green</td>
+        <td>Referred to the House Committee on Homeland Security.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="general">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8417" target="_blank" rel="noopener">HR 8417</a></strong></td>
+        <td>Keeping China Off the Rails Act</td>
+        <td>John Moolenaar</td>
+        <td>Referred to the House Committee on Transportation and Infrastructure.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="general">
         <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8426" target="_blank" rel="noopener">HR 8426</a></strong></td>
         <td>Crime Survivor Support and Stability Act of 2026</td>
         <td>Lateefah Simon</td>
         <td>Referred to the Committee on the Judiciary, and in addition to the Committee on Ways and Means, for a period to be subse</td>
         <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
       </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8420" target="_blank" rel="noopener">HR 8420</a></strong></td>
-        <td>Veterans Legal Support Act of 2026</td>
-        <td>Eleanor Norton</td>
-        <td>Referred to the House Committee on Veterans' Affairs.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8421" target="_blank" rel="noopener">HR 8421</a></strong></td>
-        <td>SERVE Act</td>
-        <td>Chris Pappas</td>
-        <td>Referred to the House Committee on Veterans' Affairs.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8416" target="_blank" rel="noopener">HR 8416</a></strong></td>
-        <td>Prison to Proprietorship for the Formerly Incarcerated Act</td>
-        <td>Morgan McGarvey</td>
-        <td>Referred to the House Committee on Small Business.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8425" target="_blank" rel="noopener">HR 8425</a></strong></td>
-        <td>Strengthening the Vaccines for Children Program Act of 2026</td>
-        <td>Kim Schrier</td>
-        <td>Referred to the House Committee on Energy and Commerce.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8418" target="_blank" rel="noopener">HR 8418</a></strong></td>
-        <td>Know Your Labor Rights Act</td>
-        <td>Riley Moore</td>
-        <td>Referred to the House Committee on Education and Workforce.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/7767" target="_blank" rel="noopener">HR 7767</a></strong></td>
-        <td>Make Billionaires Pay Their Fair Share Act</td>
-        <td>Ro Khanna</td>
-        <td>Referred to the Committee on Ways and Means, and in addition to the Committees on Energy and Commerce, Financial Service</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
-        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8392" target="_blank" rel="noopener">HR 8392</a></strong></td>
-        <td>No Free Passes for Cronies Act</td>
-        <td>Mary Gay Scanlon</td>
-        <td>Referred to the House Committee on the Judiciary.</td>
-        <td style="white-space:nowrap">2026-04-25</td>
-      </tr>
-      <tr>
+      <tr data-states="federal" data-sectors="general">
         <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8427" target="_blank" rel="noopener">HR 8427</a></strong></td>
         <td>Congressional Pension Integrity Act of 2026</td>
         <td>Suhas Subramanyam</td>
         <td>Referred to the Committee on House Administration, and in addition to the Committee on Oversight and Government Reform, </td>
         <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
+      </tr>
+      <tr data-states="federal" data-sectors="banking,retail">
+        <td><strong><a href="https://www.congress.gov/bill/119th-congress/hr-bill/8393" target="_blank" rel="noopener">HR 8393</a></strong></td>
+        <td>Consumer Protection and Corporate Accountability in Bankruptcy Act of 2026</td>
+        <td>Emilia Sykes</td>
+        <td>Referred to the House Committee on the Judiciary.</td>
+        <td style="white-space:nowrap">2026-04-25</td>
+        <td><span class="risk-badge risk-low">LOW</span></td>
       </tr>
     </tbody>
   </table>
+  <p id="bills-empty" style="display:none;text-align:center;color:#999;padding:1.5rem">No bills match your current filters.</p>
+<script>
+  function filterBills() {
+    var sector = document.getElementById('sector-filter').value;
+    var risk   = document.getElementById('risk-filter').value;
+    var rows   = document.querySelectorAll('#bills-tbody tr');
+    var shown  = 0;
+    rows.forEach(function(r) {
+      var sectors = r.dataset.sectors || '';
+      var badge   = r.querySelector('.risk-badge');
+      var badgeCls = badge ? badge.className : '';
+      var sectorOk = sector === 'all' || sectors.indexOf(sector) !== -1;
+      var riskOk = true;
+      if (risk === 'risk-critical') riskOk = badgeCls.indexOf('risk-critical') !== -1;
+      else if (risk === 'risk-high') riskOk = badgeCls.indexOf('risk-critical') !== -1 || badgeCls.indexOf('risk-high') !== -1;
+      else if (risk === 'risk-medium') riskOk = badgeCls.indexOf('risk-low') === -1;
+      r.style.display = (sectorOk && riskOk) ? '' : 'none';
+      if (sectorOk && riskOk) shown++;
+    });
+    document.getElementById('bill-filter-count').textContent = shown + ' bills shown';
+    document.getElementById('bills-empty').style.display = shown === 0 ? 'block' : 'none';
+  }
+</script>
 
   <span class="section-tag tag-green">KEY BILLS TO WATCH</span>
   <h2>Bills That Move Kent's Business</h2>
@@ -457,37 +540,37 @@
         <td><strong>SAFER Banking Act</strong></td>
         <td>Allows cannabis businesses to access standard banking, credit cards, and loans</td>
         <td>Eliminates cash-only operations. Enables B2B payment processing for Deeper Green™ sales.</td>
-        <td><span class="badge badge-navy">In Senate</span></td>
+        <td><span class="badge badge-navy">In Senate</span> <span class="risk-badge risk-high">HIGH</span></td>
       </tr>
       <tr>
         <td><strong>DEA Schedule III Reclassification</strong></td>
         <td>Moves cannabis from Schedule I to Schedule III — federal drug classification</td>
         <td>Legitimizes the market. Reduces legal risk for investors and operators. Unlocks research funding.</td>
-        <td><span class="badge badge-green">In Progress</span></td>
+        <td><span class="badge badge-green">In Progress</span> <span class="risk-badge risk-critical">CRITICAL</span></td>
       </tr>
       <tr>
         <td><strong>Section 280E Tax Reform</strong></td>
         <td>Allows cannabis businesses to deduct standard business expenses from federal taxes</td>
         <td>Direct profitability impact. Most cannabis operators pay 40–80% effective tax rate under 280E.</td>
-        <td><span class="badge badge-gray">Pending</span></td>
+        <td><span class="badge badge-gray">Pending</span> <span class="risk-badge risk-high">HIGH</span></td>
       </tr>
       <tr>
         <td><strong>FDA Food Additive Rules</strong></td>
         <td>FDA regulation of THC as a food/beverage ingredient</td>
         <td>Directly governs whether Deeper Green™ (THC powder for B2B food/beverage manufacturers) can be legally sold.</td>
-        <td><span class="badge badge-red">Critical Watch</span></td>
+        <td><span class="badge badge-red">Critical Watch</span> <span class="risk-badge risk-critical">CRITICAL</span></td>
       </tr>
       <tr>
         <td><strong>Farm Bill / Hemp THC Limits</strong></td>
         <td>Defines hemp vs. cannabis THC threshold. Sets interstate commerce rules.</td>
         <td>Determines what can be shipped across state lines without federal cannabis licensing.</td>
-        <td><span class="badge badge-navy">Renewal Due</span></td>
+        <td><span class="badge badge-navy">Renewal Due</span> <span class="risk-badge risk-high">HIGH</span></td>
       </tr>
       <tr>
         <td><strong>Federal Legalization Framework</strong></td>
         <td>Any bill creating federal licensing, taxation, and distribution framework for cannabis</td>
         <td>Defines the entire operating environment. Who can manufacture, distribute, and sell nationally.</td>
-        <td><span class="badge badge-gray">Multiple bills competing</span></td>
+        <td><span class="badge badge-gray">Multiple bills competing</span> <span class="risk-badge risk-medium">MEDIUM</span></td>
       </tr>
     </tbody>
   </table>
@@ -532,7 +615,7 @@
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
-    Updated April 25, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
+    Updated April 26, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
     &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
     <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
     <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,
