@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PolicyTracker — Cannabis & Executive Policy Intelligence
+AI Compliance Engine — Cannabis & Nicotine Compliance Intelligence for Operators
 Built by Horsepower AI | Sponsored by GF Tech One
 """
 
@@ -283,7 +283,7 @@ def nav(active=""):
 <nav>
   <a class="nav-brand" href="index.html">
     <img src="assets/GFTECH1 LOGO.jpg" alt="GF Tech One" onerror="this.style.display='none'">
-    <span class="nav-brand-text">GF TECH ONE <span>PolicyTracker</span></span>
+    <span class="nav-brand-text">GF TECH ONE <span>AI Compliance Engine</span></span>
   </a>
   <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open navigation"><span></span><span></span><span></span></button>
   <div class="nav-links">{links}</div>
@@ -322,7 +322,7 @@ def footer():
     </div>
   </div>
   <p class="footer-tagline">
-    GFTO PolicyTracker is a GF Tech One intelligence platform, built by <a href="#">Horsepower AI</a>.
+    GFTO AI Compliance Engine is a GF Tech One intelligence platform, built by <a href="#">Horsepower AI</a>.
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
@@ -399,8 +399,8 @@ def page(title, active, content):
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title} | GFTO PolicyTracker</title>
-  <meta name="description" content="Cannabis and executive policy intelligence for business leaders. Built by Horsepower AI, sponsored by GF Tech One.">
+  <title>{title} | GFTO AI Compliance Engine</title>
+  <meta name="description" content="AI-powered compliance intelligence for cannabis and nicotine operators. Track legislation, regulations, and campaign finance in real time. Built by Horsepower AI, sponsored by GF Tech One.">
   <style>{CSS}</style>
 </head>
 <body>
@@ -740,7 +740,7 @@ def build_index(news_items):
   <hr class="section-divider" style="margin: 2rem 0;">
 
   <span class="section-tag tag-navy">NAVIGATE THE TRACKER</span>
-  <h2>What's Inside GFTO PolicyTracker</h2>
+  <h2>What's Inside GFTO AI Compliance Engine</h2>
   <p class="section-intro">Four intelligence layers — legislation, lawmakers, executive actions, and the money behind the vote.</p>
   <div class="card-grid">
     <div class="card">
@@ -1529,7 +1529,7 @@ def build_vapor(news_items, fed_items):
     content = f"""
 <div class="hero">
   <div class="hero-tag">FDA VAPOR + NICOTINE REGULATION</div>
-  <h1>Nicotine &amp; Vapor <span>Policy Tracker</span></h1>
+  <h1>Nicotine &amp; Vapor <span>AI Compliance Engine</span></h1>
   <p>FDA PMTA rulings, CTP actions, and vapor legislation affecting nicotine device manufacturers — updated daily.</p>
   <div class="stat-row">
     <div class="stat-card"><div class="num">{count}</div><div class="lbl">NEWS ITEMS</div></div>
@@ -1643,14 +1643,14 @@ def build_vapor(news_items, fed_items):
   </div>
 </div>"""
 
-    return page("Vapor & Nicotine Policy Tracker", "vapor.html", content)
+    return page("Vapor & Nicotine Compliance", "vapor.html", content)
 
 # ── BUILD: ABOUT ──────────────────────────────────────────────────────────────
 def build_about():
     content = f"""
 <div class="hero">
   <div class="hero-tag">ABOUT GF TECH ONE</div>
-  <h1>GF TECH ONE <span>PolicyTracker</span></h1>
+  <h1>GF TECH ONE <span>AI Compliance Engine</span></h1>
   <p>Institutional-grade cannabis policy intelligence — built for operators, executives, and investors who need to move before the market does.</p>
 </div>
 
@@ -1671,8 +1671,8 @@ def build_about():
 
   <div class="about-section">
     <span class="section-tag tag-navy">FLAGSHIP PRODUCT</span>
-    <h2>Innovation: GFTO PolicyTracker</h2>
-    <p>The flagship product of GFTO's intelligence division is the GFTO PolicyTracker — a real-time legislative and regulatory intelligence platform monitoring:</p>
+    <h2>Innovation: GFTO AI Compliance Engine</h2>
+    <p>The flagship product of GFTO's intelligence division is the GFTO AI Compliance Engine — a real-time legislative and regulatory intelligence platform monitoring:</p>
     <div class="capability-grid" style="margin-top:1rem;">
       <div class="capability-item">Federal cannabis legislation in Congress — bills, sponsors, vote status</div>
       <div class="capability-item">Executive branch actions from the DEA, FDA, DOJ, and White House</div>
@@ -1680,7 +1680,7 @@ def build_about():
       <div class="capability-item">Vapor and nicotine policy developments running parallel to cannabis reform</div>
       <div class="capability-item">Campaign finance data from FEC and OpenSecrets</div>
     </div>
-    <p>Updated daily and weekly via automated data pipelines, GFTO PolicyTracker delivers institutional-grade intelligence in plain English — no legal background required.</p>
+    <p>Updated daily and weekly via automated data pipelines, GFTO AI Compliance Engine delivers institutional-grade intelligence in plain English — no legal background required.</p>
   </div>
 
   <div class="about-section">
@@ -1688,7 +1688,7 @@ def build_about():
     <h2>Capabilities &amp; Market Position</h2>
     <p>GF Tech One operates at the convergence of cannabis technology, regulatory intelligence, and AI-powered business systems. Core capabilities include:</p>
     <div class="capability-grid">
-      <div class="capability-item">Regulatory &amp; Legislative Intelligence — GFTO PolicyTracker</div>
+      <div class="capability-item">Regulatory &amp; Legislative Intelligence — GFTO AI Compliance Engine</div>
       <div class="capability-item">Water-Soluble Cannabinoid Technology — Deeper Green™</div>
       <div class="capability-item">AI-Powered Consumer Products — The Neb AI</div>
       <div class="capability-item">AI Marketing Infrastructure for cannabis operators</div>
@@ -1706,7 +1706,7 @@ def build_about():
       <p>Before founding GF Tech One, Kent held leadership roles across multiple verticals — from licensed cannabis operations to consumer technology ventures — where he developed a pattern recognition for the moments when regulatory change creates strategic opportunity. He is known among peers for his ability to see around corners: understanding not just what is happening in cannabis policy, but what it means for operators 12–18 months out.</p>
       <p>Under Kent's leadership, GF Tech One has launched:</p>
       <div class="capability-grid">
-        <div class="capability-item">GFTO PolicyTracker — the industry's first AI-assisted legislative intelligence dashboard for cannabis</div>
+        <div class="capability-item">GFTO AI Compliance Engine — the industry's first AI-assisted legislative intelligence dashboard for cannabis</div>
         <div class="capability-item">Deeper Green™ — proprietary water-soluble THC delivery system for B2B food &amp; beverage manufacturers</div>
         <div class="capability-item">The Neb AI — next-generation AI-personalized nicotine nebulizer for a post-cigarette consumer market</div>
       </div>
@@ -1717,7 +1717,7 @@ def build_about():
   <div class="about-section">
     <span class="section-tag tag-navy">DATA INTEGRITY</span>
     <h2>Verified Data Sources</h2>
-    <p>Every data point on GFTO PolicyTracker is sourced directly from official government agencies and verified public records. No third-party data resellers. No unverified aggregators.</p>
+    <p>Every data point on GFTO AI Compliance Engine is sourced directly from official government agencies and verified public records. No third-party data resellers. No unverified aggregators.</p>
     <table class="data-table">
       <thead><tr><th>Source</th><th>What We Pull</th><th>Update Frequency</th><th>Last Verified</th></tr></thead>
       <tbody>
@@ -1753,18 +1753,18 @@ def build_about():
         </tr>
       </tbody>
     </table>
-    <p>All government data is public domain. GFTO PolicyTracker does not editorialize or alter source data — we organize, summarize, and present it for business intelligence use.</p>
+    <p>All government data is public domain. GFTO AI Compliance Engine does not editorialize or alter source data — we organize, summarize, and present it for business intelligence use.</p>
   </div>
 
   <div class="about-section">
     <span class="section-tag tag-cream">MEDIA PARTNERSHIP</span>
     <h2>Easyriders Magazine</h2>
-    <p>GFTO PolicyTracker serves as an official cannabis news supplier to <strong>Easyriders Magazine</strong> — one of America's most iconic motorcycle and lifestyle publications. Through this partnership, GFTO delivers curated cannabis policy intelligence to Easyriders' audience of hundreds of thousands of readers who represent a core and growing cannabis consumer demographic.</p>
-    <p>This partnership validates GFTO PolicyTracker as a trusted, publication-grade intelligence source — not just a data aggregator.</p>
+    <p>GFTO AI Compliance Engine serves as an official cannabis news supplier to <strong>Easyriders Magazine</strong> — one of America's most iconic motorcycle and lifestyle publications. Through this partnership, GFTO delivers curated cannabis policy intelligence to Easyriders' audience of hundreds of thousands of readers who represent a core and growing cannabis consumer demographic.</p>
+    <p>This partnership validates GFTO AI Compliance Engine as a trusted, publication-grade intelligence source — not just a data aggregator.</p>
   </div>
 
   <p style="font-size:.82rem;color:{MUTED};margin-top:2rem;">
-    GFTO PolicyTracker is for informational purposes only. This is not legal or investment advice.
+    GFTO AI Compliance Engine is for informational purposes only. This is not legal or investment advice.
     Data sourced from Congress.gov, Federal Register, FEC.gov, OpenSecrets, and Google News.
     All government data is public domain.
   </p>
