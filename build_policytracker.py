@@ -1076,7 +1076,7 @@ SENATE_CANNABIS_CHAMPIONS = [
     {"name":"Elizabeth Warren", "party":"D","state":"MA","bioguide":"W000817","bills":"SAFE Banking, Veterans Access","stance":"Pro-Cannabis"},
     {"name":"Rand Paul",        "party":"R","state":"KY","bioguide":"P000603","bills":"States Reform Act, CBD bills","stance":"Pro-Cannabis"},
     {"name":"Brian Schatz",     "party":"D","state":"HI","bioguide":"S001194","bills":"Veterans Cannabis Research","stance":"Pro-Cannabis"},
-    {"name":"Kyrsten Sinema",   "party":"I","state":"AZ","bioguide":"S001191","bills":"SAFE Banking Act","stance":"Pro-SAFER Banking"},
+    {"name":"Ruben Gallego",    "party":"D","state":"AZ","bioguide":"G000574","bills":"SAFER Banking, Cannabis Reform","stance":"Pro-Cannabis"},
 ]
 
 def fetch_lawmakers(bills):
