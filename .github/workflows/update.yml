@@ -22,12 +22,13 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests feedparser
+        run: pip install requests feedparser anthropic
 
       - name: Run site builder
         env:
           CONGRESS_API_KEY: ${{ secrets.CONGRESS_API_KEY }}
           OPENSECRETS_API_KEY: ${{ secrets.OPENSECRETS_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python build_policytracker.py
 
       - name: Commit and push updated pages

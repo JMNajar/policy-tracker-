@@ -737,6 +737,104 @@ def fetch_bills():
     return bills
 
 
+# ── AI EXECUTIVE BRIEFINGS ────────────────────────────────────────────────────
+CACHE_FILE = Path(__file__).parent / "briefings_cache.json"
+
+def load_cache():
+    try:
+        return json.loads(CACHE_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+def save_cache(cache):
+    try:
+        CACHE_FILE.write_text(json.dumps(cache, indent=2), encoding="utf-8")
+    except Exception as e:
+        print(f"  Cache write error: {e}")
+
+def make_cache_key(text):
+    import hashlib
+    return hashlib.md5(text.encode()).hexdigest()[:16]
+
+def generate_briefing(title, context, item_type, api_key, cache):
+    """Call Claude Haiku to generate a 3-line executive briefing. Uses cache to avoid regenerating unchanged items."""
+    cache_key = make_cache_key(title)
+    if cache_key in cache:
+        return cache[cache_key]
+
+    if not api_key:
+        return None
+
+    prompt = f"""You are a cannabis industry policy analyst writing for C-suite executives (CEOs, CCOs, CFOs) of cannabis businesses. Given this regulatory item, write a 3-line executive briefing. Be specific and actionable — not generic.
+
+Item type: {item_type}
+Title: {title}
+Context: {context}
+
+Respond with EXACTLY 3 lines in this format (no extra text):
+IMPACT: [one sentence — what this means for cannabis business operations]
+TIMELINE: [one sentence — specific dates, deadlines, or timeframes if known; otherwise best estimate]
+ACTION: [one specific thing a cannabis executive should do this week or month]"""
+
+    try:
+        import anthropic as anthropic_sdk
+        client = anthropic_sdk.Anthropic(api_key=api_key)
+        message = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=180,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        result = message.content[0].text.strip()
+        cache[cache_key] = result
+        return result
+    except Exception as e:
+        print(f"  Briefing error ({title[:40]}): {e}")
+        return None
+
+def parse_briefing(text):
+    """Parse a 3-line briefing into a dict with impact/timeline/action keys."""
+    if not text:
+        return None
+    result = {}
+    for line in text.strip().splitlines():
+        if line.startswith("IMPACT:"):
+            result["impact"] = line[7:].strip()
+        elif line.startswith("TIMELINE:"):
+            result["timeline"] = line[9:].strip()
+        elif line.startswith("ACTION:"):
+            result["action"] = line[7:].strip()
+    if len(result) == 3:
+        return result
+    return None
+
+def briefing_html(briefing_dict):
+    """Render a parsed briefing dict as a collapsible HTML block."""
+    if not briefing_dict:
+        return ""
+    uid = make_cache_key(briefing_dict["action"])
+    return f"""<div style="margin-top:.65rem">
+  <button onclick="toggleBrief('{uid}')" style="background:none;border:none;padding:0;color:{GREEN};font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
+    <span id="arr-{uid}" style="font-size:.65rem">&#9654;</span> Executive Briefing
+  </button>
+  <div id="brief-{uid}" style="display:none;margin-top:.5rem;background:{LGREEN};border-left:3px solid {GREEN};border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
+    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:{NAVY}">IMPACT</span>&nbsp;&nbsp;{briefing_dict['impact']}</div>
+    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:{NAVY}">TIMELINE</span>&nbsp;&nbsp;{briefing_dict['timeline']}</div>
+    <div><span style="font-weight:800;color:{GREEN}">ACTION</span>&nbsp;&nbsp;{briefing_dict['action']}</div>
+  </div>
+</div>
+<script>
+if(typeof toggleBrief==='undefined'){{
+  function toggleBrief(id){{
+    var el=document.getElementById('brief-'+id);
+    var arr=document.getElementById('arr-'+id);
+    var open=el.style.display!=='none'&&el.style.display!=='';
+    el.style.display=open?'none':'block';
+    arr.innerHTML=open?'&#9654;':'&#9660;';
+  }}
+}}
+</script>"""
+
+
 # ── RISK SCORING ──────────────────────────────────────────────────────────────
 HIGH_PRIORITY_BILLS = [
     'safer banking', 'safe banking', 'schedule iii', '280e',
@@ -993,19 +1091,22 @@ def build_signal_panel(bills, executive, news):
 
 
 # ── BUILD: INDEX (HOME) ───────────────────────────────────────────────────────
-def build_index(news_items, bills=None, executive=None):
+def build_index(news_items, bills=None, executive=None, news_briefings=None):
     count = len(news_items)
 
+    news_briefings = news_briefings or {}
     news_cards = ""
     for item in news_items:
         source = item["source"][:30] if item["source"] else "News"
         title  = item["title"][:120]
         _, sectors_tag = tag_item(item["title"])
+        brief = briefing_html(news_briefings.get(item["title"]))
         news_cards += f"""
     <div class="card" data-sectors="{sectors_tag}">
       <div class="card-source">{source}</div>
       <div class="card-title"><a href="{item['link']}" target="_blank" rel="noopener">{title}</a></div>
       <div class="card-meta">{item['date']}</div>
+      {brief}
     </div>"""
 
     signal_panel = build_signal_panel(bills or [], executive or [], news_items)
@@ -1105,18 +1206,20 @@ def build_index(news_items, bills=None, executive=None):
     return page("Today's Cannabis Policy News", "index.html", content)
 
 # ── BUILD: BILLS ──────────────────────────────────────────────────────────────
-def build_bills(bills):
+def build_bills(bills, bill_briefings=None):
     bill_count = len(bills)
+    bill_briefings = bill_briefings or {}
 
     if bills:
         rows = ""
         for b in bills:
             risk_label, risk_cls = score_bill(b)
             states_tag, sectors_tag = tag_item(b['title'] + ' ' + b['latest_action'])
+            brief = briefing_html(bill_briefings.get(b["title"]))
             rows += f"""
       <tr data-states="{states_tag}" data-sectors="{sectors_tag}">
         <td><strong><a href="{b['url']}" target="_blank" rel="noopener">{b['number']}</a></strong></td>
-        <td>{b['title']}</td>
+        <td>{b['title']}{brief}</td>
         <td>{b['sponsor']}</td>
         <td>{b['latest_action']}</td>
         <td style="white-space:nowrap">{b['updated']}</td>
@@ -2364,10 +2467,33 @@ if __name__ == "__main__":
     opp_news = fetch_opposition_news()
     print(f"  {len(opp_news)} opposition news items")
 
+    # ── Generate AI executive briefings ─────────────────────────────────────
+    anthropic_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    briefing_cache = load_cache()
+    bill_briefings = {}
+    news_briefings = {}
+
+    if anthropic_key:
+        print("Generating AI executive briefings...")
+        for b in bills:
+            raw = generate_briefing(
+                b["title"], b["latest_action"], "congressional bill", anthropic_key, briefing_cache
+            )
+            bill_briefings[b["title"]] = parse_briefing(raw)
+        for item in news:
+            raw = generate_briefing(
+                item["title"], item.get("source",""), "cannabis policy news", anthropic_key, briefing_cache
+            )
+            news_briefings[item["title"]] = parse_briefing(raw)
+        save_cache(briefing_cache)
+        print(f"  {len(bill_briefings)} bill briefings, {len(news_briefings)} news briefings generated")
+    else:
+        print("  ANTHROPIC_API_KEY not set — skipping AI briefings")
+
     print("Building pages...")
     pages = {
-        "index.html":       build_index(news, bills, executive),
-        "bills.html":       build_bills(bills),
+        "index.html":       build_index(news, bills, executive, news_briefings),
+        "bills.html":       build_bills(bills, bill_briefings),
         "lawmakers.html":   build_lawmakers(lawmakers, opposition, opp_news),
         "executive.html":   build_executive(executive),
         "money.html":       build_money(pacs, opposition, opp_news),
