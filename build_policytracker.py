@@ -796,8 +796,181 @@ CONFLICT_LAWMAKERS = {
     "Mike Crapo":          {"committee": "Senate Banking & Finance",   "industry": "Pharmaceutical"},
 }
 
+# ── SIGNAL PANEL ─────────────────────────────────────────────────────────────
+def build_signal_panel(bills, executive, news):
+    """Generate the 6-tile regulatory signal dashboard above the news feed."""
+
+    def parse_date(s):
+        try:
+            return datetime.strptime(str(s)[:10], '%Y-%m-%d').replace(tzinfo=timezone.utc)
+        except Exception:
+            return None
+
+    def find_best(items, key_fields, keywords):
+        for item in items:
+            text = ' '.join(str(item.get(f, '')) for f in key_fields).lower()
+            if any(kw in text for kw in keywords):
+                return item
+        return None
+
+    def tile(icon, label, risk, status_text, date_str, link):
+        now = datetime.now(timezone.utc)
+        dt = parse_date(date_str)
+        days = (now - dt).days if dt else 999
+
+        active = days <= 7
+        dot_html = (
+            '<span style="color:#2E7D32;font-size:.63rem;font-weight:800;white-space:nowrap">&#9679; ACTIVE</span>'
+            if active else
+            '<span style="color:#BDBDBD;font-size:.63rem;font-weight:600;white-space:nowrap">&#9675; QUIET</span>'
+        )
+
+        colors = {
+            'CRITICAL': ('#B71C1C', '#FFF5F5', '#EF9A9A'),
+            'HIGH':     ('#B8520A', '#FFF8F0', '#FFCC80'),
+            'MONITOR':  ('#1B5E20', '#F1F8F1', '#A5D6A7'),
+        }
+        tc, bg, bc = colors.get(risk, colors['MONITOR'])
+        badge_bg = tc
+
+        return f"""<a href="{link}" style="text-decoration:none;flex:1;min-width:148px;max-width:210px">
+  <div class="sig-tile" style="background:{bg};border:1px solid {bc};border-left:4px solid {tc};border-radius:8px;padding:.85rem 1rem;height:100%">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
+      <span style="font-size:.7rem;font-weight:800;color:{tc};letter-spacing:.04em;line-height:1.2">{icon}&nbsp;{label}</span>
+      {dot_html}
+    </div>
+    <div style="margin-bottom:.5rem">
+      <span style="background:{badge_bg};color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">{risk}</span>
+    </div>
+    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">{status_text}</div>
+  </div>
+</a>"""
+
+    tiles = []
+
+    # ── 1. Banking Access ────────────────────────────────────────────────────
+    b_bank = find_best(bills, ['title', 'latest_action'], ['safer', 'safe banking', 'banking access', 'financial services'])
+    if b_bank:
+        action = b_bank['latest_action'][:60].rstrip(',. ')
+        risk_b = 'CRITICAL' if any(w in b_bank['latest_action'].lower() for w in ['vote', 'passed', 'floor', 'calendar']) else 'HIGH'
+        s_bank = f"{action} · {b_bank['updated']}"
+        d_bank = b_bank['updated']
+    else:
+        s_bank = "SAFER Banking — Senate calendar pending"
+        risk_b = 'HIGH'
+        d_bank = ''
+    tiles.append(tile('🏦', 'BANKING ACCESS', risk_b, s_bank, d_bank, 'bills.html'))
+
+    # ── 2. Schedule III / DEA ────────────────────────────────────────────────
+    e_iii = find_best(executive, ['title', 'agency'], ['schedule', 'dea', 'reclassif', 'drug enforcement', 'scheduling'])
+    if e_iii:
+        s_iii = e_iii['title'][:60].rstrip(',. ') + f" · {e_iii['date']}"
+        d_iii = e_iii['date']
+        risk_iii = 'CRITICAL'
+    else:
+        n_iii = find_best(news, ['title'], ['schedule iii', 'dea', 'reclassif', 'scheduling'])
+        if n_iii:
+            s_iii = n_iii['title'][:60].rstrip(',. ') + f" · {n_iii['date']}"
+            d_iii = n_iii.get('date', '')
+            risk_iii = 'HIGH'
+        else:
+            s_iii = "DEA rescheduling — federal process ongoing"
+            d_iii = ''
+            risk_iii = 'HIGH'
+    tiles.append(tile('💊', 'SCHEDULE III', risk_iii, s_iii, d_iii, 'executive.html'))
+
+    # ── 3. 280E Tax ──────────────────────────────────────────────────────────
+    b_tax = find_best(bills, ['title', 'latest_action'], ['280e', 'tax', 'deduction', 'internal revenue', 'irs'])
+    if b_tax:
+        action_t = b_tax['latest_action'][:60].rstrip(',. ')
+        s_tax = f"{action_t} · {b_tax['updated']}"
+        d_tax = b_tax['updated']
+        risk_t = 'HIGH'
+    else:
+        s_tax = "280E reform — committee stage, no floor date"
+        d_tax = ''
+        risk_t = 'MONITOR'
+    tiles.append(tile('💸', '280E TAX REFORM', risk_t, s_tax, d_tax, 'bills.html'))
+
+    # ── 4. Hemp / Farm Bill ──────────────────────────────────────────────────
+    b_hemp = find_best(bills, ['title', 'latest_action'], ['hemp', 'farm bill', 'thc limit', 'delta-8', 'delta 8'])
+    if b_hemp:
+        s_hemp = b_hemp['title'][:55].rstrip(',. ') + f" · {b_hemp['updated']}"
+        d_hemp = b_hemp['updated']
+        risk_h = 'HIGH'
+    else:
+        n_hemp = find_best(news, ['title'], ['hemp', 'farm bill', 'cbd regulation'])
+        if n_hemp:
+            s_hemp = n_hemp['title'][:60].rstrip(',. ') + f" · {n_hemp['date']}"
+            d_hemp = n_hemp.get('date', '')
+            risk_h = 'MONITOR'
+        else:
+            s_hemp = "Farm Bill renewal — Congress pending"
+            d_hemp = ''
+            risk_h = 'MONITOR'
+    tiles.append(tile('🌿', 'HEMP / FARM BILL', risk_h, s_hemp, d_hemp, 'bills.html'))
+
+    # ── 5. Executive Actions ─────────────────────────────────────────────────
+    e_latest = executive[0] if executive else None
+    if e_latest:
+        s_exec = e_latest['title'][:60].rstrip(',. ') + f" · {e_latest['date']}"
+        d_exec = e_latest['date']
+        dt_e = parse_date(d_exec)
+        now_e = datetime.now(timezone.utc)
+        days_e = (now_e - dt_e).days if dt_e else 999
+        risk_e = 'HIGH' if days_e <= 7 else 'MONITOR'
+    else:
+        s_exec = "Monitoring DEA, FDA, DOJ, Treasury"
+        d_exec = ''
+        risk_e = 'MONITOR'
+    tiles.append(tile('🏛', 'EXECUTIVE ACTIONS', risk_e, s_exec, d_exec, 'executive.html'))
+
+    # ── 6. Critical Watch — highest-scoring active bill ──────────────────────
+    crit_bill = None
+    for priority in ['CRITICAL', 'HIGH']:
+        for b in bills:
+            rl, _ = score_bill(b)
+            if rl == priority:
+                crit_bill = b
+                break
+        if crit_bill:
+            break
+
+    if crit_bill:
+        rl_c, _ = score_bill(crit_bill)
+        s_crit = crit_bill['title'][:60].rstrip(',. ') + f" · {crit_bill['updated']}"
+        d_crit = crit_bill['updated']
+    else:
+        rl_c = 'HIGH'
+        s_crit = "Monitoring all active legislative signals"
+        d_crit = ''
+    tiles.append(tile('⚠', 'CRITICAL WATCH', rl_c, s_crit, d_crit, 'bills.html'))
+
+    tiles_html = '\n'.join(tiles)
+
+    return f"""
+<div style="background:#FEFCE8;border-top:3px solid {NAVY};border-bottom:1px solid {BORDER};padding:1.5rem 2rem">
+  <div style="max-width:1000px;margin:0 auto">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.4rem">
+      <div>
+        <span style="font-size:.62rem;font-weight:800;color:{NAVY};letter-spacing:.12em;text-transform:uppercase">Signal Panel</span>
+        <span style="font-size:.62rem;color:{MUTED};margin-left:.6rem">Click any signal for full detail</span>
+      </div>
+      <span style="font-size:.68rem;color:{MUTED}">Updated {TODAY} &nbsp;·&nbsp; <span style="color:#2E7D32;font-weight:700">&#9679; ACTIVE</span> = movement in last 7 days</span>
+    </div>
+    <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+      {tiles_html}
+    </div>
+  </div>
+</div>
+<style>
+  .sig-tile {{ transition: box-shadow .18s, transform .18s; cursor: pointer; }}
+  .sig-tile:hover {{ box-shadow: 0 4px 18px rgba(27,67,50,.15); transform: translateY(-2px); }}
+</style>"""
+
+
 # ── BUILD: INDEX (HOME) ───────────────────────────────────────────────────────
-def build_index(news_items):
+def build_index(news_items, bills=None, executive=None):
     count = len(news_items)
 
     news_cards = ""
@@ -812,6 +985,8 @@ def build_index(news_items):
       <div class="card-meta">{item['date']}</div>
     </div>"""
 
+    signal_panel = build_signal_panel(bills or [], executive or [], news_items)
+
     content = f"""
 <div class="hero">
   <div class="hero-tag">UPDATED {TODAY.upper()}</div>
@@ -824,6 +999,8 @@ def build_index(news_items):
     <div class="stat-card"><div class="num">Free</div><div class="lbl">ALWAYS</div></div>
   </div>
 </div>
+
+{signal_panel}
 
 <hr class="section-divider">
 
@@ -2166,7 +2343,7 @@ if __name__ == "__main__":
 
     print("Building pages...")
     pages = {
-        "index.html":       build_index(news),
+        "index.html":       build_index(news, bills, executive),
         "bills.html":       build_bills(bills),
         "lawmakers.html":   build_lawmakers(lawmakers, opposition, opp_news),
         "executive.html":   build_executive(executive),
