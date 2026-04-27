@@ -500,13 +500,18 @@ def fetch_executive_actions():
                 })
         except Exception as e:
             print(f"Federal Register error ({term}): {e}")
-    # deduplicate by link
+    # Deduplicate and filter to cannabis-relevant titles only
+    CANNABIS_EXEC_KEYWORDS = ['cannabis', 'marijuana', 'marihuana', 'hemp', 'cbd']
     seen = set()
     unique = []
     for i in items:
-        if i["link"] not in seen:
-            seen.add(i["link"])
-            unique.append(i)
+        if i["link"] in seen:
+            continue
+        title_lower = i.get("title", "").lower()
+        if not any(kw in title_lower for kw in CANNABIS_EXEC_KEYWORDS):
+            continue
+        seen.add(i["link"])
+        unique.append(i)
     unique.sort(key=lambda x: x["date"], reverse=True)
     return unique[:15]
 
@@ -1027,14 +1032,15 @@ def build_signal_panel(bills, executive, news):
     tiles.append(tile('🏦', 'BANKING ACCESS', risk_b, s_bank, d_bank, l_bank))
 
     # ── 2. Schedule III / DEA ────────────────────────────────────────────────
-    e_iii = find_best(executive, ['title', 'agency'], ['schedule', 'dea', 'reclassif', 'drug enforcement', 'scheduling'])
-    if e_iii:
+    # Must mention cannabis/marijuana AND scheduling to avoid synthetic drug false matches
+    e_iii = find_best(executive, ['title'], ['cannabis', 'marijuana', 'marihuana'])
+    if e_iii and any(kw in e_iii.get('title','').lower() for kw in ['schedule', 'reclassif', 'reschedul']):
         s_iii = e_iii['title'][:60].rstrip(',. ') + f" · {e_iii['date']}"
         d_iii = e_iii['date']
         risk_iii = 'CRITICAL'
         l_iii = e_iii.get('link', 'executive.html') or 'executive.html'
     else:
-        n_iii = find_best(news, ['title'], ['schedule iii', 'dea', 'reclassif', 'scheduling'])
+        n_iii = find_best(news, ['title'], ['schedule iii cannabis', 'dea marijuana', 'cannabis reclassif', 'marijuana rescheduling'])
         if n_iii:
             s_iii = n_iii['title'][:60].rstrip(',. ') + f" · {n_iii['date']}"
             d_iii = n_iii.get('date', '')
