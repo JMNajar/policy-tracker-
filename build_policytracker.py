@@ -738,7 +738,8 @@ def fetch_bills():
 
 
 # ── AI EXECUTIVE BRIEFINGS ────────────────────────────────────────────────────
-CACHE_FILE = Path(__file__).parent / "briefings_cache.json"
+CACHE_FILE     = Path(__file__).parent / "briefings_cache.json"
+SNAPSHOT_FILE  = Path(__file__).parent / "snapshot_previous.json"
 
 def load_cache():
     try:
@@ -751,6 +752,32 @@ def save_cache(cache):
         CACHE_FILE.write_text(json.dumps(cache, indent=2), encoding="utf-8")
     except Exception as e:
         print(f"  Cache write error: {e}")
+
+def load_previous_snapshot():
+    try:
+        return json.loads(SNAPSHOT_FILE.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+
+def save_snapshot(bills, executive):
+    snapshot = {
+        "date": datetime.now().strftime("%Y-%m-%d"),
+        "bills": {
+            b["title"]: {
+                "status": b.get("latest_action", ""),
+                "risk":   score_bill(b)[0],
+            }
+            for b in bills
+        },
+        "executive": [
+            {"title": a.get("title", ""), "date": a.get("date", "")}
+            for a in executive
+        ],
+    }
+    try:
+        SNAPSHOT_FILE.write_text(json.dumps(snapshot, indent=2), encoding="utf-8")
+    except Exception as e:
+        print(f"  Snapshot write error: {e}")
 
 def make_cache_key(text):
     import hashlib
@@ -1091,7 +1118,91 @@ def build_signal_panel(bills, executive, news):
 
 
 # ── BUILD: INDEX (HOME) ───────────────────────────────────────────────────────
-def build_index(news_items, bills=None, executive=None, news_briefings=None):
+def build_week_in_review(bills, executive, prev):
+    """Compare current bills/executive actions to last week's snapshot and render a delta section."""
+    if not prev:
+        return ""
+
+    prev_bills = prev.get("bills", {})
+    prev_exec  = {a["title"] for a in prev.get("executive", [])}
+    prev_date  = prev.get("date", "last week")
+
+    changes = []
+
+    for b in bills:
+        title  = b["title"]
+        action = b.get("latest_action", "")
+        risk_label, risk_cls = score_bill(b)
+
+        if title not in prev_bills:
+            changes.append(("new_bill", title, "", risk_label, risk_cls, action))
+            continue
+
+        prev_action = prev_bills[title]["status"]
+        prev_risk   = prev_bills[title]["risk"]
+
+        if action != prev_action:
+            changes.append(("status_change", title, prev_action, risk_label, risk_cls, action))
+        elif risk_label != prev_risk:
+            changes.append(("risk_change", title, prev_risk, risk_label, risk_cls, action))
+
+    for a in executive:
+        if a.get("title", "") not in prev_exec:
+            changes.append(("new_exec", a.get("title",""), "", "", "", a.get("date","")))
+
+    if not changes:
+        body = f"""
+<p style="color:var(--muted);font-size:.92rem;padding:.75rem 0;">
+  No significant changes detected since {prev_date}. All tracked bills remain in the same status.
+</p>"""
+    else:
+        rows = ""
+        for kind, title, old_val, risk_label, risk_cls, new_val in changes:
+            short_title = title[:90] + ("…" if len(title) > 90 else "")
+            if kind == "new_bill":
+                icon  = '<span style="color:#2D6B2D;font-weight:800;">NEW</span>'
+                delta = f"Added to tracker — <span class=\"risk-badge {risk_cls}\">{risk_label}</span>"
+            elif kind == "status_change":
+                icon  = '<span style="color:#E65100;font-weight:800;">UPDATE</span>'
+                old_short = old_val[:60] + ("…" if len(old_val) > 60 else "")
+                delta = f"Status changed → <em>{old_short}</em>"
+            elif kind == "risk_change":
+                icon  = '<span style="color:#B71C1C;font-weight:800;">RISK ↑</span>'
+                delta = f"Risk elevated: {old_val} → <span class=\"risk-badge {risk_cls}\">{risk_label}</span>"
+            else:
+                icon  = '<span style="color:#1B4332;font-weight:800;">NEW</span>'
+                delta = f"New executive action — {new_val}"
+            rows += f"""
+  <tr>
+    <td style="width:80px;text-align:center">{icon}</td>
+    <td style="font-weight:600;color:var(--navy)">{short_title}</td>
+    <td style="color:var(--muted);font-size:.82rem">{delta}</td>
+  </tr>"""
+
+        body = f"""
+<table class="data-table" style="margin-bottom:0">
+  <thead><tr>
+    <th style="width:80px">Change</th>
+    <th>Bill / Action</th>
+    <th>What Moved</th>
+  </tr></thead>
+  <tbody>{rows}</tbody>
+</table>"""
+
+    n = len(changes)
+    summary = f"{n} change{'s' if n != 1 else ''} since {prev_date}" if n else f"No changes since {prev_date}"
+
+    return f"""
+<div class="container" style="padding-top:2rem;padding-bottom:1rem">
+  <span class="section-tag tag-red">WEEK IN REVIEW</span>
+  <h2>What Changed This Week</h2>
+  <p class="section-intro">{summary}. Automatically compared against last week's build.</p>
+  {body}
+</div>
+<hr class="section-divider">"""
+
+
+def build_index(news_items, bills=None, executive=None, news_briefings=None, week_in_review_html=""):
     count = len(news_items)
 
     news_briefings = news_briefings or {}
@@ -1126,7 +1237,7 @@ def build_index(news_items, bills=None, executive=None, news_briefings=None):
 
 {signal_panel}
 
-<hr class="section-divider">
+{week_in_review_html}
 
 <div class="container">
   <span class="section-tag tag-red">TODAY'S TOP {count}</span>
@@ -2490,9 +2601,15 @@ if __name__ == "__main__":
     else:
         print("  ANTHROPIC_API_KEY not set — skipping AI briefings")
 
+    print("Building Week in Review...")
+    prev_snapshot      = load_previous_snapshot()
+    week_in_review_html = build_week_in_review(bills, executive, prev_snapshot)
+    save_snapshot(bills, executive)
+    print(f"  Snapshot saved ({datetime.now().strftime('%Y-%m-%d')})")
+
     print("Building pages...")
     pages = {
-        "index.html":       build_index(news, bills, executive, news_briefings),
+        "index.html":       build_index(news, bills, executive, news_briefings, week_in_review_html),
         "bills.html":       build_bills(bills, bill_briefings),
         "lawmakers.html":   build_lawmakers(lawmakers, opposition, opp_news),
         "executive.html":   build_executive(executive),
