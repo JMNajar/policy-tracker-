@@ -990,7 +990,8 @@ def build_signal_panel(bills, executive, news):
         tc, bg, bc = colors.get(risk, colors['MONITOR'])
         badge_bg = tc
 
-        return f"""<a href="{link}" style="text-decoration:none;flex:1;min-width:148px;max-width:210px">
+        target = 'target="_blank" rel="noopener"' if link.startswith('http') else ''
+        return f"""<a href="{link}" {target} style="text-decoration:none;flex:1;min-width:148px;max-width:210px">
   <div class="sig-tile" style="background:{bg};border:1px solid {bc};border-left:4px solid {tc};border-radius:8px;padding:.85rem 1rem;height:100%">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
       <span style="font-size:.7rem;font-weight:800;color:{tc};letter-spacing:.04em;line-height:1.2">{icon}&nbsp;{label}</span>
@@ -1012,11 +1013,13 @@ def build_signal_panel(bills, executive, news):
         risk_b = 'CRITICAL' if any(w in b_bank['latest_action'].lower() for w in ['vote', 'passed', 'floor', 'calendar']) else 'HIGH'
         s_bank = f"{action} · {b_bank['updated']}"
         d_bank = b_bank['updated']
+        l_bank = b_bank['url']
     else:
         s_bank = "SAFER Banking — Senate calendar pending"
         risk_b = 'HIGH'
         d_bank = ''
-    tiles.append(tile('🏦', 'BANKING ACCESS', risk_b, s_bank, d_bank, 'bills.html'))
+        l_bank = 'bills.html'
+    tiles.append(tile('🏦', 'BANKING ACCESS', risk_b, s_bank, d_bank, l_bank))
 
     # ── 2. Schedule III / DEA ────────────────────────────────────────────────
     e_iii = find_best(executive, ['title', 'agency'], ['schedule', 'dea', 'reclassif', 'drug enforcement', 'scheduling'])
@@ -1024,17 +1027,20 @@ def build_signal_panel(bills, executive, news):
         s_iii = e_iii['title'][:60].rstrip(',. ') + f" · {e_iii['date']}"
         d_iii = e_iii['date']
         risk_iii = 'CRITICAL'
+        l_iii = e_iii.get('link', 'executive.html') or 'executive.html'
     else:
         n_iii = find_best(news, ['title'], ['schedule iii', 'dea', 'reclassif', 'scheduling'])
         if n_iii:
             s_iii = n_iii['title'][:60].rstrip(',. ') + f" · {n_iii['date']}"
             d_iii = n_iii.get('date', '')
             risk_iii = 'HIGH'
+            l_iii = n_iii.get('link', 'executive.html') or 'executive.html'
         else:
             s_iii = "DEA rescheduling — federal process ongoing"
             d_iii = ''
             risk_iii = 'HIGH'
-    tiles.append(tile('💊', 'SCHEDULE III', risk_iii, s_iii, d_iii, 'executive.html'))
+            l_iii = 'executive.html'
+    tiles.append(tile('💊', 'SCHEDULE III', risk_iii, s_iii, d_iii, l_iii))
 
     # ── 3. 280E Tax ──────────────────────────────────────────────────────────
     b_tax = find_best(bills, ['title', 'latest_action'], ['280e', 'tax', 'deduction', 'internal revenue', 'irs'])
@@ -1043,11 +1049,13 @@ def build_signal_panel(bills, executive, news):
         s_tax = f"{action_t} · {b_tax['updated']}"
         d_tax = b_tax['updated']
         risk_t = 'HIGH'
+        l_tax = b_tax['url']
     else:
         s_tax = "280E reform — committee stage, no floor date"
         d_tax = ''
         risk_t = 'MONITOR'
-    tiles.append(tile('💸', '280E TAX REFORM', risk_t, s_tax, d_tax, 'bills.html'))
+        l_tax = 'bills.html'
+    tiles.append(tile('💸', '280E TAX REFORM', risk_t, s_tax, d_tax, l_tax))
 
     # ── 4. Hemp / Farm Bill ──────────────────────────────────────────────────
     b_hemp = find_best(bills, ['title', 'latest_action'], ['hemp', 'farm bill', 'thc limit', 'delta-8', 'delta 8'])
@@ -1055,17 +1063,20 @@ def build_signal_panel(bills, executive, news):
         s_hemp = b_hemp['title'][:55].rstrip(',. ') + f" · {b_hemp['updated']}"
         d_hemp = b_hemp['updated']
         risk_h = 'HIGH'
+        l_hemp = b_hemp['url']
     else:
         n_hemp = find_best(news, ['title'], ['hemp', 'farm bill', 'cbd regulation'])
         if n_hemp:
             s_hemp = n_hemp['title'][:60].rstrip(',. ') + f" · {n_hemp['date']}"
             d_hemp = n_hemp.get('date', '')
             risk_h = 'MONITOR'
+            l_hemp = n_hemp.get('link', 'bills.html') or 'bills.html'
         else:
             s_hemp = "Farm Bill renewal — Congress pending"
             d_hemp = ''
             risk_h = 'MONITOR'
-    tiles.append(tile('🌿', 'HEMP / FARM BILL', risk_h, s_hemp, d_hemp, 'bills.html'))
+            l_hemp = 'bills.html'
+    tiles.append(tile('🌿', 'HEMP / FARM BILL', risk_h, s_hemp, d_hemp, l_hemp))
 
     # ── 5. Executive Actions ─────────────────────────────────────────────────
     e_latest = executive[0] if executive else None
@@ -1076,11 +1087,13 @@ def build_signal_panel(bills, executive, news):
         now_e = datetime.now(timezone.utc)
         days_e = (now_e - dt_e).days if dt_e else 999
         risk_e = 'HIGH' if days_e <= 7 else 'MONITOR'
+        l_exec = e_latest.get('link', 'executive.html') or 'executive.html'
     else:
         s_exec = "Monitoring DEA, FDA, DOJ, Treasury"
         d_exec = ''
         risk_e = 'MONITOR'
-    tiles.append(tile('🏛', 'EXECUTIVE ACTIONS', risk_e, s_exec, d_exec, 'executive.html'))
+        l_exec = 'executive.html'
+    tiles.append(tile('🏛', 'EXECUTIVE ACTIONS', risk_e, s_exec, d_exec, l_exec))
 
     # ── 6. Critical Watch — highest-scoring active bill ──────────────────────
     crit_bill = None
@@ -1097,11 +1110,13 @@ def build_signal_panel(bills, executive, news):
         rl_c, _ = score_bill(crit_bill)
         s_crit = crit_bill['title'][:60].rstrip(',. ') + f" · {crit_bill['updated']}"
         d_crit = crit_bill['updated']
+        l_crit = crit_bill['url']
     else:
         rl_c = 'HIGH'
         s_crit = "Monitoring all active legislative signals"
         d_crit = ''
-    tiles.append(tile('⚠', 'CRITICAL WATCH', rl_c, s_crit, d_crit, 'bills.html'))
+        l_crit = 'bills.html'
+    tiles.append(tile('⚠', 'CRITICAL WATCH', rl_c, s_crit, d_crit, l_crit))
 
     tiles_html = '\n'.join(tiles)
 
