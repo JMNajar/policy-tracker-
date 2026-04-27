@@ -1012,7 +1012,7 @@ def build_signal_panel(bills, executive, news):
         return "bills.html#bill-" + b['number'].lower().replace(" ", "-")
 
     # ── 1. Banking Access ────────────────────────────────────────────────────
-    b_bank = find_best(bills, ['title', 'latest_action'], ['safer', 'safe banking', 'banking access', 'financial services'])
+    b_bank = find_best(bills, ['title'], ['safer', 'safe banking', 'cannabis banking', 'financial access', 'bank'])
     if b_bank:
         action = b_bank['latest_action'][:60].rstrip(',. ')
         risk_b = 'CRITICAL' if any(w in b_bank['latest_action'].lower() for w in ['vote', 'passed', 'floor', 'calendar']) else 'HIGH'
@@ -1048,7 +1048,7 @@ def build_signal_panel(bills, executive, news):
     tiles.append(tile('💊', 'SCHEDULE III', risk_iii, s_iii, d_iii, l_iii))
 
     # ── 3. 280E Tax ──────────────────────────────────────────────────────────
-    b_tax = find_best(bills, ['title', 'latest_action'], ['280e', 'tax', 'deduction', 'internal revenue', 'irs'])
+    b_tax = find_best(bills, ['title'], ['280e', 'tax deduction', 'internal revenue cannabis', 'cannabis tax'])
     if b_tax:
         action_t = b_tax['latest_action'][:60].rstrip(',. ')
         s_tax = f"{action_t} · {b_tax['updated']}"
