@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cannabis Campaign Finance & Money | GFTO AI Compliance Engine</title>
+  <title>Site Health Dashboard | GFTO AI Compliance Engine</title>
   <meta name="description" content="AI-powered compliance intelligence for cannabis and nicotine operators. Track legislation, regulations, and campaign finance in real time. Built by Horsepower AI, sponsored by GF Tech One.">
   <style>
   :root {
@@ -252,7 +252,7 @@
     <span class="nav-brand-text">GF TECH ONE <span>AI Compliance Engine</span></span>
   </a>
   <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open navigation"><span></span><span></span><span></span></button>
-  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html" class="active">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="methodology.html">Methodology</a><a href="about.html">About</a><a href="status.html">Status</a></div>
+  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="methodology.html">Methodology</a><a href="about.html">About</a><a href="status.html" class="active">Status</a></div>
 </nav>
 
 <div class="cred-bar">
@@ -268,155 +268,137 @@
   <span class="cred-verified">Last verified April 27, 2026</span>
 </div>
 
-<div class="hero">
-  <div class="hero-tag">CAMPAIGN FINANCE INTELLIGENCE</div>
-  <h1>The Money <span>Behind the Vote</span></h1>
-  <p>Who funds the legislators writing cannabis law — and what that tells you about how they'll vote.</p>
-  <div class="stat-row">
-    <div class="stat-card"><div class="num">FEC</div><div class="lbl">DATA SOURCE</div></div>
-    <div class="stat-card"><div class="num">0</div><div class="lbl">CANNABIS PACs FOUND</div></div>
-    <div class="stat-card"><div class="num">Monthly</div><div class="lbl">REFRESH</div></div>
+<style>
+    .status-banner {
+      border-radius: 10px; padding: 1.5rem 2rem; margin: 1.5rem 0 2rem;
+      display: flex; align-items: center; gap: 1.2rem;
+    }
+    .status-banner-label { font-size: 1.6rem; font-weight: 900; letter-spacing: .08em; }
+    .status-banner-sub { font-size: .9rem; color: #444; margin-top: .2rem; }
+    .status-counts span { display: inline-block; padding: .2rem .7rem; border-radius: 12px;
+      font-size: .8rem; font-weight: 700; margin-left: .4rem; }
+    .status-grid { display: grid; gap: 1rem; margin-bottom: 2rem; }
+    .status-row {
+      background: #fff; border: 1px solid #DDE3ED; border-radius: 8px;
+      padding: 1rem 1.4rem; display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .status-dot { font-size: 1.3rem; flex-shrink: 0; margin-top: .05rem; }
+    .status-name { font-weight: 700; font-size: .95rem; color: #1a2535; }
+    .status-detail { font-size: .85rem; color: #5a6a80; margin-top: .15rem; }
+    .status-fix {
+      font-size: .82rem; background: #FFF8E1; border-left: 3px solid #D4A017;
+      padding: .4rem .7rem; border-radius: 0 4px 4px 0; margin-top: .5rem; color: #5a4000;
+    }
+    .cost-box {
+      background: #fff; border: 1px solid #DDE3ED; border-radius: 8px;
+      padding: 1.4rem 1.8rem; margin-bottom: 2rem;
+    }
+    .cost-box h3 { font-size: 1rem; color: #1B4332; margin-bottom: .8rem; }
+    .cost-row { display: flex; justify-content: space-between; padding: .35rem 0;
+      border-bottom: 1px solid #f0f0f0; font-size: .88rem; }
+    .cost-row:last-child { border-bottom: none; font-weight: 700; }
+    .cost-note { font-size: .78rem; color: #5a6a80; margin-top: .6rem; }
+    </style>
+<div style="max-width:860px;margin:0 auto;padding:2rem 1.5rem">
+
+  <h1 style="font-size:1.6rem;font-weight:900;color:#1B4332;margin-bottom:.3rem">Site Health Dashboard</h1>
+  <p style="color:#5a6a80;font-size:.9rem;margin-bottom:1.5rem">Built: April 27, 2026 at 08:30 AM — runs automatically every morning with the daily build</p>
+
+  <div class="status-banner" style="background:#FFF8E1;border:2px solid #D4A017">
+    <div>
+      <div class="status-banner-label" style="color:#D4A017">WARNINGS</div>
+      <div class="status-banner-sub">
+        <span class="status-counts">
+          <span style="background:#E8F5E9;color:#2D6B2D">4 OK</span>
+          <span style="background:#FFF8E1;color:#B8860B">4 Warning</span>
+          <span style="background:#FFEBEE;color:#C62828">0 Error</span>
+        </span>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="container">
-
-  <span class="section-tag tag-navy">INDUSTRY SPENDING COMPARISON</span>
-  <h2>Cannabis vs. Opposition — PAC Money Tracked</h2>
-  <p class="section-intro">Total political spending detected via FEC records this cycle. Opposition figure represents disbursements to federal legislators from documented anti-cannabis PACs only — full industry political spend is far larger.</p>
-  <div style="background:#FFFFFF;border:1px solid #DDE3ED;border-radius:10px;padding:1.5rem 1.75rem;margin-bottom:2rem;max-width:600px">
-    <div style="margin-bottom:.85rem"><div style="display:flex;justify-content:space-between;font-size:.82rem;font-weight:700;margin-bottom:.3rem"><span>Cannabis Industry PACs (Pro-Cannabis)</span><span style="color:#2D6B2D">$0</span></div><div style="background:#f0f0f0;border-radius:4px;height:18px"><div style="background:#2D6B2D;width:2%;height:18px;border-radius:4px;transition:width .5s"></div></div></div><div style="margin-bottom:.85rem"><div style="display:flex;justify-content:space-between;font-size:.82rem;font-weight:700;margin-bottom:.3rem"><span>Opposition Industry PACs (Anti-Cannabis)</span><span style="color:#B71C1C">$0</span></div><div style="background:#f0f0f0;border-radius:4px;height:18px"><div style="background:#B71C1C;width:2%;height:18px;border-radius:4px;transition:width .5s"></div></div></div>
-    <p style="font-size:.72rem;color:#5a6a80;margin-top:.5rem">Source: FEC.gov · 2023–2024 cycle · Cannabis PAC total receipts vs. documented opposition disbursements to legislators</p>
+  <div class="status-grid">
+    
+        <div class="status-row">
+          <span class="status-dot" style="color:#D4A017">●</span>
+          <div style="flex:1">
+            <div class="status-name">Congress.gov API</div>
+            <div class="status-detail">Only 9 bills returned — may be rate-limited</div>
+            <div class="status-fix">⚠ Fix: Check CONGRESS_API_KEY secret in GitHub → Settings → Secrets → Actions</div>
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="status-dot" style="color:#D4A017">●</span>
+          <div style="flex:1">
+            <div class="status-name">Federal Register API</div>
+            <div class="status-detail">Only 1 executive actions — check filters</div>
+            <div class="status-fix">⚠ Fix: No action needed unless this persists — may reflect genuine low activity</div>
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="status-dot" style="color:#2D6B2D">●</span>
+          <div style="flex:1">
+            <div class="status-name">Google News RSS</div>
+            <div class="status-detail">10 news items fetched</div>
+            
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="status-dot" style="color:#D4A017">●</span>
+          <div style="flex:1">
+            <div class="status-name">FEC API</div>
+            <div class="status-detail">Rate-limited (DEMO_KEY) — will clear by tomorrow</div>
+            <div class="status-fix">⚠ Fix: Rate limit resets daily. No action needed unless this persists for 3+ days.</div>
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="status-dot" style="color:#D4A017">●</span>
+          <div style="flex:1">
+            <div class="status-name">Anthropic API Key</div>
+            <div class="status-detail">Not set — AI briefings disabled</div>
+            <div class="status-fix">⚠ Fix: Add ANTHROPIC_API_KEY to GitHub → Settings → Secrets → Actions</div>
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="status-dot" style="color:#2D6B2D">●</span>
+          <div style="flex:1">
+            <div class="status-name">Week-in-Review Snapshot</div>
+            <div class="status-detail">Snapshot from 2026-04-27 (0d ago)</div>
+            
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="status-dot" style="color:#2D6B2D">●</span>
+          <div style="flex:1">
+            <div class="status-name">Live Site (Vercel)</div>
+            <div class="status-detail">policy-tracker-rosy.vercel.app is up and serving content</div>
+            
+          </div>
+        </div>
+        <div class="status-row">
+          <span class="status-dot" style="color:#2D6B2D">●</span>
+          <div style="flex:1">
+            <div class="status-name">Page Files</div>
+            <div class="status-detail">All 8 pages present — 326 KB total</div>
+            
+          </div>
+        </div>
   </div>
 
-  <span class="section-tag tag-green">LIVE FEC DATA</span>
-  <h2>Cannabis-Related Political Committees</h2>
-  <p class="section-intro">Political action committees and organizations with cannabis in their name or mission
-     registered with the FEC. This is the money directly supporting cannabis-friendly legislators.
-     Source: FEC.gov (official, free, no key required).</p>
-
-  <table class="data-table">
-    <thead>
-      <tr><th>Committee Name</th><th>Type</th><th>State</th><th>Total Receipts</th></tr>
-    </thead>
-    <tbody><tr><td colspan='4' style='color:#999;padding:1rem;'>FEC data loading — check connection.</td></tr></tbody>
-  </table>
-
-
-  <span class="section-tag tag-red">OPPOSITION WATCH — LIVE FEC DATA</span>
-  <h2>Anti-Cannabis Industry Funding — Who Got the Money</h2>
-  <p class="section-intro">Legislative recipients of documented contributions from industries with known financial
-     incentives to oppose cannabis reform. Three industries dominate: pharmaceutical companies protecting opioid
-     markets, alcohol producers facing direct market competition, and private prison operators dependent on
-     drug convictions. Source: FEC.gov official records, 2023–2024 election cycle.</p>
-
-    <table class="data-table">
-    <thead>
-      <tr><th>Recipient (Campaign Committee)</th><th>Industry Source</th><th>Amount (2023–24 Cycle)</th><th>Contributing PACs</th></tr>
-    </thead>
-    <tbody><tr><td colspan='4' style='color:#999;padding:1rem 0;'>FEC live data loading — check API connection.</td></tr></tbody>
-  </table>
-
-  <hr class="section-divider" style="margin:3rem 0">
-
-  <span class="section-tag tag-navy">INDUSTRY CONTEXT</span>
-  <h2>Why These Industries Oppose Cannabis</h2>
-  <p class="section-intro">Follow the financial incentive and you understand the opposition.</p>
-
-  <table class="data-table">
-    <thead>
-      <tr><th>Industry</th><th>Annual Political Spend</th><th>Cannabis Position</th><th>Financial Incentive</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Pharmaceutical</strong></td>
-        <td>$300M+ annually</td>
-        <td><span class="badge badge-red">Anti-Legalization</span></td>
-        <td>Cannabis competes directly with opioids, sleep aids, and anxiety medications — a $40B+ market at risk</td>
-      </tr>
-      <tr>
-        <td><strong>Alcohol / Beer</strong></td>
-        <td>$25M+ annually</td>
-        <td><span class="badge badge-red">Anti-Legalization</span></td>
-        <td>Beer Institute, Wine & Spirits Wholesalers — consumers switching from alcohol to cannabis</td>
-      </tr>
-      <tr>
-        <td><strong>Private Prison</strong></td>
-        <td>$10M+ annually</td>
-        <td><span class="badge badge-red">Anti-Legalization</span></td>
-        <td>GEO Group, CoreCivic — cannabis convictions fill beds; legalization reduces revenue</td>
-      </tr>
-      <tr>
-        <td><strong>Tobacco</strong></td>
-        <td>$15M+ annually</td>
-        <td><span class="badge badge-navy">Mixed</span></td>
-        <td>Altria buying cannabis stakes — they want to own it, not kill it. Position evolving.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr class="section-divider" style="margin:3rem 0">
-
-  <span class="section-tag tag-red">OPPOSITION IN THE NEWS</span>
-  <h2>Anti-Cannabis Funding — Recent Coverage</h2>
-  <p class="section-intro">Documented reporting on the financial relationships between anti-cannabis industries and federal legislators.</p>
   
-  <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
-      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Cannabis Business Times</span>
-      <span style="font-size:.68rem;color:#5a6a80">Apr 07, 2026</span>
+    <div class="cost-box">
+      <h3>Anthropic API — Monthly Cost Estimate</h3>
+      <div class="cost-row"><span>Briefings in cache</span><span>33 items</span></div>
+      <div class="cost-row"><span>Cost per fresh briefing</span><span>$0.00092</span></div>
+      <div class="cost-row"><span>Realistic monthly estimate</span><span>$0.01</span></div>
+      <div class="cost-row"><span>Worst-case (all items regenerated monthly)</span><span>$0.91</span></div>
+      <p class="cost-note">Cached items are never regenerated — only new or changed bills/news incur API cost. Verify actual spend at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>.</p>
     </div>
-    <a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxORlhrZWF3WXdKNmVDS2Z5ZXp6MFd5U0dKUEZ2WUJGVEVhRm13TkJ6QWY4TWxvTElLYWVTcGpSOU1UVUtySnV5VEkyRjhnT1p1Zkk5VExzVkVReE1yTjAyWU1jaVVLYzdkUnNKSUx1SEVIcVZOOXl2T0ZrRkJvWVVwaFZIYW1sRkdPa1lxQ1FEQU80VHdTRVctZExNYmJtMmtMaWdnNUcxNFByMmxuU01ZU01UX0UxUWRsV3NiSFZSc3BmTURFb0g1dEZHRzNWaDVoSGlPV2p3Y2prcnZ0bTVJ?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">California Cannabis Operators Confront Proposed 10mg THC Cap on Beverages - Cannabis Business Times</a>
-  </div>
-  <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
-      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Idaho Capital Sun</span>
-      <span style="font-size:.68rem;color:#5a6a80">Mar 25, 2026</span>
-    </div>
-    <a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxOMUJUTTRvc3VGcmtfb1ZNMmVYd2JGSnFDT0c1SUJvYjV5Tm9DeVZnTXJwRThRU1ZxWDIyN2h4NVA0MHdXWElMQk40cVRNa1k4emtNTHU2UDB3NF93V0p1WHlBMldLdkl0MFNzbVBiWGdEYzRNdkVfbnZzR1hscDFsUzZKMVMwOEpkMkwySU0yQjZTd1VCNTVNUHhXYmJ1TWdoaDI0eWJqLXg3SUE?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Idaho budget committee co-chair’s PAC accepts $200,000 contribution – tied for largest this year - Idaho Capital Sun</a>
-  </div>
-  <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
-      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Marijuana Moment</span>
-      <span style="font-size:.68rem;color:#5a6a80">Mar 17, 2026</span>
-    </div>
-    <a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxNMFNORWJyVjFHWGJoZjBOeGI4SDBDejdfME9scFRpMEhJbWQtRHI3OU92TUxvUWIwQVI5MzBROXgzcmMwRThPX1dsZ3ptQ2d5cnhNLS11QlZxUUxqWlRPWVNwOE9jTlNzTEJ1bU1SMlN0M1dqVWd4UkdtT3RoNjRwa3FRcXB1U1p0Yi1Td0VZUGloM2d5N2RXYXpGR2JvemlGdEV3dlZhQzBXWTk3SGFVYzJ3OTZ5Q09sNXF5eWZtVW01aWstR0xNMzBDOTRDNXNKbGNUUTRSR3Z0QQ?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Colorado Legislative Committee Votes To Reject Bill To Put Marijuana And Alcohol Tax Hikes On November Ballot - Marijuana Moment</a>
-  </div>
-  <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
-      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Politico</span>
-      <span style="font-size:.68rem;color:#5a6a80">Feb 10, 2026</span>
-    </div>
-    <a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQdUdwU2pyX1NweVBOMmN0bUpJOFJTMmVSSmM5LXowTzBaTHU3cFFvU3c4VmNLb3pNd3MwZjBIMm02bkR5WnFfZlRFZ3B3ZzJzVU11X3NqWWM1T0RNTksxd3FQSVhJN0g3UXlxSmJGNVV5dTRiRThNUWNWd1B4aFdDUENTV0lNOVBBRkwzRUtnbF9XdHpCZnFDZXJrSnVETXJ3amdXT2hJYUdoTWdWaE5hSg?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">The Alex Bores campaign’s PAC overlap - Politico</a>
-  </div>
-  <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
-      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Orlando Sentinel</span>
-      <span style="font-size:.68rem;color:#5a6a80">Feb 08, 2026</span>
-    </div>
-    <a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxPLXQ1YUZHOWY1aGhtUUNBSWd0RFI3QWNGMEhrLVB0bTNFbGRLZzB3OVJTWFhpdWtnX1lMY1JCRFU1UXZlb3RjcndVQVV5T0VPaGdJVVUwb3lXWE1CdUFteURIdVp3dUVCZkhRMFAyamo5cHJRck5aNUhQLUJKRUVqbDExYWprRWFhLWY5WWJwMVV0cFNmWFFGV0ZISFpGOEd6U2lOZk5QNXlibmh4NXU0ejVzR0dYbTZ2Zng1SFgtNHoweWJteVhwTTVFOVFjY2c?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Florida never told its opioid advisory council $4 million was spent on anti-marijuana ads - Orlando Sentinel</a>
-  </div>
-  <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
-      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">Ohio Capital Journal</span>
-      <span style="font-size:.68rem;color:#5a6a80">Feb 06, 2026</span>
-    </div>
-    <a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxQX3lMd2oyM0w3dkpwWnhaYTdwaTFUNVJLYTlQY1phVjI2cHdyWHBvYTQyNGFXUGlnX1FOWmdvaHhwS0dHQzVXOEJxckdvMy1WQ1J3TGx6QWdPdzJRUGhnYTNIcWRaWWU2U29ad1l0all5UW5Ld01zeENsczZ2RFV6Q05OenFmdExVcF9GLThzUFFpRmZoRWUtOUNiXzhBWFNVU195Y1Z3NlFRNHBZWXN2MkFOSVNjNHNHenowZU9aNUluRHhYdVVscER3bEZocTE3eGVmZA?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Some in Ohio's marijuana industry oppose new attempt to overturn hemp ban, marijuana restrictions - Ohio Capital Journal</a>
-  </div>
-  <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
-      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">The Atlantic</span>
-      <span style="font-size:.68rem;color:#5a6a80">Dec 18, 2025</span>
-    </div>
-    <a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxNREV4T2E2d2h0TXk5Q1gzMHhXRU9mVERTYXdxWGdtOVFzS0VnbGNhZXdWZ1ZDZnRxOWVXS1BFcFVvU2lsN1dpQkpISkYxYS1mdmhQdEJEdm1mMzFOYnluSGY2TkRuMEp5YUFGZHZfZVB4MzVBNTR6c3g3ck01eWhocUM3QklWN1FTekE?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">Rescheduling Marijuana Is an Enormous Mistake - The Atlantic</a>
-  </div>
-  <div style="border:1px solid #DDE3ED;border-radius:8px;padding:1rem 1.1rem;background:#fff;margin-bottom:.75rem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem">
-      <span style="font-size:.68rem;font-weight:700;color:#5a6a80;text-transform:uppercase;letter-spacing:.06em">The Washington Post</span>
-      <span style="font-size:.68rem;color:#5a6a80">Dec 12, 2025</span>
-    </div>
-    <a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxOQjBIbjQ4LS1rcnBQZkdIellGMEh5WC1UMVhZWHFjRWQ0blAyRDROSVF0bS05VFYtX3dLMmNoc3lRcGFYN0Q4QzFIeF9wbnR0OW00MjJ3YmhlWmVSaW15MjI5c2V1aUxFM2R4aEhsTkFXd1F1bmY3SWtwOVNjQ2h5dWlrdHZFT0NKT0RaRHlxZUdwdGIzbmhmYjNNaXBlWTNWNVp3aw?oc=5" target="_blank" rel="noopener" style="font-size:.9rem;font-weight:600;color:#1B4332;text-decoration:none;line-height:1.35">What the reclassification of marijuana would mean for Americans - The Washington Post</a>
-  </div>
+
+  <p style="font-size:.78rem;color:#9aa5b4;text-align:center;margin-top:1rem">
+    This page is auto-generated by the daily GitHub Actions build. It reflects system state at build time, not real-time.
+  </p>
+
 </div>
 
 <div class="signup-band">

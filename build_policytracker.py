@@ -290,6 +290,7 @@ def nav(active=""):
         ("vapor.html",       "Vapor/Nicotine"),
         ("methodology.html", "Methodology"),
         ("about.html",       "About"),
+        ("status.html",      "Status"),
     ]
     links = ""
     for href, label in pages:
@@ -2645,6 +2646,259 @@ def build_methodology():
     return page("Methodology & Data Sources", "methodology.html", content)
 
 
+# ── HEALTH CHECKS ─────────────────────────────────────────────────────────────
+def run_health_checks(bills, executive, news, briefing_cache):
+    """Run all health checks and return list of result dicts."""
+    checks = []
+
+    def chk(name, status, detail, fix=""):
+        checks.append({"name": name, "status": status, "detail": detail, "fix": fix})
+
+    # Congress.gov API
+    if len(bills) >= 15:
+        chk("Congress.gov API", "green", f"{len(bills)} cannabis bills fetched")
+    elif len(bills) > 0:
+        chk("Congress.gov API", "yellow", f"Only {len(bills)} bills returned — may be rate-limited",
+            "Check CONGRESS_API_KEY secret in GitHub → Settings → Secrets → Actions")
+    else:
+        chk("Congress.gov API", "red", "0 bills returned — API may be down or key invalid",
+            "Verify CONGRESS_API_KEY is set in GitHub Secrets and not expired")
+
+    # Federal Register API
+    if len(executive) >= 3:
+        chk("Federal Register API", "green", f"{len(executive)} executive actions fetched")
+    elif len(executive) > 0:
+        chk("Federal Register API", "yellow", f"Only {len(executive)} executive actions — check filters",
+            "No action needed unless this persists — may reflect genuine low activity")
+    else:
+        chk("Federal Register API", "red", "0 executive actions — API may be down",
+            "Check https://www.federalregister.gov/api/v1/ manually to verify uptime")
+
+    # Google News RSS
+    if len(news) >= 6:
+        chk("Google News RSS", "green", f"{len(news)} news items fetched")
+    elif len(news) > 0:
+        chk("Google News RSS", "yellow", f"Only {len(news)} news items — RSS may be throttled",
+            "No action needed — RSS feeds fluctuate. Will resolve on next build.")
+    else:
+        chk("Google News RSS", "red", "0 news items — RSS feed unreachable",
+            "Verify internet connectivity and Google News RSS access from the build environment")
+
+    # FEC API
+    try:
+        r = requests.get(
+            "https://api.open.fec.gov/v1/committees/?api_key=DEMO_KEY&limit=1&committee_type=O",
+            timeout=8
+        )
+        if r.status_code == 200:
+            chk("FEC API", "green", "Reachable (DEMO_KEY)")
+        elif r.status_code == 429:
+            chk("FEC API", "yellow", "Rate-limited (DEMO_KEY) — will clear by tomorrow",
+                "Rate limit resets daily. No action needed unless this persists for 3+ days.")
+        else:
+            chk("FEC API", "yellow", f"HTTP {r.status_code} — unexpected response",
+                "Check https://api.open.fec.gov/v1/ for status")
+    except Exception as e:
+        chk("FEC API", "red", f"Connection error: {e}",
+            "Check internet connectivity from build environment")
+
+    # Anthropic API key
+    anthropic_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if anthropic_key:
+        cached_count = len(briefing_cache)
+        chk("Anthropic API Key", "green", f"Configured — {cached_count} briefings in cache")
+    else:
+        chk("Anthropic API Key", "yellow", "Not set — AI briefings disabled",
+            "Add ANTHROPIC_API_KEY to GitHub → Settings → Secrets → Actions")
+
+    # Snapshot freshness
+    try:
+        snap = json.loads(SNAPSHOT_FILE.read_text(encoding="utf-8"))
+        snap_date_str = snap.get("date", "")
+        snap_dt = datetime.strptime(snap_date_str, "%Y-%m-%d")
+        days_old = (datetime.now() - snap_dt).days
+        if days_old <= 1:
+            chk("Week-in-Review Snapshot", "green", f"Snapshot from {snap_date_str} ({days_old}d ago)")
+        elif days_old <= 7:
+            chk("Week-in-Review Snapshot", "yellow", f"Snapshot is {days_old} days old ({snap_date_str})",
+                "Trigger a manual build: push a commit or run GitHub Actions manually")
+        else:
+            chk("Week-in-Review Snapshot", "red", f"Snapshot is {days_old} days old — builds may be failing",
+                "Check GitHub Actions tab for failed workflows. Re-run the latest workflow.")
+    except Exception:
+        chk("Week-in-Review Snapshot", "yellow", "No snapshot file found — will be created on next build",
+            "Run the build script once locally or trigger GitHub Actions manually")
+
+    # Live site availability
+    try:
+        r = requests.get("https://policy-tracker-rosy.vercel.app/", timeout=10)
+        if r.status_code == 200 and len(r.text) > 5000:
+            chk("Live Site (Vercel)", "green", "policy-tracker-rosy.vercel.app is up and serving content")
+        elif r.status_code == 200:
+            chk("Live Site (Vercel)", "yellow", "Site reachable but page content seems small",
+                "Check Vercel deployment logs — a partial build may have been deployed")
+        else:
+            chk("Live Site (Vercel)", "red", f"HTTP {r.status_code} — site may be down",
+                "Check https://vercel.com dashboard and redeploy from GitHub Actions")
+    except Exception as e:
+        chk("Live Site (Vercel)", "red", f"Unreachable: {e}",
+            "Check Vercel dashboard. May need to redeploy: push an empty commit to trigger CI.")
+
+    # Page file sizes
+    required_pages = ["index.html", "bills.html", "lawmakers.html", "executive.html",
+                      "money.html", "vapor.html", "about.html", "methodology.html"]
+    missing, small = [], []
+    for pg in required_pages:
+        path = OUTPUT_DIR / pg
+        if not path.exists():
+            missing.append(pg)
+        elif path.stat().st_size < 4096:
+            small.append(pg)
+    if missing:
+        chk("Page Files", "red", f"Missing: {', '.join(missing)}",
+            "Re-run build script to regenerate all pages")
+    elif small:
+        chk("Page Files", "yellow", f"Unusually small: {', '.join(small)}",
+            "These pages may have rendered with empty data. Check build logs.")
+    else:
+        total_kb = sum((OUTPUT_DIR / pg).stat().st_size for pg in required_pages) // 1024
+        chk("Page Files", "green", f"All {len(required_pages)} pages present — {total_kb} KB total")
+
+    return checks
+
+
+def _estimate_monthly_cost(briefing_cache):
+    """Estimate monthly Anthropic cost based on cache size and daily build cadence."""
+    cached = len(briefing_cache)
+    # claude-haiku-4-5 pricing: $0.80/MTok input, $4.00/MTok output
+    # Per briefing: ~400 input tokens + ~150 output tokens
+    cost_per_item = (400 * 0.80 + 150 * 4.00) / 1_000_000  # ~$0.00092
+    # Cached items are never regenerated — only new/changed items cost money
+    # Worst-case estimate: all items regenerated once per month
+    worst_case_monthly = cached * cost_per_item * 30  # 30 daily builds if all miss cache
+    # Realistic: most items are stable; maybe 2-3 new items per week
+    realistic_weekly = 3 * cost_per_item
+    realistic_monthly = realistic_weekly * 4
+    return cached, cost_per_item, realistic_monthly, worst_case_monthly
+
+
+def build_status(checks, briefing_cache):
+    """Generate the status.html health dashboard page."""
+    built_at = datetime.now().strftime("%B %d, %Y at %I:%M %p")
+
+    green_count  = sum(1 for c in checks if c["status"] == "green")
+    yellow_count = sum(1 for c in checks if c["status"] == "yellow")
+    red_count    = sum(1 for c in checks if c["status"] == "red")
+
+    if red_count > 0:
+        overall_color = "#C62828"
+        overall_label = "ISSUES DETECTED"
+        overall_bg    = "#FFEBEE"
+    elif yellow_count > 0:
+        overall_color = "#D4A017"
+        overall_label = "WARNINGS"
+        overall_bg    = "#FFF8E1"
+    else:
+        overall_color = "#2D6B2D"
+        overall_label = "ALL SYSTEMS GO"
+        overall_bg    = "#E8F5E9"
+
+    STATUS_CSS = """
+    .status-banner {
+      border-radius: 10px; padding: 1.5rem 2rem; margin: 1.5rem 0 2rem;
+      display: flex; align-items: center; gap: 1.2rem;
+    }
+    .status-banner-label { font-size: 1.6rem; font-weight: 900; letter-spacing: .08em; }
+    .status-banner-sub { font-size: .9rem; color: #444; margin-top: .2rem; }
+    .status-counts span { display: inline-block; padding: .2rem .7rem; border-radius: 12px;
+      font-size: .8rem; font-weight: 700; margin-left: .4rem; }
+    .status-grid { display: grid; gap: 1rem; margin-bottom: 2rem; }
+    .status-row {
+      background: #fff; border: 1px solid #DDE3ED; border-radius: 8px;
+      padding: 1rem 1.4rem; display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .status-dot { font-size: 1.3rem; flex-shrink: 0; margin-top: .05rem; }
+    .status-name { font-weight: 700; font-size: .95rem; color: #1a2535; }
+    .status-detail { font-size: .85rem; color: #5a6a80; margin-top: .15rem; }
+    .status-fix {
+      font-size: .82rem; background: #FFF8E1; border-left: 3px solid #D4A017;
+      padding: .4rem .7rem; border-radius: 0 4px 4px 0; margin-top: .5rem; color: #5a4000;
+    }
+    .cost-box {
+      background: #fff; border: 1px solid #DDE3ED; border-radius: 8px;
+      padding: 1.4rem 1.8rem; margin-bottom: 2rem;
+    }
+    .cost-box h3 { font-size: 1rem; color: #1B4332; margin-bottom: .8rem; }
+    .cost-row { display: flex; justify-content: space-between; padding: .35rem 0;
+      border-bottom: 1px solid #f0f0f0; font-size: .88rem; }
+    .cost-row:last-child { border-bottom: none; font-weight: 700; }
+    .cost-note { font-size: .78rem; color: #5a6a80; margin-top: .6rem; }
+    """
+
+    def dot(status):
+        if status == "green":  return '<span class="status-dot" style="color:#2D6B2D">●</span>'
+        if status == "yellow": return '<span class="status-dot" style="color:#D4A017">●</span>'
+        return '<span class="status-dot" style="color:#C62828">●</span>'
+
+    rows_html = ""
+    for c in checks:
+        fix_html = f'<div class="status-fix">⚠ Fix: {c["fix"]}</div>' if c.get("fix") and c["status"] in ("red", "yellow") else ""
+        rows_html += f"""
+        <div class="status-row">
+          {dot(c['status'])}
+          <div style="flex:1">
+            <div class="status-name">{c['name']}</div>
+            <div class="status-detail">{c['detail']}</div>
+            {fix_html}
+          </div>
+        </div>"""
+
+    cached, cost_per_item, realistic_monthly, worst_case_monthly = _estimate_monthly_cost(briefing_cache)
+    cost_html = f"""
+    <div class="cost-box">
+      <h3>Anthropic API — Monthly Cost Estimate</h3>
+      <div class="cost-row"><span>Briefings in cache</span><span>{cached} items</span></div>
+      <div class="cost-row"><span>Cost per fresh briefing</span><span>${cost_per_item:.5f}</span></div>
+      <div class="cost-row"><span>Realistic monthly estimate</span><span>${realistic_monthly:.2f}</span></div>
+      <div class="cost-row"><span>Worst-case (all items regenerated monthly)</span><span>${worst_case_monthly:.2f}</span></div>
+      <p class="cost-note">Cached items are never regenerated — only new or changed bills/news incur API cost. Verify actual spend at <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>.</p>
+    </div>"""
+
+    content = f"""
+<style>{STATUS_CSS}</style>
+<div style="max-width:860px;margin:0 auto;padding:2rem 1.5rem">
+
+  <h1 style="font-size:1.6rem;font-weight:900;color:#1B4332;margin-bottom:.3rem">Site Health Dashboard</h1>
+  <p style="color:#5a6a80;font-size:.9rem;margin-bottom:1.5rem">Built: {built_at} — runs automatically every morning with the daily build</p>
+
+  <div class="status-banner" style="background:{overall_bg};border:2px solid {overall_color}">
+    <div>
+      <div class="status-banner-label" style="color:{overall_color}">{overall_label}</div>
+      <div class="status-banner-sub">
+        <span class="status-counts">
+          <span style="background:#E8F5E9;color:#2D6B2D">{green_count} OK</span>
+          <span style="background:#FFF8E1;color:#B8860B">{yellow_count} Warning</span>
+          <span style="background:#FFEBEE;color:#C62828">{red_count} Error</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-grid">
+    {rows_html}
+  </div>
+
+  {cost_html}
+
+  <p style="font-size:.78rem;color:#9aa5b4;text-align:center;margin-top:1rem">
+    This page is auto-generated by the daily GitHub Actions build. It reflects system state at build time, not real-time.
+  </p>
+
+</div>"""
+
+    return page("Site Health Dashboard", "status.html", content)
+
+
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -2718,6 +2972,12 @@ if __name__ == "__main__":
     save_snapshot(bills, executive)
     print(f"  Snapshot saved ({datetime.now().strftime('%Y-%m-%d')})")
 
+    print("Running health checks...")
+    checks = run_health_checks(bills, executive, news, briefing_cache)
+    red_ct = sum(1 for c in checks if c["status"] == "red")
+    yel_ct = sum(1 for c in checks if c["status"] == "yellow")
+    print(f"  {len(checks)} checks — {len(checks)-red_ct-yel_ct} OK / {yel_ct} warning / {red_ct} error")
+
     print("Building pages...")
     pages = {
         "index.html":       build_index(news, bills, executive, news_briefings, week_in_review_html),
@@ -2728,6 +2988,7 @@ if __name__ == "__main__":
         "vapor.html":       build_vapor(vapor_news, vapor_fed),
         "methodology.html": build_methodology(),
         "about.html":       build_about(),
+        "status.html":      build_status(checks, briefing_cache),
     }
 
     for filename, html in pages.items():
