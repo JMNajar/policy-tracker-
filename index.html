@@ -169,6 +169,8 @@
 
   /* DIVIDER */
   .section-divider { border: none; border-top: 1px solid #DDE3ED; margin: 0; }
+  tr:target { animation: highlight-row 2s ease-out; }
+  @keyframes highlight-row { 0% { background: #FFF9C4; } 100% { background: transparent; } }
 
   /* FOOTER */
   footer {
@@ -289,7 +291,7 @@
       <span style="font-size:.68rem;color:#5a6a80">Updated April 27, 2026 &nbsp;·&nbsp; <span style="color:#2E7D32;font-weight:700">&#9679; ACTIVE</span> = movement in last 7 days</span>
     </div>
     <div style="display:flex;gap:.75rem;flex-wrap:wrap">
-      <a href="https://www.congress.gov/bill/119th-congress/house-bill/6807" target="_blank" rel="noopener" style="text-decoration:none;flex:1;min-width:148px;max-width:210px">
+      <a href="bills.html#bill-hr-6807"  style="text-decoration:none;flex:1;min-width:148px;max-width:210px">
   <div class="sig-tile" style="background:#FFF8F0;border:1px solid #FFCC80;border-left:4px solid #B8520A;border-radius:8px;padding:.85rem 1rem;height:100%">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
       <span style="font-size:.7rem;font-weight:800;color:#B8520A;letter-spacing:.04em;line-height:1.2">🏦&nbsp;BANKING ACCESS</span>
@@ -313,7 +315,7 @@
     <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">Schedules of Controlled Substances: Placement of MDMB-4en-PI · 2026-04-24</div>
   </div>
 </a>
-<a href="https://www.congress.gov/bill/119th-congress/senate-bill/3537" target="_blank" rel="noopener" style="text-decoration:none;flex:1;min-width:148px;max-width:210px">
+<a href="bills.html#bill-s-3537"  style="text-decoration:none;flex:1;min-width:148px;max-width:210px">
   <div class="sig-tile" style="background:#FFF8F0;border:1px solid #FFCC80;border-left:4px solid #B8520A;border-radius:8px;padding:.85rem 1rem;height:100%">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
       <span style="font-size:.7rem;font-weight:800;color:#B8520A;letter-spacing:.04em;line-height:1.2">💸&nbsp;280E TAX REFORM</span>
@@ -325,7 +327,7 @@
     <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">Read twice and referred to the Committee on Banking, Housing · 2026-01-20</div>
   </div>
 </a>
-<a href="https://www.congress.gov/bill/119th-congress/senate-bill/4315" target="_blank" rel="noopener" style="text-decoration:none;flex:1;min-width:148px;max-width:210px">
+<a href="bills.html#bill-s-4315"  style="text-decoration:none;flex:1;min-width:148px;max-width:210px">
   <div class="sig-tile" style="background:#FFF8F0;border:1px solid #FFCC80;border-left:4px solid #B8520A;border-radius:8px;padding:.85rem 1rem;height:100%">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
       <span style="font-size:.7rem;font-weight:800;color:#B8520A;letter-spacing:.04em;line-height:1.2">🌿&nbsp;HEMP / FARM BILL</span>
@@ -420,10 +422,10 @@
 
   <div class="card-grid" id="news-grid">
     
-    <div class="card" data-sectors="general">
-      <div class="card-source">The State</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMie0FVX3lxTFBhbjdRRTgzaEhtbklFTkNVMFdhbDNjN0FKdG4tM3VlWU05d01SN3k3VHVwVHVoOGRkVUQwY21zRzRGWUpkQW5ndEktSjdxa2JoeVFkODMtMmhmckRkQ1dTU1dFX0VManlES3F1TndDVWlDMlpoWnM5bTZIdw?oc=5" target="_blank" rel="noopener">South Carolina lawmakers clash over THC edibles. Here’s what to know - The State</a></div>
-      <div class="card-meta">Apr 26, 2026</div>
+    <div class="card" data-sectors="hemp">
+      <div class="card-source">Marijuana Moment</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxPOGZ5MDBZT092MTByaGtsTjBKal92OEh4dHg3cE9Fc1R6bE0xNjRFYVBEenpVcWtvaFNpUG5ydzF0YXRWZjA5eGwtMDAzQ3A5SlZpZmtpX2NYS3p6SHdGRlNWbnBQcWxYMWNuNnZXY0VBazhwR2t5XzlxQUI1djhQYjVRZWhGejNhenBma0hTSld2eHpXUnFMZkJwWG83bU5SekE?oc=5" target="_blank" rel="noopener">Trump pushes Congress for hemp & CBD reforms (Newsletter: April 27, 2026) - Marijuana Moment</a></div>
+      <div class="card-meta">Apr 27, 2026</div>
       
     </div>
     <div class="card" data-sectors="hemp,retail">
@@ -463,12 +465,6 @@
       
     </div>
     <div class="card" data-sectors="executive">
-      <div class="card-source">Arkansas Times</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQSVAxQ3VzOVY5OGRvaDR1UkhHRE4wQzNfSnRBNFhaOVNaTUt1TFRiS0JNTTE3WE5WVVg2d3QxOWd1V0t0UUJSWWhqOVBYRllSOHBqbEg0b1Azd0J6UUJydjFfcUlYWFUyUkpYak9yRjVYSkFFTlVDcnZGV0hpTm5RdFg5UUh2SEx1bXd3ZlBmUG9Xbi1yTDlDcDdGT1A5RFIz?oc=5" target="_blank" rel="noopener">Marijuana dispensaries: Trump’s executive order a start - Arkansas Times</a></div>
-      <div class="card-meta">Apr 23, 2026</div>
-      
-    </div>
-    <div class="card" data-sectors="executive">
       <div class="card-source">Foley & Lardner LLP</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMingJBVV95cUxOUXUtYzFNTnNiY1NTcVozV1lzRDVFbVFEUC1ma2tmZUtzSkJsVE5tU2U1TzVqanBfRFoxY0tLUEhRbGU0YklpYnZkRjczY09Cc3YwcWh2MTM4V1FYNC1HSEV4bWFHWEZGRjFCampJR2RiWDZ0V1R3UWd3dERwcTFKSk5pRGdQcXFWa21oeDV2SVNNTHd0RFR5bFpYN2FZRGVjNUlMSWNaTnRTY3BxVTMtc01QU09vSWxGcE1lTExJWVpSMlRLTkd5MTVkZlVPbGgwRm1jNGtOVnpXbVdrc0xuT1JaQUJHRE1UTUFqdU9XWERzek0waHB4aHpMMmFfNkZCdEw3LUdlVXo1WDVYWHd6UkdMVzFfeHNyUUJGcHB3?oc=5" target="_blank" rel="noopener">DEA Issues Long Awaited Final Order Rescheduling Certain Marijuana Products to Schedule III: What It Means, What It Does</a></div>
       <div class="card-meta">Apr 23, 2026</div>
@@ -477,6 +473,12 @@
     <div class="card" data-sectors="hemp">
       <div class="card-source">Missouri Independent</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPR3RRaXh5NEpRLVJxbC03b0gtaXFBOXlfU1M4N3B6Sk9HUHJvYU9uV1cyUjUwdEw0N2ZoN2locjZxQVd1bUh2eGhIdnIwcWlKOGM0ZGxKay1WV1BFaU1BVWZXS20zTllZb2l0YlZ1d18yb3NrZTlpWTd3WEJuYjdlcjNzVDJZeXBOZTZsTGtMWWNsTjhVNmhDUXdqYm51cGVRSkFsYURSSkF5Wmg2YVRhWkNWZTQwYXppcXc?oc=5" target="_blank" rel="noopener">Missouri governor signs bill to ban intoxicating hemp products in November - Missouri Independent</a></div>
+      <div class="card-meta">Apr 23, 2026</div>
+      
+    </div>
+    <div class="card" data-sectors="executive">
+      <div class="card-source">Foley Hoag</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMijwJBVV95cUxNaWkxTUFBbzFCa294TlRydUh1QnBZMHdpU1MyeUhGVWh1cGdtRW9lQWlfaU1yclplU3VpaW9DYTBwb1lzbDBNLWY0TDFteXg4cDlVRWVEVkMyTDBjb1duSjY4TWRCdTg0UWsxY0wxa19HMEFib0VuVEl1VnlBTVZlYVp5enVvaWVzcUZocVd3NnRZcW9CaUNoc04yanU2WVBISTlUR216eXM0dzFPd2s0NlRQZ2JUM3ZpaXNINEhZSW5EVG9OUTlLT2RZUTV0c1VkZ19Bd19veTExMzFkOFRHNHZYTGNSLVJzWk5CYVRaQXNkVjQ5VGF4UUdFXzJlSFVfeUhlUFFkM0dVYlBjUVJz?oc=5" target="_blank" rel="noopener">DOJ Immediately Reschedules State-Licensed Medical Cannabis to Schedule III — and Restarts the Clock on Broader Reschedu</a></div>
       <div class="card-meta">Apr 23, 2026</div>
       
     </div>

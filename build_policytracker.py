@@ -1008,6 +1008,9 @@ def build_signal_panel(bills, executive, news):
 
     tiles = []
 
+    def bill_anchor(b):
+        return "bills.html#bill-" + b['number'].lower().replace(" ", "-")
+
     # ── 1. Banking Access ────────────────────────────────────────────────────
     b_bank = find_best(bills, ['title', 'latest_action'], ['safer', 'safe banking', 'banking access', 'financial services'])
     if b_bank:
@@ -1015,7 +1018,7 @@ def build_signal_panel(bills, executive, news):
         risk_b = 'CRITICAL' if any(w in b_bank['latest_action'].lower() for w in ['vote', 'passed', 'floor', 'calendar']) else 'HIGH'
         s_bank = f"{action} · {b_bank['updated']}"
         d_bank = b_bank['updated']
-        l_bank = b_bank['url']
+        l_bank = bill_anchor(b_bank)
     else:
         s_bank = "SAFER Banking — Senate calendar pending"
         risk_b = 'HIGH'
@@ -1051,7 +1054,7 @@ def build_signal_panel(bills, executive, news):
         s_tax = f"{action_t} · {b_tax['updated']}"
         d_tax = b_tax['updated']
         risk_t = 'HIGH'
-        l_tax = b_tax['url']
+        l_tax = bill_anchor(b_tax)
     else:
         s_tax = "280E reform — committee stage, no floor date"
         d_tax = ''
@@ -1065,7 +1068,7 @@ def build_signal_panel(bills, executive, news):
         s_hemp = b_hemp['title'][:55].rstrip(',. ') + f" · {b_hemp['updated']}"
         d_hemp = b_hemp['updated']
         risk_h = 'HIGH'
-        l_hemp = b_hemp['url']
+        l_hemp = bill_anchor(b_hemp)
     else:
         n_hemp = find_best(news, ['title'], ['hemp', 'farm bill', 'cbd regulation'])
         if n_hemp:
@@ -1112,7 +1115,7 @@ def build_signal_panel(bills, executive, news):
         rl_c, _ = score_bill(crit_bill)
         s_crit = crit_bill['title'][:60].rstrip(',. ') + f" · {crit_bill['updated']}"
         d_crit = crit_bill['updated']
-        l_crit = crit_bill['url']
+        l_crit = bill_anchor(crit_bill)
     else:
         rl_c = 'HIGH'
         s_crit = "Monitoring all active legislative signals"
