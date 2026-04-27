@@ -1530,7 +1530,7 @@ def fetch_lawmakers(bills):
             "chamber":    "Senate",
             "bioguide":   s["bioguide"],
             "bill_count": 1,
-            "bill_nos":   [s["bills"]],
+            "bill_nos":   [s["bills"]],   # plain string — renders as muted text
             "curated":    True,
         }
 
@@ -1550,7 +1550,11 @@ def fetch_lawmakers(bills):
                 "curated":  False,
             }
         sponsor_map[name]["bill_count"] += 1
-        sponsor_map[name]["bill_nos"].append(b.get("number",""))
+        sponsor_map[name]["bill_nos"].append({
+            "number": b.get("number", ""),
+            "title":  b.get("title", ""),
+            "url":    b.get("url", ""),
+        })
 
     # FEC fundraising lookup per lawmaker
     lawmakers = []
@@ -1577,7 +1581,8 @@ def fetch_lawmakers(bills):
             "chamber":    info["chamber"],
             "photo":      f"https://bioguide.congress.gov/bioguide/photo/{bioguide[0]}/{bioguide}.jpg" if bioguide else "",
             "bill_count": info["bill_count"],
-            "bills":      ", ".join(info["bill_nos"][:3]),
+            "bill_nos":   info["bill_nos"][:3],   # list of {number, title, url} dicts OR plain strings for curated
+            "curated":    info.get("curated", False),
             "fec_total":  fec_total,
         })
 
@@ -1617,8 +1622,24 @@ def build_lawmakers(lawmakers, opposition=None, opp_news=None):
         state    = lm["state"]
         bills    = lm["bill_count"]
         photo    = lm["photo"]
-        bill_nos = lm["bills"]
         fec_fmt  = f"${lm['fec_total']:,.0f}" if lm["fec_total"] else "—"
+
+        # Render bill list — dicts get clickable links, plain strings stay as text
+        bill_parts = []
+        for entry in lm.get("bill_nos", []):
+            if isinstance(entry, dict) and entry.get("url"):
+                short_title = entry["title"][:60].rstrip(",. ") + ("…" if len(entry["title"]) > 60 else "")
+                bill_parts.append(
+                    f'<a href="{entry["url"]}" target="_blank" rel="noopener" '
+                    f'style="color:{NAVY};font-weight:700;text-decoration:none;white-space:nowrap" '
+                    f'title="{entry["title"]}">{entry["number"]}</a>'
+                    f'<span style="color:{MUTED}"> — {short_title}</span>'
+                )
+            elif isinstance(entry, dict):
+                bill_parts.append(f'<span style="color:{MUTED}">{entry.get("number","")}</span>')
+            else:
+                bill_parts.append(f'<span style="color:{MUTED}">{entry}</span>')
+        bill_nos_html = '<br>'.join(bill_parts) if bill_parts else '<span style="color:{MUTED}">—</span>'
 
         pc, bg, plabel = party_colors.get(party, (NAVY, LBLUE, party or "?"))
         stance_label, stance_badge = stance_map.get(name, ("Active Sponsor","badge-navy"))
@@ -1645,7 +1666,7 @@ def build_lawmakers(lawmakers, opposition=None, opp_news=None):
           <div style="font-size:.68rem;font-weight:700;color:{MUTED};letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">{chamber} &nbsp;·&nbsp; {state}</div>
           <div style="font-size:1rem;font-weight:800;color:{NAVY};line-height:1.2;margin-bottom:.4rem">{name}</div>
           <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem">{party_pill} <span class="badge {stance_badge}" style="font-size:.65rem">{stance_label}</span>{conflict_badge}</div>
-          <div style="font-size:.78rem;color:{MUTED}">{bill_nos}</div>
+          <div style="font-size:.78rem;line-height:1.6">{bill_nos_html}</div>
         </div>
       </div>
       <div style="border-top:1px solid {BORDER};margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
