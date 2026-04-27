@@ -1513,25 +1513,57 @@ def build_bills(bills, bill_briefings=None):
     return page(f"Cannabis Bills in Congress ({bill_count})", "bills.html", content)
 
 # ── DATA: LAWMAKERS ──────────────────────────────────────────────────────────
-# Curated Senate cannabis champions — active in prior or current Congress
 SENATE_CANNABIS_CHAMPIONS = [
-    {"name":"Chuck Schumer",    "party":"D","state":"NY","bioguide":"S000148","bills":"SAFER Banking, Cannabis Admin. Act","stance":"Pro-Cannabis"},
-    {"name":"Cory Booker",      "party":"D","state":"NJ","bioguide":"B001288","bills":"Cannabis Admin. & Opportunity Act","stance":"Pro-Cannabis"},
-    {"name":"Ron Wyden",        "party":"D","state":"OR","bioguide":"W000779","bills":"Cannabis Admin. Act, 280E Reform","stance":"Pro-Cannabis"},
-    {"name":"Jeff Merkley",     "party":"D","state":"OR","bioguide":"M001176","bills":"Cannabis Admin. Act","stance":"Pro-Cannabis"},
-    {"name":"Bernie Sanders",   "party":"I","state":"VT","bioguide":"S000033","bills":"Legalization bills, 280E Reform","stance":"Pro-Cannabis"},
-    {"name":"John Fetterman",   "party":"D","state":"PA","bioguide":"F000479","bills":"SAFER Banking, Schedule III","stance":"Pro-Cannabis"},
-    {"name":"Elizabeth Warren", "party":"D","state":"MA","bioguide":"W000817","bills":"SAFE Banking, Veterans Access","stance":"Pro-Cannabis"},
-    {"name":"Rand Paul",        "party":"R","state":"KY","bioguide":"P000603","bills":"States Reform Act, CBD bills","stance":"Pro-Cannabis"},
-    {"name":"Brian Schatz",     "party":"D","state":"HI","bioguide":"S001194","bills":"Veterans Cannabis Research","stance":"Pro-Cannabis"},
-    {"name":"Ruben Gallego",    "party":"D","state":"AZ","bioguide":"G000574","bills":"SAFER Banking, Cannabis Reform","stance":"Pro-Cannabis"},
+    {"name":"Chuck Schumer",       "party":"D","state":"NY","bioguide":"S000148","bills":"SAFER Banking, Cannabis Admin. Act"},
+    {"name":"Cory Booker",         "party":"D","state":"NJ","bioguide":"B001288","bills":"Cannabis Admin. & Opportunity Act"},
+    {"name":"Ron Wyden",           "party":"D","state":"OR","bioguide":"W000779","bills":"Cannabis Admin. Act, 280E Reform"},
+    {"name":"Jeff Merkley",        "party":"D","state":"OR","bioguide":"M001176","bills":"Cannabis Admin. Act"},
+    {"name":"Bernie Sanders",      "party":"I","state":"VT","bioguide":"S000033","bills":"Legalization, 280E Reform"},
+    {"name":"John Fetterman",      "party":"D","state":"PA","bioguide":"F000479","bills":"SAFER Banking, Schedule III"},
+    {"name":"Elizabeth Warren",    "party":"D","state":"MA","bioguide":"W000817","bills":"SAFE Banking, Veterans Access"},
+    {"name":"Rand Paul",           "party":"R","state":"KY","bioguide":"P000603","bills":"States Reform Act, CBD bills"},
+    {"name":"Brian Schatz",        "party":"D","state":"HI","bioguide":"S001194","bills":"Veterans Cannabis Research"},
+    {"name":"Ruben Gallego",       "party":"D","state":"AZ","bioguide":"G000574","bills":"SAFER Banking, Cannabis Reform"},
+    {"name":"Michael Bennet",      "party":"D","state":"CO","bioguide":"B001267","bills":"Cannabis reform, banking access"},
+    {"name":"Alex Padilla",        "party":"D","state":"CA","bioguide":"P000145","bills":"Cannabis Admin. Act, expungement"},
+    {"name":"Adam Schiff",         "party":"D","state":"CA","bioguide":"S001150","bills":"Cannabis reform, veterans access"},
+    {"name":"Jacky Rosen",         "party":"D","state":"NV","bioguide":"R000608","bills":"SAFER Banking, small business"},
+    {"name":"Chris Van Hollen",    "party":"D","state":"MD","bioguide":"V000128","bills":"Cannabis Admin. Act, 280E Reform"},
+    {"name":"Tim Kaine",           "party":"D","state":"VA","bioguide":"K000384","bills":"Veterans cannabis access"},
+    {"name":"Mark Warner",         "party":"D","state":"VA","bioguide":"W000805","bills":"SAFER Banking, financial access"},
+    {"name":"Tammy Baldwin",       "party":"D","state":"WI","bioguide":"B001230","bills":"Cannabis reform, veterans"},
+]
+
+HOUSE_CANNABIS_CHAMPIONS = [
+    {"name":"Alexandria Ocasio-Cortez","party":"D","state":"NY","bioguide":"O000172","bills":"MORE Act, Cannabis Admin. Act"},
+    {"name":"Dave Joyce",              "party":"R","state":"OH","bioguide":"J000295","bills":"SAFER Banking, Cannabis Caucus co-chair"},
+    {"name":"Nancy Mace",              "party":"R","state":"SC","bioguide":"M001210","bills":"States Reform Act, hemp reform"},
+    {"name":"Hakeem Jeffries",         "party":"D","state":"NY","bioguide":"J000294","bills":"MORE Act, expungement"},
+    {"name":"Jerrold Nadler",          "party":"D","state":"NY","bioguide":"N000002","bills":"MORE Act, Judiciary sponsor"},
+    {"name":"Ro Khanna",               "party":"D","state":"CA","bioguide":"K000389","bills":"Cannabis reform, veterans access"},
+    {"name":"Jamie Raskin",            "party":"D","state":"MD","bioguide":"R000606","bills":"MORE Act, expungement"},
+    {"name":"Pramila Jayapal",         "party":"D","state":"WA","bioguide":"J000298","bills":"MORE Act, Cannabis Admin. Act"},
+    {"name":"Jim McGovern",            "party":"D","state":"MA","bioguide":"M000312","bills":"Cannabis reform, hemp"},
+    {"name":"Steve Cohen",             "party":"D","state":"TN","bioguide":"C001068","bills":"MORE Act, decriminalization"},
+    {"name":"Hank Johnson",            "party":"D","state":"GA","bioguide":"J000288","bills":"MORE Act, expungement"},
+    {"name":"Eleanor Holmes Norton",   "party":"D","state":"DC","bioguide":"N000147","bills":"DC cannabis autonomy, MORE Act"},
+    {"name":"Rashida Tlaib",           "party":"D","state":"MI","bioguide":"T000481","bills":"MORE Act, Cannabis Admin. Act"},
+    {"name":"Ilhan Omar",              "party":"D","state":"MN","bioguide":"O000173","bills":"MORE Act, expungement"},
+    {"name":"Ayanna Pressley",         "party":"D","state":"MA","bioguide":"P000617","bills":"Cannabis Admin. Act, expungement"},
+    {"name":"Don Beyer",               "party":"D","state":"VA","bioguide":"B001292","bills":"Cannabis reform, banking access"},
+    {"name":"Nydia Velázquez",         "party":"D","state":"NY","bioguide":"V000081","bills":"Small business cannabis access"},
+    {"name":"Yvette Clarke",           "party":"D","state":"NY","bioguide":"C001067","bills":"MORE Act, expungement"},
+    {"name":"Suzanne Bonamici",        "party":"D","state":"OR","bioguide":"B001278","bills":"Hemp, cannabis reform"},
+    {"name":"Bonnie Watson Coleman",   "party":"D","state":"NJ","bioguide":"W000822","bills":"MORE Act, expungement"},
+    {"name":"Jared Huffman",           "party":"D","state":"CA","bioguide":"H001068","bills":"Cannabis reform, veterans"},
+    {"name":"Mark Pocan",              "party":"D","state":"WI","bioguide":"P000607","bills":"MORE Act, cannabis legalization"},
 ]
 
 def fetch_lawmakers(bills):
-    """Aggregate sponsors from bills + curated Senate champions, enrich with FEC totals."""
+    """Aggregate sponsors from bills + curated champions, enrich with FEC totals."""
     sponsor_map = {}
 
-    # Seed with curated Senate champions first
+    # Seed with curated Senate champions
     for s in SENATE_CANNABIS_CHAMPIONS:
         sponsor_map[s["name"]] = {
             "name":       s["name"],
@@ -1540,9 +1572,23 @@ def fetch_lawmakers(bills):
             "chamber":    "Senate",
             "bioguide":   s["bioguide"],
             "bill_count": 1,
-            "bill_nos":   [s["bills"]],   # plain string — renders as muted text
+            "bill_nos":   [s["bills"]],
             "curated":    True,
         }
+
+    # Seed with curated House champions
+    for h in HOUSE_CANNABIS_CHAMPIONS:
+        if h["name"] not in sponsor_map:
+            sponsor_map[h["name"]] = {
+                "name":       h["name"],
+                "party":      h["party"],
+                "state":      h["state"],
+                "chamber":    "House",
+                "bioguide":   h["bioguide"],
+                "bill_count": 1,
+                "bill_nos":   [h["bills"]],
+                "curated":    True,
+            }
 
     for b in bills:
         name = b.get("sponsor","").strip()
@@ -1597,7 +1643,7 @@ def fetch_lawmakers(bills):
         })
 
     lawmakers.sort(key=lambda x: x["bill_count"], reverse=True)
-    return lawmakers[:30]
+    return lawmakers[:60]
 
 # ── BUILD: LAWMAKERS ──────────────────────────────────────────────────────────
 def build_lawmakers(lawmakers, opposition=None, opp_news=None):
