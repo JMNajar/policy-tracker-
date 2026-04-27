@@ -1910,63 +1910,125 @@ def build_lawmakers(lawmakers, opposition=None, opp_news=None):
     return page(f"Cannabis Lawmakers & Money ({count})", "lawmakers.html", content)
 
 # ── BUILD: EXECUTIVE ──────────────────────────────────────────────────────────
-def build_executive(actions):
+def build_executive(actions, exec_briefings=None):
+    exec_briefings = exec_briefings or {}
+
     type_labels = {
-        "Presidential Document": ("badge-red",   "Presidential"),
-        "Rule":                  ("badge-navy",  "Final Rule"),
-        "Proposed Rule":         ("badge-gray",  "Proposed Rule"),
-        "Notice":                ("badge-gray",  "Notice"),
+        "Presidential Document": ("badge-red",  "Presidential Action"),
+        "Rule":                  ("badge-navy", "Final Rule"),
+        "Proposed Rule":         ("badge-gray", "Proposed Rule"),
+        "Notice":                ("badge-gray", "Agency Notice"),
     }
 
-    rows = ""
-    for a in actions[:20]:
-        doc_type = a.get("type","")
-        badge_cls, badge_label = type_labels.get(doc_type, ("badge-gray", doc_type[:20]))
-        agency = a.get("agency","Federal Agency")[:50]
-        date   = a.get("date","")
-        number = a.get("number","")
-        num_str = f" &nbsp;·&nbsp; #{number}" if number else ""
-        rows += f"""
-      <tr>
-        <td><span class="badge {badge_cls}">{badge_label}</span></td>
-        <td><a href="{a['link']}" target="_blank">{a['title'][:100]}</a></td>
-        <td>{agency}</td>
-        <td>{date}{num_str}</td>
-      </tr>"""
+    # Per-agency fallback context — shown when no AI briefing is available
+    AGENCY_CONTEXT = {
+        "drug enforcement administration": (
+            "DEA scheduling actions determine which cannabinoid compounds are federally legal to sell. "
+            "This directly affects hemp-derived products (delta-8, delta-10, HHC, THCO) and state-by-state market access."
+        ),
+        "food and drug administration": (
+            "FDA governs cannabis-derived ingredients in food, supplements, and medicine, including hemp CBD. "
+            "FDA rules set the boundary between legal sales and federal violation for product operators."
+        ),
+        "department of agriculture": (
+            "USDA implements Farm Bill hemp rules — THC thresholds, licensing, crop destruction requirements. "
+            "Changes here affect what hemp operators can grow, test, and sell across state lines."
+        ),
+        "department of justice": (
+            "DOJ enforcement priorities determine real-world federal prosecution risk. "
+            "Attorney General guidance can deprioritize cannabis enforcement without any Congressional action."
+        ),
+        "department of the treasury": (
+            "Treasury and FinCEN guidance controls whether banks can legally serve cannabis businesses. "
+            "Changes affect payment processing, merchant accounts, and access to capital."
+        ),
+        "internal revenue service": (
+            "IRS 280E enforcement determines whether cannabis businesses can deduct ordinary business expenses. "
+            "Tax treatment is one of the largest cost factors for cannabis operators."
+        ),
+    }
 
-    if not rows:
-        rows = "<tr><td colspan='4' style='color:#999;padding:1rem;'>No executive actions retrieved — check connection and try again.</td></tr>"
+    def agency_fallback(agency_str):
+        a = agency_str.lower()
+        for key, text in AGENCY_CONTEXT.items():
+            if key in a:
+                return text
+        return (
+            "This federal action references cannabis, marijuana, or hemp — review for implications "
+            "to your licensing, product compliance, or interstate commerce posture."
+        )
+
+    cards = ""
+    for a in actions[:20]:
+        doc_type  = a.get("type", "")
+        badge_cls, badge_label = type_labels.get(doc_type, ("badge-gray", doc_type[:20] or "Federal Action"))
+        agency    = a.get("agency", "Federal Agency")
+        date      = a.get("date", "")
+        number    = a.get("number", "")
+        num_str   = f"&nbsp;·&nbsp;#{number}" if number else ""
+        title     = a.get("title", "")
+
+        briefing = exec_briefings.get(title)
+        if briefing:
+            context_html = f"""
+            <div style="margin-top:.85rem;background:{LGREEN};border-left:3px solid {GREEN};border-radius:0 6px 6px 0;padding:.7rem 1rem;font-size:.82rem;line-height:1.6">
+              <div style="margin-bottom:.35rem"><span style="font-weight:800;color:{NAVY};letter-spacing:.04em">IMPACT</span>&nbsp;&nbsp;{briefing['impact']}</div>
+              <div style="margin-bottom:.35rem"><span style="font-weight:800;color:{NAVY};letter-spacing:.04em">TIMELINE</span>&nbsp;&nbsp;{briefing['timeline']}</div>
+              <div><span style="font-weight:800;color:{GREEN};letter-spacing:.04em">ACTION</span>&nbsp;&nbsp;{briefing['action']}</div>
+            </div>"""
+        else:
+            fallback = agency_fallback(agency)
+            context_html = f"""
+            <div style="margin-top:.85rem;background:#F5F7FA;border-left:3px solid {MUTED};border-radius:0 6px 6px 0;padding:.7rem 1rem;font-size:.82rem;line-height:1.6;color:{MUTED}">
+              <span style="font-weight:700;color:{TEXT}">WHY IT MATTERS</span>&nbsp;&nbsp;{fallback}
+            </div>"""
+
+        cards += f"""
+      <div style="background:#fff;border:1px solid {BORDER};border-radius:10px;padding:1.4rem 1.6rem;margin-bottom:1.2rem">
+        <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.65rem">
+          <span class="badge {badge_cls}">{badge_label}</span>
+          <span style="font-size:.8rem;color:{MUTED};font-weight:600">{agency}</span>
+          <span style="font-size:.8rem;color:{MUTED}">{date}{num_str}</span>
+        </div>
+        <div style="font-size:1rem;font-weight:700;color:{TEXT};line-height:1.4">{title}</div>
+        {context_html}
+        <div style="margin-top:.9rem">
+          <a href="{a['link']}" target="_blank" rel="noopener"
+             style="font-size:.78rem;font-weight:700;color:{GREEN};text-decoration:none;border:1px solid {GREEN};padding:.3rem .75rem;border-radius:4px">
+            View on Federal Register →
+          </a>
+        </div>
+      </div>"""
+
+    if not cards:
+        cards = f"""
+      <div style="background:#F5F7FA;border:1px solid {BORDER};border-radius:10px;padding:2rem;text-align:center;color:{MUTED}">
+        <div style="font-size:1.1rem;font-weight:700;margin-bottom:.5rem">No qualifying actions this period</div>
+        <div style="font-size:.88rem">The Federal Register is monitored daily for cannabis, marijuana, and hemp-specific actions.
+        Actions appear here when published. Absence means no new federal regulatory activity — not a data error.</div>
+      </div>"""
 
     content = f"""
 <div class="hero">
   <div class="hero-tag">EXECUTIVE BRANCH ACTIONS</div>
   <h1>Presidential & <span>Agency Actions</span></h1>
-  <p>Executive orders, DEA rulings, FDA guidance, and DOJ enforcement memos affecting cannabis — live from the Federal Register.</p>
+  <p>Executive orders, DEA rulings, FDA guidance, and USDA rules affecting cannabis and hemp operators — pulled live from the Federal Register with plain-language context for each action.</p>
   <div class="stat-row">
     <div class="stat-card"><div class="num">{len(actions)}</div><div class="lbl">ACTIONS FOUND</div></div>
     <div class="stat-card"><div class="num">Federal Register</div><div class="lbl">DATA SOURCE</div></div>
-    <div class="stat-card"><div class="num">Weekly</div><div class="lbl">REFRESH</div></div>
+    <div class="stat-card"><div class="num">Daily</div><div class="lbl">REFRESH</div></div>
   </div>
 </div>
 
 <div class="container">
   <span class="section-tag tag-red">LIVE DATA</span>
-  <h2>Federal Register — Cannabis Actions</h2>
-  <p class="section-intro">Presidential documents, final rules, proposed rules, and agency notices
-     from the Federal Register referencing cannabis, marijuana, or hemp.
-     Updated every Monday. Source: federalregister.gov (free, no key required).</p>
+  <h2>Federal Register — Cannabis &amp; Hemp Actions</h2>
+  <p class="section-intro">Presidential documents, final rules, proposed rules, and agency notices from the Federal Register
+     referencing cannabis, marijuana, or hemp — including DEA compound scheduling that affects hemp-derived products
+     (delta-8, delta-10, HHC) under Farm Bill definitions. Each action includes plain-language context
+     explaining the operator impact. Source: federalregister.gov.</p>
 
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Title</th>
-        <th>Agency</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>{rows}</tbody>
-  </table>
+  {cards}
 
   <span class="section-tag tag-navy">KEY AGENCIES</span>
   <h2>Who Controls Cannabis Regulation</h2>
@@ -1978,12 +2040,13 @@ def build_executive(actions):
       <tr><th>Agency</th><th>Cannabis Authority</th><th>Why It Matters for Business</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>DEA</strong></td><td>Scheduling decisions — Schedule I vs. III</td><td>The single biggest regulatory event possible. Rescheduling changes banking, research, and legal risk overnight.</td></tr>
-      <tr><td><strong>FDA</strong></td><td>Cannabis in food, supplements, and medicine</td><td>Directly governs Deeper Green™ (THC as a food ingredient). FDA rules determine legal B2B sales.</td></tr>
-      <tr><td><strong>DOJ / AG</strong></td><td>Federal prosecution priorities</td><td>Can deprioritize cannabis enforcement without Congress. The AG's stance determines real-world risk.</td></tr>
-      <tr><td><strong>Treasury / FinCEN</strong></td><td>Banking guidance for cannabis businesses</td><td>FinCEN memos tell banks whether they can serve cannabis clients. Changes here affect payment processing.</td></tr>
-      <tr><td><strong>USDA</strong></td><td>Hemp farming regulations, Farm Bill implementation</td><td>Sets THC threshold for hemp vs. cannabis classification. Affects what can cross state lines legally.</td></tr>
-      <tr><td><strong>White House / President</strong></td><td>Executive orders, pardons, enforcement direction</td><td>Presidential action can move faster than any legislation. Today's news is often executive-driven.</td></tr>
+      <tr><td><strong>DEA</strong></td><td>Scheduling decisions — Schedule I vs. III; hemp-derived cannabinoid classification</td><td>The single biggest regulatory lever. Compound scheduling affects delta-8, delta-10, HHC, and THCO — not just plant cannabis. State legality varies by compound.</td></tr>
+      <tr><td><strong>FDA</strong></td><td>Cannabis-derived ingredients in food, supplements, and medicine</td><td>FDA rules set the B2B sales boundary for hemp CBD and THC products. Enforcement discretion changes without legislation.</td></tr>
+      <tr><td><strong>DOJ / AG</strong></td><td>Federal prosecution priorities</td><td>Can deprioritize cannabis enforcement without Congress. The AG's stance determines real-world federal risk.</td></tr>
+      <tr><td><strong>Treasury / FinCEN</strong></td><td>Banking guidance for cannabis businesses</td><td>FinCEN memos tell banks whether they can serve cannabis clients. Changes here affect payment processing and capital access.</td></tr>
+      <tr><td><strong>USDA</strong></td><td>Hemp farming regulations, Farm Bill implementation</td><td>Sets THC threshold for hemp vs. cannabis classification. Affects what can be grown, tested, and sold across state lines.</td></tr>
+      <tr><td><strong>IRS</strong></td><td>280E tax enforcement</td><td>280E prevents cannabis businesses from deducting ordinary expenses. IRS posture is one of the largest cost factors for operators.</td></tr>
+      <tr><td><strong>White House / President</strong></td><td>Executive orders, pardons, enforcement direction</td><td>Presidential action moves faster than legislation. Pardons, enforcement memos, and agency directives can shift market conditions overnight.</td></tr>
     </tbody>
   </table>
 </div>"""
@@ -2949,6 +3012,8 @@ if __name__ == "__main__":
     bill_briefings = {}
     news_briefings = {}
 
+    exec_briefings = {}
+
     if anthropic_key:
         print("Generating AI executive briefings...")
         for b in bills:
@@ -2961,8 +3026,14 @@ if __name__ == "__main__":
                 item["title"], item.get("source",""), "cannabis policy news", anthropic_key, briefing_cache
             )
             news_briefings[item["title"]] = parse_briefing(raw)
+        for a in executive:
+            context = f"{a.get('agency','')} | {a.get('type','')} | {a.get('date','')}"
+            raw = generate_briefing(
+                a["title"], context, "federal regulatory action affecting cannabis operators", anthropic_key, briefing_cache
+            )
+            exec_briefings[a["title"]] = parse_briefing(raw)
         save_cache(briefing_cache)
-        print(f"  {len(bill_briefings)} bill briefings, {len(news_briefings)} news briefings generated")
+        print(f"  {len(bill_briefings)} bill briefings, {len(news_briefings)} news briefings, {len(exec_briefings)} exec briefings generated")
     else:
         print("  ANTHROPIC_API_KEY not set — skipping AI briefings")
 
@@ -2983,7 +3054,7 @@ if __name__ == "__main__":
         "index.html":       build_index(news, bills, executive, news_briefings, week_in_review_html),
         "bills.html":       build_bills(bills, bill_briefings),
         "lawmakers.html":   build_lawmakers(lawmakers, opposition, opp_news),
-        "executive.html":   build_executive(executive),
+        "executive.html":   build_executive(executive, exec_briefings),
         "money.html":       build_money(pacs, opposition, opp_news),
         "vapor.html":       build_vapor(vapor_news, vapor_fed),
         "methodology.html": build_methodology(),
