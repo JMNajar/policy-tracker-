@@ -651,15 +651,8 @@ def fetch_opposition_news():
 
 # ── DATA: CONGRESS.GOV BILLS ─────────────────────────────────────────────────
 def fetch_bills():
+    import re as _re
     api_key = os.environ.get("CONGRESS_API_KEY", "x6DiIlrW2gyfGrXC9I1ySo9qVFjuwpEyNDFuCM6c")
-    search_terms = ["cannabis", "marijuana", "hemp"]
-    # Bills whose titles contain these keywords are general legislation, not cannabis-specific
-    BILL_EXCLUSIONS = [
-        'appropriations', 'appropriation', 'consolidated appropriations',
-        'omnibus', 'continuing resolution', 'national defense authorization',
-        'supplemental appropriations', 'emergency supplemental',
-        'general government', 'military construction',
-    ]
 
     # Congress.gov URL type mapping
     BILL_TYPE_URL = {
@@ -673,28 +666,44 @@ def fetch_bills():
         'sconres':  'senate-concurrent-resolution',
     }
 
+    # Word-boundary patterns so 'thc' doesn't match 'healthcare', etc.
+    CANNABIS_PATTERNS = [
+        _re.compile(r'\bcannabis\b'),
+        _re.compile(r'\bmarijuana\b'),
+        _re.compile(r'\bmarihuana\b'),
+        _re.compile(r'\bhemp\b'),
+        _re.compile(r'\b(cbd|thc)\b'),
+    ]
+
+    def is_cannabis_bill(title):
+        t = title.lower()
+        return any(p.search(t) for p in CANNABIS_PATTERNS)
+
+    # Scan the 119th Congress bill list by introduction date to find cannabis bills.
+    # The search API does full-text search and returns false positives; scanning titles is reliable.
     bill_stubs = []
     seen = set()
-    for term in search_terms:
+    for offset in range(0, 6000, 250):
         url = (
-            f"https://api.congress.gov/v3/bill"
-            f"?query={term}&sort=updateDate+desc&limit=20"
+            f"https://api.congress.gov/v3/bill/119"
+            f"?sort=introducedDate+desc&limit=250&offset={offset}"
             f"&api_key={api_key}"
         )
         try:
-            r = requests.get(url, timeout=12)
-            data = r.json()
-            for b in data.get("bills", []):
+            r = requests.get(url, timeout=15)
+            batch = r.json().get("bills", [])
+            if not batch:
+                break
+            for b in batch:
                 bill_id = f"{b.get('congress','')}-{b.get('type','')}-{b.get('number','')}"
                 if bill_id in seen:
                     continue
-                title_lower = b.get("title", "").lower()
-                if any(excl in title_lower for excl in BILL_EXCLUSIONS):
-                    continue
-                seen.add(bill_id)
-                bill_stubs.append(b)
+                if is_cannabis_bill(b.get("title", "")):
+                    seen.add(bill_id)
+                    bill_stubs.append(b)
         except Exception as e:
-            print(f"Congress.gov error ({term}): {e}")
+            print(f"Congress.gov scan error (offset {offset}): {e}")
+            continue
 
     # Fetch bill detail for each stub to get sponsor (list endpoint omits it)
     bills = []
