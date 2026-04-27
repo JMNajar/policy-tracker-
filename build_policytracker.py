@@ -204,6 +204,8 @@ CSS = f"""
 
   /* DIVIDER */
   .section-divider {{ border: none; border-top: 1px solid {BORDER}; margin: 0; }}
+  tr:target {{ animation: highlight-row 2s ease-out; }}
+  @keyframes highlight-row {{ 0% {{ background: #FFF9C4; }} 100% {{ background: transparent; }} }}
 
   /* FOOTER */
   footer {{
@@ -1351,10 +1353,18 @@ def build_bills(bills, bill_briefings=None):
             risk_label, risk_cls = score_bill(b)
             states_tag, sectors_tag = tag_item(b['title'] + ' ' + b['latest_action'])
             brief = briefing_html(bill_briefings.get(b["title"]))
+            anchor = "bill-" + b['number'].lower().replace(" ", "-")
+            cgov_btn = (
+                f'<a href="{b["url"]}" target="_blank" rel="noopener" '
+                f'style="display:inline-block;margin-top:.6rem;font-size:.72rem;font-weight:700;'
+                f'color:{NAVY};border:1px solid {NAVY};border-radius:4px;padding:.2rem .6rem;'
+                f'text-decoration:none;letter-spacing:.03em">'
+                f'View on Congress.gov →</a>'
+            )
             rows += f"""
-      <tr data-states="{states_tag}" data-sectors="{sectors_tag}">
-        <td><strong><a href="{b['url']}" target="_blank" rel="noopener">{b['number']}</a></strong></td>
-        <td>{b['title']}{brief}</td>
+      <tr id="{anchor}" data-states="{states_tag}" data-sectors="{sectors_tag}">
+        <td><strong>{b['number']}</strong></td>
+        <td>{b['title']}{brief}{cgov_btn}</td>
         <td>{b['sponsor']}</td>
         <td>{b['latest_action']}</td>
         <td style="white-space:nowrap">{b['updated']}</td>
@@ -1627,10 +1637,11 @@ def build_lawmakers(lawmakers, opposition=None, opp_news=None):
         # Render bill list — dicts get clickable links, plain strings stay as text
         bill_parts = []
         for entry in lm.get("bill_nos", []):
-            if isinstance(entry, dict) and entry.get("url"):
-                short_title = entry["title"][:60].rstrip(",. ") + ("…" if len(entry["title"]) > 60 else "")
+            if isinstance(entry, dict) and entry.get("number"):
+                anchor = "bill-" + entry["number"].lower().replace(" ", "-")
+                short_title = entry["title"][:65].rstrip(",. ") + ("…" if len(entry["title"]) > 65 else "")
                 bill_parts.append(
-                    f'<a href="{entry["url"]}" target="_blank" rel="noopener" '
+                    f'<a href="bills.html#{anchor}" '
                     f'style="color:{NAVY};font-weight:700;text-decoration:none;white-space:nowrap" '
                     f'title="{entry["title"]}">{entry["number"]}</a>'
                     f'<span style="color:{MUTED}"> — {short_title}</span>'
@@ -1639,7 +1650,7 @@ def build_lawmakers(lawmakers, opposition=None, opp_news=None):
                 bill_parts.append(f'<span style="color:{MUTED}">{entry.get("number","")}</span>')
             else:
                 bill_parts.append(f'<span style="color:{MUTED}">{entry}</span>')
-        bill_nos_html = '<br>'.join(bill_parts) if bill_parts else '<span style="color:{MUTED}">—</span>'
+        bill_nos_html = '<br>'.join(bill_parts) if bill_parts else f'<span style="color:{MUTED}">—</span>'
 
         pc, bg, plabel = party_colors.get(party, (NAVY, LBLUE, party or "?"))
         stance_label, stance_badge = stance_map.get(name, ("Active Sponsor","badge-navy"))
