@@ -389,6 +389,15 @@
   </table>
   <p id="bills-empty" style="display:none;text-align:center;color:#999;padding:1.5rem">No bills match your current filters.</p>
 <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var params = new URLSearchParams(window.location.search);
+    var s = params.get('sector');
+    var r = params.get('risk');
+    if (s) { var el = document.getElementById('sector-filter'); if (el) el.value = s; }
+    if (r) { var el2 = document.getElementById('risk-filter'); if (el2) el2.value = r; }
+    if (s || r) filterBills();
+  });
+
   function filterBills() {
     var sector = document.getElementById('sector-filter').value;
     var risk   = document.getElementById('risk-filter').value;
