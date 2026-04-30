@@ -210,6 +210,10 @@
   .kent-card { background: #fff; border: 1px solid #DDE3ED; border-radius: 10px; padding: 1.75rem 2rem; margin-bottom: 2rem; border-left: 4px solid #1B4332; }
   .kent-card h3 { font-size: 1.2rem; font-weight: 800; color: #1B4332; margin-bottom: .25rem; }
   .kent-card .kent-title { font-size: .82rem; color: #D4A017; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 1rem; }
+  .leader-card-inner { display: flex; gap: 1.75rem; align-items: flex-start; }
+  .leader-photo { width: 130px; min-width: 130px; height: 130px; border-radius: 8px; object-fit: cover; object-position: top; border: 2px solid #DDE3ED; }
+  .leader-card-body { flex: 1; }
+  @media (max-width: 600px) { .leader-card-inner { flex-direction: column; } .leader-photo { width: 100%; height: 200px; min-width: unset; } }
   .capability-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1.25rem 0 2rem; }
   .capability-item { background: #E8F5E9; border-radius: 8px; padding: .85rem 1.1rem; border-left: 3px solid #2D6B2D; font-size: .88rem; font-weight: 600; color: #1B4332; }
 
@@ -318,19 +322,21 @@
 
   <div class="about-section">
     <span class="section-tag tag-cream">LEADERSHIP</span>
-    <h2>About Kent Rhodes</h2>
+    <h2>About Mark Rhodes</h2>
     <div class="kent-card">
-      <h3>Kent Rhodes</h3>
-      <div class="kent-title">Chief Executive Officer &amp; Founder — GF Tech One</div>
-      <p>Kent Rhodes is the founder and Chief Executive Officer of GF Tech One. A seasoned entrepreneur with deep roots in cannabis, technology, and consumer products, Kent has spent over a decade building companies at the intersection of science and market strategy.</p>
-      <p>Before founding GF Tech One, Kent held leadership roles across multiple verticals — from licensed cannabis operations to consumer technology ventures — where he developed a pattern recognition for the moments when regulatory change creates strategic opportunity. He is known among peers for his ability to see around corners: understanding not just what is happening in cannabis policy, but what it means for operators 12–18 months out.</p>
-      <p>Under Kent's leadership, GF Tech One has launched:</p>
-      <div class="capability-grid">
-        <div class="capability-item">GFTO AI Compliance Engine — the industry's first AI-assisted legislative intelligence dashboard for cannabis</div>
-        <div class="capability-item">Deeper Green™ — proprietary water-soluble THC delivery system for B2B food &amp; beverage manufacturers</div>
-        <div class="capability-item">The Neb AI — next-generation AI-personalized nicotine nebulizer for a post-cigarette consumer market</div>
+      <div class="leader-card-inner">
+        <img class="leader-photo" src="assets/mark-rhodes.jpg" alt="Mark Rhodes — V.P. of Operations, GF Tech One" onerror="this.style.display='none'">
+        <div class="leader-card-body">
+          <h3>Mark Rhodes</h3>
+          <div class="kent-title">V.P. of Operations — GF Technologies One</div>
+          <p>Mark Rhodes represents the next phase of GF Technologies One—where execution meets precision.</p>
+          <p>As a principal at GF Technologies One, Mark leads the development of advanced delivery systems designed to perform at scale. His focus is simple: turning complex formulations into stable, consumer-ready products that meet regulatory standards and real-world demands.</p>
+          <p>Over the past decade, Mark has built a track record in commercialization—taking products from early-stage formulation to full-scale production for both proprietary brands and strategic partners. From tablets and mints to beverages and encapsulated systems, his work is grounded in consistency, manufacturability, and performance.</p>
+          <p>Since entering licensed markets in 2019, he has advanced bioavailability technologies through platforms like Deeper Green, while also contributing to patented inhalation systems that integrate hardware and chemistry into controlled, efficient delivery solutions.</p>
+          <p>What differentiates Mark is operational clarity. He understands how products get built, approved, and scaled—reducing friction and accelerating time to market.</p>
+          <p>In a category full of ideas but short on execution, Mark Rhodes brings the systems and discipline required to build what works—and bring it to market successfully.</p>
+        </div>
       </div>
-      <p>Kent is based in California, where he continues to build at the frontier of cannabis technology, compliance intelligence, and AI-driven product development.</p>
     </div>
   </div>
 
