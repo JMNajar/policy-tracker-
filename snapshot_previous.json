@@ -1,17 +1,25 @@
 {
-  "date": "2026-04-27",
+  "date": "2026-05-04",
   "bills": {
+    "Hemp Safety Enforcement Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
+      "risk": "MEDIUM"
+    },
+    "Farm, Food, and National Security Act of 2026": {
+      "status": "The Clerk was authorized to correct section numbers, punctuation, and cross references, and to make other necessary tech",
+      "risk": "MEDIUM"
+    },
     "Higher Education Marijuana Research Act of 2026": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
       "risk": "LOW"
     },
-    "A bill to amend the Agricultural Marketing Act of 1946 to maintain certain State and Tribal laws relating to hemp, and for other purposes.": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
-      "risk": "LOW"
-    },
-    "A bill to require the Secretary of Health and Human Services to collect data and report to Congress on the cost to the Medicaid program from": {
+    "Marijuana Impact on Medicaid Act of 2026": {
       "status": "Read twice and referred to the Committee on Finance.",
       "risk": "LOW"
+    },
+    "Hemp Enforcement, Modernization, and Protection Act": {
+      "status": "Referred to the House Committee on Energy and Commerce.",
+      "risk": "MEDIUM"
     },
     "Hemp Planting Predictability Act": {
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
@@ -32,8 +40,20 @@
   },
   "executive": [
     {
-      "title": "Increasing Medical Marijuana and Cannabidiol Research",
-      "date": "2025-12-23"
+      "title": "Schedules of Controlled Substances: Rescheduling of Food and Drug Administration Approved Products Containing Marijuana From Schedule I to Schedule III; Corresponding Change to Permit Requirements",
+      "date": "2026-04-28"
+    },
+    {
+      "title": "Schedules of Controlled Substances: Rescheduling of Marijuana; Withdrawal",
+      "date": "2026-04-28"
+    },
+    {
+      "title": "Schedules of Controlled Substances: Rescheduling of Marijuana",
+      "date": "2026-04-28"
+    },
+    {
+      "title": "Domestic Hemp Production Program; Notice of Request for Extension and Revision of a Currently Approved Information Collection",
+      "date": "2026-01-28"
     }
   ]
 }
