@@ -16,7 +16,7 @@ except ImportError:
     import requests
     import feedparser
 
-OUTPUT_DIR = Path(r"c:\Users\subsc\Documents\My AI Assistant\policy-tracker")
+OUTPUT_DIR = Path(__file__).parent
 TODAY = datetime.now().strftime("%B %d, %Y")
 NOW_UTC = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -442,6 +442,8 @@ def fetch_news():
         "cannabis banking SAFER act",
         "cannabis executive order Trump",
         "hemp THC regulation 2026",
+        "farm bill hemp provisions 2026",
+        "hemp intoxicating ban November 2026",
     ]
     items = []
     seen = set()
@@ -478,13 +480,14 @@ def fetch_news():
 # ── DATA: FEDERAL REGISTER ────────────────────────────────────────────────────
 def fetch_executive_actions():
     items = []
-    for term in ["cannabis","marijuana","hemp"]:
+    for term in ["cannabis","marijuana","hemp","marihuana"]:
         url = (
             f"https://www.federalregister.gov/api/v1/documents.json"
             f"?conditions[term]={term}"
             f"&conditions[type][]=PRESDOCU"
             f"&conditions[type][]=RULE"
             f"&conditions[type][]=PRORULE"
+            f"&conditions[type][]=NOTICE"
             f"&per_page=8&order=newest"
         )
         try:
@@ -750,6 +753,41 @@ def fetch_bills():
             "latest_action":   b.get("latestAction",{}).get("text","")[:120],
         })
 
+    # Explicitly tracked bills missed by title scan (hemp-relevant omnibus/agriculture bills)
+    WATCHLIST_BILLS = [
+        ("119", "hr", "7567"),  # Farm, Food, and National Security Act of 2026
+    ]
+    for (wc, wt, wn) in WATCHLIST_BILLS:
+        if any(b["number"] == f"{wt.upper()} {wn}" for b in bills):
+            continue
+        try:
+            wr = requests.get(
+                f"https://api.congress.gov/v3/bill/{wc}/{wt}/{wn}?api_key={api_key}",
+                timeout=10
+            )
+            wd = wr.json().get("bill", {})
+            if wd:
+                sponsors = wd.get("sponsors", [])
+                s = sponsors[0] if sponsors else {}
+                latest = wd.get("latestAction", {})
+                btype_url = BILL_TYPE_URL.get(wt.lower(), wt + "-bill")
+                bills.append({
+                    "number":           f"{wt.upper()} {wn}",
+                    "title":            wd.get("title", f"H.R. {wn}")[:140],
+                    "sponsor":          f"{s.get('firstName','')} {s.get('lastName','')}".strip(),
+                    "sponsor_party":    s.get("party", ""),
+                    "sponsor_state":    s.get("state", ""),
+                    "sponsor_bioguide": s.get("bioguideId", ""),
+                    "chamber":          "House" if wt.lower() == "hr" else "Senate",
+                    "congress":         wc,
+                    "updated":          (wd.get("updateDate", "") or "")[:10],
+                    "url":              f"https://www.congress.gov/bill/{wc}th-congress/{btype_url}/{wn}",
+                    "latest_action":    (latest.get("text", "") or "")[:120],
+                })
+                print(f"  Watchlist: added {wt.upper()} {wn} — {wd.get('title','')[:60]}")
+        except Exception as e:
+            print(f"  Watchlist fetch error ({wt}{wn}): {e}")
+
     bills.sort(key=lambda x: x["updated"], reverse=True)
     return bills
 
@@ -884,6 +922,7 @@ HIGH_PRIORITY_BILLS = [
     'safer banking', 'safe banking', 'schedule iii', '280e',
     'cannabis administration', 'marijuana opportunity', 'states reform',
     'hope act', 'federal legalization', 'more act', 'cannabis act',
+    'farm, food', 'farm bill', 'hemp safety', 'hemp enforcement',
 ]
 
 def score_bill(bill):
@@ -1070,7 +1109,7 @@ def build_signal_panel(bills, executive, news):
     tiles.append(tile('💸', '280E TAX REFORM', risk_t, s_tax, d_tax, l_tax))
 
     # ── 4. Hemp / Farm Bill ──────────────────────────────────────────────────
-    b_hemp = find_best(bills, ['title', 'latest_action'], ['hemp', 'farm bill', 'thc limit', 'delta-8', 'delta 8'])
+    b_hemp = find_best(bills, ['title', 'latest_action'], ['hemp', 'farm bill', 'farm, food', 'thc limit', 'delta-8', 'delta 8', 'intoxicating'])
     if b_hemp:
         s_hemp = b_hemp['title'][:55].rstrip(',. ') + f" · {b_hemp['updated']}"
         d_hemp = b_hemp['updated']
