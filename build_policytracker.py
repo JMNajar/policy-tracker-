@@ -756,6 +756,12 @@ def fetch_bills():
     # Explicitly tracked bills missed by title scan (hemp-relevant omnibus/agriculture bills)
     WATCHLIST_BILLS = [
         ("119", "hr", "7567"),  # Farm, Food, and National Security Act of 2026
+        ("119", "hr", "2934"),  # STATES 2.0 Act — deschedule cannabis, interstate commerce
+        ("119", "hr", "4963"),  # Marijuana 1-to-3 Act — Schedule III rescheduling
+        ("119", "hr", "3082"),  # Evidence Based Drug Policy Act — evidence-based scheduling
+        ("119", "hr", "1384"),  # Veterans Equal Access Act — VA doctor cannabis discussions
+        ("119", "hr",  "996"),  # Veterans Cannabis Use for Safe Healing Act — veteran protections
+        ("119", "hr", "5068"),  # MORE Act — federal descheduling + expungement (backup guarantee)
     ]
     for (wc, wt, wn) in WATCHLIST_BILLS:
         if any(b["number"] == f"{wt.upper()} {wn}" for b in bills):
@@ -1606,6 +1612,7 @@ HOUSE_CANNABIS_CHAMPIONS = [
     {"name":"Bonnie Watson Coleman",   "party":"D","state":"NJ","bioguide":"W000822","bills":"MORE Act, expungement"},
     {"name":"Jared Huffman",           "party":"D","state":"CA","bioguide":"H001068","bills":"Cannabis reform, veterans"},
     {"name":"Mark Pocan",              "party":"D","state":"WI","bioguide":"P000607","bills":"MORE Act, cannabis legalization"},
+    {"name":"Andy Barr",               "party":"R","state":"KY","bioguide":"B001260","bills":"H.R. 7567 Farm Bill hemp provisions, hemp market framework"},
 ]
 
 def fetch_lawmakers(bills):
