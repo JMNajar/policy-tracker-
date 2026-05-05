@@ -1,5 +1,5 @@
 {
-  "date": "2026-05-04",
+  "date": "2026-05-05",
   "bills": {
     "Hemp Safety Enforcement Act": {
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
@@ -12,6 +12,10 @@
     "Higher Education Marijuana Research Act of 2026": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
       "risk": "LOW"
+    },
+    "MORE Act": {
+      "status": "Referred to the Committee on the Judiciary, and in addition to the Committees on Energy and Commerce, Agriculture, Educa",
+      "risk": "MEDIUM"
     },
     "Marijuana Impact on Medicaid Act of 2026": {
       "status": "Read twice and referred to the Committee on Finance.",
@@ -33,8 +37,28 @@
       "status": "Referred to the House Committee on Agriculture.",
       "risk": "LOW"
     },
+    "Veterans Equal Access Act": {
+      "status": "Referred to the Subcommittee on Health.",
+      "risk": "LOW"
+    },
     "Marijuana in Federally Assisted Housing Parity Act of 2025": {
       "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
+      "risk": "LOW"
+    },
+    "Paid Family and Medical Leave Tax Credit Extension and Enhancement Act": {
+      "status": "Referred to the House Committee on Ways and Means.",
+      "risk": "LOW"
+    },
+    "Marijuana 1-to-3 Act of 2025": {
+      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committee on the Judiciary, for a period to be ",
+      "risk": "LOW"
+    },
+    "STATES 2.0 Act": {
+      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, and Transportation",
+      "risk": "LOW"
+    },
+    "Evidence-Based Drug Policy Act of 2025": {
+      "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
       "risk": "LOW"
     }
   },
