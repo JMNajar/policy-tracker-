@@ -1,12 +1,12 @@
 {
   "date": "2026-05-05",
   "bills": {
-    "Hemp Safety Enforcement Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
-      "risk": "MEDIUM"
-    },
     "Farm, Food, and National Security Act of 2026": {
       "status": "The Clerk was authorized to correct section numbers, punctuation, and cross references, and to make other necessary tech",
+      "risk": "MEDIUM"
+    },
+    "Hemp Safety Enforcement Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "MEDIUM"
     },
     "Higher Education Marijuana Research Act of 2026": {
