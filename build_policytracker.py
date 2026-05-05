@@ -2546,8 +2546,13 @@ def build_about():
     <span class="section-tag tag-cream">LEADERSHIP</span>
     <h2>About Mark Rhodes</h2>
     <div class="kent-card">
-      <h3>Mark Rhodes</h3>
-      <div class="kent-title">Chief Executive Officer &amp; Founder — GF Tech One</div>
+      <div style="display:flex;gap:1.5rem;align-items:flex-start;margin-bottom:1rem">
+        <img src="assets/mark-rhodes.jpeg" alt="Mark Rhodes" style="width:90px;height:110px;object-fit:cover;border-radius:8px;border:2px solid #dde8dd;flex-shrink:0" onerror="this.style.display='none'">
+        <div>
+          <h3 style="margin:0 0 .25rem">Mark Rhodes</h3>
+          <div class="kent-title">Chief Executive Officer &amp; Founder — GF Tech One</div>
+        </div>
+      </div>
       <p>Mark Rhodes is the founder and Chief Executive Officer of GF Tech One. A seasoned entrepreneur with deep roots in cannabis, technology, and consumer products, Mark has spent over a decade building companies at the intersection of science and market strategy.</p>
       <p>Before founding GF Tech One, Mark held leadership roles across multiple verticals — from licensed cannabis operations to consumer technology ventures — where he developed a pattern recognition for the moments when regulatory change creates strategic opportunity. He is known among peers for his ability to see around corners: understanding not just what is happening in cannabis policy, but what it means for operators 12–18 months out.</p>
       <p>Under Mark's leadership, GF Tech One has launched:</p>
