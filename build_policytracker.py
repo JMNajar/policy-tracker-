@@ -1506,7 +1506,7 @@ def build_bills(bills, bill_briefings=None):
   {live_section}
 
   <span class="section-tag tag-green">KEY BILLS TO WATCH</span>
-  <h2>Bills That Move Kent's Business</h2>
+  <h2>Bills That Move M.Rhode's Business</h2>
   <p class="section-intro">These are the categories of legislation with direct impact on cannabis product manufacturers,
      B2B suppliers, and emerging cannabis technology companies.</p>
 
@@ -2511,8 +2511,8 @@ def build_about():
   <div class="about-section">
     <span class="section-tag tag-green">OUR ORIGIN</span>
     <h2>The Origin of GFTO</h2>
-    <p>GF Tech One was founded by Kent Rhodes, a serial entrepreneur and cannabis industry veteran, after years of working inside cannabis operations and watching smart, well-capitalized companies make preventable mistakes — not from lack of effort, but from lack of information.</p>
-    <p>Kent saw a gap: cannabis businesses were flying blind on regulatory shifts, legislative momentum, and competitive intelligence while regulators and competitors were not. His answer was to build systems that don't just monitor the landscape — they interpret it.</p>
+    <p>GF Tech One was founded by Mark Rhodes, a serial entrepreneur and cannabis industry veteran, after years of working inside cannabis operations and watching smart, well-capitalized companies make preventable mistakes — not from lack of effort, but from lack of information.</p>
+    <p>Mark saw a gap: cannabis businesses were flying blind on regulatory shifts, legislative momentum, and competitive intelligence while regulators and competitors were not. His answer was to build systems that don't just monitor the landscape — they interpret it.</p>
   </div>
 
   <div class="about-section">
@@ -2544,19 +2544,19 @@ def build_about():
 
   <div class="about-section">
     <span class="section-tag tag-cream">LEADERSHIP</span>
-    <h2>About Kent Rhodes</h2>
+    <h2>About Mark Rhodes</h2>
     <div class="kent-card">
-      <h3>Kent Rhodes</h3>
+      <h3>Mark Rhodes</h3>
       <div class="kent-title">Chief Executive Officer &amp; Founder — GF Tech One</div>
-      <p>Kent Rhodes is the founder and Chief Executive Officer of GF Tech One. A seasoned entrepreneur with deep roots in cannabis, technology, and consumer products, Kent has spent over a decade building companies at the intersection of science and market strategy.</p>
-      <p>Before founding GF Tech One, Kent held leadership roles across multiple verticals — from licensed cannabis operations to consumer technology ventures — where he developed a pattern recognition for the moments when regulatory change creates strategic opportunity. He is known among peers for his ability to see around corners: understanding not just what is happening in cannabis policy, but what it means for operators 12–18 months out.</p>
-      <p>Under Kent's leadership, GF Tech One has launched:</p>
+      <p>Mark Rhodes is the founder and Chief Executive Officer of GF Tech One. A seasoned entrepreneur with deep roots in cannabis, technology, and consumer products, Mark has spent over a decade building companies at the intersection of science and market strategy.</p>
+      <p>Before founding GF Tech One, Mark held leadership roles across multiple verticals — from licensed cannabis operations to consumer technology ventures — where he developed a pattern recognition for the moments when regulatory change creates strategic opportunity. He is known among peers for his ability to see around corners: understanding not just what is happening in cannabis policy, but what it means for operators 12–18 months out.</p>
+      <p>Under Mark's leadership, GF Tech One has launched:</p>
       <div class="capability-grid">
         <div class="capability-item">GFTO AI Compliance Engine — the industry's first AI-assisted legislative intelligence dashboard for cannabis</div>
         <div class="capability-item">Deeper Green™ — proprietary water-soluble THC delivery system for B2B food &amp; beverage manufacturers</div>
         <div class="capability-item">The Neb AI — next-generation AI-personalized nicotine nebulizer for a post-cigarette consumer market</div>
       </div>
-      <p>Kent is based in California, where he continues to build at the frontier of cannabis technology, compliance intelligence, and AI-driven product development.</p>
+      <p>Mark is based in California, where he continues to build at the frontier of cannabis technology, compliance intelligence, and AI-driven product development.</p>
     </div>
   </div>
 
