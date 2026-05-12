@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | GFTO AI Compliance Engine</title>
+  <meta name="description" content="Privacy policy for the GFTO AI Compliance Engine — a GF Tech One intelligence platform built by Horsepower AI.">
+  <style>
+  :root {
+    --navy:   #1B4332;
+    --gold:   #D4A017;
+    --green:  #2D6B2D;
+    --lgreen: #E8F5E9;
+    --lgold:  #FFF8E1;
+    --light:  #FAFAF8;
+    --border: #DDE3ED;
+    --text:   #1a2535;
+    --muted:  #5a6a80;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--light); }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: #FEFCE8; padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border); min-height: 64px;
+  }
+  .nav-brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+  .nav-brand img { height: 36px; }
+  .nav-brand-text { font-size: .85rem; font-weight: 800; color: var(--navy); letter-spacing: .04em; line-height: 1.2; }
+  .nav-brand-text span { color: var(--green); font-weight: 600; }
+  .nav-links { display: flex; gap: .15rem; flex-wrap: wrap; }
+  .nav-links a {
+    font-size: .78rem; font-weight: 600; color: var(--navy); text-decoration: none;
+    padding: .45rem .7rem; border-radius: 5px; white-space: nowrap;
+  }
+  .nav-links a:hover, .nav-links a.active { background: rgba(27,67,50,.12); color: var(--navy); }
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: .5rem;
+  }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: #1B4332; border-radius: 2px; transition: transform .3s, opacity .3s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 768px) {
+    .nav-hamburger { display: flex; }
+    .nav-links {
+      display: none; position: fixed; top: 64px; left: 0; right: 0;
+      background: #FEFCE8; flex-direction: column;
+      padding: .5rem 0 1rem; box-shadow: 0 4px 12px rgba(0,0,0,.3); z-index: 99;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: .85rem 1.5rem; font-size: .95rem; border-bottom: 1px solid rgba(27,67,50,.08); }
+  }
+
+  .page-wrap { max-width: 800px; margin: 3rem auto; padding: 0 2rem 4rem; }
+  .page-label { display: inline-block; background: var(--lgreen); color: var(--navy); font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: .3rem .75rem; border-radius: 20px; margin-bottom: 1rem; }
+  h1 { font-size: 2rem; font-weight: 800; color: var(--navy); margin-bottom: .4rem; }
+  .effective { font-size: .82rem; color: var(--muted); margin-bottom: 2.5rem; }
+  h2 { font-size: 1.05rem; font-weight: 800; color: var(--navy); margin: 2rem 0 .6rem; border-bottom: 1px solid var(--border); padding-bottom: .4rem; }
+  p { font-size: .93rem; line-height: 1.75; color: #3a4a3a; margin-bottom: .9rem; }
+  ul { padding-left: 1.4rem; margin-bottom: .9rem; }
+  ul li { font-size: .93rem; line-height: 1.75; color: #3a4a3a; margin-bottom: .3rem; }
+  .callout { background: var(--lgreen); border-left: 4px solid var(--green); border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1.5rem 0; }
+  .callout p { margin: 0; font-size: .88rem; }
+  a { color: var(--green); text-decoration: none; font-weight: 600; }
+  a:hover { color: var(--gold); }
+
+  footer {
+    background: var(--navy); color: rgba(255,255,255,.75);
+    text-align: center; padding: 2.5rem 2rem;
+  }
+  .footer-tagline { font-size: .82rem; margin-bottom: .5rem; }
+  .footer-tagline a { color: #FFD54F; text-decoration: none; font-weight: 600; }
+  .footer-legal { font-size: .72rem; color: rgba(255,255,255,.4); }
+  .footer-legal a { color: rgba(255,255,255,.65); text-decoration: none; }
+  .footer-legal a:hover { color: #FFD54F; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <img src="assets/GFTECH1 LOGO.jpg" alt="GF Tech One" onerror="this.style.display='none'">
+    <span class="nav-brand-text">GF TECH ONE <span>AI Compliance Engine</span></span>
+  </a>
+  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Open navigation"><span></span><span></span><span></span></button>
+  <div class="nav-links"><a href="index.html">Today's News</a><a href="bills.html">Bills</a><a href="lawmakers.html">Lawmakers</a><a href="executive.html">Executive</a><a href="money.html">Money</a><a href="vapor.html">Vapor/Nicotine</a><a href="methodology.html">Methodology</a><a href="about.html">About</a><a href="status.html">Status</a></div>
+</nav>
+
+<div class="page-wrap">
+  <span class="page-label">Legal</span>
+  <h1>Privacy Policy</h1>
+  <p class="effective">Effective: May 2026 &nbsp;·&nbsp; GFTO AI Compliance Engine &nbsp;·&nbsp; Built by Horsepower AI</p>
+
+  <div class="callout">
+    <p><strong>Short version:</strong> This platform collects no personal data, requires no account, and places no advertising or tracking pixels. It is a read-only intelligence dashboard.</p>
+  </div>
+
+  <h2>What This Platform Is</h2>
+  <p>The GFTO AI Compliance Engine is a regulatory intelligence dashboard built by Horsepower AI for GF Tech One. It aggregates publicly available data from federal government sources and presents it in a structured format for cannabis and nicotine industry operators. No user registration is required to access this platform.</p>
+
+  <h2>Data We Do Not Collect</h2>
+  <ul>
+    <li>No names, email addresses, or contact information</li>
+    <li>No account credentials or login data</li>
+    <li>No payment or financial information</li>
+    <li>No location data beyond what your browser provides to any website</li>
+    <li>No advertising profiles or behavioral tracking</li>
+  </ul>
+
+  <h2>Browser Storage</h2>
+  <p>This platform does not use cookies for tracking. Standard browser caching may occur as part of normal web operation. No personally identifiable information is stored in your browser by this site.</p>
+
+  <h2>Third-Party Data Sources</h2>
+  <p>All intelligence content is sourced from publicly available government and news databases. Visiting this platform does not transmit your data to these sources — they are accessed server-side during automated data updates only.</p>
+  <ul>
+    <li><a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a> — federal legislation</li>
+    <li><a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a> — executive and regulatory actions</li>
+    <li><a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a> — campaign finance records</li>
+    <li><a href="https://www.opensecrets.org" target="_blank" rel="noopener">OpenSecrets</a> — political spending data</li>
+    <li>Google News RSS — curated cannabis news headlines</li>
+    <li>Anthropic Claude API — used to generate plain-English briefings from raw data</li>
+  </ul>
+
+  <h2>Server Logs</h2>
+  <p>Like all web platforms, our hosting provider (Vercel) may collect standard server logs including IP addresses, browser type, and page requests. These logs are used solely for platform performance and security monitoring and are governed by <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Vercel's Privacy Policy</a>.</p>
+
+  <h2>Children's Privacy</h2>
+  <p>This platform is intended for business operators and professionals in the cannabis and nicotine industries. It is not directed at individuals under 18 years of age.</p>
+
+  <h2>Changes to This Policy</h2>
+  <p>If this policy changes materially, the effective date at the top of this page will be updated. Continued use of the platform constitutes acceptance of the current policy.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this privacy policy or the platform may be directed to:<br>
+  <a href="mailto:jeff.najar@horsepowermarketing.com">jeff.najar@horsepowermarketing.com</a></p>
+</div>
+
+<footer>
+  <p class="footer-tagline">
+    GFTO AI Compliance Engine is a GF Tech One intelligence platform, built by <a href="#">Horsepower AI</a>.
+    <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
+  </p>
+  <p class="footer-legal">
+    &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
+    <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
+    <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,
+    <a href="https://www.opensecrets.org" target="_blank" rel="noopener">OpenSecrets</a>, Google News
+    &nbsp;·&nbsp; For informational purposes only. Not legal advice.
+    &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a>
+  </p>
+</footer>
+
+<script>
+function toggleNav(){var btn=document.querySelector('.nav-hamburger');var links=document.querySelector('.nav-links');btn.classList.toggle('open');links.classList.toggle('open');}
+document.addEventListener('click',function(e){if(!e.target.closest('nav')){document.querySelector('.nav-hamburger').classList.remove('open');document.querySelector('.nav-links').classList.remove('open');}});
+</script>
+</body>
+</html>
