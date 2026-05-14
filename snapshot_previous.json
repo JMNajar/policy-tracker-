@@ -1,9 +1,13 @@
 {
-  "date": "2026-05-13",
+  "date": "2026-05-14",
   "bills": {
     "Hemp Planting Predictability Act": {
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "LOW"
+    },
+    "Farm, Food, and National Security Act of 2026": {
+      "status": "The Clerk was authorized to correct section numbers, punctuation, and cross references, and to make other necessary tech",
+      "risk": "MEDIUM"
     },
     "MORE Act": {
       "status": "Referred to the Committee on the Judiciary, and in addition to the Committees on Energy and Commerce, Agriculture, Educa",
@@ -13,10 +17,6 @@
       "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
       "risk": "LOW"
     },
-    "Farm, Food, and National Security Act of 2026": {
-      "status": "The Clerk was authorized to correct section numbers, punctuation, and cross references, and to make other necessary tech",
-      "risk": "MEDIUM"
-    },
     "Hemp Safety Enforcement Act": {
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "MEDIUM"
@@ -24,10 +24,6 @@
     "Higher Education Marijuana Research Act of 2026": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
       "risk": "LOW"
-    },
-    "Hemp Enforcement, Modernization, and Protection Act": {
-      "status": "Referred to the House Committee on Energy and Commerce.",
-      "risk": "MEDIUM"
     },
     "American Hemp Protection Act of 2025": {
       "status": "Referred to the House Committee on Agriculture.",
