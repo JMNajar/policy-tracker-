@@ -1,16 +1,20 @@
 {
-  "date": "2026-05-15",
+  "date": "2026-05-16",
   "bills": {
+    "American Hemp Protection Act of 2025": {
+      "status": "Referred to the Subcommittee on Commodity Markets, Digital Assets, and Rural Development.",
+      "risk": "LOW"
+    },
     "Hemp Planting Predictability Act": {
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "LOW"
     },
-    "Farm, Food, and National Security Act of 2026": {
-      "status": "The Clerk was authorized to correct section numbers, punctuation, and cross references, and to make other necessary tech",
+    "MORE Act": {
+      "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
       "risk": "MEDIUM"
     },
-    "MORE Act": {
-      "status": "Referred to the Committee on the Judiciary, and in addition to the Committees on Energy and Commerce, Agriculture, Educa",
+    "Farm, Food, and National Security Act of 2026": {
+      "status": "The Clerk was authorized to correct section numbers, punctuation, and cross references, and to make other necessary tech",
       "risk": "MEDIUM"
     },
     "Marijuana in Federally Assisted Housing Parity Act of 2025": {
@@ -23,10 +27,6 @@
     },
     "Higher Education Marijuana Research Act of 2026": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
-      "risk": "LOW"
-    },
-    "American Hemp Protection Act of 2025": {
-      "status": "Referred to the House Committee on Agriculture.",
       "risk": "LOW"
     },
     "To amend the Agriculture, Rural Development, Food and Drug Administration, and Related Agency Appropriations Act, 2026, to delay the impleme": {
