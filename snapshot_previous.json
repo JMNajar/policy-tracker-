@@ -5,10 +5,6 @@
       "status": "Referred to the Subcommittee on Commodity Markets, Digital Assets, and Rural Development.",
       "risk": "LOW"
     },
-    "Hemp Planting Predictability Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
-      "risk": "LOW"
-    },
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
       "risk": "MEDIUM"
@@ -31,6 +27,10 @@
     },
     "To amend the Agriculture, Rural Development, Food and Drug Administration, and Related Agency Appropriations Act, 2026, to delay the impleme": {
       "status": "Referred to the House Committee on Agriculture.",
+      "risk": "LOW"
+    },
+    "Hemp Planting Predictability Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "LOW"
     },
     "Veterans Equal Access Act": {
