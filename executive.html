@@ -358,7 +358,7 @@
         
             <div style="margin-top:.85rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.7rem 1rem;font-size:.82rem;line-height:1.6">
               <div style="margin-bottom:.35rem"><span style="font-weight:800;color:#1B4332;letter-spacing:.04em">IMPACT</span>&nbsp;&nbsp;The USDA is seeking to revise its hemp production reporting requirements, which could expand compliance documentation obligations for licensed hemp cultivators and integrated cannabis operators with hemp divisions, potentially increasing administrative burden and audit exposure.</div>
-              <div style="margin-bottom:.35rem"><span style="font-weight:800;color:#1B4332;letter-spacing:.04em">TIMELINE</span>&nbsp;&nbsp;The notice requests public comment through a deadline pending — monitor Federal Register for the final date; any rule changes would likely take 6-12 months to finalize and implement for the 2027 growing season.</div>
+              <div style="margin-bottom:.35rem"><span style="font-weight:800;color:#1B4332;letter-spacing:.04em">TIMELINE</span>&nbsp;&nbsp;The notice requests public comment through March [specific deadline TBD in Federal Register]; any rule changes would likely take 6-12 months to finalize and implement for the 2027 growing season.</div>
               <div><span style="font-weight:800;color:#2D6B2D;letter-spacing:.04em">ACTION</span>&nbsp;&nbsp;Submit detailed comments to USDA-APHIS this month outlining your current hemp reporting compliance costs and any proposed requirements that would create operational conflicts with state cannabis licensing, and coordinate with industry associations (NCIA, NORML Cannabis Business Council) to file joint comment letters.</div>
             </div>
         <div style="margin-top:.9rem">
@@ -393,46 +393,12 @@
 <div class="signup-band">
   <h3>Weekly Cannabis Law Roundup</h3>
   <p>The legislation that matters to your business — plain English, every Monday morning.</p>
-  <div class="signup-form" id="signup-form">
-    <input type="text" id="signup-fname" placeholder="First name">
-    <input type="email" id="signup-email" placeholder="Your email address">
-    <button id="signup-btn" onclick="submitSignup(event)">Subscribe Free</button>
+  <div class="signup-form">
+    <input type="text" placeholder="First name">
+    <input type="email" placeholder="Your email address">
+    <button>Subscribe Free</button>
   </div>
-  <p id="signup-msg" style="display:none;margin-top:.75rem;font-weight:700;font-size:.9rem;"></p>
   <p class="signup-note">No spam. Unsubscribe anytime. Produced by Horsepower AI.</p>
-  <script>
-  window.submitSignup = window.submitSignup || function(e) {
-    e.preventDefault();
-    var email = document.getElementById('signup-email').value.trim();
-    var fname = document.getElementById('signup-fname').value.trim();
-    var msg = document.getElementById('signup-msg');
-    var btn = document.getElementById('signup-btn');
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      msg.style.display = 'block'; msg.style.color = '#FFD700';
-      msg.textContent = 'Please enter a valid email address.';
-      return;
-    }
-    btn.disabled = true; btn.textContent = 'Subscribing...';
-    fetch('/api/subscribe', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, first_name: fname })
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      if (d.success) {
-        document.getElementById('signup-form').style.display = 'none';
-        msg.style.display = 'block'; msg.style.color = '#90EE90';
-        msg.textContent = "You're in. Look for the roundup every Monday morning.";
-      } else { throw new Error('fail'); }
-    })
-    .catch(function() {
-      btn.disabled = false; btn.textContent = 'Subscribe Free';
-      msg.style.display = 'block'; msg.style.color = '#FFD700';
-      msg.textContent = 'Something went wrong. Please try again.';
-    });
-  };
-  </script>
 </div>
 
 <footer>
