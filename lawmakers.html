@@ -1291,7 +1291,7 @@
           <div style="font-size:.68rem;font-weight:700;color:#5a6a80;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">House &nbsp;·&nbsp; IA</div>
           <div style="font-size:1rem;font-weight:800;color:#1B4332;line-height:1.2;margin-bottom:.4rem">Randy Feenstra</div>
           <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem"><span style="background:#FFEBEE;color:#B71C1C;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:12px;border:1px solid #B71C1C33">R</span> <span class="badge badge-navy" style="font-size:.65rem">Active Sponsor</span></div>
-          <div style="font-size:.78rem;line-height:1.6"><a href="bills.html#bill-hr-996" style="color:#1B4332;font-weight:700;text-decoration:none;white-space:nowrap" title="Paid Family and Medical Leave Tax Credit Extension and Enhancement Act">HR 996</a><span style="color:#5a6a80"> — Paid Family and Medical Leave Tax Credit Extension and Enhancemen…</span></div>
+          <div style="font-size:.78rem;line-height:1.6"><a href="bills.html#bill-hr-996" style="color:#1B4332;font-weight:700;text-decoration:none;white-space:nowrap" title="Paid Family and Medical Leave Tax Credit Extension and Enhancement Act">HR 996</a><span style="color:#5a6a80"> — Paid Family and Medical Leave Tax Credit Extension and Enhancemen...</span></div>
         </div>
       </div>
       <div style="border-top:1px solid #DDE3ED;margin-top:.9rem;padding-top:.8rem;display:flex;gap:1rem;justify-content:space-between">
@@ -1381,7 +1381,7 @@
     <thead>
       <tr><th>Recipient (Campaign Committee)</th><th>Industry Source</th><th>Amount (2023–24 Cycle)</th><th>Contributing PACs</th></tr>
     </thead>
-    <tbody><tr><td colspan='4' style='color:#999;padding:1rem 0;'>FEC live data loading — check API connection.</td></tr></tbody>
+    <tbody><tr><td colspan='4' style='color:#999;padding:1rem 0;'>Data updating — check back shortly.</td></tr></tbody>
   </table>
 
   <hr class="section-divider" style="margin:3rem 0">
@@ -1494,12 +1494,34 @@
 <div class="signup-band">
   <h3>Weekly Cannabis Law Roundup</h3>
   <p>The legislation that matters to your business — plain English, every Monday morning.</p>
-  <div class="signup-form">
-    <input type="text" placeholder="First name">
-    <input type="email" placeholder="Your email address">
-    <button>Subscribe Free</button>
+  <div class="signup-form" id="signup-form">
+    <input type="text" id="signup-fname" placeholder="First name">
+    <input type="email" id="signup-email" placeholder="Your email address">
+    <button id="signup-btn" onclick="submitSignup(event)">Subscribe Free</button>
   </div>
+  <p id="signup-msg" style="display:none;margin-top:.75rem;font-weight:700;font-size:.9rem;"></p>
   <p class="signup-note">No spam. Unsubscribe anytime. Produced by Horsepower AI.</p>
+  <script>
+  window.submitSignup = window.submitSignup || function(e) {
+    e.preventDefault();
+    var email = document.getElementById('signup-email').value.trim();
+    var fname = document.getElementById('signup-fname').value.trim();
+    var msg = document.getElementById('signup-msg');
+    var btn = document.getElementById('signup-btn');
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msg.style.display = 'block'; msg.style.color = '#FFD700';
+      msg.textContent = 'Please enter a valid email address.';
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Subscribing...';
+    var url = 'https://gfto.beehiiv.com/subscribe?email=' + encodeURIComponent(email);
+    if (fname) url += '&utm_source=website&first_name=' + encodeURIComponent(fname);
+    window.open(url, '_blank');
+    document.getElementById('signup-form').style.display = 'none';
+    msg.style.display = 'block'; msg.style.color = '#90EE90';
+    msg.textContent = "You're in. Complete your signup in the new tab.";
+  };
+  </script>
 </div>
 
 <footer>

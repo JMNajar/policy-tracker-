@@ -1,0 +1,13 @@
+{
+  "rewrites": [
+    { "source": "/bills", "destination": "/bills.html" },
+    { "source": "/lawmakers", "destination": "/lawmakers.html" },
+    { "source": "/executive", "destination": "/executive.html" },
+    { "source": "/money", "destination": "/money.html" },
+    { "source": "/vapor", "destination": "/vapor.html" },
+    { "source": "/methodology", "destination": "/methodology.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/status", "destination": "/status.html" },
+    { "source": "/privacy", "destination": "/privacy.html" }
+  ]
+}

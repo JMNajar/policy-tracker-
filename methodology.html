@@ -383,12 +383,43 @@
 <div class="signup-band">
   <h3>Weekly Cannabis Law Roundup</h3>
   <p>The legislation that matters to your business — plain English, every Monday morning.</p>
-  <div class="signup-form">
-    <input type="text" placeholder="First name">
-    <input type="email" placeholder="Your email address">
-    <button>Subscribe Free</button>
+  <div class="signup-form" id="signup-form">
+    <input type="text" id="signup-fname" placeholder="First name">
+    <input type="email" id="signup-email" placeholder="Your email address">
+    <button id="signup-btn" onclick="submitSignup(event)">Subscribe Free</button>
   </div>
+  <p id="signup-msg" style="display:none;margin-top:.75rem;font-weight:700;font-size:.9rem;"></p>
   <p class="signup-note">No spam. Unsubscribe anytime. Produced by Horsepower AI.</p>
+  <script>
+  window.submitSignup = window.submitSignup || function(e) {
+    e.preventDefault();
+    var email = document.getElementById('signup-email').value.trim();
+    var fname = document.getElementById('signup-fname').value.trim();
+    var msg = document.getElementById('signup-msg');
+    var btn = document.getElementById('signup-btn');
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msg.style.display = 'block'; msg.style.color = '#FFD700';
+      msg.textContent = 'Please enter a valid email address.';
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Subscribing...';
+    var data = new FormData();
+    data.append('EMAIL', email);
+    if (fname) data.append('FIRSTNAME', fname);
+    // CONNECT: Replace YOUR_BREVO_FORM_URL with your Brevo subscription form action URL
+    fetch('YOUR_BREVO_FORM_URL', { method: 'POST', body: data, mode: 'no-cors' })
+      .then(function() {
+        document.getElementById('signup-form').style.display = 'none';
+        msg.style.display = 'block'; msg.style.color = '#90EE90';
+        msg.textContent = "You're in. Look for the roundup every Monday morning.";
+      })
+      .catch(function() {
+        btn.disabled = false; btn.textContent = 'Subscribe Free';
+        msg.style.display = 'block'; msg.style.color = '#FFD700';
+        msg.textContent = 'Something went wrong. Please try again.';
+      });
+  };
+  </script>
 </div>
 
 <footer>
