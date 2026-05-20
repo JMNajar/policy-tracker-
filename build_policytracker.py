@@ -19,6 +19,7 @@ except ImportError:
 OUTPUT_DIR = Path(__file__).parent
 TODAY = datetime.now().strftime("%B %d, %Y")
 NOW_UTC = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+FEC_API_KEY = os.environ.get("FEC_API_KEY", "DEMO_KEY")
 
 # ── BRAND COLORS ──────────────────────────────────────────────────────────────
 NAVY   = "#1B4332"
@@ -521,7 +522,7 @@ def fetch_executive_actions():
 
 # ── DATA: FEC CANNABIS PACs ───────────────────────────────────────────────────
 def fetch_cannabis_pacs():
-    url = "https://api.open.fec.gov/v1/committees/?q=cannabis&api_key=DEMO_KEY&per_page=20&sort=-receipts"
+    url = f"https://api.open.fec.gov/v1/committees/?q=cannabis&api_key={FEC_API_KEY}&per_page=20&sort=-receipts"
     try:
         r = requests.get(url, timeout=10)
         data = r.json()
@@ -543,7 +544,7 @@ def fetch_cannabis_pacs():
 
 def fetch_top_donors_cannabis():
     """Top individual/org donors mentioning cannabis in FEC data"""
-    url = "https://api.open.fec.gov/v1/schedules/schedule_b/?api_key=DEMO_KEY&recipient_name=cannabis&per_page=20&sort=-disbursement_amount"
+    url = f"https://api.open.fec.gov/v1/schedules/schedule_b/?api_key={FEC_API_KEY}&recipient_name=cannabis&per_page=20&sort=-disbursement_amount"
     try:
         r = requests.get(url, timeout=10)
         data = r.json()
@@ -568,7 +569,7 @@ def fetch_opposition_disbursements():
         try:
             r = requests.get(
                 f"https://api.open.fec.gov/v1/committees/"
-                f"?q={query.replace(' ', '+')}&api_key=DEMO_KEY&per_page=3",
+                f"?q={query.replace(' ', '+')}&api_key={FEC_API_KEY}&per_page=3",
                 timeout=10
             )
             committees = r.json().get("results", [])
@@ -582,7 +583,7 @@ def fetch_opposition_disbursements():
         try:
             r2 = requests.get(
                 f"https://api.open.fec.gov/v1/schedules/schedule_b/"
-                f"?committee_id={cid}&api_key=DEMO_KEY"
+                f"?committee_id={cid}&api_key={FEC_API_KEY}"
                 f"&per_page=20&sort=-disbursement_amount&two_year_transaction_period=2024",
                 timeout=10
             )
@@ -1675,7 +1676,7 @@ def fetch_lawmakers(bills):
         try:
             fec_url = (
                 f"https://api.open.fec.gov/v1/candidates/search/"
-                f"?q={requests.utils.quote(name)}&api_key=DEMO_KEY&per_page=5&sort=-receipts"
+                f"?q={requests.utils.quote(name)}&api_key={FEC_API_KEY}&per_page=5&sort=-receipts"
             )
             fec_r = requests.get(fec_url, timeout=8)
             for cand in fec_r.json().get("results", []):
@@ -2801,13 +2802,13 @@ def run_health_checks(bills, executive, news, briefing_cache):
     # FEC API
     try:
         r = requests.get(
-            "https://api.open.fec.gov/v1/committees/?api_key=DEMO_KEY&limit=1&committee_type=O",
+            f"https://api.open.fec.gov/v1/committees/?api_key={FEC_API_KEY}&limit=1&committee_type=O",
             timeout=8
         )
         if r.status_code == 200:
-            chk("FEC API", "green", "Reachable (DEMO_KEY)")
+            chk("FEC API", "green", "Reachable")
         elif r.status_code == 429:
-            chk("FEC API", "yellow", "Rate-limited (DEMO_KEY) — will clear by tomorrow",
+            chk("FEC API", "yellow", "Rate-limited — will clear by tomorrow",
                 "Rate limit resets daily. No action needed unless this persists for 3+ days.")
         else:
             chk("FEC API", "yellow", f"HTTP {r.status_code} — unexpected response",

@@ -32,6 +32,7 @@ jobs:
           CONGRESS_API_KEY: ${{ secrets.CONGRESS_API_KEY }}
           OPENSECRETS_API_KEY: ${{ secrets.OPENSECRETS_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FEC_API_KEY: ${{ secrets.FEC_API_KEY }}
         run: python build_policytracker.py
 
       - name: Commit and push updated pages
