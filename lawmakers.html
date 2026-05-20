@@ -1514,12 +1514,24 @@
       return;
     }
     btn.disabled = true; btn.textContent = 'Subscribing...';
-    var url = 'https://gfto.beehiiv.com/subscribe?email=' + encodeURIComponent(email);
-    if (fname) url += '&utm_source=website&first_name=' + encodeURIComponent(fname);
-    window.open(url, '_blank');
-    document.getElementById('signup-form').style.display = 'none';
-    msg.style.display = 'block'; msg.style.color = '#90EE90';
-    msg.textContent = "You're in. Complete your signup in the new tab.";
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, first_name: fname })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.success) {
+        document.getElementById('signup-form').style.display = 'none';
+        msg.style.display = 'block'; msg.style.color = '#90EE90';
+        msg.textContent = "You're in. Look for the roundup every Monday morning.";
+      } else { throw new Error('fail'); }
+    })
+    .catch(function() {
+      btn.disabled = false; btn.textContent = 'Subscribe Free';
+      msg.style.display = 'block'; msg.style.color = '#FFD700';
+      msg.textContent = 'Something went wrong. Please try again.';
+    });
   };
   </script>
 </div>

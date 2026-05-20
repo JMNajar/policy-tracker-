@@ -424,21 +424,24 @@
       return;
     }
     btn.disabled = true; btn.textContent = 'Subscribing...';
-    var data = new FormData();
-    data.append('EMAIL', email);
-    if (fname) data.append('FIRSTNAME', fname);
-    // CONNECT: Replace YOUR_BREVO_FORM_URL with your Brevo subscription form action URL
-    fetch('YOUR_BREVO_FORM_URL', { method: 'POST', body: data, mode: 'no-cors' })
-      .then(function() {
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, first_name: fname })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.success) {
         document.getElementById('signup-form').style.display = 'none';
         msg.style.display = 'block'; msg.style.color = '#90EE90';
         msg.textContent = "You're in. Look for the roundup every Monday morning.";
-      })
-      .catch(function() {
-        btn.disabled = false; btn.textContent = 'Subscribe Free';
-        msg.style.display = 'block'; msg.style.color = '#FFD700';
-        msg.textContent = 'Something went wrong. Please try again.';
-      });
+      } else { throw new Error('fail'); }
+    })
+    .catch(function() {
+      btn.disabled = false; btn.textContent = 'Subscribe Free';
+      msg.style.display = 'block'; msg.style.color = '#FFD700';
+      msg.textContent = 'Something went wrong. Please try again.';
+    });
   };
   </script>
 </div>
