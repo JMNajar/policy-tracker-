@@ -521,26 +521,28 @@ def fetch_executive_actions():
     return unique[:15]
 
 # ── DATA: FEC CANNABIS PACs ───────────────────────────────────────────────────
+CANNABIS_PAC_QUERIES = ["cannabis", "marijuana", "norml", "mpp+pac", "hemp"]
+
 def fetch_cannabis_pacs():
-    url = f"https://api.open.fec.gov/v1/committees/?q=cannabis&api_key={FEC_API_KEY}&per_page=20&sort=-receipts"
-    try:
-        r = requests.get(url, timeout=10)
-        data = r.json()
-        results = data.get("results", [])
-        pacs = []
-        for c in results:
-            pacs.append({
-                "name":     c.get("name",""),
-                "type":     c.get("committee_type_full",""),
-                "state":    c.get("state","US"),
-                "receipts": c.get("receipts") or 0,
-                "id":       c.get("committee_id",""),
-            })
-        pacs.sort(key=lambda x: x["receipts"], reverse=True)
-        return pacs[:15]
-    except Exception as e:
-        print(f"FEC PAC error: {e}")
-        return []
+    pacs = {}
+    for term in CANNABIS_PAC_QUERIES:
+        url = f"https://api.open.fec.gov/v1/committees/?q={term}&api_key={FEC_API_KEY}&per_page=20&sort=-receipts"
+        try:
+            r = requests.get(url, timeout=10)
+            for c in r.json().get("results", []):
+                cid = c.get("committee_id","")
+                if cid and cid not in pacs:
+                    pacs[cid] = {
+                        "name":     c.get("name",""),
+                        "type":     c.get("committee_type_full",""),
+                        "state":    c.get("state","US"),
+                        "receipts": c.get("receipts") or 0,
+                        "id":       cid,
+                    }
+        except Exception as e:
+            print(f"FEC PAC error ({term}): {e}")
+    result = sorted(pacs.values(), key=lambda x: x["receipts"], reverse=True)
+    return result[:15]
 
 def fetch_top_donors_cannabis():
     """Top individual/org donors mentioning cannabis in FEC data"""
@@ -584,7 +586,7 @@ def fetch_opposition_disbursements():
             r2 = requests.get(
                 f"https://api.open.fec.gov/v1/schedules/schedule_b/"
                 f"?committee_id={cid}&api_key={FEC_API_KEY}"
-                f"&per_page=20&sort=-disbursement_amount&two_year_transaction_period=2024",
+                f"&per_page=20&sort=-disbursement_amount&two_year_transaction_period=2026",
                 timeout=10
             )
             disbursements = r2.json().get("results", [])
@@ -1900,7 +1902,7 @@ def build_lawmakers(lawmakers, opposition=None, opp_news=None):
   <p class="section-intro">Legislative recipients of documented contributions from industries with known financial
      incentives to oppose cannabis reform: pharmaceutical companies protecting opioid markets, alcohol producers
      facing direct market competition, and private prison operators dependent on drug convictions.
-     Source: FEC.gov official records, 2023–2024 election cycle.</p>
+     Source: FEC.gov official records, 2025–2026 election cycle.</p>
   {opp_rows_html}
 
   <hr class="section-divider" style="margin:3rem 0">
@@ -2195,7 +2197,7 @@ def build_money(pacs, opposition=None, opp_news=None):
   <p class="section-intro">Total political spending detected via FEC records this cycle. Opposition figure represents disbursements to federal legislators from documented anti-cannabis PACs only — full industry political spend is far larger.</p>
   <div style="background:{WHITE};border:1px solid {BORDER};border-radius:10px;padding:1.5rem 1.75rem;margin-bottom:2rem;max-width:600px">
     {chart_html}
-    <p style="font-size:.72rem;color:{MUTED};margin-top:.5rem">Source: FEC.gov · 2023–2024 cycle · Cannabis PAC total receipts vs. documented opposition disbursements to legislators</p>
+    <p style="font-size:.72rem;color:{MUTED};margin-top:.5rem">Source: FEC.gov · 2025–2026 cycle · Cannabis PAC total receipts vs. documented opposition disbursements to legislators</p>
   </div>
 
   <span class="section-tag tag-green">LIVE FEC DATA</span>
@@ -2217,7 +2219,7 @@ def build_money(pacs, opposition=None, opp_news=None):
   <p class="section-intro">Legislative recipients of documented contributions from industries with known financial
      incentives to oppose cannabis reform. Three industries dominate: pharmaceutical companies protecting opioid
      markets, alcohol producers facing direct market competition, and private prison operators dependent on
-     drug convictions. Source: FEC.gov official records, 2023–2024 election cycle.</p>
+     drug convictions. Source: FEC.gov official records, 2025–2026 election cycle.</p>
 
   {opp_fec_table}
 
@@ -2684,7 +2686,7 @@ def build_methodology():
         </tr>
         <tr>
           <td><strong><a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a></strong></td>
-          <td>Cannabis-related political action committees (PACs), total receipts, and disbursements from opposition-industry PACs (pharmaceutical, alcohol, private prison) to federal legislators. 2023–2024 election cycle.</td>
+          <td>Cannabis-related political action committees (PACs), total receipts, and disbursements from opposition-industry PACs (pharmaceutical, alcohol, private prison) to federal legislators. 2025–2026 election cycle.</td>
           <td>Weekly — every Monday</td>
           <td>Search any committee at fec.gov/data/committees</td>
         </tr>
@@ -2728,7 +2730,7 @@ def build_methodology():
     <p>A <strong>⚠ Conflict</strong> badge appears on a lawmaker's profile when two conditions are both true:</p>
     <ol style="margin:1rem 0 1rem 1.5rem;line-height:1.9;color:#3a4a3a">
       <li>The lawmaker sits on a committee with direct jurisdiction over cannabis legislation (Senate Judiciary, Senate Banking, House Judiciary, House Financial Services, Senate Finance, or Senate Agriculture)</li>
-      <li>FEC records show the lawmaker's campaign received documented funding from industries with known financial incentives to oppose cannabis reform (pharmaceutical, alcohol, or private prison industries) during the 2023–2024 cycle</li>
+      <li>FEC records show the lawmaker's campaign received documented funding from industries with known financial incentives to oppose cannabis reform (pharmaceutical, alcohol, or private prison industries) during the 2025–2026 cycle</li>
     </ol>
     <p>Conflict flags are based on documented FEC filings and publicly available committee rosters. All underlying data is verifiable at fec.gov and congress.gov.</p>
   </div>
