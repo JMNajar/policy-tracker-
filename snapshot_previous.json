@@ -1,6 +1,14 @@
 {
-  "date": "2026-05-19",
+  "date": "2026-05-20",
   "bills": {
+    "Farm, Food, and National Security Act of 2026": {
+      "status": "Received in the Senate.",
+      "risk": "MEDIUM"
+    },
+    "Veterans Equal Access Act": {
+      "status": "Referred to the Subcommittee on Health.",
+      "risk": "LOW"
+    },
     "American Hemp Protection Act of 2025": {
       "status": "Referred to the Subcommittee on Commodity Markets, Digital Assets, and Rural Development.",
       "risk": "LOW"
@@ -11,10 +19,6 @@
     },
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
-      "risk": "MEDIUM"
-    },
-    "Farm, Food, and National Security Act of 2026": {
-      "status": "The Clerk was authorized to correct section numbers, punctuation, and cross references, and to make other necessary tech",
       "risk": "MEDIUM"
     },
     "Marijuana in Federally Assisted Housing Parity Act of 2025": {
@@ -31,10 +35,6 @@
     },
     "To amend the Agriculture, Rural Development, Food and Drug Administration, and Related Agency Appropriations Act, 2026, to delay the impleme": {
       "status": "Referred to the House Committee on Agriculture.",
-      "risk": "LOW"
-    },
-    "Veterans Equal Access Act": {
-      "status": "Referred to the Subcommittee on Health.",
       "risk": "LOW"
     },
     "Paid Family and Medical Leave Tax Credit Extension and Enhancement Act": {
