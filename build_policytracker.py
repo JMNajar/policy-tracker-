@@ -523,14 +523,24 @@ def fetch_executive_actions():
 # ── DATA: FEC CANNABIS PACs ───────────────────────────────────────────────────
 CANNABIS_PAC_QUERIES = ["cannabis", "marijuana", "norml", "hemp"]
 
+KNOWN_CANNABIS_PACS = {
+    "C00528026": {"name": "National Cannabis Industry Association PAC", "type": "PAC - Qualified",    "state": "CO"},
+    "C00865196": {"name": "Cannabis Freedom PAC",                       "type": "Hybrid PAC",         "state": "TX"},
+    "C00647685": {"name": "The Cannabis Fund",                          "type": "PAC - Nonqualified", "state": "OR"},
+    "C00690149": {"name": "Cannabis Trade Federation Action Fund",      "type": "PAC - Nonqualified", "state": "CO"},
+    "C00534529": {"name": "Medicinal Cannabis SuperPAC",                "type": "Super PAC",          "state": "CA"},
+}
+
 def fetch_cannabis_pacs():
-    # Step 1: find committees by name keyword
     pacs = {}
     for term in CANNABIS_PAC_QUERIES:
         url = f"https://api.open.fec.gov/v1/committees/?q={term}&api_key={FEC_API_KEY}&per_page=20"
         try:
             r = requests.get(url, timeout=10)
-            for c in r.json().get("results", []):
+            data = r.json()
+            results = data.get("results", [])
+            print(f"    FEC search '{term}': {len(results)} found (HTTP {r.status_code})")
+            for c in results:
                 cid = c.get("committee_id","")
                 if cid and cid not in pacs:
                     pacs[cid] = {
@@ -541,9 +551,12 @@ def fetch_cannabis_pacs():
                         "id":       cid,
                     }
         except Exception as e:
-            print(f"FEC PAC search error ({term}): {e}")
+            print(f"    FEC search error ({term}): {e}")
 
-    # Step 2: fetch actual receipts from totals endpoint (2024 cycle — 2026 cycle too early)
+    for cid, meta in KNOWN_CANNABIS_PACS.items():
+        if cid not in pacs:
+            pacs[cid] = {"id": cid, "receipts": 0, **meta}
+
     for cid, pac in list(pacs.items()):
         try:
             t = requests.get(
@@ -553,8 +566,10 @@ def fetch_cannabis_pacs():
             results = t.json().get("results", [])
             if results:
                 pac["receipts"] = results[0].get("receipts") or 0
-        except Exception:
-            pass
+            else:
+                print(f"    FEC totals: no 2024 data for {cid}")
+        except Exception as e:
+            print(f"    FEC totals error ({cid}): {e}")
 
     result = sorted(pacs.values(), key=lambda x: x["receipts"], reverse=True)
     return [p for p in result if p["receipts"] > 0][:15]
