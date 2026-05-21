@@ -521,12 +521,13 @@ def fetch_executive_actions():
     return unique[:15]
 
 # ── DATA: FEC CANNABIS PACs ───────────────────────────────────────────────────
-CANNABIS_PAC_QUERIES = ["cannabis", "marijuana", "norml", "mpp+pac", "hemp"]
+CANNABIS_PAC_QUERIES = ["cannabis", "marijuana", "norml", "hemp"]
 
 def fetch_cannabis_pacs():
+    # Step 1: find committees by name keyword
     pacs = {}
     for term in CANNABIS_PAC_QUERIES:
-        url = f"https://api.open.fec.gov/v1/committees/?q={term}&api_key={FEC_API_KEY}&per_page=20&sort=-receipts"
+        url = f"https://api.open.fec.gov/v1/committees/?q={term}&api_key={FEC_API_KEY}&per_page=20"
         try:
             r = requests.get(url, timeout=10)
             for c in r.json().get("results", []):
@@ -535,14 +536,28 @@ def fetch_cannabis_pacs():
                     pacs[cid] = {
                         "name":     c.get("name",""),
                         "type":     c.get("committee_type_full",""),
-                        "state":    c.get("state","US"),
-                        "receipts": c.get("receipts") or 0,
+                        "state":    c.get("state","US") or "US",
+                        "receipts": 0,
                         "id":       cid,
                     }
         except Exception as e:
-            print(f"FEC PAC error ({term}): {e}")
+            print(f"FEC PAC search error ({term}): {e}")
+
+    # Step 2: fetch actual receipts from totals endpoint (2024 cycle — 2026 cycle too early)
+    for cid, pac in list(pacs.items()):
+        try:
+            t = requests.get(
+                f"https://api.open.fec.gov/v1/committee/{cid}/totals/?api_key={FEC_API_KEY}&cycle=2024",
+                timeout=10
+            )
+            results = t.json().get("results", [])
+            if results:
+                pac["receipts"] = results[0].get("receipts") or 0
+        except Exception:
+            pass
+
     result = sorted(pacs.values(), key=lambda x: x["receipts"], reverse=True)
-    return result[:15]
+    return [p for p in result if p["receipts"] > 0][:15]
 
 def fetch_top_donors_cannabis():
     """Top individual/org donors mentioning cannabis in FEC data"""
@@ -586,7 +601,7 @@ def fetch_opposition_disbursements():
             r2 = requests.get(
                 f"https://api.open.fec.gov/v1/schedules/schedule_b/"
                 f"?committee_id={cid}&api_key={FEC_API_KEY}"
-                f"&per_page=20&sort=-disbursement_amount&two_year_transaction_period=2026",
+                f"&per_page=20&sort=-disbursement_amount&two_year_transaction_period=2024",
                 timeout=10
             )
             disbursements = r2.json().get("results", [])
