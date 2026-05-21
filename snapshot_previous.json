@@ -1,6 +1,10 @@
 {
   "date": "2026-05-21",
   "bills": {
+    "Evidence-Based Drug Policy Act of 2025": {
+      "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
+      "risk": "LOW"
+    },
     "Farm, Food, and National Security Act of 2026": {
       "status": "Received in the Senate.",
       "risk": "MEDIUM"
@@ -47,10 +51,6 @@
     },
     "STATES 2.0 Act": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, and Transportation",
-      "risk": "LOW"
-    },
-    "Evidence-Based Drug Policy Act of 2025": {
-      "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
       "risk": "LOW"
     }
   },
