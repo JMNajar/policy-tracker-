@@ -1,8 +1,12 @@
 {
-  "date": "2026-05-29",
+  "date": "2026-05-30",
   "bills": {
-    "Hemp Planting Predictability Act": {
+    "Hemp Safety Enforcement Act": {
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
+      "risk": "MEDIUM"
+    },
+    "Hemp Planting Predictability Act": {
+      "status": "Referred to the Subcommittee on Forestry and Horticulture.",
       "risk": "LOW"
     },
     "MORE Act": {
@@ -28,10 +32,6 @@
     "Marijuana in Federally Assisted Housing Parity Act of 2025": {
       "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
       "risk": "LOW"
-    },
-    "Hemp Safety Enforcement Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
-      "risk": "MEDIUM"
     },
     "Higher Education Marijuana Research Act of 2026": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
