@@ -1,5 +1,5 @@
 {
-  "date": "2026-05-31",
+  "date": "2026-06-01",
   "bills": {
     "Hemp Safety Enforcement Act": {
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
@@ -50,22 +50,5 @@
       "risk": "LOW"
     }
   },
-  "executive": [
-    {
-      "title": "Schedules of Controlled Substances: Rescheduling of Food and Drug Administration Approved Products Containing Marijuana From Schedule I to Schedule III; Corresponding Change to Permit Requirements",
-      "date": "2026-04-28"
-    },
-    {
-      "title": "Schedules of Controlled Substances: Rescheduling of Marijuana; Withdrawal",
-      "date": "2026-04-28"
-    },
-    {
-      "title": "Schedules of Controlled Substances: Rescheduling of Marijuana",
-      "date": "2026-04-28"
-    },
-    {
-      "title": "Domestic Hemp Production Program; Notice of Request for Extension and Revision of a Currently Approved Information Collection",
-      "date": "2026-01-28"
-    }
-  ]
+  "executive": []
 }
