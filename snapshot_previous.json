@@ -1,16 +1,16 @@
 {
-  "date": "2026-06-02",
+  "date": "2026-06-03",
   "bills": {
-    "Hemp Safety Enforcement Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
-      "risk": "MEDIUM"
-    },
     "Hemp Planting Predictability Act": {
-      "status": "Referred to the Subcommittee on Forestry and Horticulture.",
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "LOW"
     },
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
+      "risk": "MEDIUM"
+    },
+    "Hemp Safety Enforcement Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "MEDIUM"
     },
     "Evidence-Based Drug Policy Act of 2025": {
