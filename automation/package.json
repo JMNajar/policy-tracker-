@@ -1,0 +1,13 @@
+{
+  "name": "policy-tracker-automation",
+  "version": "1.0.0",
+  "description": "Signal-to-video automation for GFTO AI Compliance Engine",
+  "main": "pipeline.js",
+  "scripts": {
+    "start": "node pipeline.js",
+    "install-browser": "npx playwright install chrome"
+  },
+  "dependencies": {
+    "playwright": "^1.44.0"
+  }
+}
