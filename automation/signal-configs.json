@@ -45,7 +45,7 @@
     "emoji": "💸",
     "statusColor": "#1B5E20",
     "borderColor": "#A5D6A7",
-    "notebookUrl": null,
+    "notebookUrl": "https://notebooklm.google.com/notebook/60f25d74-e9f6-44ee-8c9c-1ef235a86cfb",
     "sources": [
       "https://policy-tracker-rosy.vercel.app/bills.html"
     ],
@@ -65,7 +65,7 @@
     "emoji": "🌿",
     "statusColor": "#B8520A",
     "borderColor": "#FFCC80",
-    "notebookUrl": null,
+    "notebookUrl": "https://notebooklm.google.com/notebook/f88bef6e-5462-4c54-8a1b-69a00decd614",
     "sources": [
       "https://policy-tracker-rosy.vercel.app/bills.html"
     ],

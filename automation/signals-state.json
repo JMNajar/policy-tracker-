@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-06-06T21:00:00Z",
+  "lastRun": "2026-06-06T22:55:00Z",
   "activeVideos": [
     {
       "signalKey": "schedule-iii",
@@ -9,6 +9,16 @@
     {
       "signalKey": "banking-access",
       "youtubeId": "QbUbJ9_hwhs",
+      "publishedAt": "2026-06-06"
+    },
+    {
+      "signalKey": "280e-tax-reform",
+      "youtubeId": "Zj1gBLDsaWM",
+      "publishedAt": "2026-06-06"
+    },
+    {
+      "signalKey": "hemp-farm-bill",
+      "youtubeId": "fkep9KcbvZA",
       "publishedAt": "2026-06-06"
     }
   ],
@@ -27,15 +37,15 @@
     },
     "280e-tax-reform": {
       "lastStatus": "MONITOR",
-      "youtubeId": null,
-      "videoPublishedAt": null,
-      "embedDuration": null
+      "youtubeId": "Zj1gBLDsaWM",
+      "videoPublishedAt": "2026-06-06",
+      "embedDuration": "1:35"
     },
     "hemp-farm-bill": {
       "lastStatus": "HIGH",
-      "youtubeId": null,
-      "videoPublishedAt": null,
-      "embedDuration": null
+      "youtubeId": "fkep9KcbvZA",
+      "videoPublishedAt": "2026-06-06",
+      "embedDuration": "1:38"
     },
     "executive-actions": {
       "lastStatus": "MONITOR",
