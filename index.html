@@ -226,6 +226,12 @@
   .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+  /* SIGNAL PANEL GRID */
+  .signal-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:.6rem; }
+
+  /* TABLE SCROLL */
+  .table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .hero h1 { font-size: 1.7rem; }
@@ -241,6 +247,16 @@
     .stat-card { min-width: 120px; padding: .9rem 1rem; }
     .cred-bar { padding: .4rem 1rem; gap: .5rem; }
     .cred-bar .cred-verified { margin-left: 0; }
+    .signal-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .container { padding: 1.5rem 1rem; }
+    .signal-panel-outer { padding: 1rem; }
+    .data-table { font-size: .78rem; }
+  }
+  @media (max-width: 560px) {
+    .signal-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .hero h1 { font-size: 1.4rem; }
+    .hero p { font-size: .88rem; }
+    .stat-card .num { font-size: 1.4rem; }
   }
 </style>
 </head>
@@ -281,7 +297,7 @@
 </div>
 
 
-<div style="background:#FEFCE8;border-top:3px solid #1B4332;border-bottom:1px solid #DDE3ED;padding:1.5rem 2rem">
+<div class="signal-panel-outer" style="background:#FEFCE8;border-top:3px solid #1B4332;border-bottom:1px solid #DDE3ED;padding:1.5rem 2rem">
   <div style="max-width:1500px;margin:0 auto">
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.4rem">
       <div>
@@ -290,7 +306,7 @@
       </div>
       <span style="font-size:.68rem;color:#5a6a80">Updated June 07, 2026 &nbsp;·&nbsp; <span style="color:#2E7D32;font-weight:700">&#9679; ACTIVE</span> = movement in last 7 days</span>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.6rem">
+    <div class="signal-grid">
       <a href="bills.html" style="text-decoration:none;position:relative;display:block">
   <div class="sig-tile" style="background:#FFF8F0;border:1px solid #FFCC80;border-left:4px solid #B8520A;border-radius:8px;padding:.85rem 1rem">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
@@ -397,7 +413,7 @@
   <h2>What Changed This Week</h2>
   <p class="section-intro">2 changes since 2026-06-06. Automatically compared against last week's build.</p>
   
-<table class="data-table" style="margin-bottom:0">
+<div class="table-scroll"><table class="data-table" style="margin-bottom:0">
   <thead><tr>
     <th style="width:80px">Change</th>
     <th>Bill / Action</th>
@@ -414,8 +430,7 @@
     <td style="font-weight:600;color:var(--navy)">Marijuana in Federally Assisted Housing Parity Act of 2025</td>
     <td style="color:var(--muted);font-size:.82rem">Status changed → <em>Read twice and referred to the Committee on Banking, Housing…</em></td>
   </tr></tbody>
-</table>
-</div>
+</table></div>
 <hr class="section-divider">
 
 <div class="container">
