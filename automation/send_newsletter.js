@@ -192,7 +192,7 @@ function buildEmail(configs, state, videos) {
               <p style="margin:0;font-size:11px;color:rgba(255,255,255,.5)">
                 <a href="https://policy-tracker-rosy.vercel.app" style="color:#D4A017;text-decoration:none">View Full Dashboard</a>
                 &nbsp;·&nbsp;
-                <a href="{{{unsubscribe}}}" style="color:rgba(255,255,255,.5);text-decoration:none">Unsubscribe</a>
+                <span style="color:rgba(255,255,255,.5)">Reply to unsubscribe</span>
               </p>
             </td>
           </tr>
