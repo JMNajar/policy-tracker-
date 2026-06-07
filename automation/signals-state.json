@@ -25,6 +25,11 @@
       "signalKey": "executive-actions",
       "youtubeId": "VeUrjEGPvww",
       "publishedAt": "2026-06-06"
+    },
+    {
+      "signalKey": "critical-watch",
+      "youtubeId": "ybB2dqQnce0",
+      "publishedAt": "2026-06-07"
     }
   ],
   "signals": {
@@ -60,9 +65,9 @@
     },
     "critical-watch": {
       "lastStatus": "HIGH",
-      "youtubeId": null,
-      "videoPublishedAt": null,
-      "embedDuration": null
+      "youtubeId": "ybB2dqQnce0",
+      "videoPublishedAt": "2026-06-07",
+      "embedDuration": "2:48"
     }
   }
 }

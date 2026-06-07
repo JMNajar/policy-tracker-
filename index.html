@@ -390,7 +390,7 @@
       <span style="background:#B8520A;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">HIGH</span>
     </div>
     <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">Monitoring all active legislative signals</div>
-    <button disabled style="margin-top:.65rem;width:100%;background:#9E9E9E;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:.25rem">&#8987; Briefing Coming Soon</button>
+    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('ybB2dqQnce0')" style="margin-top:.65rem;width:100%;background:#B8520A;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#9654; Watch Briefing</button>
     <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-critical')" style="margin-top:.3rem;width:100%;background:transparent;color:#B8520A;border:1px solid #B8520A;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#128203; Read the Brief</button>
     <div id="brief-critical" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#FFF8F0;border:1px solid #FFCC80;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)"><p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">The Critical Watch signal flags the highest-risk active legislation affecting cannabis and vapor operators. When this tile lights up, regulatory action may be required.</p><button onclick="event.stopPropagation();window.location.href='bills.html'" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">&#127963; View Legislation Tracker &#8594;</button></div>
   </div>
@@ -479,6 +479,12 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
 
   <div class="card-grid" id="news-grid">
     
+    <div class="card" data-sectors="hemp">
+      <div class="card-source">WFAA</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxOVEdyVlNJUXg2WndWVkZqd3RkcXhTRDBaNEVDM3lFUnhhQnlDSWlyVllnUFkyOHhrQ0dsODhyS0Z4Wnd0RVpHcGQtRVZ0QjBiMldQb3lic05nb1JpY0VzV1Qxb3lMR0VwWU1XdmtNRHVYcE9xZmhnNnhhNnFvUEtLY0ZEckRIZVZyb1R0S3lKZWtxZllPRTRMQjEyc1AzRE95R2wxd0w3RjFEc1RvMWF3NjN4SW8zaC1JRFdhMThld0F5UGlNM2xxZHJWLTVJY2t0UGVROXlB?oc=5" target="_blank" rel="noopener">Texas can implement its smokable hemp ban for now, court rules - WFAA</a></div>
+      <div class="card-meta">Jun 06, 2026</div>
+      
+    </div>
     <div class="card" data-sectors="executive,hemp">
       <div class="card-source">Legis1</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE5WRVFQeEUzNXVtYl9WMGZ5UWhhOUkwVVFzcUdCdnc5WDZyaEgxeG1VSi1IelhMNVVMT2hqUHlzekhfTmJ6YnlkQ2l1QmRfOEdRRmt2X1o4ZWF6U0FJeWNjazlVYzNob0xHZUpoekVIeEFqc2lwSGc?oc=5" target="_blank" rel="noopener">Hemp Rules Rewritten: Industry Faces November Deadline - Legis1</a></div>
@@ -488,12 +494,6 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
     <div class="card" data-sectors="hemp,retail">
       <div class="card-source">Foley Hoag</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiigJBVV95cUxNQWMyVkJvNnJjSnlPbEJ0X0JaMWtyajcwVXVyLXlXY1NLeWJVRXZEdjNXV2o1SlFJbTZ2QkVmSTRWLUtFWWNac1MwX0NYdmVGNXAyUnliVW1xa1lybDJJS0lrWWxtYWYtZzNIbnFQUUY1cjlGdVM0LXhQc2JWbV9WbWVDZnV4R0oxN3BiNFF4Ym5OLU9qQzlpQnJkSjlOS1Z5QzhBZ05CZTBYNGhRVHZ5SW5FRXhPZ0dhX1NtU0J2Z0JicjlvTVlpZUJtVnEtci1zWnZYczlnTE45RWxKRnQwdE9uOURLYldfY0UxTVlfektJQl85RWVwNXJOY2NJaWdKd1ozUWFUd0lLZw?oc=5" target="_blank" rel="noopener">Barr Proposal To Legalize and Regulate Hemp-Derived Consumer Products Enters Crowded Field of Hemp Legislation - Foley H</a></div>
-      <div class="card-meta">Jun 03, 2026</div>
-      
-    </div>
-    <div class="card" data-sectors="hemp">
-      <div class="card-source">Harris Sliwoski LLP</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOQ1RhbmpKU2NwQnNNM2xVRFY4Wml0X3F4Um01dDVBenROVjlEZkU5RTRPYXBSZEstRFR3anUyUFNtZUpxa3hhWnNIbFZfczA5bGxkM0dRby0xNjF4UjA0bFlaSlh6N29fQ2k0M1B3WTlZSjNYeGczb0luelBkZUQ5YTRkZ0I4QQ?oc=5" target="_blank" rel="noopener">Minnesota’s New Cannabis and Hemp Laws - Canna Law Blog™ - Harris Sliwoski LLP</a></div>
       <div class="card-meta">Jun 03, 2026</div>
       
     </div>
@@ -533,9 +533,9 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
       <div class="card-meta">May 29, 2026</div>
       
     </div>
-    <div class="card" data-sectors="hemp">
-      <div class="card-source">U.S. Hemp Roundtable</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNT24tazRLS010NTdQMzV4bzNkSndhODlGOHhMN2kxSklMbmZpRE5uTzRaZjk2bTA0S25tX3U5azNsSVZjbDJBZVdHd1hZUXFqUDctME9EQk93akJYQ2V0SnpDTXdDNWh4TmlVdTA0V3NsNkFtMjR3ZmJVejNQeTFkSTJaUXhaa2Zjd2sxNUcycWZaTHlxM0xPLVFkN0FiLWtWQWtBZUt1SmdPZmI2dWVOSXlObVZPWjF3UVNuTEtxOFdpRGhyc1Z2ckk5Qm5iZw?oc=5" target="_blank" rel="noopener">State Hemp Policy Update: Delaware, Illinois, Nebraska, New Jersey, Pennsylvania (Philadelphia), and Virginia - U.S. Hem</a></div>
+    <div class="card" data-sectors="banking,executive,hemp">
+      <div class="card-source">Hemp Gazette</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxOZUJya1g2OUQycm1DalYxWnZPMGlpWmEySy1Ha3g1ZHQ5M2JSTzdzZzNSTDViaWt1QVJRNXBRYllJS0lyNTdGMjRuSkRPd0VHbXNFVEhkb1Z0T1RPUVJCT2REVHRGcndWcUlpUmt4aXExWjl4Z1hRbjdlTzNFaVJ6eWVBVzBTVVBKTHoxcV9SZ0U2SDU1eHdLc2hGbXMzeXRXaUg4?oc=5" target="_blank" rel="noopener">SAFE Banking Act Stalls in Congress Despite Schedule III Cannabis Reclassification - Hemp Gazette</a></div>
       <div class="card-meta">May 27, 2026</div>
       
     </div>
