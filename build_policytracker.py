@@ -37,9 +37,21 @@ MUTED  = "#5a6a80"
 
 TODAY_SHORT = datetime.now().strftime("%b %d")   # e.g., "Apr 25"
 
-# ── YOUTUBE CHANNEL (for Critical Watch auto-detect) ─────────────────────────
-# Find your channel ID in YouTube Studio → Settings → Channel → Advanced Settings
+# ── YOUTUBE CHANNEL — signal video auto-detect ───────────────────────────────
+# Upload any video to this channel with the signal name in the title and it
+# auto-wires to the correct tile on the next bot run. No code changes needed.
 YOUTUBE_CHANNEL_ID = 'UCJw8gCUT9EjhUnMyYnsAPpA'
+
+# Keywords that map a channel video title → signal tile.
+# The most recent matching video wins, so uploading a new version auto-replaces the old one.
+SIGNAL_VIDEO_KEYWORDS = {
+    'banking':   ['banking access', 'safer banking'],
+    'schedule3': ['schedule iii', 'dea reschedul', 'dea reclassif'],
+    '280e':      ['280e'],
+    'hemp':      ['hemp', 'farm bill'],
+    'exec':      ['executive action'],
+    'critical':  ['critical watch'],
+}
 
 # ── FRESHNESS STATE ───────────────────────────────────────────────────────────
 FRESHNESS = None   # Set in main() after fetching executive actions
@@ -1057,20 +1069,30 @@ CONFLICT_LAWMAKERS = {
     "Mike Crapo":          {"committee": "Senate Banking & Finance",   "industry": "Pharmaceutical"},
 }
 
-# ── YOUTUBE: AUTO-DETECT CRITICAL WATCH VIDEO ────────────────────────────────
-def fetch_critical_watch_video_id():
-    """Scan the channel RSS feed for the latest video titled 'Critical Watch'."""
+# ── YOUTUBE: AUTO-DETECT ALL SIGNAL VIDEOS ───────────────────────────────────
+def fetch_signal_videos():
+    """Fetch channel RSS once and map each signal key to its latest video ID.
+
+    Upload a new video to YouTube with the signal name in the title and it
+    auto-wires on the next bot run — no hardcoded IDs, no manual steps.
+    """
+    videos = {key: '' for key in SIGNAL_VIDEO_KEYWORDS}
     if not YOUTUBE_CHANNEL_ID:
-        return ''
+        return videos
     try:
         url = f'https://www.youtube.com/feeds/videos.xml?channel_id={YOUTUBE_CHANNEL_ID}'
         feed = feedparser.parse(url)
-        for entry in feed.entries:
-            if 'critical watch' in entry.get('title', '').lower():
-                return entry.get('yt_videoid', '')
+        entries = [(e.get('title', '').lower(), e.get('yt_videoid', '')) for e in feed.entries]
+        for key, keywords in SIGNAL_VIDEO_KEYWORDS.items():
+            for title, vid_id in entries:
+                if any(kw in title for kw in keywords):
+                    videos[key] = vid_id
+                    break
+        found = [k for k, v in videos.items() if v]
+        print(f'  YouTube signal videos resolved: {len(found)}/6 — {", ".join(found) or "none"}')
     except Exception as e:
-        print(f'  Critical Watch YouTube RSS error: {e}')
-    return ''
+        print(f'  YouTube channel RSS error: {e}')
+    return videos
 
 
 # ── SIGNAL PANEL ─────────────────────────────────────────────────────────────
@@ -1170,6 +1192,7 @@ def build_signal_panel(bills, executive, news):
 </a>"""
 
     tiles = []
+    vids = fetch_signal_videos()
 
     def bill_anchor(b):
         return "bills.html#bill-" + b['number'].lower().replace(" ", "-")
@@ -1188,7 +1211,7 @@ def build_signal_panel(bills, executive, news):
         d_bank = ''
         l_bank = 'bills.html'
     tiles.append(tile('🏦', 'BANKING ACCESS', risk_b, s_bank, d_bank, l_bank,
-        video_id='QbUbJ9_hwhs', brief_id='brief-banking',
+        video_id=vids['banking'], brief_id='brief-banking',
         brief_text='Cannabis businesses are locked out of normal banking — no accounts, loans, or card processing — because federal law still classifies marijuana as a controlled substance.',
         brief_link='bills.html', brief_link_label='View Legislation Tracker'))
 
@@ -1213,7 +1236,7 @@ def build_signal_panel(bills, executive, news):
             risk_iii = 'HIGH'
             l_iii = 'executive.html'
     tiles.append(tile('💊', 'SCHEDULE III', risk_iii, s_iii, d_iii, l_iii,
-        video_id='hMgzPL2Bmeg', brief_id='brief-schedule3',
+        video_id=vids['schedule3'], brief_id='brief-schedule3',
         brief_text='The DEA has officially moved marijuana from Schedule I to Schedule III — eliminating the Section 280E tax burden for state-licensed cannabis operators.',
         brief_link='https://www.federalregister.gov/documents/2026/04/28/2026-08176/schedules-of-controlled-substances-rescheduling-of-food-and-drug-administration-approved-products',
         brief_link_label='Federal Register Rule', brief_new_tab=True))
@@ -1232,7 +1255,7 @@ def build_signal_panel(bills, executive, news):
         risk_t = 'MONITOR'
         l_tax = 'bills.html'
     tiles.append(tile('💸', '280E TAX REFORM', risk_t, s_tax, d_tax, l_tax,
-        video_id='Zj1gBLDsaWM', brief_id='brief-280e',
+        video_id=vids['280e'], brief_id='brief-280e',
         brief_text="Section 280E forces cannabis businesses to pay federal taxes on gross revenue — not profit — because of drug scheduling. Reform could put thousands of dollars back in operators' pockets.",
         brief_link='bills.html', brief_link_label='View Legislation Tracker'))
 
@@ -1256,7 +1279,7 @@ def build_signal_panel(bills, executive, news):
             risk_h = 'MONITOR'
             l_hemp = 'bills.html'
     tiles.append(tile('🌿', 'HEMP / FARM BILL', risk_h, s_hemp, d_hemp, l_hemp,
-        video_id='fkep9KcbvZA', brief_id='brief-hemp',
+        video_id=vids['hemp'], brief_id='brief-hemp',
         brief_text='The Farm Bill reauthorization will set the rules for hemp-derived cannabinoids — including CBD, Delta-8, and Delta-9 products — for the next five years.',
         brief_link='bills.html', brief_link_label='View Legislation Tracker'))
 
@@ -1276,7 +1299,7 @@ def build_signal_panel(bills, executive, news):
         risk_e = 'MONITOR'
         l_exec = 'executive.html'
     tiles.append(tile('🏛', 'EXECUTIVE ACTIONS', risk_e, s_exec, d_exec, l_exec,
-        video_id='VeUrjEGPvww', brief_id='brief-exec',
+        video_id=vids['exec'], brief_id='brief-exec',
         brief_text="Presidential orders and executive agency actions can move faster than legislation — and they're reshaping the cannabis regulatory landscape right now.",
         brief_link='executive.html', brief_link_label='View Executive Tracker'))
 
@@ -1301,9 +1324,8 @@ def build_signal_panel(bills, executive, news):
         s_crit = "Monitoring all active legislative signals"
         d_crit = ''
         l_crit = 'bills.html'
-    critical_watch_video_id = fetch_critical_watch_video_id()
     tiles.append(tile('⚠', 'CRITICAL WATCH', rl_c, s_crit, d_crit, l_crit,
-        video_id=critical_watch_video_id,
+        video_id=vids['critical'],
         brief_id='brief-critical',
         brief_text='The Critical Watch signal flags the highest-risk active legislation affecting cannabis and vapor operators. When this tile lights up, regulatory action may be required.',
         brief_link='bills.html', brief_link_label='View Legislation Tracker'))
