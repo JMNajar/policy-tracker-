@@ -69,25 +69,37 @@ async function scrapeSignalStatuses(page) {
 }
 
 // ── Change detection ───────────────────────────────────────────────────────
+const LEVEL = { MONITOR: 0, HIGH: 1, CRITICAL: 2 };
+
 function detectChanges(state, currentStatuses) {
-  const newCriticals = [];
-  const resolved     = [];
+  const toRegenerate = [];
 
   for (const { name, status } of currentStatuses) {
-    const key  = nameToKey(name);
-    const prev = state.signals[key]?.lastStatus;
+    const key      = nameToKey(name);
+    const prev     = state.signals[key]?.lastStatus;
+    const noVideo  = !state.signals[key]?.youtubeId;
+    const prevLvl  = LEVEL[prev] ?? -1;
+    const currLvl  = LEVEL[status] ?? 0;
 
-    if (status === 'CRITICAL' && prev !== 'CRITICAL') {
-      newCriticals.push(key);
-      log(`NEW CRITICAL: ${key} (was ${prev || 'unknown'})`);
-    }
-    if (prev === 'CRITICAL' && status !== 'CRITICAL') {
-      resolved.push(key);
-      log(`RESOLVED: ${key} (now ${status})`);
+    if (currLvl > prevLvl) {
+      toRegenerate.push(key);
+      log(`ESCALATED: ${key} (${prev || 'none'} → ${status}) — new video needed`);
+    } else if (noVideo) {
+      toRegenerate.push(key);
+      log(`NO VIDEO: ${key} (${status}) — generating first video`);
+    } else if (prevLvl > currLvl) {
+      log(`DE-ESCALATED: ${key} (${prev} → ${status}) — keeping existing video`);
     }
   }
 
-  return { newCriticals, resolved };
+  // Critical Watch always regenerates on Monday — it tracks the highest-priority
+  // active bill which changes week to week.
+  if (!toRegenerate.includes('critical-watch')) {
+    toRegenerate.push('critical-watch');
+    log('CRITICAL WATCH: weekly Monday regeneration scheduled');
+  }
+
+  return { toRegenerate };
 }
 
 // ── NotebookLM — generate video ────────────────────────────────────────────
@@ -402,64 +414,45 @@ async function main() {
     log('Scraped statuses:', JSON.stringify(currentStatuses));
 
     // 2. Detect changes
-    const { newCriticals, resolved } = detectChanges(state, currentStatuses);
+    const { toRegenerate } = detectChanges(state, currentStatuses);
 
-    if (newCriticals.length === 0 && resolved.length === 0) {
-      log('No signal changes detected. Pipeline done.');
+    if (toRegenerate.length === 0) {
+      log('No signals need new videos. Pipeline done.');
       await browser.close();
       return;
     }
 
     let embedChanged = false;
 
-    // 3. Handle newly CRITICAL signals — generate video if needed
-    for (const key of newCriticals) {
+    // 3. Generate new videos for all signals that need them
+    for (const key of toRegenerate) {
       const config = configs[key];
       if (!config) {
         log(`⚠ Unknown signal key "${key}" — add to signal-configs.json.`);
         continue;
       }
 
-      let youtubeId = state.signals[key]?.youtubeId;
+      log(`Running full pipeline for: ${key}`);
+      const youtubeId = await runVideoPipeline(page, config, key);
+      if (!youtubeId) continue;
 
-      if (!youtubeId) {
-        log(`No existing video for ${key}. Running full pipeline...`);
-        youtubeId = await runVideoPipeline(page, config, key);
-        if (!youtubeId) continue; // No notebook configured — skip
+      if (!state.signals[key]) state.signals[key] = {};
+      state.signals[key].youtubeId = youtubeId;
+      state.signals[key].videoPublishedAt = new Date().toISOString().slice(0, 10);
+      state.signals[key].embedDuration = config.embedDuration || null;
 
-        if (!state.signals[key]) state.signals[key] = {};
-        state.signals[key].youtubeId = youtubeId;
-        state.signals[key].videoPublishedAt = new Date().toISOString().slice(0, 10);
-        state.signals[key].embedDuration = config.embedDuration || null;
-      } else {
-        log(`Reusing existing video for ${key}: ${youtubeId}`);
-      }
-
-      // Add to active videos list if not already there
-      const alreadyActive = (state.activeVideos || []).some(v => v.signalKey === key);
-      if (!alreadyActive) {
-        if (!state.activeVideos) state.activeVideos = [];
-        state.activeVideos.push({
-          signalKey: key,
-          youtubeId,
-          publishedAt: state.signals[key].videoPublishedAt
-        });
-      }
+      // Upsert into active videos list
+      if (!state.activeVideos) state.activeVideos = [];
+      state.activeVideos = state.activeVideos.filter(v => v.signalKey !== key);
+      state.activeVideos.push({
+        signalKey: key,
+        youtubeId,
+        publishedAt: state.signals[key].videoPublishedAt
+      });
       embedChanged = true;
     }
 
-    // 4. Handle resolved signals — remove from active video list
-    for (const key of resolved) {
-      if (!state.activeVideos) continue;
-      const before = state.activeVideos.length;
-      state.activeVideos = state.activeVideos.filter(v => v.signalKey !== key);
-      if (state.activeVideos.length < before) {
-        log(`Removed video for resolved signal: ${key}`);
-        embedChanged = true;
-      }
-    }
-
-    // 5. Update signal status in state
+    // 4. Update signal status in state
     for (const { name, status } of currentStatuses) {
       const key = nameToKey(name);
       if (!state.signals[key]) state.signals[key] = {};
@@ -468,14 +461,10 @@ async function main() {
     state.lastRun = new Date().toISOString();
     saveJSON(STATE_PATH, state);
 
-    // 6. Rebuild index.html and deploy if anything changed
+    // 5. Rebuild index.html and deploy if any video changed
     if (embedChanged) {
       updateIndexHtml(state, configs);
-      const labels = [
-        ...newCriticals.map(k => `+${k}`),
-        ...resolved.map(k => `-${k}`)
-      ].join(', ');
-      gitPush(`Auto: signal update [${labels}]\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`);
+      gitPush(`Auto: Monday signal video update [${toRegenerate.join(', ')}]\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`);
     }
 
     log('=== Pipeline COMPLETE ===');

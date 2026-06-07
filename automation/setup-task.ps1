@@ -17,7 +17,7 @@ $Action  = New-ScheduledTaskAction `
     -Execute "powershell.exe" `
     -Argument "-NonInteractive -ExecutionPolicy Bypass -File `"$ScriptPath`""
 
-$Trigger = New-ScheduledTaskTrigger -Daily -At "8:00AM"
+$Trigger = New-ScheduledTaskTrigger -Weekly -DaysOfWeek Monday -At "6:30AM"
 
 $Settings = New-ScheduledTaskSettingsSet `
     -StartWhenAvailable `
@@ -30,10 +30,10 @@ $Task = Register-ScheduledTask `
     -Trigger   $Trigger `
     -Settings  $Settings `
     -RunLevel  Highest `
-    -Description "GFTO AI Compliance Engine: detects CRITICAL signals, generates NotebookLM video, uploads to YouTube, embeds on policy tracker homepage same day."
+    -Description "GFTO AI Compliance Engine: every Monday 6:30AM — detects signal risk changes, regenerates NotebookLM videos, uploads to YouTube, embeds on policy tracker homepage automatically."
 
 Write-Host "Task registered: $TaskName"
-Write-Host "Runs: Daily at 8:00 AM"
+Write-Host "Runs: Every Monday at 6:30 AM (after GitHub Actions 5AM build deploys to Vercel)"
 Write-Host "Script: $ScriptPath"
 Write-Host ""
 Write-Host "IMPORTANT — First-run auth setup required:"
