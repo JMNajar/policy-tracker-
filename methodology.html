@@ -226,6 +226,10 @@
   .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+  /* SIGNAL PANEL GRID */
+  .signal-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:.6rem; }
+  .table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .hero h1 { font-size: 1.7rem; }
@@ -241,6 +245,16 @@
     .stat-card { min-width: 120px; padding: .9rem 1rem; }
     .cred-bar { padding: .4rem 1rem; gap: .5rem; }
     .cred-bar .cred-verified { margin-left: 0; }
+    .signal-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .signal-panel-outer { padding: 1rem; }
+    .container { padding: 1.5rem 1rem; }
+    .data-table { font-size: .78rem; }
+  }
+  @media (max-width: 560px) {
+    .signal-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .hero h1 { font-size: 1.4rem; }
+    .hero p { font-size: .88rem; }
+    .stat-card .num { font-size: 1.4rem; }
   }
 </style>
 </head>
@@ -264,8 +278,8 @@
   <span class="cred-pipe">·</span>
   <span class="cred-media">Official cannabis news supplier to <strong>Easyriders Magazine</strong></span>
   <span class="cred-pipe">·</span>
-  <span class="cred-freshness">Final Rule — 39 days ago</span>
-  <span class="cred-verified">Last verified June 06, 2026</span>
+  <span class="cred-freshness">Final Rule — 40 days ago</span>
+  <span class="cred-verified">Last verified June 07, 2026</span>
 </div>
 
 <div class="hero">
@@ -375,7 +389,7 @@
 
   <p style="font-size:.82rem;color:#5a6a80;margin-top:2rem;">
     For informational purposes only. Not legal advice. Not investment advice.
-    All government data is public domain. Last updated June 06, 2026.
+    All government data is public domain. Last updated June 07, 2026.
   </p>
 
 </div>
@@ -414,7 +428,7 @@
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
-    Updated June 06, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
+    Updated June 07, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
     &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
     <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
     <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,

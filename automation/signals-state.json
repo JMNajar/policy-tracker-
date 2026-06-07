@@ -20,6 +20,11 @@
       "signalKey": "hemp-farm-bill",
       "youtubeId": "fkep9KcbvZA",
       "publishedAt": "2026-06-06"
+    },
+    {
+      "signalKey": "executive-actions",
+      "youtubeId": "VeUrjEGPvww",
+      "publishedAt": "2026-06-06"
     }
   ],
   "signals": {
@@ -49,9 +54,9 @@
     },
     "executive-actions": {
       "lastStatus": "MONITOR",
-      "youtubeId": null,
-      "videoPublishedAt": null,
-      "embedDuration": null
+      "youtubeId": "VeUrjEGPvww",
+      "videoPublishedAt": "2026-06-06",
+      "embedDuration": "2:48"
     },
     "critical-watch": {
       "lastStatus": "HIGH",

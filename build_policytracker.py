@@ -37,6 +37,10 @@ MUTED  = "#5a6a80"
 
 TODAY_SHORT = datetime.now().strftime("%b %d")   # e.g., "Apr 25"
 
+# ── YOUTUBE CHANNEL (for Critical Watch auto-detect) ─────────────────────────
+# Find your channel ID in YouTube Studio → Settings → Channel → Advanced Settings
+YOUTUBE_CHANNEL_ID = ''  # e.g. 'UCxxxxxxxxxxxxxxxxxxxxxxxxxx'
+
 # ── FRESHNESS STATE ───────────────────────────────────────────────────────────
 FRESHNESS = None   # Set in main() after fetching executive actions
 
@@ -262,6 +266,10 @@ CSS = f"""
   .nav-hamburger.open span:nth-child(2) {{ opacity: 0; transform: scaleX(0); }}
   .nav-hamburger.open span:nth-child(3) {{ transform: translateY(-7px) rotate(-45deg); }}
 
+  /* SIGNAL PANEL GRID */
+  .signal-grid {{ display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:.6rem; }}
+  .table-scroll {{ overflow-x:auto; -webkit-overflow-scrolling:touch; }}
+
   /* RESPONSIVE */
   @media (max-width: 768px) {{
     .hero h1 {{ font-size: 1.7rem; }}
@@ -277,6 +285,16 @@ CSS = f"""
     .stat-card {{ min-width: 120px; padding: .9rem 1rem; }}
     .cred-bar {{ padding: .4rem 1rem; gap: .5rem; }}
     .cred-bar .cred-verified {{ margin-left: 0; }}
+    .signal-grid {{ grid-template-columns: repeat(3, minmax(0,1fr)); }}
+    .signal-panel-outer {{ padding: 1rem; }}
+    .container {{ padding: 1.5rem 1rem; }}
+    .data-table {{ font-size: .78rem; }}
+  }}
+  @media (max-width: 560px) {{
+    .signal-grid {{ grid-template-columns: repeat(2, minmax(0,1fr)); }}
+    .hero h1 {{ font-size: 1.4rem; }}
+    .hero p {{ font-size: .88rem; }}
+    .stat-card .num {{ font-size: 1.4rem; }}
   }}
 """
 
@@ -1039,6 +1057,22 @@ CONFLICT_LAWMAKERS = {
     "Mike Crapo":          {"committee": "Senate Banking & Finance",   "industry": "Pharmaceutical"},
 }
 
+# ── YOUTUBE: AUTO-DETECT CRITICAL WATCH VIDEO ────────────────────────────────
+def fetch_critical_watch_video_id():
+    """Scan the channel RSS feed for the latest video titled 'Critical Watch'."""
+    if not YOUTUBE_CHANNEL_ID:
+        return ''
+    try:
+        url = f'https://www.youtube.com/feeds/videos.xml?channel_id={YOUTUBE_CHANNEL_ID}'
+        feed = feedparser.parse(url)
+        for entry in feed.entries:
+            if 'critical watch' in entry.get('title', '').lower():
+                return entry.get('yt_videoid', '')
+    except Exception as e:
+        print(f'  Critical Watch YouTube RSS error: {e}')
+    return ''
+
+
 # ── SIGNAL PANEL ─────────────────────────────────────────────────────────────
 def build_signal_panel(bills, executive, news):
     """Generate the 6-tile regulatory signal dashboard above the news feed."""
@@ -1056,7 +1090,8 @@ def build_signal_panel(bills, executive, news):
                 return item
         return None
 
-    def tile(icon, label, risk, status_text, date_str, link):
+    def tile(icon, label, risk, status_text, date_str, link,
+             video_id='', brief_id='', brief_text='', brief_link='', brief_link_label='', brief_new_tab=False):
         now = datetime.now(timezone.utc)
         dt = parse_date(date_str)
         days = (now - dt).days if dt else 999
@@ -1077,8 +1112,49 @@ def build_signal_panel(bills, executive, news):
         badge_bg = tc
 
         target = 'target="_blank" rel="noopener"' if link.startswith('http') else ''
-        return f"""<a href="{link}" {target} style="text-decoration:none;flex:1;min-width:148px;max-width:210px">
-  <div class="sig-tile" style="background:{bg};border:1px solid {bc};border-left:4px solid {tc};border-radius:8px;padding:.85rem 1rem;height:100%">
+
+        if video_id:
+            btn_watch = (
+                f'<button onclick="event.preventDefault();event.stopPropagation();openVideoModal(\'{video_id}\')"'
+                f' style="margin-top:.65rem;width:100%;background:{tc};color:#fff;border:none;border-radius:6px;'
+                f'padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;'
+                f'align-items:center;justify-content:center;gap:.25rem">&#9654; Watch Briefing</button>'
+            )
+        else:
+            btn_watch = (
+                '<button disabled style="margin-top:.65rem;width:100%;background:#9E9E9E;color:#fff;border:none;'
+                'border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:not-allowed;'
+                'display:flex;align-items:center;justify-content:center;gap:.25rem">&#8987; Briefing Coming Soon</button>'
+            )
+
+        if brief_text and brief_id:
+            nav_js = f"window.open('{brief_link}','_blank')" if brief_new_tab else f"window.location.href='{brief_link}'"
+            btn_read = (
+                f'<button onclick="event.preventDefault();event.stopPropagation();toggleBrief(\'{brief_id}\')"'
+                f' style="margin-top:.3rem;width:100%;background:transparent;color:{tc};border:1px solid {tc};'
+                f'border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;'
+                f'align-items:center;justify-content:center;gap:.25rem">&#128203; Read the Brief</button>'
+            )
+            brief_div = (
+                f'<div id="{brief_id}" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;'
+                f'z-index:50;background:{bg};border:1px solid {bc};border-radius:6px;padding:.6rem .75rem;'
+                f'box-shadow:0 4px 16px rgba(0,0,0,.15)">'
+                f'<p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">{brief_text}</p>'
+                f'<button onclick="event.stopPropagation();{nav_js}" style="font-size:.7rem;font-weight:700;'
+                f'color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;'
+                f'border-radius:5px;cursor:pointer">&#127963; {brief_link_label} &#8594;</button>'
+                f'</div>'
+            )
+        else:
+            btn_read = (
+                '<button disabled style="margin-top:.3rem;width:100%;background:transparent;color:#9E9E9E;'
+                'border:1px solid #9E9E9E;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;'
+                'cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:.25rem">&#128203; Coming Soon</button>'
+            )
+            brief_div = ''
+
+        return f"""<a href="{link}" {target} style="text-decoration:none;position:relative;display:block">
+  <div class="sig-tile" style="background:{bg};border:1px solid {bc};border-left:4px solid {tc};border-radius:8px;padding:.85rem 1rem">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
       <span style="font-size:.7rem;font-weight:800;color:{tc};letter-spacing:.04em;line-height:1.2">{icon}&nbsp;{label}</span>
       {dot_html}
@@ -1087,6 +1163,9 @@ def build_signal_panel(bills, executive, news):
       <span style="background:{badge_bg};color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">{risk}</span>
     </div>
     <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">{status_text}</div>
+    {btn_watch}
+    {btn_read}
+    {brief_div}
   </div>
 </a>"""
 
@@ -1108,7 +1187,10 @@ def build_signal_panel(bills, executive, news):
         risk_b = 'HIGH'
         d_bank = ''
         l_bank = 'bills.html'
-    tiles.append(tile('🏦', 'BANKING ACCESS', risk_b, s_bank, d_bank, l_bank))
+    tiles.append(tile('🏦', 'BANKING ACCESS', risk_b, s_bank, d_bank, l_bank,
+        video_id='QbUbJ9_hwhs', brief_id='brief-banking',
+        brief_text='Cannabis businesses are locked out of normal banking — no accounts, loans, or card processing — because federal law still classifies marijuana as a controlled substance.',
+        brief_link='bills.html', brief_link_label='View Legislation Tracker'))
 
     # ── 2. Schedule III / DEA ────────────────────────────────────────────────
     # Must mention cannabis/marijuana AND scheduling to avoid synthetic drug false matches
@@ -1130,7 +1212,11 @@ def build_signal_panel(bills, executive, news):
             d_iii = ''
             risk_iii = 'HIGH'
             l_iii = 'executive.html'
-    tiles.append(tile('💊', 'SCHEDULE III', risk_iii, s_iii, d_iii, l_iii))
+    tiles.append(tile('💊', 'SCHEDULE III', risk_iii, s_iii, d_iii, l_iii,
+        video_id='hMgzPL2Bmeg', brief_id='brief-schedule3',
+        brief_text='The DEA has officially moved marijuana from Schedule I to Schedule III — eliminating the Section 280E tax burden for state-licensed cannabis operators.',
+        brief_link='https://www.federalregister.gov/documents/2026/04/28/2026-08176/schedules-of-controlled-substances-rescheduling-of-food-and-drug-administration-approved-products',
+        brief_link_label='Federal Register Rule', brief_new_tab=True))
 
     # ── 3. 280E Tax ──────────────────────────────────────────────────────────
     b_tax = find_best(bills, ['title'], ['280e', 'tax deduction', 'internal revenue cannabis', 'cannabis tax'])
@@ -1145,7 +1231,10 @@ def build_signal_panel(bills, executive, news):
         d_tax = ''
         risk_t = 'MONITOR'
         l_tax = 'bills.html'
-    tiles.append(tile('💸', '280E TAX REFORM', risk_t, s_tax, d_tax, l_tax))
+    tiles.append(tile('💸', '280E TAX REFORM', risk_t, s_tax, d_tax, l_tax,
+        video_id='Zj1gBLDsaWM', brief_id='brief-280e',
+        brief_text="Section 280E forces cannabis businesses to pay federal taxes on gross revenue — not profit — because of drug scheduling. Reform could put thousands of dollars back in operators' pockets.",
+        brief_link='bills.html', brief_link_label='View Legislation Tracker'))
 
     # ── 4. Hemp / Farm Bill ──────────────────────────────────────────────────
     b_hemp = find_best(bills, ['title', 'latest_action'], ['hemp', 'farm bill', 'farm, food', 'thc limit', 'delta-8', 'delta 8', 'intoxicating'])
@@ -1166,7 +1255,10 @@ def build_signal_panel(bills, executive, news):
             d_hemp = ''
             risk_h = 'MONITOR'
             l_hemp = 'bills.html'
-    tiles.append(tile('🌿', 'HEMP / FARM BILL', risk_h, s_hemp, d_hemp, l_hemp))
+    tiles.append(tile('🌿', 'HEMP / FARM BILL', risk_h, s_hemp, d_hemp, l_hemp,
+        video_id='fkep9KcbvZA', brief_id='brief-hemp',
+        brief_text='The Farm Bill reauthorization will set the rules for hemp-derived cannabinoids — including CBD, Delta-8, and Delta-9 products — for the next five years.',
+        brief_link='bills.html', brief_link_label='View Legislation Tracker'))
 
     # ── 5. Executive Actions ─────────────────────────────────────────────────
     e_latest = executive[0] if executive else None
@@ -1183,7 +1275,10 @@ def build_signal_panel(bills, executive, news):
         d_exec = ''
         risk_e = 'MONITOR'
         l_exec = 'executive.html'
-    tiles.append(tile('🏛', 'EXECUTIVE ACTIONS', risk_e, s_exec, d_exec, l_exec))
+    tiles.append(tile('🏛', 'EXECUTIVE ACTIONS', risk_e, s_exec, d_exec, l_exec,
+        video_id='VeUrjEGPvww', brief_id='brief-exec',
+        brief_text="Presidential orders and executive agency actions can move faster than legislation — and they're reshaping the cannabis regulatory landscape right now.",
+        brief_link='executive.html', brief_link_label='View Executive Tracker'))
 
     # ── 6. Critical Watch — highest-scoring active bill ──────────────────────
     crit_bill = None
@@ -1206,13 +1301,18 @@ def build_signal_panel(bills, executive, news):
         s_crit = "Monitoring all active legislative signals"
         d_crit = ''
         l_crit = 'bills.html'
-    tiles.append(tile('⚠', 'CRITICAL WATCH', rl_c, s_crit, d_crit, l_crit))
+    critical_watch_video_id = fetch_critical_watch_video_id()
+    tiles.append(tile('⚠', 'CRITICAL WATCH', rl_c, s_crit, d_crit, l_crit,
+        video_id=critical_watch_video_id,
+        brief_id='brief-critical',
+        brief_text='The Critical Watch signal flags the highest-risk active legislation affecting cannabis and vapor operators. When this tile lights up, regulatory action may be required.',
+        brief_link='bills.html', brief_link_label='View Legislation Tracker'))
 
     tiles_html = '\n'.join(tiles)
 
     return f"""
-<div style="background:#FEFCE8;border-top:3px solid {NAVY};border-bottom:1px solid {BORDER};padding:1.5rem 2rem">
-  <div style="max-width:1000px;margin:0 auto">
+<div class="signal-panel-outer" style="background:#FEFCE8;border-top:3px solid {NAVY};border-bottom:1px solid {BORDER}">
+  <div style="max-width:1500px;margin:0 auto">
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.4rem">
       <div>
         <span style="font-size:.62rem;font-weight:800;color:{NAVY};letter-spacing:.12em;text-transform:uppercase">Signal Panel</span>
@@ -1220,7 +1320,7 @@ def build_signal_panel(bills, executive, news):
       </div>
       <span style="font-size:.68rem;color:{MUTED}">Updated {TODAY} &nbsp;·&nbsp; <span style="color:#2E7D32;font-weight:700">&#9679; ACTIVE</span> = movement in last 7 days</span>
     </div>
-    <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+    <div class="signal-grid">
       {tiles_html}
     </div>
   </div>
@@ -1228,7 +1328,32 @@ def build_signal_panel(bills, executive, news):
 <style>
   .sig-tile {{ transition: box-shadow .18s, transform .18s; cursor: pointer; }}
   .sig-tile:hover {{ box-shadow: 0 4px 18px rgba(27,67,50,.15); transform: translateY(-2px); }}
-</style>"""
+</style>
+<div id="vid-modal" onclick="closeVideoModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center">
+  <div onclick="event.stopPropagation()" style="position:relative;width:min(900px,92vw);background:#000;border-radius:10px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.7)">
+    <button onclick="closeVideoModal()" style="position:absolute;top:.55rem;right:.7rem;background:rgba(255,255,255,.18);border:none;color:#fff;font-size:1.1rem;font-weight:900;width:34px;height:34px;border-radius:50%;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center">&#x2715;</button>
+    <div style="position:relative;padding-bottom:56.25%;height:0">
+      <iframe id="vid-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
+    </div>
+  </div>
+</div>
+<script>
+function toggleBrief(id) {{
+  var el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}}
+function openVideoModal(id) {{
+  document.getElementById('vid-iframe').src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+  document.getElementById('vid-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}}
+function closeVideoModal() {{
+  document.getElementById('vid-iframe').src = '';
+  document.getElementById('vid-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}}
+document.addEventListener('keydown', function(e) {{ if (e.key === 'Escape') closeVideoModal(); }});
+</script>"""
 
 
 # ── BUILD: INDEX (HOME) ───────────────────────────────────────────────────────

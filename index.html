@@ -228,8 +228,6 @@
 
   /* SIGNAL PANEL GRID */
   .signal-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:.6rem; }
-
-  /* TABLE SCROLL */
   .table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
 
   /* RESPONSIVE */
@@ -248,8 +246,8 @@
     .cred-bar { padding: .4rem 1rem; gap: .5rem; }
     .cred-bar .cred-verified { margin-left: 0; }
     .signal-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
-    .container { padding: 1.5rem 1rem; }
     .signal-panel-outer { padding: 1rem; }
+    .container { padding: 1.5rem 1rem; }
     .data-table { font-size: .78rem; }
   }
   @media (max-width: 560px) {
@@ -297,7 +295,7 @@
 </div>
 
 
-<div class="signal-panel-outer" style="background:#FEFCE8;border-top:3px solid #1B4332;border-bottom:1px solid #DDE3ED;padding:1.5rem 2rem">
+<div class="signal-panel-outer" style="background:#FEFCE8;border-top:3px solid #1B4332;border-bottom:1px solid #DDE3ED">
   <div style="max-width:1500px;margin:0 auto">
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.4rem">
       <div>
@@ -307,20 +305,19 @@
       <span style="font-size:.68rem;color:#5a6a80">Updated June 07, 2026 &nbsp;·&nbsp; <span style="color:#2E7D32;font-weight:700">&#9679; ACTIVE</span> = movement in last 7 days</span>
     </div>
     <div class="signal-grid">
-      <a href="bills.html" style="text-decoration:none;position:relative;display:block">
+      <a href="bills.html"  style="text-decoration:none;position:relative;display:block">
   <div class="sig-tile" style="background:#FFF8F0;border:1px solid #FFCC80;border-left:4px solid #B8520A;border-radius:8px;padding:.85rem 1rem">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
       <span style="font-size:.7rem;font-weight:800;color:#B8520A;letter-spacing:.04em;line-height:1.2">🏦&nbsp;BANKING ACCESS</span>
       <span style="color:#BDBDBD;font-size:.63rem;font-weight:600;white-space:nowrap">&#9675; QUIET</span>
     </div>
-    <div style="margin-bottom:.5rem"><span style="background:#B8520A;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">HIGH</span></div>
-    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">SAFER Banking — Senate calendar pending</div>
-    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('QbUbJ9_hwhs')" style="margin-top:.65rem;width:100%;background:#1B4332;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">▶ Watch Briefing</button>
-    <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-banking')" style="margin-top:.3rem;width:100%;background:transparent;color:#B8520A;border:1px solid #B8520A;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">📋 Read the Brief</button>
-    <div id="brief-banking" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#FFF8F0;border:1px solid #FFCC80;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)">
-      <p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">Cannabis businesses are locked out of normal banking — no accounts, loans, or card processing — because federal law still classifies marijuana as a controlled substance.</p>
-      <button onclick="event.stopPropagation();window.location.href='bills.html'" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">🏛 View Legislation Tracker →</button>
+    <div style="margin-bottom:.5rem">
+      <span style="background:#B8520A;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">HIGH</span>
     </div>
+    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">SAFER Banking — Senate calendar pending</div>
+    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('QbUbJ9_hwhs')" style="margin-top:.65rem;width:100%;background:#B8520A;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#9654; Watch Briefing</button>
+    <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-banking')" style="margin-top:.3rem;width:100%;background:transparent;color:#B8520A;border:1px solid #B8520A;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#128203; Read the Brief</button>
+    <div id="brief-banking" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#FFF8F0;border:1px solid #FFCC80;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)"><p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">Cannabis businesses are locked out of normal banking — no accounts, loans, or card processing — because federal law still classifies marijuana as a controlled substance.</p><button onclick="event.stopPropagation();window.location.href='bills.html'" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">&#127963; View Legislation Tracker &#8594;</button></div>
   </div>
 </a>
 <a href="https://www.federalregister.gov/documents/2026/04/28/2026-08176/schedules-of-controlled-substances-rescheduling-of-food-and-drug-administration-approved-products" target="_blank" rel="noopener" style="text-decoration:none;position:relative;display:block">
@@ -329,46 +326,43 @@
       <span style="font-size:.7rem;font-weight:800;color:#B71C1C;letter-spacing:.04em;line-height:1.2">💊&nbsp;SCHEDULE III</span>
       <span style="color:#BDBDBD;font-size:.63rem;font-weight:600;white-space:nowrap">&#9675; QUIET</span>
     </div>
-    <div style="margin-bottom:.5rem"><span style="background:#B71C1C;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">CRITICAL</span></div>
-    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">Schedules of Controlled Substances: Rescheduling of Food and · 2026-04-28</div>
-    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('hMgzPL2Bmeg')" style="margin-top:.65rem;width:100%;background:#B71C1C;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">▶ Watch Briefing</button>
-    <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-schedule3')" style="margin-top:.3rem;width:100%;background:transparent;color:#B71C1C;border:1px solid #B71C1C;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">📋 Read the Brief</button>
-    <div id="brief-schedule3" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#FFF5F5;border:1px solid #EF9A9A;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)">
-      <p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">The DEA has officially moved marijuana from Schedule I to Schedule III — eliminating the Section 280E tax burden for state-licensed cannabis operators.</p>
-      <button onclick="event.stopPropagation();window.open('https://www.federalregister.gov/documents/2026/04/28/2026-08176/schedules-of-controlled-substances-rescheduling-of-food-and-drug-administration-approved-products','_blank')" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">🏛 Federal Register Rule →</button>
+    <div style="margin-bottom:.5rem">
+      <span style="background:#B71C1C;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">CRITICAL</span>
     </div>
+    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">Schedules of Controlled Substances: Rescheduling of Food and · 2026-04-28</div>
+    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('hMgzPL2Bmeg')" style="margin-top:.65rem;width:100%;background:#B71C1C;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#9654; Watch Briefing</button>
+    <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-schedule3')" style="margin-top:.3rem;width:100%;background:transparent;color:#B71C1C;border:1px solid #B71C1C;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#128203; Read the Brief</button>
+    <div id="brief-schedule3" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#FFF5F5;border:1px solid #EF9A9A;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)"><p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">The DEA has officially moved marijuana from Schedule I to Schedule III — eliminating the Section 280E tax burden for state-licensed cannabis operators.</p><button onclick="event.stopPropagation();window.open('https://www.federalregister.gov/documents/2026/04/28/2026-08176/schedules-of-controlled-substances-rescheduling-of-food-and-drug-administration-approved-products','_blank')" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">&#127963; Federal Register Rule &#8594;</button></div>
   </div>
 </a>
-<a href="bills.html" style="text-decoration:none;position:relative;display:block">
+<a href="bills.html"  style="text-decoration:none;position:relative;display:block">
   <div class="sig-tile" style="background:#F1F8F1;border:1px solid #A5D6A7;border-left:4px solid #1B5E20;border-radius:8px;padding:.85rem 1rem">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
       <span style="font-size:.7rem;font-weight:800;color:#1B5E20;letter-spacing:.04em;line-height:1.2">💸&nbsp;280E TAX REFORM</span>
       <span style="color:#BDBDBD;font-size:.63rem;font-weight:600;white-space:nowrap">&#9675; QUIET</span>
     </div>
-    <div style="margin-bottom:.5rem"><span style="background:#1B5E20;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">MONITOR</span></div>
-    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">280E reform — committee stage, no floor date</div>
-    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('Zj1gBLDsaWM')" style="margin-top:.65rem;width:100%;background:#1B5E20;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">▶ Watch Briefing</button>
-    <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-280e')" style="margin-top:.3rem;width:100%;background:transparent;color:#1B5E20;border:1px solid #1B5E20;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">📋 Read the Brief</button>
-    <div id="brief-280e" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#F1F8F1;border:1px solid #A5D6A7;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)">
-      <p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">Section 280E forces cannabis businesses to pay federal taxes on gross revenue — not profit — because of drug scheduling. Reform could put thousands of dollars back in operators' pockets.</p>
-      <button onclick="event.stopPropagation();window.location.href='bills.html'" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">🏛 View Legislation Tracker →</button>
+    <div style="margin-bottom:.5rem">
+      <span style="background:#1B5E20;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">MONITOR</span>
     </div>
+    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">280E reform — committee stage, no floor date</div>
+    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('Zj1gBLDsaWM')" style="margin-top:.65rem;width:100%;background:#1B5E20;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#9654; Watch Briefing</button>
+    <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-280e')" style="margin-top:.3rem;width:100%;background:transparent;color:#1B5E20;border:1px solid #1B5E20;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#128203; Read the Brief</button>
+    <div id="brief-280e" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#F1F8F1;border:1px solid #A5D6A7;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)"><p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">Section 280E forces cannabis businesses to pay federal taxes on gross revenue — not profit — because of drug scheduling. Reform could put thousands of dollars back in operators' pockets.</p><button onclick="event.stopPropagation();window.location.href='bills.html'" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">&#127963; View Legislation Tracker &#8594;</button></div>
   </div>
 </a>
-<a href="bills.html#bill-hr-7024" style="text-decoration:none;position:relative;display:block">
+<a href="bills.html#bill-hr-7024"  style="text-decoration:none;position:relative;display:block">
   <div class="sig-tile" style="background:#FFF8F0;border:1px solid #FFCC80;border-left:4px solid #B8520A;border-radius:8px;padding:.85rem 1rem">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
       <span style="font-size:.7rem;font-weight:800;color:#B8520A;letter-spacing:.04em;line-height:1.2">🌿&nbsp;HEMP / FARM BILL</span>
       <span style="color:#2E7D32;font-size:.63rem;font-weight:800;white-space:nowrap">&#9679; ACTIVE</span>
     </div>
-    <div style="margin-bottom:.5rem"><span style="background:#B8520A;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">HIGH</span></div>
-    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">Hemp Planting Predictability Act · 2026-06-03</div>
-    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('fkep9KcbvZA')" style="margin-top:.65rem;width:100%;background:#B8520A;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">▶ Watch Briefing</button>
-    <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-hemp')" style="margin-top:.3rem;width:100%;background:transparent;color:#B8520A;border:1px solid #B8520A;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">📋 Read the Brief</button>
-    <div id="brief-hemp" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#FFF8F0;border:1px solid #FFCC80;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)">
-      <p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">The Farm Bill reauthorization will set the rules for hemp-derived cannabinoids — including CBD, Delta-8, and Delta-9 products — for the next five years.</p>
-      <button onclick="event.stopPropagation();window.location.href='bills.html'" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">🏛 View Legislation Tracker →</button>
+    <div style="margin-bottom:.5rem">
+      <span style="background:#B8520A;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">HIGH</span>
     </div>
+    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">Hemp Planting Predictability Act · 2026-06-03</div>
+    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('fkep9KcbvZA')" style="margin-top:.65rem;width:100%;background:#B8520A;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#9654; Watch Briefing</button>
+    <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-hemp')" style="margin-top:.3rem;width:100%;background:transparent;color:#B8520A;border:1px solid #B8520A;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#128203; Read the Brief</button>
+    <div id="brief-hemp" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#FFF8F0;border:1px solid #FFCC80;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)"><p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">The Farm Bill reauthorization will set the rules for hemp-derived cannabinoids — including CBD, Delta-8, and Delta-9 products — for the next five years.</p><button onclick="event.stopPropagation();window.location.href='bills.html'" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">&#127963; View Legislation Tracker &#8594;</button></div>
   </div>
 </a>
 <a href="https://www.federalregister.gov/documents/2026/04/28/2026-08176/schedules-of-controlled-substances-rescheduling-of-food-and-drug-administration-approved-products" target="_blank" rel="noopener" style="text-decoration:none;position:relative;display:block">
@@ -377,26 +371,28 @@
       <span style="font-size:.7rem;font-weight:800;color:#1B5E20;letter-spacing:.04em;line-height:1.2">🏛&nbsp;EXECUTIVE ACTIONS</span>
       <span style="color:#BDBDBD;font-size:.63rem;font-weight:600;white-space:nowrap">&#9675; QUIET</span>
     </div>
-    <div style="margin-bottom:.5rem"><span style="background:#1B5E20;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">MONITOR</span></div>
-    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">Schedules of Controlled Substances: Rescheduling of Food and · 2026-04-28</div>
-    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('VeUrjEGPvww')" style="margin-top:.65rem;width:100%;background:#1B5E20;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">▶ Watch Briefing</button>
-    <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-exec')" style="margin-top:.3rem;width:100%;background:transparent;color:#1B5E20;border:1px solid #1B5E20;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">📋 Read the Brief</button>
-    <div id="brief-exec" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#F1F8F1;border:1px solid #A5D6A7;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)">
-      <p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">Presidential orders and executive agency actions can move faster than legislation — and they're reshaping the cannabis regulatory landscape right now.</p>
-      <button onclick="event.stopPropagation();window.open('https://policy-tracker-rosy.vercel.app','_blank')" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">🏛 View Policy Tracker →</button>
+    <div style="margin-bottom:.5rem">
+      <span style="background:#1B5E20;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">MONITOR</span>
     </div>
+    <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">Schedules of Controlled Substances: Rescheduling of Food and · 2026-04-28</div>
+    <button onclick="event.preventDefault();event.stopPropagation();openVideoModal('VeUrjEGPvww')" style="margin-top:.65rem;width:100%;background:#1B5E20;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#9654; Watch Briefing</button>
+    <button onclick="event.preventDefault();event.stopPropagation();toggleBrief('brief-exec')" style="margin-top:.3rem;width:100%;background:transparent;color:#1B5E20;border:1px solid #1B5E20;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.25rem">&#128203; Read the Brief</button>
+    <div id="brief-exec" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:50;background:#F1F8F1;border:1px solid #A5D6A7;border-radius:6px;padding:.6rem .75rem;box-shadow:0 4px 16px rgba(0,0,0,.15)"><p style="font-size:.73rem;color:#2a2a2a;line-height:1.5;margin:0 0 .5rem">Presidential orders and executive agency actions can move faster than legislation — and they're reshaping the cannabis regulatory landscape right now.</p><button onclick="event.stopPropagation();window.location.href='executive.html'" style="font-size:.7rem;font-weight:700;color:#1B4332;background:#E8F5E9;border:1px solid #A5D6A7;padding:.28rem .6rem;border-radius:5px;cursor:pointer">&#127963; View Executive Tracker &#8594;</button></div>
   </div>
 </a>
-<a href="bills.html" style="text-decoration:none;position:relative;display:block">
+<a href="bills.html"  style="text-decoration:none;position:relative;display:block">
   <div class="sig-tile" style="background:#FFF8F0;border:1px solid #FFCC80;border-left:4px solid #B8520A;border-radius:8px;padding:.85rem 1rem">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem;gap:.3rem">
       <span style="font-size:.7rem;font-weight:800;color:#B8520A;letter-spacing:.04em;line-height:1.2">⚠&nbsp;CRITICAL WATCH</span>
       <span style="color:#BDBDBD;font-size:.63rem;font-weight:600;white-space:nowrap">&#9675; QUIET</span>
     </div>
-    <div style="margin-bottom:.5rem"><span style="background:#B8520A;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">HIGH</span></div>
+    <div style="margin-bottom:.5rem">
+      <span style="background:#B8520A;color:#fff;font-size:.58rem;font-weight:800;padding:.1rem .42rem;border-radius:10px;letter-spacing:.05em">HIGH</span>
+    </div>
     <div style="font-size:.76rem;color:#2a2a2a;line-height:1.38;font-weight:500">Monitoring all active legislative signals</div>
-    <button disabled style="margin-top:.65rem;width:100%;background:#9E9E9E;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:.25rem">⏳ Briefing Coming Soon</button>
-    <button disabled style="margin-top:.3rem;width:100%;background:transparent;color:#9E9E9E;border:1px solid #9E9E9E;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:.25rem">📋 Coming Soon</button>
+    <button disabled style="margin-top:.65rem;width:100%;background:#9E9E9E;color:#fff;border:none;border-radius:6px;padding:.38rem .5rem;font-size:.67rem;font-weight:800;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:.25rem">&#8987; Briefing Coming Soon</button>
+    <button disabled style="margin-top:.3rem;width:100%;background:transparent;color:#9E9E9E;border:1px solid #9E9E9E;border-radius:6px;padding:.33rem .5rem;font-size:.67rem;font-weight:800;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:.25rem">&#128203; Coming Soon</button>
+    
   </div>
 </a>
     </div>
@@ -406,6 +402,31 @@
   .sig-tile { transition: box-shadow .18s, transform .18s; cursor: pointer; }
   .sig-tile:hover { box-shadow: 0 4px 18px rgba(27,67,50,.15); transform: translateY(-2px); }
 </style>
+<div id="vid-modal" onclick="closeVideoModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center">
+  <div onclick="event.stopPropagation()" style="position:relative;width:min(900px,92vw);background:#000;border-radius:10px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.7)">
+    <button onclick="closeVideoModal()" style="position:absolute;top:.55rem;right:.7rem;background:rgba(255,255,255,.18);border:none;color:#fff;font-size:1.1rem;font-weight:900;width:34px;height:34px;border-radius:50%;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center">&#x2715;</button>
+    <div style="position:relative;padding-bottom:56.25%;height:0">
+      <iframe id="vid-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
+    </div>
+  </div>
+</div>
+<script>
+function toggleBrief(id) {
+  var el = document.getElementById(id);
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+function openVideoModal(id) {
+  document.getElementById('vid-iframe').src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
+  document.getElementById('vid-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closeVideoModal() {
+  document.getElementById('vid-iframe').src = '';
+  document.getElementById('vid-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeVideoModal(); });
+</script>
 
 
 <div class="container" style="padding-top:2rem;padding-bottom:1rem">
@@ -413,7 +434,7 @@
   <h2>What Changed This Week</h2>
   <p class="section-intro">2 changes since 2026-06-06. Automatically compared against last week's build.</p>
   
-<div class="table-scroll"><table class="data-table" style="margin-bottom:0">
+<table class="data-table" style="margin-bottom:0">
   <thead><tr>
     <th style="width:80px">Change</th>
     <th>Bill / Action</th>
@@ -430,7 +451,8 @@
     <td style="font-weight:600;color:var(--navy)">Marijuana in Federally Assisted Housing Parity Act of 2025</td>
     <td style="color:var(--muted);font-size:.82rem">Status changed → <em>Read twice and referred to the Committee on Banking, Housing…</em></td>
   </tr></tbody>
-</table></div>
+</table>
+</div>
 <hr class="section-divider">
 
 <div class="container">
@@ -457,265 +479,65 @@
 
   <div class="card-grid" id="news-grid">
     
+    <div class="card" data-sectors="hemp">
+      <div class="card-source">WFAA</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxOVEdyVlNJUXg2WndWVkZqd3RkcXhTRDBaNEVDM3lFUnhhQnlDSWlyVllnUFkyOHhrQ0dsODhyS0Z4Wnd0RVpHcGQtRVZ0QjBiMldQb3lic05nb1JpY0VzV1Qxb3lMR0VwWU1XdmtNRHVYcE9xZmhnNnhhNnFvUEtLY0ZEckRIZVZyb1R0S3lKZWtxZllPRTRMQjEyc1AzRE95R2wxd0w3RjFEc1RvMWF3NjN4SW8zaC1JRFdhMThld0F5UGlNM2xxZHJWLTVJY2t0UGVROXlB?oc=5" target="_blank" rel="noopener">Texas can implement its smokable hemp ban for now, court rules - WFAA</a></div>
+      <div class="card-meta">Jun 06, 2026</div>
+      
+    </div>
     <div class="card" data-sectors="executive,hemp">
       <div class="card-source">Legis1</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE5WRVFQeEUzNXVtYl9WMGZ5UWhhOUkwVVFzcUdCdnc5WDZyaEgxeG1VSi1IelhMNVVMT2hqUHlzekhfTmJ6YnlkQ2l1QmRfOEdRRmt2X1o4ZWF6U0FJeWNjazlVYzNob0xHZUpoekVIeEFqc2lwSGc?oc=5" target="_blank" rel="noopener">Hemp Rules Rewritten: Industry Faces November Deadline - Legis1</a></div>
       <div class="card-meta">Jun 04, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('0726e12279e28972')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-0726e12279e28972" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-0726e12279e28972" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Federal hemp regulations overhaul will likely tighten delta-8/delta-10 THC product standards and testing requirements, forcing reformulation or discontinuation of compliant-seeming products currently generating significant revenue.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;November deadline requires immediate compliance pathway planning; expect final rule publication 60-90 days before enforcement to allow transition time.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Conduct immediate inventory audit of all hemp-derived THC products and engage regulatory counsel this month to model compliance scenarios and identify which SKUs require reformulation versus discontinuation before the deadline.</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
+      
     </div>
     <div class="card" data-sectors="hemp,retail">
       <div class="card-source">Foley Hoag</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiigJBVV95cUxNQWMyVkJvNnJjSnlPbEJ0X0JaMWtyajcwVXVyLXlXY1NLeWJVRXZEdjNXV2o1SlFJbTZ2QkVmSTRWLUtFWWNac1MwX0NYdmVGNXAyUnliVW1xa1lybDJJS0lrWWxtYWYtZzNIbnFQUUY1cjlGdVM0LXhQc2JWbV9WbWVDZnV4R0oxN3BiNFF4Ym5OLU9qQzlpQnJkSjlOS1Z5QzhBZ05CZTBYNGhRVHZ5SW5FRXhPZ0dhX1NtU0J2Z0JicjlvTVlpZUJtVnEtci1zWnZYczlnTE45RWxKRnQwdE9uOURLYldfY0UxTVlfektJQl85RWVwNXJOY2NJaWdKd1ozUWFUd0lLZw?oc=5" target="_blank" rel="noopener">Barr Proposal To Legalize and Regulate Hemp-Derived Consumer Products Enters Crowded Field of Hemp Legislation - Foley H</a></div>
       <div class="card-meta">Jun 03, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('336d2e5252a26ac4')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-336d2e5252a26ac4" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-336d2e5252a26ac4" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Federal hemp legalization could cannibalize cannabis market share by creating a federally-compliant alternative to cannabis products (edibles, smokables, extracts) that bypasses state licensing requirements and tax obligations, pressuring margins in non-adult-use states.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;Barr proposal enters legislative queue alongside competing hemp bills; no floor vote scheduled, but expect markup activity in relevant House/Senate committees within 6-12 months as competing bills consolidate.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Audit your product portfolio's hemp-derivative exposure and map which SKUs face displacement risk; brief your board on competitive scenarios if hemp products achieve federal parity with state-legal cannabis in your key markets.</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
-    </div>
-    <div class="card" data-sectors="hemp">
-      <div class="card-source">Harris Sliwoski LLP</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOQ1RhbmpKU2NwQnNNM2xVRFY4Wml0X3F4Um01dDVBenROVjlEZkU5RTRPYXBSZEstRFR3anUyUFNtZUpxa3hhWnNIbFZfczA5bGxkM0dRby0xNjF4UjA0bFlaSlh6N29fQ2k0M1B3WTlZSjNYeGczb0luelBkZUQ5YTRkZ0I4QQ?oc=5" target="_blank" rel="noopener">Minnesota’s New Cannabis and Hemp Laws - Canna Law Blog™ - Harris Sliwoski LLP</a></div>
-      <div class="card-meta">Jun 03, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('08c745401b89ec20')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-08c745401b89ec20" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-08c745401b89ec20" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Minnesota's legalization creates a new regulated market with specific licensing requirements, compliance standards, and operational rules that differ from existing hemp frameworks, requiring immediate portfolio review for entities currently operating under hemp provisions.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;Minnesota's adult-use framework is expected to launch in 2025 with licensing applications opening in phases throughout the year; hemp-to-cannabis transition rules and final regulatory details should clarify by Q1 2025.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Engage Harris Sliwoski or equivalent Minnesota cannabis counsel this month to audit current operations against forthcoming licensing requirements and map which existing hemp assets can convert versus require new applications under adult-use rules.</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
+      
     </div>
     <div class="card" data-sectors="hemp">
       <div class="card-source">Marijuana Moment</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxORy1rX2ZVRGRWWjBUUWF3SFMyZ001RURIbG1vZkZubGZMbXU0VFhwa0JfdnBKQksxRW5LUUtWaXpOUDcyX3lla1pSMjNrY3ZzR2VQN3ZvRUZHUE56R2NVczVPMjdYdWhpNGJLamNDTFVTbDNsQjdxZzh0MFJ3bTlVRUVIcDlWUmlrRW1vOGtrR2I3dFZ0X0tsUEZ2dWREb2ZQUS1nNF9WaWhmTWYtRTRVLWc0QkJHNlk?oc=5" target="_blank" rel="noopener">Amendments to save hemp THC from ban are blocked in Congress (Newsletter: June 3, 2026) - Marijuana Moment</a></div>
       <div class="card-meta">Jun 03, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('7a78e97a75fd6e98')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-7a78e97a75fd6e98" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-7a78e97a75fd6e98" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Federal hemp-derived THC products face potential regulatory restrictions or bans if Congress doesn't pass protective amendments, directly threatening the $8B+ hemp-THC market segment and forcing compliance pivots for multi-state operators with delta-8, delta-10, and HHC product lines.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;No specific amendment deadline identified; monitor Congressional calendar for next legislative window—likely fall 2026 session—as DEA interpretations of hemp legality remain in flux pending legislative action.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Conduct immediate portfolio audit of hemp-THC SKUs, secure legal counsel to model compliance scenarios under both "hemp THC permitted" and "hemp THC banned" outcomes, and establish government affairs budget for Q3-Q4 lobbying efforts with industry coalitions (NCIA, ACA).</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
+      
     </div>
     <div class="card" data-sectors="general">
       <div class="card-source">The Virginian-Pilot</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxNcjNVSFBZMlp3UjF0Z0FZT05jU1BqSG16TXhYbENITmpMcDE2LWhWdW5oUWpsMm9QdGdEQVlhcDY5enNGU1VkaWhVQWozbTN2MlJ0LVVBZVNiLWgtb2x2SjVqTDFVN04xRl92WFQ1WVFDTHVLMmJRVXBraGZhejVUX0Y4RQ?oc=5" target="_blank" rel="noopener">Here’s what federal changes could mean for cannabis laws in Virginia - The Virginian-Pilot</a></div>
       <div class="card-meta">Jun 02, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('0a9afd2838d70455')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-0a9afd2838d70455" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-0a9afd2838d70455" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Federal rescheduling or deschedul­ing could enable Virginia operators to access traditional banking, claim federal tax deductions (Section 280E relief), and potentially reduce state licensing barriers, but may also trigger federal enforcement priorities and interstate commerce complications if Virginia's regulatory framework becomes non-compliant.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;Federal action remains uncertain pending DEA rescheduling review (no confirmed deadline); Virginia legislative sessions occur annually in January, making 2025 the likely window for state law alignment if federal changes materialize by mid-year.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Engage your government affairs team to monitor federal developments weekly and map Virginia's current regulatory gaps against potential federal compliance requirements; simultaneously, commission legal analysis of your banking, tax, and licensing vulnerabilities under three federal scenarios (status quo, Schedule III, full descheduling).</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
+      
     </div>
     <div class="card" data-sectors="hemp">
       <div class="card-source">SC Daily Gazette</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxNODYtS2pkM0t3UkM0ODJMMHJZeWoxZ0FpS3E5WEZJODhtb2RzOWZiR19ublJSY3VselJ1SmljUHdqZzZWZEh5UzVyczJJVXhSbVo1MTV4MzdETWJBQ0xma3Z5Sk1RU1ZLQlF6a0FZY3ZmV2ZTUWFMZGxROThOMS1oMnpqQ05GZUNTX2MteEhZSnVVdUczRHVHWEVvbWVEdFpkMXFiQ081cW45dWpwWDJr?oc=5" target="_blank" rel="noopener">SC legislators’ effort to restrict THC hemp products depends on Congress - SC Daily Gazette</a></div>
       <div class="card-meta">Jun 01, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('e4ba0477a632df85')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-e4ba0477a632df85" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-e4ba0477a632df85" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;South Carolina's ability to restrict THC hemp products remains contingent on federal legislative action, meaning your hemp-derived cannabinoid business (delta-8, delta-10, HHC) faces continued regulatory uncertainty in SC but no immediate prohibition.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;No specific federal timeline exists; SC legislative restrictions are effectively stalled pending Congressional movement on hemp regulation, likely 6-18 months minimum if federal reform advances.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Audit your SC inventory and sales channels for hemp-derived products and establish a contingency plan for potential state-level restrictions; simultaneously monitor federal hemp rescheduling bills (particularly Farm Bill reauthorization conversations in late 2024-2025).</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
+      
     </div>
     <div class="card" data-sectors="general">
       <div class="card-source">Michigan State University</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxPRVJxM3hLMURHZFpsSE1KbGR3UDhwRUxQZHExbjZ5ZXhVUTBqUDFBNkpnZ2xrOGdwQlFQNmpycTBtT1lyZVhfWFpWekg5R2hzRWZEZ2FlbEdTZ0VId0c3ZzBQUE1GNm1qbl9Yd2lJbFg2dng2eGoyZWRNVFJlZHBpWHJJREE5UGYzb3Exakp5NmtFLTFJamw1VXJuQlV4V2hXWkc4MFM1d0Nadw?oc=5" target="_blank" rel="noopener">Ask the Expert: How federal laws impact cannabis research in Michigan - Michigan State University</a></div>
       <div class="card-meta">Jun 01, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('b96d50afd8fcc191')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-b96d50afd8fcc191" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-b96d50afd8fcc191" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Federal scheduling of cannabis as Schedule I restricts Michigan cultivators and retailers from participating in DEA-approved research that could validate product claims, access banking partnerships, and inform compliance standards—limiting competitive differentiation through clinical evidence.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;No immediate deadline, but research partnerships through MSU require federal DEA approval (typically 6-12 months), making early engagement critical for Q4 2024 or 2025 study enrollment.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Contact MSU's cannabis research office this month to identify which of your product categories (CBD, minor cannabinoids, or full-spectrum formulations) qualify for federally-compliant studies, and secure legal review of participation requirements before committing resources.</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
+      
     </div>
     <div class="card" data-sectors="general">
       <div class="card-source">Stateline</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxNT1dIdFR6R3NjMUdsVDRXdG0wSGRRRmthSGN3Vm9SZzBha1E3NGFITzgxcDFZYWZyLUhQWDZIbU4xX1c3YW9mcmhKeHRSbWlsTDlTclRnOWlJT2Y5bjVMNkVwTkxsai1vcEdiUHM5T0s0OTVlSERhQ3lITFFpbzMzVk9xYVBqTFZTRXhaOWpaMF9KS2xTOVEwc2lOejVDQQ?oc=5" target="_blank" rel="noopener">The feds have embraced medical marijuana. Now what? - Stateline</a></div>
       <div class="card-meta">May 29, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('9be46a15e445242d')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-9be46a15e445242d" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-9be46a15e445242d" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Federal acceptance of medical marijuana creates regulatory arbitrage opportunities for multi-state operators—expect accelerated banking access, reduced enforcement risk in medical markets, and potential federal rescheduling that could eliminate state-level licensing requirements within 18-36 months.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;Rescheduling discussions are ongoing in Congress and HHS; banking relief through SAFE Act amendments could materialize within 6-12 months; state-by-state medical program expansion will accelerate through 2024-2025.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Audit your current state portfolio for medical-only vs. adult-use positioning and immediately begin stakeholder engagement (state legislators, banking relationships, compliance counsel) to capitalize on federal tailwinds before rescheduling triggers competitive consolidation.</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
+      
     </div>
     <div class="card" data-sectors="hemp">
       <div class="card-source">Cannabis Business Times</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxPMjJ4RDY4Z2E2TV95R0VfZ3Buc0hnbHhxVWp4OTd0MXVLX0tLQi1WMDlNcThuTTBfdmFiUmRxc3dxUVRHUXZQNWY0RUR3VWpDVk1QWTZaOUlxenduMUpoY1FUWXRmbVRHRmM4bkkzVTJ3TjE0cU1MdEVnVEVXX2d5eFhpS1c2SWJQaGtHY01ZWHZMWDN1cHZSNW45WHR6RjU1VVpaaXJGQlBwTFpSX3pLZjdSQlBBeFAxWDBudFFDVElsdHd0cEE?oc=5" target="_blank" rel="noopener">3 US House Republicans Attempt to Thwart Intoxicating Hemp Product Ban - Cannabis Business Times</a></div>
       <div class="card-meta">May 29, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('ba4e56c79a02f6e2')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-ba4e56c79a02f6e2" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-ba4e56c79a02f6e2" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Republican opposition to intoxicating hemp product restrictions could delay or block federal enforcement of delta-8/delta-10 THC bans, allowing hemp-derived competitors to continue capturing market share and undermining the regulatory advantage of licensed cannabis operators.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;Congressional action unlikely before Q2 2024; executive branch enforcement will continue in parallel, creating regulatory uncertainty for 6-12 months as legal challenges and legislative efforts compete.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Document all hemp-derived product sales data in your jurisdiction and brief your government affairs team to prepare regulatory comments supporting delta-8 restrictions—positioning your company to capitalize when federal enforcement tightens.</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
+      
     </div>
-    <div class="card" data-sectors="banking,executive,hemp">
-      <div class="card-source">Hemp Gazette</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxOZUJya1g2OUQycm1DalYxWnZPMGlpWmEySy1Ha3g1ZHQ5M2JSTzdzZzNSTDViaWt1QVJRNXBRYllJS0lyNTdGMjRuSkRPd0VHbXNFVEhkb1Z0T1RPUVJCT2REVHRGcndWcUlpUmt4aXExWjl4Z1hRbjdlTzNFaVJ6eWVBVzBTVVBKTHoxcV9SZ0U2SDU1eHdLc2hGbXMzeXRXaUg4?oc=5" target="_blank" rel="noopener">SAFE Banking Act Stalls in Congress Despite Schedule III Cannabis Reclassification - Hemp Gazette</a></div>
+    <div class="card" data-sectors="hemp">
+      <div class="card-source">U.S. Hemp Roundtable</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNT24tazRLS010NTdQMzV4bzNkSndhODlGOHhMN2kxSklMbmZpRE5uTzRaZjk2bTA0S25tX3U5azNsSVZjbDJBZVdHd1hZUXFqUDctME9EQk93akJYQ2V0SnpDTXdDNWh4TmlVdTA0V3NsNkFtMjR3ZmJVejNQeTFkSTJaUXhaa2Zjd2sxNUcycWZaTHlxM0xPLVFkN0FiLWtWQWtBZUt1SmdPZmI2dWVOSXlObVZPWjF3UVNuTEtxOFdpRGhyc1Z2ckk5Qm5iZw?oc=5" target="_blank" rel="noopener">State Hemp Policy Update: Delaware, Illinois, Nebraska, New Jersey, Pennsylvania (Philadelphia), and Virginia - U.S. Hem</a></div>
       <div class="card-meta">May 27, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('c392a2f2bec875af')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-c392a2f2bec875af" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-c392a2f2bec875af" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Cannabis operators remain locked out of federal banking services and cannot deduct ordinary business expenses (IRC 280E), perpetuating cash-heavy operations and limiting access to capital even as Schedule III reclassification proceeds separately.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;SAFE Banking Act has stalled without a floor vote; Schedule III reclassification could take 12-24 months for DEA implementation after any positive ruling, creating an extended period where banking remains unavailable despite reduced scheduling.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Establish relationships with state-chartered banks and credit unions accepting cannabis accounts now; simultaneously audit your 280E tax position and explore cost-segregation strategies to offset the deduction ban until federal banking access materializes.</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
+      
     </div>
   </div>
   <p id="news-empty" style="display:none;text-align:center;color:#999;padding:1.5rem">No stories match that sector filter.</p>
@@ -813,32 +635,6 @@ if(typeof toggleBrief==='undefined'){
 <script>
 function toggleNav(){var btn=document.querySelector('.nav-hamburger');var links=document.querySelector('.nav-links');btn.classList.toggle('open');links.classList.toggle('open');}
 document.addEventListener('click',function(e){if(!e.target.closest('nav')){document.querySelector('.nav-hamburger').classList.remove('open');document.querySelector('.nav-links').classList.remove('open');}});
-</script>
-<!-- VIDEO MODAL -->
-<div id="vid-modal" onclick="closeVideoModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center">
-  <div onclick="event.stopPropagation()" style="position:relative;width:min(900px,92vw);background:#000;border-radius:10px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.7)">
-    <button onclick="closeVideoModal()" style="position:absolute;top:.55rem;right:.7rem;background:rgba(255,255,255,.18);border:none;color:#fff;font-size:1.1rem;font-weight:900;width:34px;height:34px;border-radius:50%;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center">✕</button>
-    <div style="position:relative;padding-bottom:56.25%;height:0">
-      <iframe id="vid-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%"></iframe>
-    </div>
-  </div>
-</div>
-<script>
-function toggleBrief(id) {
-  var el = document.getElementById(id);
-  el.style.display = el.style.display === 'none' ? 'block' : 'none';
-}
-function openVideoModal(id) {
-  document.getElementById('vid-iframe').src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
-  document.getElementById('vid-modal').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-}
-function closeVideoModal() {
-  document.getElementById('vid-iframe').src = '';
-  document.getElementById('vid-modal').style.display = 'none';
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeVideoModal(); });
 </script>
 </body>
 </html>

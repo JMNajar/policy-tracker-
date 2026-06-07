@@ -226,6 +226,10 @@
   .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+  /* SIGNAL PANEL GRID */
+  .signal-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:.6rem; }
+  .table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .hero h1 { font-size: 1.7rem; }
@@ -241,6 +245,16 @@
     .stat-card { min-width: 120px; padding: .9rem 1rem; }
     .cred-bar { padding: .4rem 1rem; gap: .5rem; }
     .cred-bar .cred-verified { margin-left: 0; }
+    .signal-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .signal-panel-outer { padding: 1rem; }
+    .container { padding: 1.5rem 1rem; }
+    .data-table { font-size: .78rem; }
+  }
+  @media (max-width: 560px) {
+    .signal-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .hero h1 { font-size: 1.4rem; }
+    .hero p { font-size: .88rem; }
+    .stat-card .num { font-size: 1.4rem; }
   }
 </style>
 </head>
@@ -264,8 +278,8 @@
   <span class="cred-pipe">·</span>
   <span class="cred-media">Official cannabis news supplier to <strong>Easyriders Magazine</strong></span>
   <span class="cred-pipe">·</span>
-  <span class="cred-freshness">Final Rule — 39 days ago</span>
-  <span class="cred-verified">Last verified June 06, 2026</span>
+  <span class="cred-freshness">Final Rule — 40 days ago</span>
+  <span class="cred-verified">Last verified June 07, 2026</span>
 </div>
 
 <div class="hero">
@@ -307,13 +321,13 @@
       <div class="card-meta">May 18, 2026</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B4332">Filter</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1TVTBDU2p0RWd6XzVjMUoyYVh1cklMUm1vcWcyQlE1cEFPTG1Jam5samRRWW1fc1dZS3BidUtqaHlVRDVBN2NXck1Ub1hRVEp1R3UyeW1xNU50LVVUUXdLSnRGNzZJdDN3SVE?oc=5" target="_blank" rel="noopener">FDA Finally Authorizes Fruit-Flavored Vapes. Here’s What It Took. - Filter</a></div>
-      <div class="card-meta">May 06, 2026</div>
+      <div class="card-source" style="color:#1B4332">Merkley (.gov)</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMi5AFBVV95cUxObVh4M1hDSVFoeXZKSDF5bGZGbUhEeDlwc3psM0ZwUm9CMHBIVmZJN0ZsRi1fZ0c2WUhDekIxdU9NdVhiRGFJVnA3WlNqd05hVUhhdlNKMmlTNVFSU3R1Wk50VnhRWnRSajctMEJNR3FuMVdVOC14VEdtand2Q3hXd19pdnR3SE1kb1B4ZXY0SVA3NnRiWUwydUExaS1kUjFPSUdGNlFKWGxvWU91bWhGRGI0R29lTm9jTmdwRFU3Zm1hT2E1aFVkR09FMkg5RUJXVDkwODdDQTdzZTVIOFQ0VHFsenQ?oc=5" target="_blank" rel="noopener">BLUMENTHAL & MERKLEY LEAD GROUP OF 10 SENATORS IN DEMANDING FDA REVERSE DANGEROUS AUTHORIZATION OF FLAVORED E-CIGARETTES</a></div>
+      <div class="card-meta">May 18, 2026</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B4332">Vaping360</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxOOS0ydS1QRFljeVE0a1kxU0ZWTXpPM3RxSFh6TWc3bDJYLW9Yc2VSX1lhX0NraWRhQno5NngzWUE3VjFPelExeEJBZTgtYmtnQWtFZWNZam5NQmVIaUZiNElzdVp2RkNsWTdhSFhKTDN0YkVKdWUwSUhfdWF1cnBiWWRPdzA2RElSbEE?oc=5" target="_blank" rel="noopener">Updated List of FDA-Authorized Vapes - Vaping360</a></div>
+      <div class="card-source" style="color:#1B4332">Filter</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE1TVTBDU2p0RWd6XzVjMUoyYVh1cklMUm1vcWcyQlE1cEFPTG1Jam5samRRWW1fc1dZS3BidUtqaHlVRDVBN2NXck1Ub1hRVEp1R3UyeW1xNU50LVVUUXdLSnRGNzZJdDN3SVE?oc=5" target="_blank" rel="noopener">FDA Finally Authorizes Fruit-Flavored Vapes. Here’s What It Took. - Filter</a></div>
       <div class="card-meta">May 06, 2026</div>
     </div>
     <div class="card">
@@ -332,9 +346,9 @@
       <div class="card-meta">Mar 10, 2026</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B4332">ABC News - Breaking News, Late</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNWl8zVW1HdElITDBvM21xVTU5cnM5THRpbUpGVHRYQjZEVVczNTRMTF9STkZWTXVNUVdJdXRvRjVKYmQ4WmNBNXBoalZ5dVhpb1JJZnFNYjUtSE1ZaUs5cU9fVFJuSHB3RGZZUUZyY2tMWnJRdFdGd0s0NGVKTWQyMFZSbE5CeG1mUE1VNlR4VjFuZnJ2U2RLWWVfOGRMSTI3VE1nbEhhLVZJZVpwb2fSAbMBQVVfeXFMTm9sLXZwQUVnRm5LZ3hpRTVZTVpZMnNUVWhuNkE5RExsQklvU3MyTjh3bzhqWTdWVlhnaDZQdEt1LUVJclF6Z2NzaDJwQnRMcVRzbGVWZ2dDTmJJMzN4X3ZZUmJPR1VjOGd2VVFWQXhMUDBITU9MY2tZSzBHMkdUUjJHQVp0SUpCUm1kbFcwZFRnN0N1X1NGQjc0WE5RanBVcF9FM2dEdWpnaExUS0xHVzliUEU?oc=5" target="_blank" rel="noopener">Bipartisan bill proposes banning flavored e-cigarettes amid vaping crisis - ABC News - Breaking News, Latest News and Vi</a></div>
-      <div class="card-meta">Feb 11, 2026</div>
+      <div class="card-source" style="color:#1B4332">Mexico News Daily</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiZEFVX3lxTFBaQ1RUajdST3prMk9GS19EWTJDTE15TjNKR2hyTTdINHlINUNVT2E5ZHUxUl9nSFd0dFh4WU9fdmdQTEZxRVNfdHpSSHN6ZkdZZEtmS1ZybG45MEdKb29JaDBFcVY?oc=5" target="_blank" rel="noopener">Vape sellers could face up to 8 years in prison under new law - Mexico News Daily</a></div>
+      <div class="card-meta">Dec 10, 2025</div>
     </div></div>
 
   <hr class="section-divider" style="margin:2rem 0">
@@ -540,7 +554,7 @@
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
-    Updated June 06, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
+    Updated June 07, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
     &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
     <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
     <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,
