@@ -345,11 +345,44 @@ def footer():
   <h3>Weekly Cannabis Law Roundup</h3>
   <p>The legislation that matters to your business — plain English, every Monday morning.</p>
   <div class="signup-form">
-    <input type="text" placeholder="First name">
-    <input type="email" placeholder="Your email address">
-    <button>Subscribe Free</button>
+    <input id="sg-name" type="text" placeholder="First name">
+    <input id="sg-email" type="email" placeholder="Your email address">
+    <button id="sg-btn" onclick="sgSubscribe()">Subscribe Free</button>
   </div>
-  <p class="signup-note">No spam. Unsubscribe anytime. Produced by Horsepower AI.</p>
+  <p class="signup-note" id="sg-msg">No spam. Unsubscribe anytime. Produced by Horsepower AI.</p>
+  <script>
+  function sgSubscribe() {{
+    var name  = document.getElementById('sg-name').value.trim();
+    var email = document.getElementById('sg-email').value.trim();
+    var msg   = document.getElementById('sg-msg');
+    var btn   = document.getElementById('sg-btn');
+    if (!email || !email.includes('@')) {{ msg.textContent = 'Please enter a valid email.'; return; }}
+    btn.textContent = 'Subscribing...';
+    btn.disabled = true;
+    fetch('/api/subscribe', {{
+      method: 'POST',
+      headers: {{ 'Content-Type': 'application/json' }},
+      body: JSON.stringify({{ name: name, email: email }})
+    }})
+    .then(r => r.json())
+    .then(d => {{
+      if (d.success) {{
+        msg.textContent = "You're in! First issue arrives Monday morning.";
+        document.getElementById('sg-name').value  = '';
+        document.getElementById('sg-email').value = '';
+      }} else {{
+        msg.textContent = 'Something went wrong — please try again.';
+      }}
+      btn.textContent = 'Subscribe Free';
+      btn.disabled = false;
+    }})
+    .catch(() => {{
+      msg.textContent = 'Something went wrong — please try again.';
+      btn.textContent = 'Subscribe Free';
+      btn.disabled = false;
+    }});
+  }}
+  </script>
 </div>
 
 <footer>

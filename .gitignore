@@ -2,3 +2,4 @@
 automation/node_modules
 automation/browser-profile
 automation/pipeline.log
+automation/.env
