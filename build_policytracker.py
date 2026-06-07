@@ -39,7 +39,7 @@ TODAY_SHORT = datetime.now().strftime("%b %d")   # e.g., "Apr 25"
 
 # ── YOUTUBE CHANNEL (for Critical Watch auto-detect) ─────────────────────────
 # Find your channel ID in YouTube Studio → Settings → Channel → Advanced Settings
-YOUTUBE_CHANNEL_ID = ''  # e.g. 'UCxxxxxxxxxxxxxxxxxxxxxxxxxx'
+YOUTUBE_CHANNEL_ID = 'UCJw8gCUT9EjhUnMyYnsAPpA'
 
 # ── FRESHNESS STATE ───────────────────────────────────────────────────────────
 FRESHNESS = None   # Set in main() after fetching executive actions
