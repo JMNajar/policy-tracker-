@@ -3,7 +3,8 @@
 
 $TaskName   = "PolicyTrackerSignalPipeline"
 $ScriptPath = Join-Path $PSScriptRoot "run.ps1"
-$NodePath   = (Get-Command node -ErrorAction SilentlyContinue)?.Source
+$NodeCmd  = Get-Command node -ErrorAction SilentlyContinue
+$NodePath = if ($NodeCmd) { $NodeCmd.Source } else { $null }
 
 if (-not $NodePath) {
     Write-Error "Node.js not found in PATH. Install Node.js first."
