@@ -316,15 +316,15 @@
 <div style="max-width:860px;margin:0 auto;padding:2rem 1.5rem">
 
   <h1 style="font-size:1.6rem;font-weight:900;color:#1B4332;margin-bottom:.3rem">Site Health Dashboard</h1>
-  <p style="color:#5a6a80;font-size:.9rem;margin-bottom:1.5rem">Built: June 08, 2026 at 12:27 PM — runs automatically every morning with the daily build</p>
+  <p style="color:#5a6a80;font-size:.9rem;margin-bottom:1.5rem">Built: June 08, 2026 at 08:55 AM — runs automatically every morning with the daily build</p>
 
   <div class="status-banner" style="background:#FFF8E1;border:2px solid #D4A017">
     <div>
       <div class="status-banner-label" style="color:#D4A017">WARNINGS</div>
       <div class="status-banner-sub">
         <span class="status-counts">
-          <span style="background:#E8F5E9;color:#2D6B2D">6 OK</span>
-          <span style="background:#FFF8E1;color:#B8860B">2 Warning</span>
+          <span style="background:#E8F5E9;color:#2D6B2D">5 OK</span>
+          <span style="background:#FFF8E1;color:#B8860B">3 Warning</span>
           <span style="background:#FFEBEE;color:#C62828">0 Error</span>
         </span>
       </div>
@@ -361,16 +361,16 @@
           <span class="status-dot" style="color:#D4A017">●</span>
           <div style="flex:1">
             <div class="status-name">FEC API</div>
-            <div class="status-detail">HTTP 403 — unexpected response</div>
-            <div class="status-fix">⚠ Fix: Check https://api.open.fec.gov/v1/ for status</div>
+            <div class="status-detail">Rate-limited — will clear by tomorrow</div>
+            <div class="status-fix">⚠ Fix: Rate limit resets daily. No action needed unless this persists for 3+ days.</div>
           </div>
         </div>
         <div class="status-row">
-          <span class="status-dot" style="color:#2D6B2D">●</span>
+          <span class="status-dot" style="color:#D4A017">●</span>
           <div style="flex:1">
             <div class="status-name">Anthropic API Key</div>
-            <div class="status-detail">Configured — 156 briefings in cache</div>
-            
+            <div class="status-detail">Not set — AI briefings disabled</div>
+            <div class="status-fix">⚠ Fix: Add ANTHROPIC_API_KEY to GitHub → Settings → Secrets → Actions</div>
           </div>
         </div>
         <div class="status-row">
@@ -393,7 +393,7 @@
           <span class="status-dot" style="color:#2D6B2D">●</span>
           <div style="flex:1">
             <div class="status-name">Page Files</div>
-            <div class="status-detail">All 8 pages present — 398 KB total</div>
+            <div class="status-detail">All 8 pages present — 422 KB total</div>
             
           </div>
         </div>
@@ -457,6 +457,13 @@
     });
   }
   </script>
+</div>
+
+<div class="stat-row" style="padding: 1.5rem 1rem; background: #1a3a2a;">
+  <div class="stat-card"><div class="num">50+</div><div class="lbl">REGULATORY ITEMS TRACKED</div></div>
+  <div class="stat-card"><div class="num">Daily</div><div class="lbl">AUTO-UPDATED</div></div>
+  <div class="stat-card"><div class="num">Jun 08</div><div class="lbl">LAST VERIFIED</div></div>
+  <div class="stat-card"><div class="num">Free</div><div class="lbl">ALWAYS</div></div>
 </div>
 
 <footer>

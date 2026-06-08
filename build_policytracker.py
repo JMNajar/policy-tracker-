@@ -385,6 +385,13 @@ def footer():
   </script>
 </div>
 
+<div class="stat-row" style="padding: 1.5rem 1rem; background: #1a3a2a;">
+  <div class="stat-card"><div class="num">50+</div><div class="lbl">REGULATORY ITEMS TRACKED</div></div>
+  <div class="stat-card"><div class="num">Daily</div><div class="lbl">AUTO-UPDATED</div></div>
+  <div class="stat-card"><div class="num">{TODAY_SHORT}</div><div class="lbl">LAST VERIFIED</div></div>
+  <div class="stat-card"><div class="num">Free</div><div class="lbl">ALWAYS</div></div>
+</div>
+
 <footer>
   <div class="footer-logos">
     <div class="footer-logo-block">
@@ -1521,12 +1528,6 @@ def build_index(news_items, bills=None, executive=None, news_briefings=None, wee
   <div class="hero-tag">UPDATED {TODAY.upper()}</div>
   <h1>Cannabis & Executive Policy<br><span>Intelligence Dashboard</span></h1>
   <p>The legislation, executive actions, and money behind the vote — built for cannabis business leaders.</p>
-  <div class="stat-row">
-    <div class="stat-card"><div class="num">50+</div><div class="lbl">REGULATORY ITEMS TRACKED</div></div>
-    <div class="stat-card"><div class="num">Daily</div><div class="lbl">AUTO-UPDATED</div></div>
-    <div class="stat-card"><div class="num">{TODAY_SHORT}</div><div class="lbl">LAST VERIFIED</div></div>
-    <div class="stat-card"><div class="num">Free</div><div class="lbl">ALWAYS</div></div>
-  </div>
 </div>
 
 {signal_panel}
