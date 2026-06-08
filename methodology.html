@@ -278,8 +278,8 @@
   <span class="cred-pipe">·</span>
   <span class="cred-media">Official cannabis news supplier to <strong>Easyriders Magazine</strong></span>
   <span class="cred-pipe">·</span>
-  <span class="cred-freshness">Final Rule — 40 days ago</span>
-  <span class="cred-verified">Last verified June 07, 2026</span>
+  <span class="cred-freshness">Final Rule — 41 days ago</span>
+  <span class="cred-verified">Last verified June 08, 2026</span>
 </div>
 
 <div class="hero">
@@ -389,7 +389,7 @@
 
   <p style="font-size:.82rem;color:#5a6a80;margin-top:2rem;">
     For informational purposes only. Not legal advice. Not investment advice.
-    All government data is public domain. Last updated June 07, 2026.
+    All government data is public domain. Last updated June 08, 2026.
   </p>
 
 </div>
@@ -398,11 +398,44 @@
   <h3>Weekly Cannabis Law Roundup</h3>
   <p>The legislation that matters to your business — plain English, every Monday morning.</p>
   <div class="signup-form">
-    <input type="text" placeholder="First name">
-    <input type="email" placeholder="Your email address">
-    <button>Subscribe Free</button>
+    <input id="sg-name" type="text" placeholder="First name">
+    <input id="sg-email" type="email" placeholder="Your email address">
+    <button id="sg-btn" onclick="sgSubscribe()">Subscribe Free</button>
   </div>
-  <p class="signup-note">No spam. Unsubscribe anytime. Produced by Horsepower AI.</p>
+  <p class="signup-note" id="sg-msg">No spam. Unsubscribe anytime. Produced by Horsepower AI.</p>
+  <script>
+  function sgSubscribe() {
+    var name  = document.getElementById('sg-name').value.trim();
+    var email = document.getElementById('sg-email').value.trim();
+    var msg   = document.getElementById('sg-msg');
+    var btn   = document.getElementById('sg-btn');
+    if (!email || !email.includes('@')) { msg.textContent = 'Please enter a valid email.'; return; }
+    btn.textContent = 'Subscribing...';
+    btn.disabled = true;
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email })
+    })
+    .then(r => r.json())
+    .then(d => {
+      if (d.success) {
+        msg.textContent = "You're in! First issue arrives Monday morning.";
+        document.getElementById('sg-name').value  = '';
+        document.getElementById('sg-email').value = '';
+      } else {
+        msg.textContent = 'Something went wrong — please try again.';
+      }
+      btn.textContent = 'Subscribe Free';
+      btn.disabled = false;
+    })
+    .catch(() => {
+      msg.textContent = 'Something went wrong — please try again.';
+      btn.textContent = 'Subscribe Free';
+      btn.disabled = false;
+    });
+  }
+  </script>
 </div>
 
 <footer>
@@ -428,7 +461,7 @@
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
-    Updated June 07, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
+    Updated June 08, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
     &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
     <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
     <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,
