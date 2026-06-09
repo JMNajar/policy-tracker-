@@ -112,6 +112,10 @@ CSS = f"""
   .hero h1 {{ font-size: 2.4rem; font-weight: 800; line-height: 1.15; margin-bottom: .6rem; }}
   .hero h1 span {{ color: #FFD54F; }}
   .hero p {{ color: #A5D6A7; font-size: 1rem; max-width: 620px; margin: 0 auto 2rem; }}
+  .hero-inner {{ display:flex; align-items:center; justify-content:center; gap:3rem; max-width:1100px; margin:0 auto; }}
+  .hero-text {{ flex:1; text-align:left; }}
+  .hero-text p {{ margin: 0 0 2rem; }}
+  .hero-video {{ flex-shrink:0; }}
   .stat-row {{ display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }}
   .stat-card {{
     background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.15);
@@ -285,6 +289,9 @@ CSS = f"""
   /* RESPONSIVE */
   @media (max-width: 768px) {{
     .hero h1 {{ font-size: 1.7rem; }}
+    .hero-inner {{ flex-direction:column; }}
+    .hero-text {{ text-align:center; }}
+    .hero-video {{ display:none; }}
     .nav-hamburger {{ display: flex; }}
     .nav-links {{
       display: none; position: fixed; top: 64px; left: 0; right: 0;
@@ -1529,9 +1536,21 @@ def build_index(news_items, bills=None, executive=None, news_briefings=None, wee
 
     content = f"""
 <div class="hero">
-  <div class="hero-tag">UPDATED {TODAY.upper()}</div>
-  <h1>Cannabis & Executive Policy<br><span>Intelligence Dashboard</span></h1>
-  <p>The legislation, executive actions, and money behind the vote — built for cannabis business leaders.</p>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">UPDATED {TODAY.upper()}</div>
+      <h1>Cannabis & Executive Policy<br><span>Intelligence Dashboard</span></h1>
+      <p>The legislation, executive actions, and money behind the vote — built for cannabis business leaders.</p>
+    </div>
+    <div class="hero-video">
+      <iframe width="220" height="391"
+        src="https://www.youtube.com/embed/sidWWJLdu4o"
+        title="Cannabis Policy Intelligence" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="display:block;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.45)"></iframe>
+    </div>
+  </div>
 </div>
 
 {signal_panel}
