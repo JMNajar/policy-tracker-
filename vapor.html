@@ -60,6 +60,9 @@
   .hero h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; margin-bottom: .6rem; }
   .hero h1 span { color: #FFD54F; }
   .hero p { color: #A5D6A7; font-size: 1rem; max-width: 620px; margin: 0 auto 2rem; }
+  .hero-inner { display:flex; align-items:center; justify-content:center; gap:3rem; max-width:1100px; margin:0 auto; }
+  .hero-text { text-align:center; }
+  .hero-video { flex-shrink:0; }
   .stat-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
   .stat-card {
     background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.15);
@@ -233,6 +236,9 @@
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .hero h1 { font-size: 1.7rem; }
+    .hero-inner { flex-direction:column; }
+    .hero-text { text-align:center; }
+    .hero-video { display:none; }
     .nav-hamburger { display: flex; }
     .nav-links {
       display: none; position: fixed; top: 64px; left: 0; right: 0;
@@ -278,8 +284,8 @@
   <span class="cred-pipe">·</span>
   <span class="cred-media">Official cannabis news supplier to <strong>Easyriders Magazine</strong></span>
   <span class="cred-pipe">·</span>
-  <span class="cred-freshness">Final Rule — 41 days ago</span>
-  <span class="cred-verified">Last verified June 08, 2026</span>
+  <span class="cred-freshness">Final Rule — 42 days ago</span>
+  <span class="cred-verified">Last verified June 09, 2026</span>
 </div>
 
 <div class="hero">
@@ -346,9 +352,9 @@
       <div class="card-meta">Mar 10, 2026</div>
     </div>
     <div class="card">
-      <div class="card-source" style="color:#1B4332">ABC News - Breaking News, Late</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNWl8zVW1HdElITDBvM21xVTU5cnM5THRpbUpGVHRYQjZEVVczNTRMTF9STkZWTXVNUVdJdXRvRjVKYmQ4WmNBNXBoalZ5dVhpb1JJZnFNYjUtSE1ZaUs5cU9fVFJuSHB3RGZZUUZyY2tMWnJRdFdGd0s0NGVKTWQyMFZSbE5CeG1mUE1VNlR4VjFuZnJ2U2RLWWVfOGRMSTI3VE1nbEhhLVZJZVpwb2fSAbMBQVVfeXFMTm9sLXZwQUVnRm5LZ3hpRTVZTVpZMnNUVWhuNkE5RExsQklvU3MyTjh3bzhqWTdWVlhnaDZQdEt1LUVJclF6Z2NzaDJwQnRMcVRzbGVWZ2dDTmJJMzN4X3ZZUmJPR1VjOGd2VVFWQXhMUDBITU9MY2tZSzBHMkdUUjJHQVp0SUpCUm1kbFcwZFRnN0N1X1NGQjc0WE5RanBVcF9FM2dEdWpnaExUS0xHVzliUEU?oc=5" target="_blank" rel="noopener">Bipartisan bill proposes banning flavored e-cigarettes amid vaping crisis - ABC News - Breaking News, Latest News and Vi</a></div>
-      <div class="card-meta">Feb 11, 2026</div>
+      <div class="card-source" style="color:#1B4332">Health Policy Watch</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxQZU96MjVTT1NlTkFjRENCQTBpNVFudWZHVXc3UVpXRTJObVZSRGk3SEFrZEhDUkROT1NjbWFNX1gtbFZvOW9YN2RhejBFOUoyNEMwa0ZlQzBpek5ZNkRkNXpEQWFvRFVucXFsZEduOWptNVJreTI4cUx0MWZwXzd5d0dQV1A0bG5LTS05VVJJem1HTWU4NWxPUDZxTE9sR3J5VVU0bWItWDRrNUp1UGl4RTlyLXlVZ3lDY0wyMVBQWEdsZm8?oc=5" target="_blank" rel="noopener">Global Anti-Tobacco Summit Targets Youth Nicotine Addiction 'Epidemic' And Environmental Harms - Health Policy Watch</a></div>
+      <div class="card-meta">Nov 13, 2025</div>
     </div></div>
 
   <hr class="section-divider" style="margin:2rem 0">
@@ -567,7 +573,7 @@
 <div class="stat-row" style="padding: 1.5rem 1rem; background: #1a3a2a;">
   <div class="stat-card"><div class="num">50+</div><div class="lbl">REGULATORY ITEMS TRACKED</div></div>
   <div class="stat-card"><div class="num">Daily</div><div class="lbl">AUTO-UPDATED</div></div>
-  <div class="stat-card"><div class="num">Jun 08</div><div class="lbl">LAST VERIFIED</div></div>
+  <div class="stat-card"><div class="num">Jun 09</div><div class="lbl">LAST VERIFIED</div></div>
   <div class="stat-card"><div class="num">Free</div><div class="lbl">ALWAYS</div></div>
 </div>
 
@@ -594,7 +600,7 @@
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
-    Updated June 08, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
+    Updated June 09, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
     &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
     <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
     <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,

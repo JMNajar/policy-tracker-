@@ -60,6 +60,9 @@
   .hero h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.15; margin-bottom: .6rem; }
   .hero h1 span { color: #FFD54F; }
   .hero p { color: #A5D6A7; font-size: 1rem; max-width: 620px; margin: 0 auto 2rem; }
+  .hero-inner { display:flex; align-items:center; justify-content:center; gap:3rem; max-width:1100px; margin:0 auto; }
+  .hero-text { text-align:center; }
+  .hero-video { flex-shrink:0; }
   .stat-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
   .stat-card {
     background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.15);
@@ -233,6 +236,9 @@
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .hero h1 { font-size: 1.7rem; }
+    .hero-inner { flex-direction:column; }
+    .hero-text { text-align:center; }
+    .hero-video { display:none; }
     .nav-hamburger { display: flex; }
     .nav-links {
       display: none; position: fixed; top: 64px; left: 0; right: 0;
@@ -278,8 +284,8 @@
   <span class="cred-pipe">·</span>
   <span class="cred-media">Official cannabis news supplier to <strong>Easyriders Magazine</strong></span>
   <span class="cred-pipe">·</span>
-  <span class="cred-freshness">Final Rule — 41 days ago</span>
-  <span class="cred-verified">Last verified June 08, 2026</span>
+  <span class="cred-freshness">Final Rule — 42 days ago</span>
+  <span class="cred-verified">Last verified June 09, 2026</span>
 </div>
 
 <div class="hero">
@@ -287,7 +293,7 @@
   <h1>Presidential & <span>Agency Actions</span></h1>
   <p>Executive orders, DEA rulings, FDA guidance, and USDA rules affecting cannabis and hemp operators — pulled live from the Federal Register with plain-language context for each action.</p>
   <div class="stat-row">
-    <div class="stat-card"><div class="num">4</div><div class="lbl">ACTIONS FOUND</div></div>
+    <div class="stat-card"><div class="num">2</div><div class="lbl">ACTIONS FOUND</div></div>
     <div class="stat-card"><div class="num">Federal Register</div><div class="lbl">DATA SOURCE</div></div>
     <div class="stat-card"><div class="num">Daily</div><div class="lbl">REFRESH</div></div>
   </div>
@@ -317,46 +323,6 @@
             </div>
         <div style="margin-top:.9rem">
           <a href="https://www.federalregister.gov/documents/2026/04/28/2026-08176/schedules-of-controlled-substances-rescheduling-of-food-and-drug-administration-approved-products" target="_blank" rel="noopener"
-             style="font-size:.78rem;font-weight:700;color:#2D6B2D;text-decoration:none;border:1px solid #2D6B2D;padding:.3rem .75rem;border-radius:4px">
-            View on Federal Register →
-          </a>
-        </div>
-      </div>
-      <div style="background:#fff;border:1px solid #DDE3ED;border-radius:10px;padding:1.4rem 1.6rem;margin-bottom:1.2rem">
-        <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.65rem">
-          <span class="badge badge-gray">Proposed Rule</span>
-          <span style="font-size:.8rem;color:#5a6a80;font-weight:600"></span>
-          <span style="font-size:.8rem;color:#5a6a80">2026-04-28&nbsp;·&nbsp;#2026-08178</span>
-        </div>
-        <div style="font-size:1rem;font-weight:700;color:#1a2535;line-height:1.4">Schedules of Controlled Substances: Rescheduling of Marijuana; Withdrawal</div>
-        
-            <div style="margin-top:.85rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.7rem 1rem;font-size:.82rem;line-height:1.6">
-              <div style="margin-bottom:.35rem"><span style="font-weight:800;color:#1B4332;letter-spacing:.04em">IMPACT</span>&nbsp;&nbsp;Federal rescheduling of cannabis from Schedule I to Schedule III would enable banking access, federal tax code 280E relief, and multi-state operations under a coherent regulatory framework, fundamentally shifting from prohibition to regulated commerce.</div>
-              <div style="margin-bottom:.35rem"><span style="font-weight:800;color:#1B4332;letter-spacing:.04em">TIMELINE</span>&nbsp;&nbsp;Proposed rule published April 28, 2026; federal rescheduling typically requires 6-12 months post-comment period for DEA finalization, with potential implementation in late 2026 or 2027 depending on legal challenges.</div>
-              <div><span style="font-weight:800;color:#2D6B2D;letter-spacing:.04em">ACTION</span>&nbsp;&nbsp;Conduct immediate scenario planning with CFO and legal counsel on tax liability reversal, banking relationship applications, and interstate expansion readiness to capitalize within 90 days of any final DEA determination.</div>
-            </div>
-        <div style="margin-top:.9rem">
-          <a href="https://www.federalregister.gov/documents/2026/04/28/2026-08178/schedules-of-controlled-substances-rescheduling-of-marijuana-withdrawal" target="_blank" rel="noopener"
-             style="font-size:.78rem;font-weight:700;color:#2D6B2D;text-decoration:none;border:1px solid #2D6B2D;padding:.3rem .75rem;border-radius:4px">
-            View on Federal Register →
-          </a>
-        </div>
-      </div>
-      <div style="background:#fff;border:1px solid #DDE3ED;border-radius:10px;padding:1.4rem 1.6rem;margin-bottom:1.2rem">
-        <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.65rem">
-          <span class="badge badge-gray">Proposed Rule</span>
-          <span style="font-size:.8rem;color:#5a6a80;font-weight:600"></span>
-          <span style="font-size:.8rem;color:#5a6a80">2026-04-28&nbsp;·&nbsp;#2026-08177</span>
-        </div>
-        <div style="font-size:1rem;font-weight:700;color:#1a2535;line-height:1.4">Schedules of Controlled Substances: Rescheduling of Marijuana</div>
-        
-            <div style="margin-top:.85rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.7rem 1rem;font-size:.82rem;line-height:1.6">
-              <div style="margin-bottom:.35rem"><span style="font-weight:800;color:#1B4332;letter-spacing:.04em">IMPACT</span>&nbsp;&nbsp;Rescheduling marijuana from Schedule I to Schedule III would enable federal tax deduction eligibility under IRC 280E, allow banking access through federally-regulated institutions, and create a pathway for multi-state licensing frameworks—fundamentally transforming compliance costs and capital availability for licensed operators.</div>
-              <div style="margin-bottom:.35rem"><span style="font-weight:800;color:#1B4332;letter-spacing:.04em">TIMELINE</span>&nbsp;&nbsp;Proposed rule comment period closes mid-2026; final rulemaking and DEA scheduling decision expected late 2026 or early 2027, with implementation likely within 90-180 days of final rule publication.</div>
-              <div><span style="font-weight:800;color:#2D6B2D;letter-spacing:.04em">ACTION</span>&nbsp;&nbsp;Engage external affairs counsel this month to submit formal comments during the federal register period; simultaneously audit your current tax structure and banking relationships to identify immediate optimization opportunities once rescheduling occurs.</div>
-            </div>
-        <div style="margin-top:.9rem">
-          <a href="https://www.federalregister.gov/documents/2026/04/28/2026-08177/schedules-of-controlled-substances-rescheduling-of-marijuana" target="_blank" rel="noopener"
              style="font-size:.78rem;font-weight:700;color:#2D6B2D;text-decoration:none;border:1px solid #2D6B2D;padding:.3rem .75rem;border-radius:4px">
             View on Federal Register →
           </a>
@@ -451,7 +417,7 @@
 <div class="stat-row" style="padding: 1.5rem 1rem; background: #1a3a2a;">
   <div class="stat-card"><div class="num">50+</div><div class="lbl">REGULATORY ITEMS TRACKED</div></div>
   <div class="stat-card"><div class="num">Daily</div><div class="lbl">AUTO-UPDATED</div></div>
-  <div class="stat-card"><div class="num">Jun 08</div><div class="lbl">LAST VERIFIED</div></div>
+  <div class="stat-card"><div class="num">Jun 09</div><div class="lbl">LAST VERIFIED</div></div>
   <div class="stat-card"><div class="num">Free</div><div class="lbl">ALWAYS</div></div>
 </div>
 
@@ -478,7 +444,7 @@
     <a href="mailto:jeff.najar@horsepowermarketing.com">Contact us →</a>
   </p>
   <p class="footer-legal">
-    Updated June 08, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
+    Updated June 09, 2026 &nbsp;·&nbsp; Official cannabis news supplier to <strong style="color:rgba(255,255,255,.65);">Easyriders Magazine</strong>
     &nbsp;·&nbsp; Data: <a href="https://www.congress.gov" target="_blank" rel="noopener">Congress.gov</a>,
     <a href="https://www.federalregister.gov" target="_blank" rel="noopener">Federal Register</a>,
     <a href="https://www.fec.gov" target="_blank" rel="noopener">FEC.gov</a>,
