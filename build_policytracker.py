@@ -288,9 +288,10 @@ CSS = f"""
   /* RESPONSIVE */
   @media (max-width: 768px) {{
     .hero h1 {{ font-size: 1.7rem; }}
-    .hero-inner {{ flex-direction:column; }}
+    .hero-inner {{ flex-direction:column; gap:1.5rem; }}
     .hero-text {{ text-align:center; }}
-    .hero-video {{ display:none; }}
+    .hero-video {{ display:flex; flex-direction:column; align-items:center; }}
+    .hero-video iframe {{ width:160px; height:160px; }}
     .nav-hamburger {{ display: flex; }}
     .nav-links {{
       display: none; position: fixed; top: 64px; left: 0; right: 0;

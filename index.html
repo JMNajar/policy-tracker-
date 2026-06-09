@@ -236,9 +236,10 @@
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .hero h1 { font-size: 1.7rem; }
-    .hero-inner { flex-direction:column; }
+    .hero-inner { flex-direction:column; gap:1.5rem; }
     .hero-text { text-align:center; }
-    .hero-video { display:none; }
+    .hero-video { display:flex; flex-direction:column; align-items:center; }
+    .hero-video iframe { width:160px; height:160px; }
     .nav-hamburger { display: flex; }
     .nav-links {
       display: none; position: fixed; top: 64px; left: 0; right: 0;
@@ -492,6 +493,12 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
 
   <div class="card-grid" id="news-grid">
     
+    <div class="card" data-sectors="general">
+      <div class="card-source">The Tennessean</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYk9xa1pKMHplRVBQZU1PM1hrMGQxaUlpTzJTWHhhMEpaRkpiUVk1RUtMdzYtNHBsUk5uRmdpZkVNdEVONTQwNmpwTUE4UnprSDd3N3VQX002NUpia082em5WTVd2MGNkUjJuQndxRTFKeDN0MzhGbzlpblVjTDVjQmFrUHNaQ3A4czREOG1KZFJ5c3dLdWFMS0toQzZNdW9sSF9yTDB1THFTcU1pdUh6V3ZTRFZvcjZsNEMyMDJ6bW0?oc=5" target="_blank" rel="noopener">Tennessee THC ban takes effect July 1: What’s legal, what’s not - The Tennessean</a></div>
+      <div class="card-meta">Jun 09, 2026</div>
+      
+    </div>
     <div class="card" data-sectors="hemp,retail">
       <div class="card-source">Chicago Tribune</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQWFUwNFM2X3RuTzZXOE1iN1YxRXZaV2JldmZiM0U3ekUxV0oyQjZWS1RCU0R2azFTUUxPNlpVa0tUVHN6Vy1iUXBqRFF5UG1SNWl3LW9VNThHejQ0UGFycXM4cFFzdmVqVGtNU255UkNzejJubjdxQUZwb0lwNktHNHhGYzRNUQ?oc=5" target="_blank" rel="noopener">Proposed Illinois law would shut down unlicensed intoxicating hemp shops - Chicago Tribune</a></div>
@@ -504,10 +511,10 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
       <div class="card-meta">Jun 07, 2026</div>
       
     </div>
-    <div class="card" data-sectors="hemp">
-      <div class="card-source">WFAA</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxOVEdyVlNJUXg2WndWVkZqd3RkcXhTRDBaNEVDM3lFUnhhQnlDSWlyVllnUFkyOHhrQ0dsODhyS0Z4Wnd0RVpHcGQtRVZ0QjBiMldQb3lic05nb1JpY0VzV1Qxb3lMR0VwWU1XdmtNRHVYcE9xZmhnNnhhNnFvUEtLY0ZEckRIZVZyb1R0S3lKZWtxZllPRTRMQjEyc1AzRE95R2wxd0w3RjFEc1RvMWF3NjN4SW8zaC1JRFdhMThld0F5UGlNM2xxZHJWLTVJY2t0UGVROXlB?oc=5" target="_blank" rel="noopener">Texas can implement its smokable hemp ban for now, court rules - WFAA</a></div>
-      <div class="card-meta">Jun 06, 2026</div>
+    <div class="card" data-sectors="general">
+      <div class="card-source">UCHealth</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxPTk5KRUhjY2RwR3NidlJqR0N0UjNMVlBJcTZhY1FWLVdTNWtsOFBRNnQwODB1VW9TM1VpTVhESEFGaDJTTm5uZFF4Ym9TempOUi12dXFReXFsLUVaVXBrSU4ySFlwM2pmUk9Yek9hV1ZCQVVhSmwxWUtpaEVCSDBZcHZ6WWFwQQ?oc=5" target="_blank" rel="noopener">What new federal marijuana guidelines mean for research and patients. The bottom line: Recreational marijuana still is n</a></div>
+      <div class="card-meta">Jun 04, 2026</div>
       
     </div>
     <div class="card" data-sectors="executive,hemp">
@@ -529,27 +536,21 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
       
     </div>
     <div class="card" data-sectors="hemp">
+      <div class="card-source">SC Daily Gazette</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxNODYtS2pkM0t3UkM0ODJMMHJZeWoxZ0FpS3E5WEZJODhtb2RzOWZiR19ublJSY3VselJ1SmljUHdqZzZWZEh5UzVyczJJVXhSbVo1MTV4MzdETWJBQ0xma3Z5Sk1RU1ZLQlF6a0FZY3ZmV2ZTUWFMZGxROThOMS1oMnpqQ05GZUNTX2MteEhZSnVVdUczRHVHWEVvbWVEdFpkMXFiQ081cW45dWpwWDJr?oc=5" target="_blank" rel="noopener">SC legislators’ effort to restrict THC hemp products depends on Congress - SC Daily Gazette</a></div>
+      <div class="card-meta">Jun 01, 2026</div>
+      
+    </div>
+    <div class="card" data-sectors="hemp">
       <div class="card-source">Cannabis Business Times</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxPMjJ4RDY4Z2E2TV95R0VfZ3Buc0hnbHhxVWp4OTd0MXVLX0tLQi1WMDlNcThuTTBfdmFiUmRxc3dxUVRHUXZQNWY0RUR3VWpDVk1QWTZaOUlxenduMUpoY1FUWXRmbVRHRmM4bkkzVTJ3TjE0cU1MdEVnVEVXX2d5eFhpS1c2SWJQaGtHY01ZWHZMWDN1cHZSNW45WHR6RjU1VVpaaXJGQlBwTFpSX3pLZjdSQlBBeFAxWDBudFFDVElsdHd0cEE?oc=5" target="_blank" rel="noopener">3 US House Republicans Attempt to Thwart Intoxicating Hemp Product Ban - Cannabis Business Times</a></div>
       <div class="card-meta">May 29, 2026</div>
       
     </div>
-    <div class="card" data-sectors="banking,executive">
-      <div class="card-source">Cannabis Business Times</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMigAJBVV95cUxNeWhxUE5MWnQ1QVRVWVZZTG5OYkpoZnh5eXB3Z1ZXWXNEd2ltbW9Ic1FlNnFpa2FvcDk2eGNFUDhRWDBKTXVDczBQMHVNT3djZllaTF9lSURvQ2Z0czZGX2xnUFlfemNXX2hGLU1zR0tKeGVXT29KUHcyalVydWctZUpUUXJmdUhudFREc3VDdzNuWGlhNEtEUkJncjBCdGpKNGQ5OXVwZUFoNjFwdFJxNXdSZWM1NGtIc3dtT1BqSmlnbUFTT3VWZkppMEwwQ0xVYmlUTG45LWpkWXFMUnFteXZGRHNHaGZJWmEtWnNCdTNOU25vc181TExJRm8zQzZZ?oc=5" target="_blank" rel="noopener">SAFE Banking Act Nowhere to Be Found in Wake of Schedule III Cannabis Order - Cannabis Business Times</a></div>
-      <div class="card-meta">May 26, 2026</div>
-      
-    </div>
-    <div class="card" data-sectors="hemp">
-      <div class="card-source">MJBizDaily</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxPZDVCOHEtd0ZDak94M3hTY203MzhKOHJRUzJvVXRrajcyQ1ZqWFNwcV9KaFZRWnA1QVR1NExhb3U4OGVKM1dVa1FBN00xY0FEM1FoWFJ2R0p5WElRVTFvWlBZejI3djNfY3YxVkJBZThuMU96SkR2amwweUo0ZE9lT0lkZUVONnlDNWpybnBEZ0RfSm5NZmhNWmdUbl9XelhKa0dfVEdPNmN1TlVMd3VIUQ?oc=5" target="_blank" rel="noopener">Hemp THC regulation is inevitable, not a ban. Here’s how operators can prepare. - MJBizDaily</a></div>
-      <div class="card-meta">May 22, 2026</div>
-      
-    </div>
-    <div class="card" data-sectors="hemp">
-      <div class="card-source">Vicente LLP</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxQTm51Q0lLeDAtbWNkR2psOFhOZnhoNFFMUmgxcDh4R2lWeGpkaXNtSG9GT0hreDNURS10cFBNQU1QaFEtSF9PejZVTVIwNkxEMzNqQzJ2cWVDZ21xMjZmekxSZTNuUzFHNG9UOEZCalVfRVBIVGtFbU5hRzFzWGFHV2tMdWdpcjlzbFdVelhnS0Jrdng3aVFnRENfeEFBVi1pTVBjN0NycEJvcEtNWUxSeg?oc=5" target="_blank" rel="noopener">2026 Federal Hemp Ban: What It Means for the Future of Consumable Hemp Products - Vicente LLP</a></div>
-      <div class="card-meta">May 07, 2026</div>
+    <div class="card" data-sectors="general">
+      <div class="card-source">Indiana Capital Chronicle</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNT0lUYURXbzNRMFlsT2NEcEVLRzNDY21OLVM1RkpKMnN5ZjNBSWNkdnFna1AtWllJVFl4LTFuVms5eGJVQ2NKWHJyRGpKT2VpTmJfN0VhMnozNV9vSmp5Q2htT3l3c3VQVkdaX19ubUcteVpZRTF6NVlQYXJ5a25OMS1TMkFLcEhJY2ZZWS1mNk8xOTM3UUdiRA?oc=5" target="_blank" rel="noopener">Rokita wants to block federal marijuana shift - Indiana Capital Chronicle</a></div>
+      <div class="card-meta">May 28, 2026</div>
       
     </div>
   </div>
