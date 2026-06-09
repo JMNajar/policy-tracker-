@@ -1433,23 +1433,24 @@ def build_week_in_review(bills, executive, prev):
     for b in bills:
         title  = b["title"]
         action = b.get("latest_action", "")
+        url    = b.get("url", "")
         risk_label, risk_cls = score_bill(b)
 
         if title not in prev_bills:
-            changes.append(("new_bill", title, "", risk_label, risk_cls, action))
+            changes.append(("new_bill", title, "", risk_label, risk_cls, action, url))
             continue
 
         prev_action = prev_bills[title]["status"]
         prev_risk   = prev_bills[title]["risk"]
 
         if action != prev_action:
-            changes.append(("status_change", title, prev_action, risk_label, risk_cls, action))
+            changes.append(("status_change", title, prev_action, risk_label, risk_cls, action, url))
         elif risk_label != prev_risk:
-            changes.append(("risk_change", title, prev_risk, risk_label, risk_cls, action))
+            changes.append(("risk_change", title, prev_risk, risk_label, risk_cls, action, url))
 
     for a in executive:
         if a.get("title", "") not in prev_exec:
-            changes.append(("new_exec", a.get("title",""), "", "", "", a.get("date","")))
+            changes.append(("new_exec", a.get("title",""), "", "", "", a.get("date",""), ""))
 
     if not changes:
         body = f"""
@@ -1458,23 +1459,26 @@ def build_week_in_review(bills, executive, prev):
 </p>"""
     else:
         rows = ""
-        for kind, title, old_val, risk_label, risk_cls, new_val in changes:
+        for kind, title, old_val, risk_label, risk_cls, new_val, url in changes:
             short_title = title[:90] + ("…" if len(title) > 90 else "")
             if kind == "new_bill":
                 icon  = '<span style="color:#2D6B2D;font-weight:800;">NEW</span>'
                 delta = f"Added to tracker — <span class=\"risk-badge {risk_cls}\">{risk_label}</span>"
             elif kind == "status_change":
                 icon  = '<span style="color:#E65100;font-weight:800;">UPDATE</span>'
-                old_short = old_val[:60] + ("…" if len(old_val) > 60 else "")
-                delta = f"Status changed → <em>{old_short}</em>"
+                delta = f"Status changed → <em>{new_val}</em>"
             elif kind == "risk_change":
                 icon  = '<span style="color:#B71C1C;font-weight:800;">RISK ↑</span>'
                 delta = f"Risk elevated: {old_val} → <span class=\"risk-badge {risk_cls}\">{risk_label}</span>"
             else:
                 icon  = '<span style="color:#1B4332;font-weight:800;">NEW</span>'
                 delta = f"New executive action — {new_val}"
+            if url:
+                row_open  = f'<tr onclick="window.open(\'{url}\',\'_blank\')" style="cursor:pointer" title="View on Congress.gov">'
+            else:
+                row_open  = '<tr>'
             rows += f"""
-  <tr>
+  {row_open}
     <td style="width:80px;text-align:center">{icon}</td>
     <td style="font-weight:600;color:var(--navy)">{short_title}</td>
     <td style="color:var(--muted);font-size:.82rem">{delta}</td>
