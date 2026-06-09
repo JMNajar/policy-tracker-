@@ -1548,6 +1548,7 @@ def build_index(news_items, bills=None, executive=None, news_briefings=None, wee
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
         style="display:block;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.5)"></iframe>
+      <p style="color:#A5D6A7;font-size:.75rem;text-align:center;margin:.5rem 0 0;letter-spacing:.04em;">Overview of Policy Dashboard</p>
     </div>
   </div>
 </div>
