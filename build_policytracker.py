@@ -1543,12 +1543,12 @@ def build_index(news_items, bills=None, executive=None, news_briefings=None, wee
       <p>The legislation, executive actions, and money behind the vote — built for cannabis business leaders.</p>
     </div>
     <div class="hero-video">
-      <iframe width="220" height="391"
+      <iframe width="101" height="180"
         src="https://www.youtube.com/embed/sidWWJLdu4o"
         title="Cannabis Policy Intelligence" frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
-        style="display:block;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.45)"></iframe>
+        style="display:block;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.5)"></iframe>
     </div>
   </div>
 </div>
