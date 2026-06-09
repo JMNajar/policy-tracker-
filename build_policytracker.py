@@ -113,8 +113,7 @@ CSS = f"""
   .hero h1 span {{ color: #FFD54F; }}
   .hero p {{ color: #A5D6A7; font-size: 1rem; max-width: 620px; margin: 0 auto 2rem; }}
   .hero-inner {{ display:flex; align-items:center; justify-content:center; gap:3rem; max-width:1100px; margin:0 auto; }}
-  .hero-text {{ flex:1; text-align:left; }}
-  .hero-text p {{ margin: 0 0 2rem; }}
+  .hero-text {{ text-align:center; }}
   .hero-video {{ flex-shrink:0; }}
   .stat-row {{ display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }}
   .stat-card {{
