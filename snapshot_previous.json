@@ -1,13 +1,17 @@
 {
-  "date": "2026-06-09",
+  "date": "2026-06-10",
   "bills": {
-    "Hemp Planting Predictability Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
-      "risk": "LOW"
-    },
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
       "risk": "MEDIUM"
+    },
+    "Farm, Food, and National Security Act of 2026": {
+      "status": "Received in the Senate.",
+      "risk": "MEDIUM"
+    },
+    "Hemp Planting Predictability Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
+      "risk": "LOW"
     },
     "Hemp Safety Enforcement Act": {
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
@@ -16,10 +20,6 @@
     "Evidence-Based Drug Policy Act of 2025": {
       "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
       "risk": "LOW"
-    },
-    "Farm, Food, and National Security Act of 2026": {
-      "status": "Received in the Senate.",
-      "risk": "MEDIUM"
     },
     "Veterans Equal Access Act": {
       "status": "Referred to the Subcommittee on Health.",
