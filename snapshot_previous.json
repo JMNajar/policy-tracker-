@@ -1,12 +1,12 @@
 {
-  "date": "2026-06-10",
+  "date": "2026-06-11",
   "bills": {
-    "MORE Act": {
-      "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
-      "risk": "MEDIUM"
-    },
     "Farm, Food, and National Security Act of 2026": {
       "status": "Received in the Senate.",
+      "risk": "MEDIUM"
+    },
+    "MORE Act": {
+      "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
       "risk": "MEDIUM"
     },
     "Hemp Planting Predictability Act": {
