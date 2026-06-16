@@ -1,5 +1,5 @@
 {
-  "date": "2026-06-15",
+  "date": "2026-06-16",
   "bills": {
     "Farm, Food, and National Security Act of 2026": {
       "status": "Received in the Senate.",
@@ -12,10 +12,6 @@
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
       "risk": "MEDIUM"
-    },
-    "Hemp Planting Predictability Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
-      "risk": "LOW"
     },
     "Evidence-Based Drug Policy Act of 2025": {
       "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
@@ -30,7 +26,7 @@
       "risk": "LOW"
     },
     "Marijuana in Federally Assisted Housing Parity Act of 2025": {
-      "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
+      "status": "Referred to the House Committee on Financial Services.",
       "risk": "LOW"
     },
     "Higher Education Marijuana Research Act of 2026": {
