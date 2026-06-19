@@ -1,6 +1,10 @@
 {
-  "date": "2026-06-18",
+  "date": "2026-06-19",
   "bills": {
+    "To amend the National Agricultural Research, Extension, and Teaching Policy Act of 1977, to provide for marijuana agricultural research prog": {
+      "status": "Referred to the House Committee on Agriculture.",
+      "risk": "LOW"
+    },
     "Farm, Food, and National Security Act of 2026": {
       "status": "Received in the Senate.",
       "risk": "MEDIUM"
@@ -30,7 +34,7 @@
       "risk": "LOW"
     },
     "Marijuana in Federally Assisted Housing Parity Act of 2025": {
-      "status": "Referred to the House Committee on Financial Services.",
+      "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
       "risk": "LOW"
     },
     "Higher Education Marijuana Research Act of 2026": {
