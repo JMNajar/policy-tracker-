@@ -1,6 +1,10 @@
 {
-  "date": "2026-06-24",
+  "date": "2026-06-25",
   "bills": {
+    "A bill to create protections for financial institutions that provide financial services to State-sanctioned marijuana businesses and service": {
+      "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
+      "risk": "LOW"
+    },
     "To amend the National Agricultural Research, Extension, and Teaching Policy Act of 1977, to provide for marijuana agricultural research prog": {
       "status": "Referred to the House Committee on Agriculture.",
       "risk": "LOW"
