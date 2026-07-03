@@ -1,13 +1,13 @@
 {
-  "date": "2026-07-02",
+  "date": "2026-07-03",
   "bills": {
-    "A bill to create protections for financial institutions that provide financial services to State-sanctioned marijuana businesses and service": {
-      "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
-      "risk": "LOW"
-    },
     "Farm, Food, and National Security Act of 2026": {
       "status": "Received in the Senate.",
       "risk": "MEDIUM"
+    },
+    "A bill to create protections for financial institutions that provide financial services to State-sanctioned marijuana businesses and service": {
+      "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
+      "risk": "LOW"
     },
     "Hemp Safety Enforcement Act": {
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
