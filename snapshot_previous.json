@@ -1,5 +1,5 @@
 {
-  "date": "2026-07-14",
+  "date": "2026-07-15",
   "bills": {
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
@@ -12,10 +12,6 @@
     "Hemp Safety Enforcement Act": {
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "MEDIUM"
-    },
-    "Hemp Planting Predictability Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
-      "risk": "LOW"
     },
     "Evidence-Based Drug Policy Act of 2025": {
       "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
