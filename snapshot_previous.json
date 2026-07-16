@@ -1,5 +1,5 @@
 {
-  "date": "2026-07-15",
+  "date": "2026-07-16",
   "bills": {
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
@@ -25,12 +25,12 @@
       "status": "Referred to the Subcommittee on Commodity Markets, Digital Assets, and Rural Development.",
       "risk": "LOW"
     },
-    "Marijuana in Federally Assisted Housing Parity Act of 2025": {
-      "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
-      "risk": "LOW"
-    },
     "Higher Education Marijuana Research Act of 2026": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
+      "risk": "LOW"
+    },
+    "Marijuana in Federally Assisted Housing Parity Act of 2025": {
+      "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
       "risk": "LOW"
     },
     "Paid Family and Medical Leave Tax Credit Extension and Enhancement Act": {
