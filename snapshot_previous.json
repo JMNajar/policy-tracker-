@@ -1,32 +1,40 @@
 {
-  "date": "2026-07-17",
+  "date": "2026-07-18",
   "bills": {
+    "STATES 2.0 Act": {
+      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, and Transportation",
+      "risk": "LOW"
+    },
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
       "risk": "MEDIUM"
+    },
+    "A bill to decriminalize and deschedule cannabis, to provide for reinvestment in certain persons adversely impacted by the War on Drugs, to p": {
+      "status": "Read twice and referred to the Committee on Finance.",
+      "risk": "LOW"
+    },
+    "Higher Education Marijuana Research Act of 2026": {
+      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
+      "risk": "LOW"
     },
     "Farm, Food, and National Security Act of 2026": {
       "status": "Received in the Senate.",
       "risk": "MEDIUM"
     },
-    "Hemp Safety Enforcement Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
-      "risk": "MEDIUM"
-    },
-    "Evidence-Based Drug Policy Act of 2025": {
-      "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
-      "risk": "LOW"
-    },
     "Veterans Equal Access Act": {
       "status": "Referred to the Subcommittee on Health.",
       "risk": "LOW"
     },
-    "American Hemp Protection Act of 2025": {
-      "status": "Referred to the Subcommittee on Commodity Markets, Digital Assets, and Rural Development.",
+    "Hemp Safety Enforcement Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
+      "risk": "MEDIUM"
+    },
+    "Hemp Planting Predictability Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "LOW"
     },
-    "Higher Education Marijuana Research Act of 2026": {
-      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
+    "Evidence-Based Drug Policy Act of 2025": {
+      "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
       "risk": "LOW"
     },
     "Marijuana in Federally Assisted Housing Parity Act of 2025": {
@@ -39,10 +47,6 @@
     },
     "Marijuana 1-to-3 Act of 2025": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committee on the Judiciary, for a period to be ",
-      "risk": "LOW"
-    },
-    "STATES 2.0 Act": {
-      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, and Transportation",
       "risk": "LOW"
     }
   },
