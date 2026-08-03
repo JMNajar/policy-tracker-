@@ -446,10 +446,10 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
 <div class="container" style="padding-top:2rem;padding-bottom:1rem">
   <span class="section-tag tag-red">WEEK IN REVIEW</span>
   <h2>What Changed This Week</h2>
-  <p class="section-intro">No changes since 2026-08-02. Automatically compared against last week's build.</p>
+  <p class="section-intro">No changes since 2026-08-03. Automatically compared against last week's build.</p>
   
 <p style="color:var(--muted);font-size:.92rem;padding:.75rem 0;">
-  No significant changes detected since 2026-08-02. All tracked bills remain in the same status.
+  No significant changes detected since 2026-08-03. All tracked bills remain in the same status.
 </p>
 </div>
 <hr class="section-divider">
@@ -479,17 +479,43 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
   <div class="card-grid" id="news-grid">
     
     <div class="card" data-sectors="hemp">
-      <div class="card-source">marijuanamoment.net</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMi4gFBVV95cUxQLUtEMEhVQmtuSnFEaEJseE0ySUhER0JUMHRRSHBDX1dZeFNwUzQ1SjR2dXR2b2cxR3VMT0VVdV90T3dBLW45SjlmNmJmQzJJeFEtUHo3Q0pHZVdyak1GVkRtQ05BRnRMVVdMcjZZMEw1RUw3YTlsYmpOM3RlOTcteG0tMl9VXzdzWExycmFFakVSOWhONzFfVXVjcVE4T3dJRUZBRFYwVTRFcVJxMmE4SEdQZFZpSVQ2MFhBcUc2dUc0NTRwS0EtMTJUWHM5ZjlNYkJ0X0hSNFhFbklpSEV5dk5n?oc=5" target="_blank" rel="noopener">Senate Gives Hemp THC Products A Lifeline By Including Provisions To Delay Planned Federal Ban In New Spending Bill - ma</a></div>
+      <div class="card-source">KSAT</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxPQWc3cVExS0FoR25OSzlodEJMTTZKRHNMUnJuellQb25rWjg5R1ROZEplYV8taFd0M3BZSmpnY0FVZGZ3Y2t5b2VHb3FNSnA4RXpTUnNsbFNBWVpqeE9RYzBGS0YydDhGd1VIcWxCZnFzT09INU5aazR0a3RJSFRLcjJsQ0VVZ2pIUG91b0lnX3N6TEZ2TzNBT3B2TkJlX0dVU2xic2RIcnE?oc=5" target="_blank" rel="noopener">Texas cracks down on synthetic THC products, hemp shops adjust - KSAT</a></div>
       <div class="card-meta">Aug 02, 2026</div>
       <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('241cb31debea6828')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-241cb31debea6828" style="font-size:.65rem">&#9654;</span> Executive Briefing
+  <button onclick="toggleBrief('274dac07a15204a1')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
+    <span id="arr-274dac07a15204a1" style="font-size:.65rem">&#9654;</span> Executive Briefing
   </button>
-  <div id="brief-241cb31debea6828" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Hemp-derived THC products (delta-8, delta-10, THC-O) gain regulatory reprieve, reducing near-term risk of federal enforcement actions that could have eliminated a multi-billion-dollar market segment and disrupted supply chains for compliant operators.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;The spending bill delays the planned federal ban indefinitely pending further regulatory clarification; however, expect FDA guidance or Congressional action within 6-12 months as the DEA and HHS finalize hemp-vs.-cannabis THC threshold rules.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Audit your supply chain and product compliance against current state laws immediately, establish relationships with regulatory counsel specializing in hemp THC, and prepare dual-track compliance strategies in case federal rules shift toward stricter potency caps or scheduling.</div>
+  <div id="brief-274dac07a15204a1" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
+    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Texas enforcement actions against synthetic THC (delta-8, delta-10, THC-O) products will likely compress the legal gray market that has captured significant market share, potentially redirecting consumer demand toward licensed operators but triggering compliance audits of inventory and supply chain sourcing.</div>
+    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;Enforcement appears to be active now with no announced sunset date; expect regulatory clarification from Texas DSHS within 60-90 days as the agency defines prohibited synthetics versus legally-compliant hemp-derived products.</div>
+    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Immediately audit your product formulations, supplier certifications, and marketing claims against Texas's synthetic THC definition; consult counsel on whether your current inventory faces seizure risk and establish a contingency plan for reformulation or market exit in Texas if needed.</div>
+  </div>
+</div>
+<script>
+if(typeof toggleBrief==='undefined'){
+  function toggleBrief(id){
+    var el=document.getElementById('brief-'+id);
+    var arr=document.getElementById('arr-'+id);
+    var open=el.style.display!=='none'&&el.style.display!=='';
+    el.style.display=open?'none':'block';
+    arr.innerHTML=open?'&#9654;':'&#9660;';
+  }
+}
+</script>
+    </div>
+    <div class="card" data-sectors="hemp">
+      <div class="card-source">Marijuana Moment</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMi4gFBVV95cUxQLUtEMEhVQmtuSnFEaEJseE0ySUhER0JUMHRRSHBDX1dZeFNwUzQ1SjR2dXR2b2cxR3VMT0VVdV90T3dBLW45SjlmNmJmQzJJeFEtUHo3Q0pHZVdyak1GVkRtQ05BRnRMVVdMcjZZMEw1RUw3YTlsYmpOM3RlOTcteG0tMl9VXzdzWExycmFFakVSOWhONzFfVXVjcVE4T3dJRUZBRFYwVTRFcVJxMmE4SEdQZFZpSVQ2MFhBcUc2dUc0NTRwS0EtMTJUWHM5ZjlNYkJ0X0hSNFhFbklpSEV5dk5n?oc=5" target="_blank" rel="noopener">Senate Gives Hemp THC Products A Lifeline By Including Provisions To Delay Planned Federal Ban In New Spending Bill - Ma</a></div>
+      <div class="card-meta">Aug 02, 2026</div>
+      <div style="margin-top:.65rem">
+  <button onclick="toggleBrief('3f17c124d1671fb2')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
+    <span id="arr-3f17c124d1671fb2" style="font-size:.65rem">&#9654;</span> Executive Briefing
+  </button>
+  <div id="brief-3f17c124d1671fb2" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
+    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Hemp-derived THC products (delta-8, delta-10, THC-O) gain extended operational runway as federal ban implementation is postponed, preserving a multi-billion-dollar market segment for companies positioned in this category.</div>
+    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;The delay extends the existing regulatory uncertainty through the current spending bill cycle; plan for potential ban reinstatement when new appropriations legislation is negotiated, likely within 6-12 months.</div>
+    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Audit your supply chain and product portfolio this month to identify hemp-derived THC SKUs and revenue exposure, then model scenarios for both continued sales and accelerated exit strategies to prepare for inevitable federal action.</div>
   </div>
 </div>
 <script>
@@ -556,32 +582,6 @@ if(typeof toggleBrief==='undefined'){
 }
 </script>
     </div>
-    <div class="card" data-sectors="hemp">
-      <div class="card-source">KLTV.com</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxPRWE1MWM4WkVSUjNWcVpPanhUNHpleG1QN3NTOVhnbHRfcXhEbklYcW9uYTB5Q2lVd3A4X05fanRMbEVUSFlXVFp4Vy1sclRsMEJfaEFIQ2ZQNndmYmlhOGxUM1Utd0xtVjNhWmIyMVpvMEdWckhFRldkbVV3NktqZ3hpeTRxSEoyZDlYTUNrR2RDNGdjODVVaTBhSHpGWVByajc0WtIBuAFBVV95cUxOVU9FczdVZXYwbHdobTlHSkpjazFvY2ZNLVU2UzFENDFhRmVNVUdmVktqcmtFOUoyVl8wUTZDYktfNzd2VExDUi1CY2ZyamlaWlZ2YnBraTViMWJPNEdmN01Ea2xfQXZRMGQwSktKQjlhSV8tNlE4QVJFdlphdVZ0cFpLNGJaS3NiTkdUTFhOZlF5MUFySVZEb2lLazRBWUhiOTlCRmRITG1aMERiX1d6cmVsX0pCcXl1?oc=5" target="_blank" rel="noopener">Texas hemp regulations tighten, banning most THC products and raising fees - KLTV.com</a></div>
-      <div class="card-meta">Jul 30, 2026</div>
-      <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('298e28004a825ad3')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-298e28004a825ad3" style="font-size:.65rem">&#9654;</span> Executive Briefing
-  </button>
-  <div id="brief-298e28004a825ad3" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;Texas's hemp regulatory tightening will eliminate most delta-8, delta-10, and THC-adjacent product lines currently sold through hemp loopholes, forcing operators to either exit the market, pivot to compliant CBD-only products, or face enforcement action and inventory seizures.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;Regulatory changes typically take 30-90 days from announcement to enforcement; monitor Texas Department of State Health Services and Texas Department of Agriculture for formal rule filing and effective dates in the coming 60 days.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Immediately audit your current product SKUs against the new restrictions, calculate revenue impact by product category, and schedule a call with your compliance counsel and tax advisor to model scenarios (exit, pivot, or challenge) before rules become final.</div>
-  </div>
-</div>
-<script>
-if(typeof toggleBrief==='undefined'){
-  function toggleBrief(id){
-    var el=document.getElementById('brief-'+id);
-    var arr=document.getElementById('arr-'+id);
-    var open=el.style.display!=='none'&&el.style.display!=='';
-    el.style.display=open?'none':'block';
-    arr.innerHTML=open?'&#9654;':'&#9660;';
-  }
-}
-</script>
-    </div>
     <div class="card" data-sectors="general">
       <div class="card-source">Morningstar</div>
       <div class="card-title"><a href="https://news.google.com/rss/articles/CBMi_wFBVV95cUxQcDR4b0dSeldwNnI0VGUyTjVxOHdHb3RDTjFxSmJrRE9abnk0V01OaklJVDZwWlE3Rl93NWY2RVZSSTMzV3g1S29MSkZucGJERjVFX181aHFmZkpIVzV6bjRadVBfSDFMeTZTdmRTM2Jyc1A5Vlk3SWQwc0lOWUpoajJLSmU4NFFBMXNwMmpiNGs1NWN4emY1dDZNQVNaUWYtSjRIS1g5bVl1UWx1Q3p4VzBtdm1TTktKRGxQTHZBenJuVEZ6dXJnM193ZkhiN0U2eHo0V0VNSVJtcFo0WmxadzFwdXUtaGlnRGdvRmNiRHBVcmRwejFRZTdMN2lQdmM?oc=5" target="_blank" rel="noopener">Marijuana Rescheduling in Jeopardy? A Federal Court is About to Decide Whether the Attorney General Acted Improperly - M</a></div>
@@ -609,17 +609,17 @@ if(typeof toggleBrief==='undefined'){
 </script>
     </div>
     <div class="card" data-sectors="hemp">
-      <div class="card-source">marijuanamoment.net</div>
-      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxQRDdwS1VjeVNyRUhvTXhMYWxCYk03ZXM5cGdrSFRLUU12VXYzM2NyZHBJZXhDT2hlNmluT3pvbVd2Yk9Ca2ZvV2FyOHdqSzI2aEVFVVRnbDA0Yy0taFhfc0JudHFqVmtGb3VmYjF1bzdnUFpZWkFCMDBlbGVkdXN5cGxnSFUzR0FQRUV5ajVSR1BfTnlETUJ0aWY4QlVMZEwzZkZsSmVjTmpXOGtaalhlcnJSWjNfdw?oc=5" target="_blank" rel="noopener">GOP Lawmaker Circulates Another New Bill To Keep Hemp THC Products Federally Legal - marijuanamoment.net</a></div>
+      <div class="card-source">Marijuana Moment</div>
+      <div class="card-title"><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxQRDdwS1VjeVNyRUhvTXhMYWxCYk03ZXM5cGdrSFRLUU12VXYzM2NyZHBJZXhDT2hlNmluT3pvbVd2Yk9Ca2ZvV2FyOHdqSzI2aEVFVVRnbDA0Yy0taFhfc0JudHFqVmtGb3VmYjF1bzdnUFpZWkFCMDBlbGVkdXN5cGxnSFUzR0FQRUV5ajVSR1BfTnlETUJ0aWY4QlVMZEwzZkZsSmVjTmpXOGtaalhlcnJSWjNfdw?oc=5" target="_blank" rel="noopener">GOP Lawmaker Circulates Another New Bill To Keep Hemp THC Products Federally Legal - Marijuana Moment</a></div>
       <div class="card-meta">Jul 29, 2026</div>
       <div style="margin-top:.65rem">
-  <button onclick="toggleBrief('2a81e6c27288369f')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
-    <span id="arr-2a81e6c27288369f" style="font-size:.65rem">&#9654;</span> Executive Briefing
+  <button onclick="toggleBrief('ab718ed890b59042')" style="background:none;border:none;padding:0;color:#2D6B2D;font-size:.75rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:.3rem">
+    <span id="arr-ab718ed890b59042" style="font-size:.65rem">&#9654;</span> Executive Briefing
   </button>
-  <div id="brief-2a81e6c27288369f" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;A GOP-backed federal hemp THC legalization bill creates regulatory uncertainty for cannabis operators, as it could fragment state markets by allowing federally-compliant hemp-derived intoxicating products to compete directly with state-licensed cannabis while potentially triggering stricter state-level enforcement against hemp products.</div>
-    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;Congressional circulation phase typically takes 2-4 months before committee consideration; monitor bill number and sponsor for velocity, as GOP legislative capacity in current session will determine realistic passage odds by end of 2024 or 2025.</div>
-    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Conduct immediate legal audit of your state's hemp-vs.-cannabis product definitions and wholesale/retail overlap exposure, then brief your board on competitive scenarios and lobby your state cannabis regulator for clarification on enforcement priorities regarding federal hemp products.</div>
+  <div id="brief-ab718ed890b59042" style="display:none;margin-top:.5rem;background:#E8F5E9;border-left:3px solid #2D6B2D;border-radius:0 6px 6px 0;padding:.6rem .85rem;font-size:.78rem;line-height:1.55">
+    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">IMPACT</span>&nbsp;&nbsp;A GOP-backed bill to federally legitimize hemp-derived THC products (delta-8, delta-10, HHC) could fragment your market by creating a legal alternative distribution channel outside state cannabis licensing, potentially undercutting licensed retailers and complicating your competitive positioning.</div>
+    <div style="margin-bottom:.3rem"><span style="font-weight:800;color:#1B4332">TIMELINE</span>&nbsp;&nbsp;Congressional circulation phase typically precedes committee markup within 4-8 weeks; expect legislative momentum to accelerate in Q1 2024 if Republican leadership prioritizes it, though passage remains uncertain given competing federal cannabis reform efforts.</div>
+    <div><span style="font-weight:800;color:#2D6B2D">ACTION</span>&nbsp;&nbsp;Immediately map which of your SKUs/revenue streams compete directly with hemp-derived THC products and model revenue impact under three scenarios (bill dies, passes with restrictions, passes without restrictions) to inform your 2024 pricing and portfolio strategy.</div>
   </div>
 </div>
 <script>
