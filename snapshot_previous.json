@@ -1,6 +1,10 @@
 {
-  "date": "2026-08-07",
+  "date": "2026-08-08",
   "bills": {
+    "Lawful Hemp Protection Act": {
+      "status": "Referred to the Committee on Ways and Means, and in addition to the Committees on Energy and Commerce, Agriculture, and ",
+      "risk": "LOW"
+    },
     "STATES 2.0 Act": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, and Transportation",
       "risk": "LOW"
@@ -8,6 +12,10 @@
     "Cannabis Administration and Opportunity Act": {
       "status": "Read twice and referred to the Committee on Finance.",
       "risk": "MEDIUM"
+    },
+    "Hemp Planting Predictability Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
+      "risk": "LOW"
     },
     "Farm, Food, and National Security Act of 2026": {
       "status": "Received in the Senate.",
@@ -21,6 +29,10 @@
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
       "risk": "LOW"
     },
+    "Hemp Enforcement, Modernization, and Protection Act": {
+      "status": "Referred to the House Committee on Energy and Commerce.",
+      "risk": "MEDIUM"
+    },
     "Veterans Equal Access Act": {
       "status": "Referred to the Subcommittee on Health.",
       "risk": "LOW"
@@ -29,16 +41,16 @@
       "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "MEDIUM"
     },
-    "Hemp Planting Predictability Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
+    "Marijuana Impact on Medicaid Act of 2026": {
+      "status": "Read twice and referred to the Committee on Finance.",
+      "risk": "LOW"
+    },
+    "To amend the Agriculture, Rural Development, Food and Drug Administration, and Related Agency Appropriations Act, 2026, to delay the impleme": {
+      "status": "Referred to the Subcommittee on Forestry and Horticulture.",
       "risk": "LOW"
     },
     "Evidence-Based Drug Policy Act of 2025": {
       "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
-      "risk": "LOW"
-    },
-    "Marijuana in Federally Assisted Housing Parity Act of 2025": {
-      "status": "Read twice and referred to the Committee on Banking, Housing, and Urban Affairs.",
       "risk": "LOW"
     },
     "Paid Family and Medical Leave Tax Credit Extension and Enhancement Act": {
