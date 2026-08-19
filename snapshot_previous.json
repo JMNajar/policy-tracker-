@@ -1,13 +1,13 @@
 {
-  "date": "2026-08-18",
+  "date": "2026-08-19",
   "bills": {
-    "Farm, Food, and National Security Act of 2026": {
-      "status": "Received in the Senate.",
-      "risk": "MEDIUM"
-    },
     "Lawful Hemp Protection Act": {
       "status": "Referred to the Committee on Ways and Means, and in addition to the Committees on Energy and Commerce, Agriculture, and ",
       "risk": "LOW"
+    },
+    "Farm, Food, and National Security Act of 2026": {
+      "status": "Received in the Senate.",
+      "risk": "MEDIUM"
     },
     "STATES 2.0 Act": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, and Transportation",
