@@ -1,12 +1,12 @@
 {
-  "date": "2026-08-31",
+  "date": "2026-09-01",
   "bills": {
-    "Hemp Planting Predictability Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
-      "risk": "LOW"
-    },
     "Lawful Hemp Protection Act": {
       "status": "Referred to the Committee on Ways and Means, and in addition to the Committees on Energy and Commerce, Agriculture, and ",
+      "risk": "LOW"
+    },
+    "Hemp Planting Predictability Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "LOW"
     },
     "Farm, Food, and National Security Act of 2026": {
