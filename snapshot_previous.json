@@ -1,12 +1,8 @@
 {
-  "date": "2026-09-03",
+  "date": "2026-09-04",
   "bills": {
     "Lawful Hemp Protection Act": {
       "status": "Referred to the Committee on Ways and Means, and in addition to the Committees on Energy and Commerce, Agriculture, and ",
-      "risk": "LOW"
-    },
-    "Hemp Planting Predictability Act": {
-      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "LOW"
     },
     "Farm, Food, and National Security Act of 2026": {
@@ -43,6 +39,10 @@
     },
     "Marijuana Impact on Medicaid Act of 2026": {
       "status": "Read twice and referred to the Committee on Finance.",
+      "risk": "LOW"
+    },
+    "Hemp Planting Predictability Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
       "risk": "LOW"
     },
     "Evidence-Based Drug Policy Act of 2025": {
