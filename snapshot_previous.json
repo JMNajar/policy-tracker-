@@ -1,6 +1,10 @@
 {
-  "date": "2026-09-15",
+  "date": "2026-09-16",
   "bills": {
+    "Cannabis Administration and Opportunity Act": {
+      "status": "Read twice and referred to the Committee on Finance.",
+      "risk": "MEDIUM"
+    },
     "Paid Family and Medical Leave Tax Credit Extension and Enhancement Act": {
       "status": "Referred to the House Committee on Ways and Means.",
       "risk": "LOW"
@@ -16,10 +20,6 @@
     "STATES 2.0 Act": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, and Transportation",
       "risk": "LOW"
-    },
-    "Cannabis Administration and Opportunity Act": {
-      "status": "Read twice and referred to the Committee on Finance.",
-      "risk": "MEDIUM"
     },
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
