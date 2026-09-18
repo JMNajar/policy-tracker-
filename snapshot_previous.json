@@ -1,6 +1,10 @@
 {
-  "date": "2026-09-17",
+  "date": "2026-09-18",
   "bills": {
+    "To amend the Intelligence Reform and Terrorism Prevention Act of 2004 to limit adverse security clearance and suitability determinations bas": {
+      "status": "Referred to the House Committee on Oversight and Government Reform.",
+      "risk": "LOW"
+    },
     "To create a safe harbor for insurers engaging in the business of insurance in connection with a cannabis-related legitimate business, and fo": {
       "status": "Referred to the House Committee on Financial Services.",
       "risk": "LOW"
