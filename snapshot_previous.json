@@ -1,6 +1,10 @@
 {
-  "date": "2026-10-01",
+  "date": "2026-10-02",
   "bills": {
+    "To direct the Secretary of Veterans Affairs to carry out a study and clinical trials on the effects of cannabis on certain health outcomes o": {
+      "status": "Referred to the House Committee on Veterans' Affairs.",
+      "risk": "LOW"
+    },
     "Farm, Food, and National Security Act of 2026": {
       "status": "Received in the Senate.",
       "risk": "MEDIUM"
