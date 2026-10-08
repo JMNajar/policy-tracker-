@@ -1,9 +1,57 @@
 {
-  "date": "2026-10-07",
+  "date": "2026-10-08",
   "bills": {
+    "VA Medicinal Cannabis Research Act of 2026": {
+      "status": "Referred to the House Committee on Veterans' Affairs.",
+      "risk": "LOW"
+    },
     "Farm, Food, and National Security Act of 2026": {
       "status": "Received in the Senate.",
       "risk": "MEDIUM"
+    },
+    "Higher Education Marijuana Research Act of 2026": {
+      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
+      "risk": "LOW"
+    },
+    "Veterans Equal Access Act": {
+      "status": "Referred to the Subcommittee on Health.",
+      "risk": "LOW"
+    },
+    "MORE Act": {
+      "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
+      "risk": "MEDIUM"
+    },
+    "Cannabis Administration and Opportunity Act": {
+      "status": "Read twice and referred to the Committee on Finance.",
+      "risk": "MEDIUM"
+    },
+    "Paid Family and Medical Leave Tax Credit Extension and Enhancement Act": {
+      "status": "Referred to the House Committee on Ways and Means.",
+      "risk": "LOW"
+    },
+    "Lawful Hemp Protection Act": {
+      "status": "Referred to the Committee on Ways and Means, and in addition to the Committees on Energy and Commerce, Agriculture, and ",
+      "risk": "LOW"
+    },
+    "STATES 2.0 Act": {
+      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, and Transportation",
+      "risk": "LOW"
+    },
+    "Hemp Safety Enforcement Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
+      "risk": "MEDIUM"
+    },
+    "Marijuana Impact on Medicaid Act of 2026": {
+      "status": "Read twice and referred to the Committee on Finance.",
+      "risk": "LOW"
+    },
+    "Evidence-Based Drug Policy Act of 2025": {
+      "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
+      "risk": "LOW"
+    },
+    "Marijuana 1-to-3 Act of 2025": {
+      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committee on the Judiciary, for a period to be ",
+      "risk": "LOW"
     }
   },
   "executive": [
