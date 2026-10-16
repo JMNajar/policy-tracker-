@@ -1,6 +1,10 @@
 {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "bills": {
+    "Veterans Equal Access Act": {
+      "status": "Referred to the Subcommittee on Health.",
+      "risk": "LOW"
+    },
     "VA Medicinal Cannabis Research Act of 2026": {
       "status": "Referred to the House Committee on Veterans' Affairs.",
       "risk": "LOW"
@@ -11,10 +15,6 @@
     },
     "Higher Education Marijuana Research Act of 2026": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
-      "risk": "LOW"
-    },
-    "Veterans Equal Access Act": {
-      "status": "Referred to the Subcommittee on Health.",
       "risk": "LOW"
     },
     "MORE Act": {
