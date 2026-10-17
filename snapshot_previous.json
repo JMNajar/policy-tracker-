@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-16",
+  "date": "2026-10-17",
   "bills": {
     "Veterans Equal Access Act": {
       "status": "Referred to the Subcommittee on Health.",
@@ -55,6 +55,10 @@
     }
   },
   "executive": [
+    {
+      "title": "Importer of Controlled Substances Application: Groff NA Hemplex LLC",
+      "date": "2026-10-19"
+    },
     {
       "title": "Schedules of Controlled Substances: Rescheduling of Food and Drug Administration Approved Products Containing Marijuana From Schedule I to Schedule III; Corresponding Change to Permit Requirements",
       "date": "2026-04-28"
