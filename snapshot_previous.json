@@ -1,16 +1,16 @@
 {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "bills": {
+    "VA Medicinal Cannabis Research Act of 2026": {
+      "status": "Referred to the Subcommittee on Health.",
+      "risk": "LOW"
+    },
     "Marijuana 1-to-3 Act of 2025": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committee on the Judiciary, for a period to be ",
       "risk": "LOW"
     },
     "Veterans Equal Access Act": {
       "status": "Referred to the Subcommittee on Health.",
-      "risk": "LOW"
-    },
-    "VA Medicinal Cannabis Research Act of 2026": {
-      "status": "Referred to the House Committee on Veterans' Affairs.",
       "risk": "LOW"
     },
     "Farm, Food, and National Security Act of 2026": {
