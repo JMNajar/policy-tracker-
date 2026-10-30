@@ -1,6 +1,10 @@
 {
-  "date": "2026-10-29",
+  "date": "2026-10-30",
   "bills": {
+    "To impose a 50 percent rate of duty on hemp products imported from China and establish mandatory testing requirements for all imports of cer": {
+      "status": "Referred to the House Committee on Ways and Means.",
+      "risk": "LOW"
+    },
     "VA Medicinal Cannabis Research Act of 2026": {
       "status": "Referred to the Subcommittee on Health.",
       "risk": "LOW"
