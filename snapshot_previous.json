@@ -1,12 +1,12 @@
 {
-  "date": "2026-11-05",
+  "date": "2026-11-06",
   "bills": {
-    "Protecting American Hemp Farmers Act": {
-      "status": "Referred to the House Committee on Ways and Means.",
-      "risk": "LOW"
-    },
     "VA Medicinal Cannabis Research Act of 2026": {
       "status": "Referred to the Subcommittee on Health.",
+      "risk": "LOW"
+    },
+    "Protecting American Hemp Farmers Act": {
+      "status": "Referred to the House Committee on Ways and Means.",
       "risk": "LOW"
     },
     "Marijuana 1-to-3 Act of 2025": {
