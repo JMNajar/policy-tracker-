@@ -1,23 +1,71 @@
 {
-  "date": "2026-11-10",
+  "date": "2026-11-11",
   "bills": {
+    "MORE Act": {
+      "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
+      "risk": "MEDIUM"
+    },
+    "VA Medicinal Cannabis Research Act of 2026": {
+      "status": "Referred to the Subcommittee on Health.",
+      "risk": "LOW"
+    },
+    "Cannabis Administration and Opportunity Act": {
+      "status": "Read twice and referred to the Committee on Finance.",
+      "risk": "MEDIUM"
+    },
+    "Protecting American Hemp Farmers Act": {
+      "status": "Referred to the House Committee on Ways and Means.",
+      "risk": "LOW"
+    },
+    "Marijuana 1-to-3 Act of 2025": {
+      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committee on the Judiciary, for a period to be ",
+      "risk": "LOW"
+    },
     "Veterans Equal Access Act": {
       "status": "Referred to the Subcommittee on Health.",
+      "risk": "LOW"
+    },
+    "Farm, Food, and National Security Act of 2026": {
+      "status": "Received in the Senate.",
+      "risk": "MEDIUM"
+    },
+    "Higher Education Marijuana Research Act of 2026": {
+      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, Agriculture, and E",
       "risk": "LOW"
     },
     "Paid Family and Medical Leave Tax Credit Extension and Enhancement Act": {
       "status": "Referred to the House Committee on Ways and Means.",
       "risk": "LOW"
+    },
+    "Lawful Hemp Protection Act": {
+      "status": "Referred to the Committee on Ways and Means, and in addition to the Committees on Energy and Commerce, Agriculture, and ",
+      "risk": "LOW"
+    },
+    "STATES 2.0 Act": {
+      "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committees on the Judiciary, and Transportation",
+      "risk": "LOW"
+    },
+    "Hemp Safety Enforcement Act": {
+      "status": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry.",
+      "risk": "MEDIUM"
+    },
+    "Marijuana Impact on Medicaid Act of 2026": {
+      "status": "Read twice and referred to the Committee on Finance.",
+      "risk": "LOW"
+    },
+    "Evidence-Based Drug Policy Act of 2025": {
+      "status": "Referred to the Committee on Oversight and Government Reform, and in addition to the Committees on Energy and Commerce, ",
+      "risk": "LOW"
     }
   },
   "executive": [
     {
-      "title": "Importer of Controlled Substances Application: Groff NA Hemplex LLC",
-      "date": "2026-10-19"
+      "title": "Domestic Hemp Production Program; Notice of Request for Extension of a Currently Approved Information Collection",
+      "date": "2026-11-12"
     },
     {
-      "title": "Schedules of Controlled Substances: Rescheduling of Food and Drug Administration Approved Products Containing Marijuana From Schedule I to Schedule III; Corresponding Change to Permit Requirements",
-      "date": "2026-04-28"
+      "title": "Importer of Controlled Substances Application: Groff NA Hemplex LLC",
+      "date": "2026-10-19"
     }
   ]
 }
