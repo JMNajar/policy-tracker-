@@ -1,6 +1,10 @@
 {
-  "date": "2026-11-12",
+  "date": "2026-11-13",
   "bills": {
+    "Protecting American Hemp Farmers Act": {
+      "status": "Referred to the House Committee on Ways and Means.",
+      "risk": "LOW"
+    },
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
       "risk": "MEDIUM"
@@ -12,10 +16,6 @@
     "Cannabis Administration and Opportunity Act": {
       "status": "Read twice and referred to the Committee on Finance.",
       "risk": "MEDIUM"
-    },
-    "Protecting American Hemp Farmers Act": {
-      "status": "Referred to the House Committee on Ways and Means.",
-      "risk": "LOW"
     },
     "Marijuana 1-to-3 Act of 2025": {
       "status": "Referred to the Committee on Energy and Commerce, and in addition to the Committee on the Judiciary, for a period to be ",
