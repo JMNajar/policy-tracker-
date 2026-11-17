@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-16",
+  "date": "2026-11-17",
   "bills": {
     "Protecting American Hemp Farmers Act": {
       "status": "Referred to the House Committee on Ways and Means.",
@@ -58,14 +58,5 @@
       "risk": "LOW"
     }
   },
-  "executive": [
-    {
-      "title": "Domestic Hemp Production Program; Notice of Request for Extension of a Currently Approved Information Collection",
-      "date": "2026-11-12"
-    },
-    {
-      "title": "Importer of Controlled Substances Application: Groff NA Hemplex LLC",
-      "date": "2026-10-19"
-    }
-  ]
+  "executive": []
 }
