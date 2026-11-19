@@ -1,13 +1,13 @@
 {
-  "date": "2026-11-18",
+  "date": "2026-11-19",
   "bills": {
-    "A bill to amend the Agricultural Marketing Act of 1946 to modify the definition of the term \"hemp\", and for other purposes.": {
-      "status": "Read twice and referred to the Committee on Health, Education, Labor, and Pensions.",
-      "risk": "LOW"
-    },
     "Farm, Food, and National Security Act of 2026": {
       "status": "Received in the Senate.",
       "risk": "MEDIUM"
+    },
+    "A bill to amend the Agricultural Marketing Act of 1946 to modify the definition of the term \"hemp\", and for other purposes.": {
+      "status": "Read twice and referred to the Committee on Health, Education, Labor, and Pensions.",
+      "risk": "LOW"
     },
     "MORE Act": {
       "status": "Referred to the Subcommittee on Conservation, Research, and Biotechnology.",
